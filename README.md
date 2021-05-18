@@ -79,7 +79,7 @@ pip install -r requirements.txt
 ### Run 
 activate the environment and run the following command:
 ```bash
-python project.py
+python app.py
 ```
 
 ## used modules
