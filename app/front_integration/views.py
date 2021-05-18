@@ -5,6 +5,6 @@ homepage_blueprint = Blueprint('front_integration',
                                template_folder='templates')
 
 
-@homepage_blueprint.route('/', methods=['GET'])
+@homepage_blueprint.route('/', methods=['GET', 'POST'])
 def homepage():
     return render_template("base.html")
