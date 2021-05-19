@@ -1,5 +1,4 @@
-from project import create_app
+from project.commands import manager
 
 if __name__ == '__main__':
-    app = create_app()
-    app.run()
+    manager.run()
