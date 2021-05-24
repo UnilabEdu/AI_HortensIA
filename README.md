@@ -1,8 +1,8 @@
-# AI_Hortens_IA - Web Service
+# QartNLP - Web Service
 <p align="center">
   <img 
         width="460"
-        src="https://image.freepik.com/free-vector/hand-drawn-hydrangea-flower-isolated_53876-8793.jpg"
+        src="https://i.ibb.co/x55NgfZ/logo.png"
     >
 
 
