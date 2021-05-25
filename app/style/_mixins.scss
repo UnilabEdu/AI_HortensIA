@@ -1,0 +1,24 @@
+@mixin flex($justify: center, $align: center, $direct: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direct;
+}
+@mixin flexh($justify: center, $align: start, $direct: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direct;
+}
+@mixin flexv($justify: start, $align: center, $direct: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direct;
+}
+@mixin flexc($justify: center, $align: center, $direct: column) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direct;
+}
