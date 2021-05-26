@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.basic__input {
+  padding-left: 27px;
+  height: 55px;
+  opacity: 0.7;
+  outline: none;
+  border: 0.5px solid #201f20;
+}
+.basic__input::placeholder {
+  text-decoration: underline;
+  font-size: 18px;
+  color: #000000;
+}
+
+.basic__btn {
+  background-color: #7e57c2;
+  outline: none;
+  border-style: none;
+  font-size: 18px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.basic__btn:hover {
+  background-color: #7251b5;
+}
+
+body {
+  background-color: #faf9fb;
+  margin-left: 140px;
+  margin-top: 50px;
+  height: 100vh;
+  background-image: url(../assets/Polygon1.svg);
+  background-repeat: no-repeat;
+  background-position-x: -500px;
+  background-position-y: -300px;
+}
+
+header {
+  padding-left: 110px;
+}
+
+.main__content {
+  display: flex;
+  justify-content: center;
+}
+
+.left__section {
+  width: 630px;
+  margin-top: 40px;
+  color: #0b0b0c;
+  text-align: left;
+}
+.left__section .left__text {
+  border-radius: 15px;
+  opacity: 0.8;
+  color: #0b0b0c;
+  font-weight: 500;
+  background-color: #ffff;
+  padding: 23px 17px;
+  font-size: 18px;
+}
+.left__section .left__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 100px;
+}
+.left__section .left__form__input {
+  flex-grow: 0.8;
+  border-radius: 8px 0 0 8px;
+}
+.left__section .left__form__btn {
+  height: 55px;
+  border-radius: 0 8px 8px 0;
+  flex-grow: 0.2;
+}
+.left__section h2 {
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.right__section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  flex: 0.8;
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
+.right__section .auth__btn {
+  width: 350px;
+  height: 70px;
+  border-radius: 44px;
+  color: #201f20;
+  font-size: 25px;
+  font-weight: bold;
+  border: 1px solid #29333a;
+  background-color: white;
+}
+.right__section .registration__btn {
+  width: 350px;
+  height: 70px;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 44px;
+}
+.right__section .social {
+  color: #201f20;
+  font-size: 25px;
+  font-weight: bold;
+}
+.right__section .social i {
+  margin-left: 20px;
+  font-size: 30px;
+}
+.right__section a {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+/*# sourceMappingURL=main.css.map */
