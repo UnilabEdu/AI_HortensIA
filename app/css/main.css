@@ -170,12 +170,8 @@ header {
   color: #a00000;
   text-decoration: none;
   cursor: pointer;
-}/*# sourceMappingURL=main.css.map */
+}
 
 .d-block {
   display: block;
-}
-
-.d-none{
-  display: none;
-}
+}/*# sourceMappingURL=main.css.map */
