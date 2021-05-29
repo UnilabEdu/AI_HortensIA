@@ -14,27 +14,33 @@ var span_close_2 = document.getElementsByClassName("close")[1];
 
 // When the user clicks on the button, open the modal
 auth_btn.onclick = function() {
-    auth_modal.style.display = "block";
+    auth_modal.classList.remove("d-none");
+    auth_modal.classList.add("d-block");
 }
 
 reg_btn.onclick = function() {
-    reg_modal.style.display = "block";
+    reg_modal.classList.remove("d-none");
+    reg_modal.classList.add("d-block");
 }
 
 // When the user clicks on <span> (x), close the modal
 span_close_1.onclick = function() {
-    auth_modal.style.display = "none";
+    auth_modal.classList.remove("d-block");
+    auth_modal.classList.add("d-none");
 }
 span_close_2.onclick = function() {
-    reg_modal.style.display = "none";
+    red_modal.classList.remove("d-block")
+    reg_modal.classList.add("d-none");
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == auth_modal) {
-        auth_modal.style.display = "none";
+        auth_modal.classList.remove("d-block");
+        auth_modal.classList.add("d-none");
     }
     else if (event.target == reg_modal){
-        reg_modal.style.display = "none";
+        reg_modal.classList.remove("d-block")
+        reg_modal.classList.add("d-none");
     }
 }

@@ -171,3 +171,11 @@ header {
   text-decoration: none;
   cursor: pointer;
 }/*# sourceMappingURL=main.css.map */
+
+.d-block {
+  display: block;
+}
+
+.d-none{
+  display: none;
+}
