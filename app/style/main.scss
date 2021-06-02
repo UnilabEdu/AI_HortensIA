@@ -90,8 +90,6 @@ header {
   }
 }
 
-
-
 /* The Modal (background) */
 .modal {
   display: none;
@@ -113,14 +111,17 @@ header {
   padding: 20px;
   width: 80%;
   height: 80%;
+  overflow: hidden;
 }
 
 /* The Close Button */
 .close {
-  color: rgb(255, 0, 0);
+  z-index: 11200;
+  color: #fff;
   float: right;
-  font-size: 28px;
+  font-size: 40px;
   font-weight: bold;
+  margin-left: auto;
 }
 
 .close:hover,
@@ -133,3 +134,79 @@ header {
 .d-block {
   display: block;
 }
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+// reg popup start
+.reg__container {
+  display: flex;
+  height: 80%;
+  align-items: center;
+}
+.left__container {
+  width: 50%;
+  padding: 50px;
+  h1,
+  h4 {
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 30px;
+  }
+  h4 {
+    margin-bottom: 5px;
+  }
+}
+
+.reg__form {
+  margin: 0 auto;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  input {
+    border-radius: 5px;
+  }
+  .reg__btn {
+    width: 150px;
+    margin: 0 auto;
+    height: 40px;
+    border-radius: 45px;
+  }
+  * {
+    margin-bottom: 20px;
+  }
+}
+
+.right__container {
+  z-index: 1000;
+  color: #fff;
+  position: relative;
+  width: 50%;
+  padding: 50px;
+  h1,
+  p {
+    margin-bottom: 110px;
+    text-align: center;
+  }
+
+  .enter__btn {
+    display: block;
+    width: 120px;
+    height: 40px;
+    margin: 0 auto;
+    font-weight: bold;
+    border-radius: 45px;
+    background-color: white;
+    color: $dark-background;
+  }
+  .reg__background {
+    z-index: -1;
+    top: -490px;
+    left: -250px;
+    position: absolute;
+  }
+}
+// reg popup end
