@@ -48,10 +48,10 @@ def find_or_create_user(username, password, email, role=None):
 
     if not user:
         user = UserModel(username=username,
-                    password=password,
-                    email=email,
-                    confirmed_at=datetime.utcnow(),
-                    active=True)
+                         password=password,
+                         email=email,
+                         confirmed_at=datetime.utcnow(),
+                         active=True)
 
         if role:
             user.roles.append(role)
