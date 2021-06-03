@@ -17,7 +17,8 @@ class PopulateWithRandomCommand(Command):
     """
 
     def run(self):
-        # db.create_all()  # uncomment if db_init wasn't used and DB wasn't populated yet
+        db.drop_all()  # uncomment next two lines if db_init wasn't used and DB wasn't populated yet
+        db.create_all()
         populate_with_random()
 
 
@@ -52,7 +53,7 @@ def populate_users():
 
 
 def populate_texts():
-    for i in range(50):
+    for i in range(200):
         db.session.add(Text(text=gen.sentence()))
 
 
@@ -85,8 +86,8 @@ def populate_tickets():
 
     # Iterate over 30 User IDs
     for user_id in range(1, 31):
-        text_id_list = list(range(1, 51))
-        filled_tickets = randrange(15, 35)  # amount of tickets for current user
+        text_id_list = list(range(1, 201))
+        filled_tickets = randrange(100, 200)  # amount of tickets for current user
 
         for i in range(filled_tickets):
             text_id = choice(text_id_list)  # choose a random text to assign to current ticket
