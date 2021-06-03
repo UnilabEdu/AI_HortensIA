@@ -57,6 +57,9 @@ class Ticket(db.Model):
     text = db.Column(db.Text, db.ForeignKey('texts.id'))
     emotion = db.Column(db.String, db.ForeignKey('emotions.id'))
     date = db.Column(db.DateTime)
+    
+    def __init__(self):
+        self.date = datetime.datetime.now()
 
     def __repr__(self):
         return f'{self.user} - {self.text}'
