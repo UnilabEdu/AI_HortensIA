@@ -1,16 +1,23 @@
 from flask import render_template
 from .generate_charts import generate_charts
 from . import dashboard_blueprint
+import json
 
 
 # TODO: @login_required
 @dashboard_blueprint.route('/', methods=['GET'])
 def dashboard():
-    ChartMonth, ChartWeek = generate_charts()
+    ChartMonth, ChartWeek, ChartLeaderboard, heatmap_data = generate_charts()
     MonthChart = ChartMonth()
     month_chart = MonthChart.get()
 
     WeekChart = ChartWeek()
     week_chart = WeekChart.get()
 
-    return render_template('dashboard.html', week_chart=week_chart, month_chart=month_chart)
+    LeaderboardChart = ChartLeaderboard()
+    leaderboard_chart = LeaderboardChart.get()
+
+    heatmap_json = json.dumps(heatmap_data)
+
+    return render_template('dashboard.html', week_chart=week_chart, month_chart=month_chart,
+                           leaderboard_chart=leaderboard_chart, heatmap_json=heatmap_json)

@@ -21,13 +21,16 @@
 
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
       <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="pills-heatmap-tab" data-toggle="pill" href="#pills-heatmap" role="tab" aria-controls="pills-heatmap" aria-selected="true">Heatmap</a>
+        <a class="nav-link active" id="pills-heatmap-tab" data-toggle="pill" href="#pills-heatmap" role="tab" aria-controls="pills-heatmap" aria-selected="true"> Heatmap </a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="pills-month-tab" data-toggle="pill" href="#pills-month" role="tab" aria-controls="pills-month" aria-selected="true">This Month</a>
+        <a class="nav-link" id="pills-month-tab" data-toggle="pill" href="#pills-month" role="tab" aria-controls="pills-month" aria-selected="true"> This Month </a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="pills-week-tab" data-toggle="pill" href="#pills-week" role="tab" aria-controls="pills-week" aria-selected="false">This Week</a>
+        <a class="nav-link" id="pills-week-tab" data-toggle="pill" href="#pills-week" role="tab" aria-controls="pills-week" aria-selected="false"> This Week </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="pills-leaderboard-tab" data-toggle="pill" href="#pills-leaderboard" role="tab" aria-controls="pills-leaderboard" aria-selected="false"> Leaderboard </a>
       </li>
     </ul>
 
@@ -45,26 +48,12 @@
                 <canvas id="heatmapChartAxis" height="300" width="0"></canvas>
             </div>
 
-        <script>
-        function generateData() {
-          var data = [];
-          var dt = moment()
-            .subtract(182, "days")
-            .startOf("day");
-          var end = moment().startOf("day");
-          console.log(end);
-          while (dt <= end) {
-            data.push({
-              x: dt.format("YYYY-MM-DD"),
-              y: dt.format("E"),
-              d: dt.format("YYYY-MM-DD"),
-              v: Math.random() * 50
-            });
-            dt = dt.add(1, "day");
-          }
-          return data;
-        }
 
+        <script>
+
+        function generateData() {
+          return JSON.parse({{ heatmap_json | tojson | safe }});
+        }
 
 		Utils.load(() => {
 			Chart.defaults.fontSize = 9;
@@ -76,14 +65,14 @@
 						label: 'Activity Heatmap',
 						data: generateData(),
 						backgroundColor(c) {
-							const value = c.dataset.data[c.dataIndex].v;
+							const value = c.dataset.data[c.dataIndex].v * 6;
 							const alpha = (10 + value) / 60;
-							return Chart.helpers.color('#7E57C2').alpha(alpha).rgbString();
+							return Chart.helpers.color('#7E57C2').alpha(alpha).lighten(0.1 / c.dataset.data[c.dataIndex].v * 5).rgbString();
 						},
 						borderColor(c) {
-							const value = c.dataset.data[c.dataIndex].v;
+							const value = c.dataset.data[c.dataIndex].v * 6;
 							const alpha = (10 + value) / 60;
-							return Chart.helpers.color('#5D4191').alpha(alpha).darken(0.3).rgbString();
+							return Chart.helpers.color('#5D4191').alpha(alpha).darken(0.6).rgbString();
 						},
 						borderWidth: 1,
 						hoverBackgroundColor: 'yellow',
@@ -127,7 +116,7 @@
 								round: 'week',
 								isoWeekday: 1,
 								displayFormats: {
-									week: 'MMM dd'
+									week: 'MMMMMM'
 								}
 							},
 							ticks: {
@@ -206,6 +195,24 @@
                 var ctx = document.getElementById("weekChart").getContext('2d');
                 var data = {{ week_chart | safe }}
                 var weekChart = new Chart(ctx, data);
+            </script>
+
+        </div>
+
+
+        <div class="tab-pane fade" id="pills-leaderboard" role="tabpanel" aria-labelledby="pills-leaderboard">
+
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="leaderboardChart" height="210" width="400"></canvas>
+                </div>
+                <canvas id="leaderboardChartAxis" height="300" width="0"></canvas>
+            </div>
+
+            <script>
+                var ctx = document.getElementById("leaderboardChart").getContext('2d');
+                var data = {{ leaderboard_chart | safe }}
+                var leaderboardChart = new Chart(ctx, data);
             </script>
 
         </div>

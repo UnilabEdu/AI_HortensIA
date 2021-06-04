@@ -20,16 +20,16 @@
 }
 
 .nav-pills > li > a {
-    color: rgb(93, 65, 145);
+    color: rgba(127, 92, 194, 1);
 }
 
 .nav-pills > li > a:hover {
-    background-color: rgba(93, 65, 145, 0.7);
+    background-color: rgba(127, 92, 194, 0.7);
     color: white
 }
 
 .nav-pills > li > a.active {
-    background-color: rgb(93, 65, 145)!important;
+    background-color: rgba(127, 92, 194, 1)!important;
     color: white;
 }
 

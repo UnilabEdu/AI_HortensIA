@@ -1,13 +1,14 @@
 from pychartjs import BaseChart, ChartType, Color
-from project.dashboard.data_processing import data_user_line
+from project.dashboard.data_processing import data_user_line, leaderboard
 
 
 def generate_charts():
-    frequencies, month_labels = data_user_line()
+    frequencies_line, dates_month, heatmap_data = data_user_line()
+    usernames, frequencies_leaderboard, placements, colors = leaderboard()
 
     purple_gradient = Color.JSLinearGradient('ctx', 0, 0, 600, 0,
-                                             (0, Color.RGBA(93, 65, 145, 0.9)),
-                                             (1, Color.RGBA(93, 65, 145, 0.5))
+                                             (0, Color.RGBA(127, 92, 194, 1)),
+                                             (1, Color.RGBA(127, 92, 194, 0.55))
                                              ).returnGradient()
 
     class ChartMonth(BaseChart):
@@ -15,7 +16,7 @@ def generate_charts():
 
         class data:
             label = "Tickets Filed Last 30 Days"
-            data = frequencies
+            data = frequencies_line
             borderColor = Color.Hex("#5D4191")
             borderWidth = 2
             backgroundColor = purple_gradient
@@ -23,7 +24,7 @@ def generate_charts():
             fill = True
 
         class labels:
-            group = [str(date) for date in month_labels]
+            group = [str(date) for date in dates_month]
 
         class options:
             elements = {
@@ -57,7 +58,7 @@ def generate_charts():
 
         class data:
             label = "Tickets Filed Last 7 Days"
-            data = frequencies[-7:]
+            data = frequencies_line[-7:]
             borderColor = Color.Hex("#5D4191")
             borderWidth = 2
             backgroundColor = purple_gradient
@@ -65,7 +66,7 @@ def generate_charts():
             fill = True
 
         class labels:
-            group = [str(date) for date in month_labels[-7:]]
+            group = [str(date) for date in dates_month[-7:]]
 
         class options:
             elements = {
@@ -94,4 +95,40 @@ def generate_charts():
                 )
             }
 
-    return ChartMonth, ChartWeek
+    class ChartLeaderboard(BaseChart):
+        type = ChartType.Bar
+
+        class data:
+            label = "Leaderboard"
+            data = frequencies_leaderboard
+            backgroundColor = colors
+            barThickness = 'flex',
+            barPercentage = 1,
+            categoryPercentage = 1,
+            # borderRadius = 10
+
+        class labels:
+            group = usernames
+
+        class options:
+            indexAxis = 'y'
+
+            scales = {
+                "y": dict(
+                    grid=dict(
+                        display=False,
+                        drawBorder=False,
+                        tickMarkLength=0
+                    )
+                ),
+                "x": dict(
+                    grid=dict(
+                        display=False,
+                        drawBorder=False,
+                        tickMarkLength=0
+                    )
+                )
+            }
+
+
+    return ChartMonth, ChartWeek, ChartLeaderboard, heatmap_data
