@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link href="http://fonts.cdnfonts.com/css/segoe-ui-4" rel="stylesheet">
+    <!-- <link href="https://free.bboxtype.com/embedfonts/?family=FiraGO:300,400,500,700,800" rel="stylesheet"> -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -13,11 +16,12 @@
   </head>
   <body>
     <header>
-      <h1>ტექსტის კლასიფიკაცია</h1>
+     
     </header>
-    <section class="main__content">
+    <div class="main__content">
+      <h1 class="main__title nino__mtavruli">ტექსტის კლასიფიკაცია</h1>
       <div class="left__section">
-        <p class="left__text">
+        <p class="left__text firago ">
           ხელსაწყო შესაძლებლობას იძლევა ტექსტური ფაილის რუბერტ პლუტჩიკის
           "ემოციური ბორბლის" მიხედვით მარკირების. მომხმარებელს ვებ სერვისი
           სთავაზობს ბარათებს, რომელზეც გამოსახულია შემთხვევითი წინადადებები,
@@ -27,7 +31,7 @@
           მომხმარებლის მიერ მარკირებულ ბარათს შევინახავთ მონაცემთა საცავში.
         </p>
         <form class="left__form">
-          <h2>შეტყობინებების მისაღებად გამოიწერეთ</h2>
+          <h3 class="left__form__title nino__elit">შეტყობინებების მისაღებად გამოიწერეთ</h3>
           <input
             type="text"
             placeholder="ელ-ფოსტა"
@@ -35,20 +39,21 @@
           />
           <button class="left__form__btn basic__btn">გამოწერა</button>
         </form>
+        
       </div>
       <div class="right__section">
-        <p>EGN/ქარ</p>
-        <button id="auth-btn" class="auth__btn basic__btn">ავტორიზაცია</button>
-        <button id="reg-btn" class="registration__btn basic__btn">
+        <p class="language nino__mtavruli">ENG/ქარ</p>
+        <button id="auth-btn" class="auth__btn basic__btn ">ავტორიზაცია</button>
+        <button id="reg-btn" class="registration__btn basic__btn ">
           რეგისტრაცია
         </button>
         <div class="social">
           <a href="#" target="_blank">
-            <p>Follow us on facebook</p>
+            <p class="segoe">Follow us on Facebook</p>
             <i class="fab fa-facebook"></i>
           </a>
           <a href="#" target="_blank">
-            <p>Follow us on GitHub</p>
+            <p class="segoe">Follow us on GitHub</p>
             <i class="fab fa-github"></i>
           </a>
         </div>
@@ -64,14 +69,15 @@
           <span class="close">&times;</span>
           <div class="reg__container">
             <div class="left__container">
-              <h1>რეგისტაცია</h1>
+              <h1 class="nino__mtavruli">რეგისტრაცია</h1>
               <h4>შექმენით საკუთარი ექაუნთი</h4>
               <form class="reg__form">
                 <input
                   type="email"
                   placeholder="ელ-ფოსტა"
-                  class="basic__input"
+                  class="email__input basic__input"
                 />
+                <span class="email__error__text">*ველის შევსება სავალდებულოა</span>
                 <input
                   type="text"
                   placeholder="მომხმარებლის სახელი"
@@ -80,15 +86,18 @@
                 <input
                   type="password"
                   placeholder="პაროლი"
-                  class="basic__input"
+                  class="basic__input password__input"
                 />
+                <span class="password__wrong__text">*პაროლი არასწორია</span>
+                <span class="password__error__text">*გამოიყენეთ რვა სიმბოლო</span>
                 <button class="reg__btn basic__btn">რეგისტაცია</button>
               </form>
             </div>
             <div class="right__container">
               <img class="reg__background" src="../assets/reg__background.svg"/>
-              <h1>გამარჯობა, მეგობარო!</h1>
-              <p>
+              <h1 class="nino__mtavruli ">გამარჯობა, მეგობარო!</h1>
+              <p
+              >
                 შეიყვანეთ თქვენი პირადი </br> მონაცემები და დაიწყეთ  </br> მოგზაურობა ჩვენთან
                 ერთად
               </p>
@@ -97,7 +106,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
     <script src="../js/main.js"></script>
   </body>
 </html>
