@@ -65,12 +65,12 @@
 						label: 'Activity Heatmap',
 						data: generateData(),
 						backgroundColor(c) {
-							const value = c.dataset.data[c.dataIndex].v * 6;
+							const value = c.dataset.data[c.dataIndex].v * 8;
 							const alpha = (10 + value) / 60;
-							return Chart.helpers.color('#7E57C2').alpha(alpha).lighten(0.1 / c.dataset.data[c.dataIndex].v * 5).rgbString();
+							return Chart.helpers.color('#7E57C2').alpha(alpha).lighten(0.1 / c.dataset.data[c.dataIndex].v).rgbString();
 						},
 						borderColor(c) {
-							const value = c.dataset.data[c.dataIndex].v * 6;
+							const value = c.dataset.data[c.dataIndex].v * 8;
 							const alpha = (10 + value) / 60;
 							return Chart.helpers.color('#5D4191').alpha(alpha).darken(0.6).rgbString();
 						},
