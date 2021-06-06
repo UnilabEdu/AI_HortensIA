@@ -1,10 +1,11 @@
 from pychartjs import BaseChart, ChartType, Color
-from project.dashboard.data_processing import data_user_line, leaderboard
+from project.dashboard.data_processing import data_user_line, leaderboard, data_radar
 
 
 def generate_charts():
     frequencies_line, dates_month, heatmap_data = data_user_line()
     usernames, frequencies_leaderboard, placements, colors = leaderboard()
+    user_frequencies, all_frequencies = data_radar()
 
     purple_gradient = Color.JSLinearGradient('ctx', 0, 0, 600, 0,
                                              (0, Color.RGBA(127, 92, 194, 1)),
@@ -130,5 +131,45 @@ def generate_charts():
                 )
             }
 
+    class ChartRadar(BaseChart):
+        type = ChartType.Radar
 
-    return ChartMonth, ChartWeek, ChartLeaderboard, heatmap_data
+        class labels:
+            Labels = [
+                'Rage',
+                'Vigilance',
+                'Ecstasy',
+                'Admiration',
+                'Terror',
+                'Amazement',
+                'Grief',
+                'Loathing'
+            ]
+
+        class data:
+            class FirstDataset:
+                label = 'My Data'
+                data = user_frequencies[:8]
+                fill = True
+                backgroundColor = Color.RGBA(255, 99, 132, 0.2)
+                borderColor = Color.RGBA(255, 99, 132)
+                pointBackgroundColor = Color.RGBA(255, 99, 132)
+                pointBorderColor = Color.RGBA(255, 255, 255, 1)
+                pointHoverBackgroundColor = Color.RGBA(255, 255, 255, 1)
+                pointHoverBorderColor = Color.RGBA(255, 99, 132)
+                tension = 0.1
+
+
+            class SecondDataset:
+                label = 'All Data'
+                data = all_frequencies[:8]
+                fill = True
+                backgroundColor = Color.RGBA(54, 162, 235, 0.2)
+                borderColor = Color.RGBA(54, 162, 235)
+                pointBackgroundColor = Color.RGBA(54, 162, 235)
+                pointBorderColor = Color.RGBA(255, 255, 255, 1)
+                pointHoverBackgroundColor = Color.RGBA(255, 255, 255, 1)
+                pointHoverBorderColor = Color.RGBA(54, 162, 235)
+                tension = 0.1
+
+    return ChartMonth, ChartWeek, ChartLeaderboard, ChartRadar, heatmap_data

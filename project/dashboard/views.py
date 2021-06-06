@@ -7,7 +7,7 @@ import json
 # TODO: @login_required
 @dashboard_blueprint.route('/', methods=['GET'])
 def dashboard():
-    ChartMonth, ChartWeek, ChartLeaderboard, heatmap_data = generate_charts()
+    ChartMonth, ChartWeek, ChartLeaderboard, ChartRadar, heatmap_data = generate_charts()
     MonthChart = ChartMonth()
     month_chart = MonthChart.get()
 
@@ -17,7 +17,11 @@ def dashboard():
     LeaderboardChart = ChartLeaderboard()
     leaderboard_chart = LeaderboardChart.get()
 
+    RadarChart = ChartRadar()
+    radar_chart = RadarChart.get()
+
     heatmap_json = json.dumps(heatmap_data)
 
     return render_template('dashboard.html', week_chart=week_chart, month_chart=month_chart,
-                           leaderboard_chart=leaderboard_chart, heatmap_json=heatmap_json)
+                           leaderboard_chart=leaderboard_chart, heatmap_json=heatmap_json,
+                           radar_chart=radar_chart)

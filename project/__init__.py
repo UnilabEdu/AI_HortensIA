@@ -13,7 +13,7 @@ from flask_migrate import Migrate
 migrate = Migrate()
 
 
-def create_app():
+def create_app(import_blueprints=True):
     app = Flask(__name__)
     app.config.from_object(Config)
     # database init
@@ -28,8 +28,9 @@ def create_app():
     # flask-admin init
     admin.init_app(app)
 
-    # Blueprint registrations
-    from project.dashboard.views import dashboard_blueprint
-    app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
+    if import_blueprints:
+        # Blueprint registrations
+        from project.dashboard.views import dashboard_blueprint
+        app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
 
     return app

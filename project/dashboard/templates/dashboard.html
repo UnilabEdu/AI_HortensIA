@@ -32,6 +32,9 @@
       <li class="nav-item" role="presentation">
         <a class="nav-link" id="pills-leaderboard-tab" data-toggle="pill" href="#pills-leaderboard" role="tab" aria-controls="pills-leaderboard" aria-selected="false"> Leaderboard </a>
       </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="pills-radar-tab" data-toggle="pill" href="#pills-radar" role="tab" aria-controls="pills-radar" aria-selected="false"> Radar </a>
+      </li>
     </ul>
 
     </div>
@@ -217,6 +220,24 @@
 
         </div>
 
+
+
+        <div class="tab-pane fade" id="pills-radar" role="tabpanel" aria-labelledby="pills-radar">
+
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="radarChart" height="210" width="400"></canvas>
+                </div>
+                <canvas id="radarChartAxis" height="300" width="0"></canvas>
+            </div>
+
+            <script>
+                var ctx = document.getElementById("radarChart").getContext('2d');
+                var data = {{ radar_chart | safe }}
+                var radarChart = new Chart(ctx, data);
+            </script>
+
+        </div>
 
     </div>
 

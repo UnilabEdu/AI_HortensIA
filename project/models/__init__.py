@@ -50,13 +50,16 @@ class Text(db.Model):
         return self.text
 
 
+# TODO: Change relationship columns to Int
+
 class Ticket(db.Model):
     __tablename__ = "tickets"
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.String, db.ForeignKey('users.id'))
-    text = db.Column(db.Text, db.ForeignKey('texts.id'))
-    emotion = db.Column(db.String, db.ForeignKey('emotions.id'))
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
+    text = db.Column(db.Integer, db.ForeignKey('texts.id'))
+    emotion = db.Column(db.Integer, db.ForeignKey('emotions.id'))
     date = db.Column(db.DateTime)
+
 
     def __init__(self, user_id, text_id, emotion_id, date=datetime.datetime.now()):
         self.user = user_id
