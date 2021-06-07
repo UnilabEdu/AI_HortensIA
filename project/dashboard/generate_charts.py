@@ -149,7 +149,7 @@ def generate_charts():
         class data:
             class FirstDataset:
                 label = 'My Data'
-                data = user_frequencies[:8]
+                data = user_frequencies
                 fill = True
                 backgroundColor = Color.RGBA(255, 99, 132, 0.2)
                 borderColor = Color.RGBA(255, 99, 132)
@@ -162,7 +162,7 @@ def generate_charts():
 
             class SecondDataset:
                 label = 'All Data'
-                data = all_frequencies[:8]
+                data = all_frequencies
                 fill = True
                 backgroundColor = Color.RGBA(54, 162, 235, 0.2)
                 borderColor = Color.RGBA(54, 162, 235)
@@ -171,5 +171,13 @@ def generate_charts():
                 pointHoverBackgroundColor = Color.RGBA(255, 255, 255, 1)
                 pointHoverBorderColor = Color.RGBA(54, 162, 235)
                 tension = 0.1
+
+        class options:
+            scales = {
+                "r": dict(
+                    beginAtZero=True,
+                )
+            }
+
 
     return ChartMonth, ChartWeek, ChartLeaderboard, ChartRadar, heatmap_data

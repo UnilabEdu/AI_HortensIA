@@ -10,13 +10,15 @@ from datetime import date, timedelta
 def data_user_line():
     with create_app().app_context():
         start_time = time.time()  # Only to measure time of execution. Remove later
+        # TODO: use load_only
 
-        user_tickets = pd.read_sql(Ticket.query.filter_by(user=str(current_user.id)).statement, db.engine)  # ~0.16 sec
+        # TODO: why did user=str(current_user.id) still work here?
+        user_tickets = pd.read_sql(Ticket.query.filter_by(user=current_user.id).statement, db.engine)  # ~0.16 sec
 
         # TODO: test time with more entries
         # Alternate version just in case, using Pandas to filter. Time: 0.02 - 0.03 seconds (700 entries)
         # df = pd.read_sql_table('tickets', db.engine)
-        # user_tickets = df.loc[df['user'] == str(current_user.id)]
+        # user_tickets = df.loc[df['user'] == current_user.id]
 
         dates_month = [date.today() - timedelta(days=i) for i in range(30)]
         dates_heatmap = [date.today() - timedelta(days=i) for i in range(182)]
@@ -80,7 +82,7 @@ def leaderboard():
             print(s.index)
             print(list(s.index))
             print(current_user.id)
-            x = list(s.index).index((str(current_user.id),))
+            x = list(s.index).index((current_user.id,))
             current_user_frequency = int(s.values[x])
             current_user_placement = x + 1
 
@@ -121,6 +123,99 @@ def leaderboard():
         return usernames, frequencies, placements, colors
 
 
+def data_radar_test():
+    import pandas as pd
+    from project.database import db
+    from project import create_app
+    from datetime import datetime, date, timedelta
+    from sqlalchemy.orm import load_only
+
+    with create_app(import_blueprints=False).app_context():
+        start_time = time.time()  # Only to measure time of execution. Remove later
+
+        today = date.today()
+
+        # Remove this and import_blueprints when running server
+        class current_user:
+            id = 2
+
+        # Get all tickets
+        all_tickets = pd.read_sql(db.session.query(Ticket).options(load_only('user', 'emotion', 'date')).statement, db.engine)
+        # all_tickets = pd.read_sql(db.session.query(Ticket).filter(Ticket.emotion <= 45).options(load_only('user', 'emotion', 'date')).statement, db.engine)
+
+        # Change date format of all tickets
+        all_tickets['date'] = all_tickets['date'].dt.date
+
+        # Get all current_user tickets
+        user_tickets = all_tickets.loc[all_tickets['user'] == current_user.id]
+
+        print(f"{time.time() - start_time} seconds")
+
+        # Make dataframes for different time periods (day/week/month) for all data and for current_user
+        all_month_tickets = all_tickets.loc[all_tickets['date'] >= (today - timedelta(days=30))]
+        all_week_tickets = all_tickets.loc[all_tickets['date'] >= (today - timedelta(days=7))]
+        all_day_tickets = all_tickets.loc[all_tickets['date'] >= (today - timedelta(days=1))]
+
+        user_month_tickets = user_tickets.loc[user_tickets['date'] >= (today - timedelta(days=30))]
+        user_week_tickets = user_tickets.loc[user_tickets['date'] >= (today - timedelta(days=7))]
+        user_day_tickets = user_tickets.loc[user_tickets['date'] >= (today - timedelta(days=1))]
+
+        # Get dataframes ready to be iterated over
+        all_dataframes = [all_tickets, all_month_tickets, all_week_tickets, all_day_tickets,
+                          user_tickets, user_month_tickets, user_week_tickets, user_day_tickets]
+
+        # For each df: get percentages of each emotion, convert them to coefficients and emotion group coefficients
+        final_primary = []  # data for 8 emotion groups out of the first 24 (primary) emotions
+        final_secondary = []  # data for 8 last (secondary) emotions
+        for df in all_dataframes:
+            # Get percentages of emotions, sorted by emotion
+            df = df.emotion.value_counts(normalize=True).sort_index()
+
+            # Convert the pd.Series object to a list with rounded numbers
+            emotion_percentages = [round(i*100, 3) for i in df.to_list()]
+
+            # Check if there are any missing emotions
+            present_emotions = df.index.to_list()
+            if len(present_emotions) != 32:
+                # Find out which emotions are missing
+                missing_emotions = [e for e in range(1, 33) if e not in present_emotions]
+
+                # Fill indices corresponding to missing emotions with zeroes
+                for i in missing_emotions:
+                    emotion_percentages.insert(i-1, 0)  # Now the previously missing emotions have value 0
+
+            # Calculate coefficients of the 8 groups of primary emotions, append the groups and the remaining 8 emotions
+            count = 0
+            current_emotion_group = []  # group of 3 similar emotions
+            current_primary_frequencies = []  # final coefficients for all groups of primary emotions in this dataframe
+            current_secondary_frequencies = []  # final percentages for all secondary emotions in this dataframe
+            for i in emotion_percentages:
+                if count <= 23:  # primary emotions
+                    if count % 3 == 0:  # third emotion, end of the emotion group
+                        current_emotion_group.append(i * 0.6)
+                        current_primary_frequencies.append(sum(current_emotion_group))
+                        current_emotion_group = []
+                    elif count + 1 % 3 == 0:  # second emotion
+                        current_emotion_group.append(i * 0.8)
+                    else:  # first (the most intense) emotion
+                        current_emotion_group.append(i)
+                    count += 1
+                else:
+                    current_secondary_frequencies.append(i)
+            final_primary.append(current_primary_frequencies)
+            final_secondary.append(current_secondary_frequencies)
+
+        print(f"{time.time() - start_time} seconds")
+
+        # Returns 2 lists, each with data on primary and secondary emotions, both containing 8 nested lists
+        # First 4 elements (out of 8 nested lists) contain coefficients (or %) based on everyone's data in this order:
+        # any time/ last month/ week/ day. Last 4 elements have the same structure but only include current_user's data
+        return final_primary, final_secondary
+
+
+data_radar_test()
+
+
 def data_radar():
     import pandas as pd
     from project.database import db
@@ -133,9 +228,10 @@ def data_radar():
         class current_user:
             id = 2
 
-        user_tickets = pd.read_sql(db.session.query(Ticket).filter(Ticket.user == str(current_user.id), Ticket.emotion <= '24').statement, db.engine)
-        all_tickets = pd.read_sql(db.session.query(Ticket).filter(Ticket.emotion <= '24').statement, db.engine)
-        # user_tickets = pd.read_sql(Ticket.query.filter_by(user=str(current_user.id)).statement, db.engine)  # ~0.16 sec
+        user_tickets = pd.read_sql(
+            db.session.query(Ticket).filter(Ticket.user == current_user.id, Ticket.emotion <= 24).statement, db.engine)
+        all_tickets = pd.read_sql(db.session.query(Ticket).filter(Ticket.emotion <= 24).statement, db.engine)
+        # user_tickets = pd.read_sql(Ticket.query.filter_by(user=current_user.id).statement, db.engine)  # ~0.16 sec
         # all_tickets = pd.read_sql_table('tickets', db.engine)
 
         emotions_list_user = list(range(1, 33))
@@ -216,9 +312,9 @@ def data_radar():
             #     print('NO!', index)
 
             if index % 3 == 0:
-                all_frequencies_threes.append(value/3)
+                all_frequencies_threes.append(value * (1.5/3))
             elif (index + 1) % 3 == 0:
-                all_frequencies_twos.append(value/2)
+                all_frequencies_twos.append(value * (2/3))
             else:
                 all_frequencies_ones.append(value)
 
@@ -242,7 +338,12 @@ def data_radar():
         # print(user_tickets_missing)
         # print(all_tickets_missing)
 
+        user_frequencies = [i * 100 for i in user_frequencies]
+        all_frequencies = [i * 100 for i in all_frequencies]
+
         return user_frequencies, all_frequencies
 
 
-data_radar()
+# data_radar()
+
+
