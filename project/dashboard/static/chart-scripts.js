@@ -8,14 +8,10 @@ async function renderActivityCharts() {
     data = await fetchActivityData();
 
     var ctx;
-    console.log(data.week_chart)
-
-    ctx = document.getElementById("monthChart").getContext('2d');
-    var monthChart = new Chart(ctx, JSON.parse(data.month_chart));
-
+    console.log(JSON.parse(JSON.stringify(data.week_chart)))
 
     ctx = document.getElementById("weekChart").getContext('2d');
-    var weekChart = new Chart(ctx, JSON.parse(data.week_chart));
+    var weekChart = new Chart(ctx, JSON.parse(JSON.stringify(data.week_chart)));
 
     ctx = document.getElementById("leaderboardChart").getContext('2d');
     var leaderboardChart = new Chart(ctx, JSON.parse(data.leaderboard_chart));
@@ -37,9 +33,8 @@ async function renderRadarCharts() {
     data = await fetchRadarData();
 
     var ctx;
-
+    console.log(JSON.parse(JSON.stringify(data.primary_anytime_chart)))
     ctx = document.getElementById("radarChartAnytimePrimary").getContext('2d');
-    console.log(data.primary_week_chart)
     var radarChartAnytimePrimary = new Chart(ctx, JSON.parse(data.primary_anytime_chart));
 
 

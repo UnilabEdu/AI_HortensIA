@@ -102,6 +102,7 @@ def dashboard():
 @dashboard_blueprint.route('/getactivitydata')
 def get_activity_data():
     ChartMonth, ChartWeek, ChartLeaderboard, heatmap_data = generate_charts()
+    import markupsafe
 
     MonthChart = ChartMonth()
     month_chart = MonthChart.get()
