@@ -127,7 +127,7 @@ def data_radar_test():
     import pandas as pd
     from project.database import db
     from project import create_app
-    from datetime import datetime, date, timedelta
+    from datetime import date, timedelta
     from sqlalchemy.orm import load_only
 
     with create_app(import_blueprints=False).app_context():
@@ -171,8 +171,8 @@ def data_radar_test():
             # Get percentages of emotions, sorted by emotion
             df = df.emotion.value_counts(normalize=True).sort_index()
 
-            # Convert the pd.Series object to a list with rounded numbers
-            emotion_percentages = [round(i*100, 3) for i in df.to_list()]
+            # Convert the pd.Series object to a list
+            emotion_percentages = df.to_list()
 
             # Check if there are any missing emotions
             present_emotions = df.index.to_list()
@@ -185,23 +185,24 @@ def data_radar_test():
                     emotion_percentages.insert(i-1, 0)  # Now the previously missing emotions have value 0
 
             # Calculate coefficients of the 8 groups of primary emotions, append the groups and the remaining 8 emotions
-            count = 0
+            count = 1
             current_emotion_group = []  # group of 3 similar emotions
             current_primary_frequencies = []  # final coefficients for all groups of primary emotions in this dataframe
             current_secondary_frequencies = []  # final percentages for all secondary emotions in this dataframe
             for i in emotion_percentages:
-                if count <= 23:  # primary emotions
+                if count <= 24:  # primary emotions
                     if count % 3 == 0:  # third emotion, end of the emotion group
                         current_emotion_group.append(i * 0.6)
-                        current_primary_frequencies.append(sum(current_emotion_group))
+                        current_primary_frequencies.append(round(sum(current_emotion_group*100), 2))
                         current_emotion_group = []
-                    elif count + 1 % 3 == 0:  # second emotion
+                    elif (count + 1) % 3 == 0:  # second emotion
                         current_emotion_group.append(i * 0.8)
                     else:  # first (the most intense) emotion
                         current_emotion_group.append(i)
                     count += 1
                 else:
-                    current_secondary_frequencies.append(i)
+                    current_secondary_frequencies.append(round(i*100, 2))
+
             final_primary.append(current_primary_frequencies)
             final_secondary.append(current_secondary_frequencies)
 
@@ -214,6 +215,18 @@ def data_radar_test():
 
 
 data_radar_test()
+
+final_primary, final_secondary = data_radar_test()
+print('___________FINAL__________________PRIMARY____________')
+count = 0
+for l in final_primary:
+    print(f'\n\n\n\n List index: {count} \n\n. List: {l}')
+    count += 1
+print('___________FINAL__________________SECONDARY____________')
+count = 0
+for l in final_secondary:
+    print(f'\n\n\n\n List index: {count} \n\n. List: {l}')
+    count += 1
 
 
 def data_radar():
