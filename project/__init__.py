@@ -9,8 +9,11 @@ from flask_user import SQLAlchemyAdapter, UserManager
 from project.models import db
 from project.user.admin.admin import admin
 from flask_migrate import Migrate
+from flask_babel import Babel
 
 migrate = Migrate()
+babel = Babel()
+mail = Mail()
 
 
 def create_app():
@@ -23,8 +26,9 @@ def create_app():
     db_adapter = SQLAlchemyAdapter(db, UserModel)  # Setup the SQLAlchemy DB Adapter
     UserManager(db_adapter, app)  # Init Flask-User and bind to app
     # flask-mail init
-    mail = Mail(app)
-
+    mail.init_app(app)
+    # flask-babel init
+    babel.init_app(app)
     # flask-admin init
     admin.init_app(app)
 
