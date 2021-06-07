@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='style.css') }}">
 
     <script src="{{ url_for('dashboard.static', filename='utils.js') }}"></script>
+    <script src="{{ url_for('dashboard.static', filename='chart-scripts.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@next/dist/chartjs-chart-matrix.js"></script>
@@ -16,6 +17,7 @@
 
     <h1> Dashboard </h1>
 <br><br>
+
 
     <div style="margin-left: 5%">
 
@@ -41,126 +43,7 @@
 
       <div class="tab-pane fade show active" id="pills-heatmap" role="tabpanel" aria-labelledby="pills-heatmap">
 
-                    <div class="chartWrapper">
-                <div class="chartAreaWrapper">
-                    <canvas id="heatmapChart" height="210" width="600"></canvas>
-                </div>
-                <canvas id="heatmapChartAxis" height="300" width="0"></canvas>
-            </div>
-
-
-        <script>
-
-        function generateData() {
-          return JSON.parse({{ heatmap_json | tojson | safe }});
-        }
-
-		Utils.load(() => {
-			Chart.defaults.fontSize = 9;
-			const ctx = document.getElementById('heatmapChart').getContext('2d');
-			window.myMatrix = new Chart(ctx, {
-				type: 'matrix',
-				data: {
-					datasets: [{
-						label: 'Activity Heatmap',
-						data: generateData(),
-						backgroundColor(c) {
-							const value = c.dataset.data[c.dataIndex].v * 8;
-							const alpha = (10 + value) / 60;
-							return Chart.helpers.color('#7E57C2').alpha(alpha).lighten(0.1 / c.dataset.data[c.dataIndex].v).rgbString();
-						},
-						borderColor(c) {
-							const value = c.dataset.data[c.dataIndex].v * 8;
-							const alpha = (10 + value) / 60;
-							return Chart.helpers.color('#5D4191').alpha(alpha).darken(0.6).rgbString();
-						},
-						borderWidth: 1,
-						hoverBackgroundColor: 'yellow',
-						hoverBorderColor: 'yellowgreen',
-						width(c) {
-							const a = c.chart.chartArea || {};
-							return (a.right - a.left) / 30 - 1;
-						},
-						height(c) {
-							const a = c.chart.chartArea || {};
-							return (a.bottom - a.top) / 7.5 - 1;
-						}
-					}]
-				},
-				options: {
-				    responsive: true,
-                    plugins: {
-                    legend: {
-						display: false
-					},
-					tooltip: {
-						displayColors: false,
-						callbacks: {
-							title() {
-								return '';
-							},
-							label(context) {
-								const v = context.dataset.data[context.dataIndex];
-								return ['თარიღი: ' + v.d, 'რაოდენობა: ' + v.v.toFixed(2)];
-							}
-						}
-					}
-					},
-					scales: {
-						x: {
-							type: 'time',
-							position: 'bottom',
-							offset: true,
-							time: {
-								unit: 'week',
-								round: 'week',
-								isoWeekday: 1,
-								displayFormats: {
-									week: 'MMMMMM'
-								}
-							},
-							ticks: {
-								maxRotation: 0,
-								autoSkip: true
-							},
-							grid: {
-								display: false,
-								drawBorder: false,
-								tickMarkLength: 0,
-							}
-						},
-						y: {
-							type: 'time',
-							offset: true,
-							time: {
-								unit: 'day',
-								round: 'day',
-								isoWeekday: 1,
-								parser: 'i',
-								displayFormats: {
-									day: 'iiiiii'
-								}
-							},
-							reverse: true,
-							position: 'right',
-							ticks: {
-								maxRotation: 0,
-								autoSkip: true,
-								padding: 1
-							},
-							grid: {
-								display: false,
-								drawBorder: false,
-								tickMarkLength: 0
-							}
-						}
-					}
-				}
-			});
-		});
-	</script>
-
-
+              <h1>heatmap</h1>
 
       </div>
 
@@ -172,12 +55,6 @@
                 </div>
                 <canvas id="monthChartAxis" height="300" width="0"></canvas>
             </div>
-
-            <script>
-                var ctx = document.getElementById("monthChart").getContext('2d');
-                var data = {{ month_chart | safe }}
-                var monthChart = new Chart(ctx, data);
-            </script>
 
         </div>
 
@@ -191,12 +68,6 @@
                 <canvas id="weekChartAxis" height="300" width="0"></canvas>
             </div>
 
-            <script>
-                var ctx = document.getElementById("weekChart").getContext('2d');
-                var data = {{ week_chart | safe }}
-                var weekChart = new Chart(ctx, data);
-            </script>
-
         </div>
 
 
@@ -209,13 +80,10 @@
                 <canvas id="leaderboardChartAxis" height="300" width="0"></canvas>
             </div>
 
-            <script>
-                var ctx = document.getElementById("leaderboardChart").getContext('2d');
-                var data = {{ leaderboard_chart | safe }}
-                var leaderboardChart = new Chart(ctx, data);
-            </script>
-
         </div>
+
+    </div>
+
 
                 {% block content %} {% endblock %}
 

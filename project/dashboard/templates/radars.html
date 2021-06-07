@@ -34,13 +34,6 @@
                 <canvas id="radarChartAnytimePrimaryAxis" height="300" width="0"></canvas>
             </div>
 
-            <script>
-                var ctx = document.getElementById("radarChartAnytimePrimary").getContext('2d');
-                var data = {{ primary_anytime_chart | safe }}
-                var radarChartAnytimePrimary = new Chart(ctx, data);
-            </script>
-
-
             {#  Secondary (Anytime) #}
             <div class="chartWrapper">
                 <div class="chartAreaWrapper">
@@ -48,12 +41,6 @@
                 </div>
                 <canvas id="radarChartAnytimeSecondaryAxis" height="300" width="0"></canvas>
             </div>
-
-            <script>
-                var ctx = document.getElementById("radarChartAnytimeSecondary").getContext('2d');
-                var data = {{ secondary_anytime_chart | safe }}
-                var radarChartAnytimeSecondary = new Chart(ctx, data);
-            </script>
 
         </div>
 
@@ -69,13 +56,6 @@
                 <canvas id="radarChartMonthPrimaryAxis" height="300" width="0"></canvas>
             </div>
 
-            <script>
-                var ctx = document.getElementById("radarChartMonthPrimary").getContext('2d');
-                var data = {{ primary_month_chart | safe }}
-                var radarChartMonthPrimary = new Chart(ctx, data);
-            </script>
-
-
             {#  Secondary (Month) #}
             <div class="chartWrapper">
                 <div class="chartAreaWrapper">
@@ -83,12 +63,6 @@
                 </div>
                 <canvas id="radarChartMonthSecondaryAxis" height="300" width="0"></canvas>
             </div>
-
-            <script>
-                var ctx = document.getElementById("radarChartMonthSecondary").getContext('2d');
-                var data = {{ secondary_month_chart | safe }}
-                var radarChartMonthSecondary = new Chart(ctx, data);
-            </script>
 
         </div>
 
@@ -106,13 +80,6 @@
                 <canvas id="radarChartWeekPrimaryAxis" height="300" width="0"></canvas>
             </div>
 
-            <script>
-                var ctx = document.getElementById("radarChartWeekPrimary").getContext('2d');
-                var data = {{ primary_week_chart | safe }}
-                var radarChartWeekPrimary = new Chart(ctx, data);
-            </script>
-
-
             {#  Secondary (Week) #}
             <div class="chartWrapper">
                 <div class="chartAreaWrapper">
@@ -120,12 +87,6 @@
                 </div>
                 <canvas id="radarChartWeekSecondaryAxis" height="300" width="0"></canvas>
             </div>
-
-            <script>
-                var ctx = document.getElementById("radarChartWeekSecondary").getContext('2d');
-                var data = {{ secondary_week_chart | safe }}
-                var radarChartWeekSecondary = new Chart(ctx, data);
-            </script>
 
         </div>
 
@@ -142,11 +103,6 @@
                 <canvas id="radarChartDayPrimaryAxis" height="300" width="0"></canvas>
             </div>
 
-            <script>
-                var ctx = document.getElementById("radarChartDayPrimary").getContext('2d');
-                var data = {{ primary_day_chart | safe }}
-                var radarChartDayPrimary = new Chart(ctx, data);
-            </script>
 
 
             {#  Secondary (Day) #}
@@ -157,21 +113,14 @@
                 <canvas id="radarChartDaySecondaryAxis" height="300" width="0"></canvas>
             </div>
 
-            <script>
-                var ctx = document.getElementById("radarChartDaySecondary").getContext('2d');
-                var data = {{ secondary_day_chart | safe }}
-                var radarChartDaySecondary = new Chart(ctx, data);
-            </script>
-
         </div>
 
+
+
+
+
+
     </div>
-
-
-
-
-
-
 
 
             {% endblock %}

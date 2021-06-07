@@ -29,6 +29,7 @@ def data_user_line():
 
         frequencies = [0] * 30
         frequencies_heatmap = [0] * 182
+        # TODO: remove 'try: , except ValueError'
         for day in all_dates:
             # get frequencies for this month
             try:
@@ -54,7 +55,7 @@ def data_user_line():
             preset_dictionary.update(x=x, y=y, d=x, v=v)
             final.append(preset_dictionary.copy())
 
-        print(f"{time.time() - start_time} seconds")
+        print(f"LINE CHARTS TIME: {time.time() - start_time} seconds")
 
         return frequencies, dates_month, final
 
@@ -70,6 +71,7 @@ def leaderboard():
     from pychartjs.Color import JSLinearGradient, Hex
 
     with create_app().app_context():
+        start_time = time.time()  # Only to measure time of execution. Remove later
 
         current_user_frequency = None
         current_user_placement = None
@@ -79,9 +81,6 @@ def leaderboard():
         s = pd.DataFrame(tickets['user']).value_counts().sort_values(ascending=False)
 
         if (current_user.id,) not in s.index[:10] and Ticket.query.filter_by(user=current_user.id).first():
-            print(s.index)
-            print(list(s.index))
-            print(current_user.id)
             x = list(s.index).index((current_user.id,))
             current_user_frequency = int(s.values[x])
             current_user_placement = x + 1
@@ -120,6 +119,8 @@ def leaderboard():
             placements.append(str(current_user_placement) + '. ')
             frequencies.append(current_user_frequency)
 
+        print(f"LEADERBOARD TIME: {time.time() - start_time} seconds")
+
         return usernames, frequencies, placements, colors
 
 
@@ -145,11 +146,10 @@ def data_radar():
 
         # Change date format of all tickets
         all_tickets['date'] = all_tickets['date'].dt.date
-
+        # TODO: might remove current_user data (make radar charts be my data vs others' data instead of my data vs all data)
         # Get all current_user tickets
         user_tickets = all_tickets.loc[all_tickets['user'] == current_user.id]
 
-        print(f"{time.time() - start_time} seconds")
 
         # Make dataframes for different time periods (day/week/month) for all data and for current_user
         all_month_tickets = all_tickets.loc[all_tickets['date'] >= (today - timedelta(days=30))]
@@ -206,7 +206,7 @@ def data_radar():
             final_primary.append(current_primary_frequencies)
             final_secondary.append(current_secondary_frequencies)
 
-        print(f"{time.time() - start_time} seconds")
+        print(f"RADARS TIME: {time.time() - start_time} seconds")
 
         # Returns 2 lists, each with data on primary and secondary emotions, both containing 8 nested lists
         # First 4 elements (out of 8 nested lists) contain coefficients (or %) based on everyone's data in this order:
@@ -358,5 +358,3 @@ def data_radar():
 
 
 # data_radar()
-
-
