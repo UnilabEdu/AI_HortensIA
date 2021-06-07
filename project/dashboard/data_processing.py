@@ -123,7 +123,7 @@ def leaderboard():
         return usernames, frequencies, placements, colors
 
 
-def data_radar_test():
+def data_radar():
     import pandas as pd
     from project.database import db
     from project import create_app
@@ -136,8 +136,8 @@ def data_radar_test():
         today = date.today()
 
         # Remove this and import_blueprints when running server
-        class current_user:
-            id = 2
+        # class current_user:
+        #     id = 2
 
         # Get all tickets
         all_tickets = pd.read_sql(db.session.query(Ticket).options(load_only('user', 'emotion', 'date')).statement, db.engine)
@@ -214,147 +214,147 @@ def data_radar_test():
         return final_primary, final_secondary
 
 
-data_radar_test()
-
-final_primary, final_secondary = data_radar_test()
-print('___________FINAL__________________PRIMARY____________')
-count = 0
-for l in final_primary:
-    print(f'\n\n\n\n List index: {count} \n\n. List: {l}')
-    count += 1
-print('___________FINAL__________________SECONDARY____________')
-count = 0
-for l in final_secondary:
-    print(f'\n\n\n\n List index: {count} \n\n. List: {l}')
-    count += 1
-
-
-def data_radar():
-    import pandas as pd
-    from project.database import db
-    from project import create_app
-
-    with create_app(import_blueprints=False).app_context():
-        start_time = time.time()  # Only to measure time of execution. Remove later
-
-        # Remove this and import_blueprints when running server
-        class current_user:
-            id = 2
-
-        user_tickets = pd.read_sql(
-            db.session.query(Ticket).filter(Ticket.user == current_user.id, Ticket.emotion <= 24).statement, db.engine)
-        all_tickets = pd.read_sql(db.session.query(Ticket).filter(Ticket.emotion <= 24).statement, db.engine)
-        # user_tickets = pd.read_sql(Ticket.query.filter_by(user=current_user.id).statement, db.engine)  # ~0.16 sec
-        # all_tickets = pd.read_sql_table('tickets', db.engine)
-
-        emotions_list_user = list(range(1, 33))
-        emotions_list_all = list(range(1, 33))
+# data_radar()
+#
+# final_primary, final_secondary = data_radar()
+# print('___________FINAL__________________PRIMARY____________')
+# count = 0
+# for l in final_primary:
+#     print(f'\n\n\n\n List index: {count} \n\n. List: {l}')
+#     count += 1
+# print('___________FINAL__________________SECONDARY____________')
+# count = 0
+# for l in final_secondary:
+#     print(f'\n\n\n\n List index: {count} \n\n. List: {l}')
+#     count += 1
 
 
-
-        user_tickets = user_tickets['emotion'].astype('int32')
-        all_tickets = all_tickets['emotion'].astype('int32')
-
-
-        user_tickets_missing = []
-        all_tickets_missing = []
-
-
-        for n in emotions_list_user:
-            if n not in user_tickets.tolist():
-                user_tickets_missing.append(n)
-
-
-        for n in emotions_list_all:
-            if n not in all_tickets.tolist():
-                all_tickets_missing.append(n)
-
-
-
-
-
-
-        user_tickets = user_tickets.value_counts(normalize=True).sort_index()
-        all_tickets = all_tickets.value_counts(normalize=True).sort_index()
-
-
-        # user_missing_dfs = pd.DataFrame([list(i).append(0) for i in user_tickets_missing])
-
-
-        # all_missing_dfs = pd.DataFrame([list(i).append(0) for i in all_tickets_missing])
-
-
-        # user_tickets.index[23] =
-        # print('HERE', user_tickets.index[22])
-
-
-        user_frequencies = []
-        user_frequencies_ones = []
-        user_frequencies_twos = []
-        user_frequencies_threes = []
-
-        all_frequencies = []
-        all_frequencies_ones = []
-        all_frequencies_twos = []
-        all_frequencies_threes = []
-
-        print('HERE::::::::::::::::::::::::: \n', user_tickets)
-        for index, value in user_tickets.iteritems():
-            # if emotions_list_user[0] == index:
-            #     emotions_list_user.remove(index)
-            #     print('Yes!', index)
-            # else:
-            #     user_tickets_missing.append(emotions_list_user[0])
-            #     emotions_list_user.remove(emotions_list_user[0])
-            #     print('NO!', index)
-
-            if index % 3 == 0:
-                user_frequencies_threes.append(value * (1.5/3))
-            elif (index + 1) % 3 == 0:
-                user_frequencies_twos.append(value * (2/3))
-            else:
-                user_frequencies_ones.append(value)
-
-        for index, value in all_tickets.iteritems():
-            # if emotions_list_all[0] == index:
-            #     emotions_list_all.remove(index)
-            #     print('Yes!', index)
-            # else:
-            #     all_tickets_missing.append(emotions_list_all[0])
-            #     emotions_list_all.remove(emotions_list_all[0])
-            #     print('NO!', index)
-
-            if index % 3 == 0:
-                all_frequencies_threes.append(value * (1.5/3))
-            elif (index + 1) % 3 == 0:
-                all_frequencies_twos.append(value * (2/3))
-            else:
-                all_frequencies_ones.append(value)
-
-        for one, two, three in zip(user_frequencies_ones, user_frequencies_twos, user_frequencies_threes):
-            user_frequencies.append(sum((one, two, three)))
-
-        for one, two, three in zip(all_frequencies_ones, all_frequencies_twos, all_frequencies_threes):
-            all_frequencies.append(sum((one, two, three)))
-
-
-        print(user_frequencies)
-        print(len(user_frequencies))
-        print(all_frequencies)
-        print(len(all_frequencies))
-
-        # print(user_tickets)
-        # print(all_tickets)
-
-        print(f"{time.time() - start_time} seconds")
-
-        # print(user_tickets_missing)
-        # print(all_tickets_missing)
-
-        user_frequencies = [i * 100 for i in user_frequencies]
-        all_frequencies = [i * 100 for i in all_frequencies]
-
-        return user_frequencies, all_frequencies
+# def data_radar():
+#     import pandas as pd
+#     from project.database import db
+#     from project import create_app
+#
+#     with create_app(import_blueprints=False).app_context():
+#         start_time = time.time()  # Only to measure time of execution. Remove later
+#
+#         # Remove this and import_blueprints when running server
+#         class current_user:
+#             id = 2
+#
+#         user_tickets = pd.read_sql(
+#             db.session.query(Ticket).filter(Ticket.user == current_user.id, Ticket.emotion <= 24).statement, db.engine)
+#         all_tickets = pd.read_sql(db.session.query(Ticket).filter(Ticket.emotion <= 24).statement, db.engine)
+#         # user_tickets = pd.read_sql(Ticket.query.filter_by(user=current_user.id).statement, db.engine)  # ~0.16 sec
+#         # all_tickets = pd.read_sql_table('tickets', db.engine)
+#
+#         emotions_list_user = list(range(1, 33))
+#         emotions_list_all = list(range(1, 33))
+#
+#
+#
+#         user_tickets = user_tickets['emotion'].astype('int32')
+#         all_tickets = all_tickets['emotion'].astype('int32')
+#
+#
+#         user_tickets_missing = []
+#         all_tickets_missing = []
+#
+#
+#         for n in emotions_list_user:
+#             if n not in user_tickets.tolist():
+#                 user_tickets_missing.append(n)
+#
+#
+#         for n in emotions_list_all:
+#             if n not in all_tickets.tolist():
+#                 all_tickets_missing.append(n)
+#
+#
+#
+#
+#
+#
+#         user_tickets = user_tickets.value_counts(normalize=True).sort_index()
+#         all_tickets = all_tickets.value_counts(normalize=True).sort_index()
+#
+#
+#         # user_missing_dfs = pd.DataFrame([list(i).append(0) for i in user_tickets_missing])
+#
+#
+#         # all_missing_dfs = pd.DataFrame([list(i).append(0) for i in all_tickets_missing])
+#
+#
+#         # user_tickets.index[23] =
+#         # print('HERE', user_tickets.index[22])
+#
+#
+#         user_frequencies = []
+#         user_frequencies_ones = []
+#         user_frequencies_twos = []
+#         user_frequencies_threes = []
+#
+#         all_frequencies = []
+#         all_frequencies_ones = []
+#         all_frequencies_twos = []
+#         all_frequencies_threes = []
+#
+#         print('HERE::::::::::::::::::::::::: \n', user_tickets)
+#         for index, value in user_tickets.iteritems():
+#             # if emotions_list_user[0] == index:
+#             #     emotions_list_user.remove(index)
+#             #     print('Yes!', index)
+#             # else:
+#             #     user_tickets_missing.append(emotions_list_user[0])
+#             #     emotions_list_user.remove(emotions_list_user[0])
+#             #     print('NO!', index)
+#
+#             if index % 3 == 0:
+#                 user_frequencies_threes.append(value * (1.5/3))
+#             elif (index + 1) % 3 == 0:
+#                 user_frequencies_twos.append(value * (2/3))
+#             else:
+#                 user_frequencies_ones.append(value)
+#
+#         for index, value in all_tickets.iteritems():
+#             # if emotions_list_all[0] == index:
+#             #     emotions_list_all.remove(index)
+#             #     print('Yes!', index)
+#             # else:
+#             #     all_tickets_missing.append(emotions_list_all[0])
+#             #     emotions_list_all.remove(emotions_list_all[0])
+#             #     print('NO!', index)
+#
+#             if index % 3 == 0:
+#                 all_frequencies_threes.append(value * (1.5/3))
+#             elif (index + 1) % 3 == 0:
+#                 all_frequencies_twos.append(value * (2/3))
+#             else:
+#                 all_frequencies_ones.append(value)
+#
+#         for one, two, three in zip(user_frequencies_ones, user_frequencies_twos, user_frequencies_threes):
+#             user_frequencies.append(sum((one, two, three)))
+#
+#         for one, two, three in zip(all_frequencies_ones, all_frequencies_twos, all_frequencies_threes):
+#             all_frequencies.append(sum((one, two, three)))
+#
+#
+#         print(user_frequencies)
+#         print(len(user_frequencies))
+#         print(all_frequencies)
+#         print(len(all_frequencies))
+#
+#         # print(user_tickets)
+#         # print(all_tickets)
+#
+#         print(f"{time.time() - start_time} seconds")
+#
+#         # print(user_tickets_missing)
+#         # print(all_tickets_missing)
+#
+#         user_frequencies = [i * 100 for i in user_frequencies]
+#         all_frequencies = [i * 100 for i in all_frequencies]
+#
+#         return user_frequencies, all_frequencies
 
 
 # data_radar()

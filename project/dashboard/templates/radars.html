@@ -1,0 +1,177 @@
+{% extends "dashboard.html" %}
+
+            {% block content %}
+
+
+    <div style="margin-left: 5%; margin-top: 5%">
+
+    <ul class="nav nav-pills mb-3" id="pills-tab-radar" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="pills-radar-anytime-tab" data-toggle="pill" href="#pills-radar-anytime" role="tab" aria-controls="pills-radar-anytime" aria-selected="true"> Any Time </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="pills-radar-month-tab" data-toggle="pill" href="#pills-radar-month" role="tab" aria-controls="pills-radar-month" aria-selected="true"> This Month </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="pills-radar-week-tab" data-toggle="pill" href="#pills-radar-week" role="tab" aria-controls="pills-radar-week" aria-selected="false"> This Week </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="pills-radar-day-tab" data-toggle="pill" href="#pills-radar-day" role="tab" aria-controls="pills-radar-day" aria-selected="false"> Today </a>
+      </li>
+    </ul>
+
+    </div>
+
+        <div class="tab-content" id="pills-tabContent-radar">
+
+        <div class="tab-pane fade show active" id="pills-radar-anytime" role="tabpanel" aria-labelledby="pills-radar-anytime">
+
+            {#  Primary (Anytime) #}
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="radarChartAnytimePrimary" height="210" width="400"></canvas>
+                </div>
+                <canvas id="radarChartAnytimePrimaryAxis" height="300" width="0"></canvas>
+            </div>
+
+            <script>
+                var ctx = document.getElementById("radarChartAnytimePrimary").getContext('2d');
+                var data = {{ primary_anytime_chart | safe }}
+                var radarChartAnytimePrimary = new Chart(ctx, data);
+            </script>
+
+
+            {#  Secondary (Anytime) #}
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="radarChartAnytimeSecondary" height="210" width="400"></canvas>
+                </div>
+                <canvas id="radarChartAnytimeSecondaryAxis" height="300" width="0"></canvas>
+            </div>
+
+            <script>
+                var ctx = document.getElementById("radarChartAnytimeSecondary").getContext('2d');
+                var data = {{ secondary_anytime_chart | safe }}
+                var radarChartAnytimeSecondary = new Chart(ctx, data);
+            </script>
+
+        </div>
+
+
+
+        <div class="tab-pane fade" id="pills-radar-month" role="tabpanel" aria-labelledby="pills-radar-month">
+
+            {#  Primary (Month) #}
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="radarChartMonthPrimary" height="210" width="400"></canvas>
+                </div>
+                <canvas id="radarChartMonthPrimaryAxis" height="300" width="0"></canvas>
+            </div>
+
+            <script>
+                var ctx = document.getElementById("radarChartMonthPrimary").getContext('2d');
+                var data = {{ primary_month_chart | safe }}
+                var radarChartMonthPrimary = new Chart(ctx, data);
+            </script>
+
+
+            {#  Secondary (Month) #}
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="radarChartMonthSecondary" height="210" width="400"></canvas>
+                </div>
+                <canvas id="radarChartMonthSecondaryAxis" height="300" width="0"></canvas>
+            </div>
+
+            <script>
+                var ctx = document.getElementById("radarChartMonthSecondary").getContext('2d');
+                var data = {{ secondary_month_chart | safe }}
+                var radarChartMonthSecondary = new Chart(ctx, data);
+            </script>
+
+        </div>
+
+
+
+
+
+        <div class="tab-pane fade" id="pills-radar-week" role="tabpanel" aria-labelledby="pills-radar-week">
+
+            {#  Primary (Week) #}
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="radarChartWeekPrimary" height="210" width="400"></canvas>
+                </div>
+                <canvas id="radarChartWeekPrimaryAxis" height="300" width="0"></canvas>
+            </div>
+
+            <script>
+                var ctx = document.getElementById("radarChartWeekPrimary").getContext('2d');
+                var data = {{ primary_week_chart | safe }}
+                var radarChartWeekPrimary = new Chart(ctx, data);
+            </script>
+
+
+            {#  Secondary (Week) #}
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="radarChartWeekSecondary" height="210" width="400"></canvas>
+                </div>
+                <canvas id="radarChartWeekSecondaryAxis" height="300" width="0"></canvas>
+            </div>
+
+            <script>
+                var ctx = document.getElementById("radarChartWeekSecondary").getContext('2d');
+                var data = {{ secondary_week_chart | safe }}
+                var radarChartWeekSecondary = new Chart(ctx, data);
+            </script>
+
+        </div>
+
+
+
+
+        <div class="tab-pane fade" id="pills-radar-day" role="tabpanel" aria-labelledby="pills-radar-day">
+
+            {#  Primary (Day) #}
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="radarChartDayPrimary" height="210" width="400"></canvas>
+                </div>
+                <canvas id="radarChartDayPrimaryAxis" height="300" width="0"></canvas>
+            </div>
+
+            <script>
+                var ctx = document.getElementById("radarChartDayPrimary").getContext('2d');
+                var data = {{ primary_day_chart | safe }}
+                var radarChartDayPrimary = new Chart(ctx, data);
+            </script>
+
+
+            {#  Secondary (Day) #}
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="radarChartDaySecondary" height="210" width="400"></canvas>
+                </div>
+                <canvas id="radarChartDaySecondaryAxis" height="300" width="0"></canvas>
+            </div>
+
+            <script>
+                var ctx = document.getElementById("radarChartDaySecondary").getContext('2d');
+                var data = {{ secondary_day_chart | safe }}
+                var radarChartDaySecondary = new Chart(ctx, data);
+            </script>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+            {% endblock %}

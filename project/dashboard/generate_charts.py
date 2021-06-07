@@ -5,7 +5,6 @@ from project.dashboard.data_processing import data_user_line, leaderboard, data_
 def generate_charts():
     frequencies_line, dates_month, heatmap_data = data_user_line()
     usernames, frequencies_leaderboard, placements, colors = leaderboard()
-    user_frequencies, all_frequencies = data_radar()
 
     purple_gradient = Color.JSLinearGradient('ctx', 0, 0, 600, 0,
                                              (0, Color.RGBA(127, 92, 194, 1)),
@@ -131,53 +130,140 @@ def generate_charts():
                 )
             }
 
-    class ChartRadar(BaseChart):
-        type = ChartType.Radar
+    # class ChartRadar(BaseChart):
+    #     type = ChartType.Radar
+    #
+    #     class labels:
+    #         Labels = [
+    #             'Rage',
+    #             'Vigilance',
+    #             'Ecstasy',
+    #             'Admiration',
+    #             'Terror',
+    #             'Amazement',
+    #             'Grief',
+    #             'Loathing'
+    #         ]
+    #
+    #     class data:
+    #         class FirstDataset:
+    #             label = 'My Data'
+    #             data = user_frequencies
+    #             fill = True
+    #             backgroundColor = Color.RGBA(255, 99, 132, 0.2)
+    #             borderColor = Color.RGBA(255, 99, 132)
+    #             pointBackgroundColor = Color.RGBA(255, 99, 132)
+    #             pointBorderColor = Color.RGBA(255, 255, 255, 1)
+    #             pointHoverBackgroundColor = Color.RGBA(255, 255, 255, 1)
+    #             pointHoverBorderColor = Color.RGBA(255, 99, 132)
+    #             tension = 0.1
+    #
+    #
+    #         class SecondDataset:
+    #             label = 'All Data'
+    #             data = all_frequencies
+    #             fill = True
+    #             backgroundColor = Color.RGBA(54, 162, 235, 0.2)
+    #             borderColor = Color.RGBA(54, 162, 235)
+    #             pointBackgroundColor = Color.RGBA(54, 162, 235)
+    #             pointBorderColor = Color.RGBA(255, 255, 255, 1)
+    #             pointHoverBackgroundColor = Color.RGBA(255, 255, 255, 1)
+    #             pointHoverBorderColor = Color.RGBA(54, 162, 235)
+    #             tension = 0.1
+    #
+    #     class options:
+    #         scales = {
+    #             "r": dict(
+    #                 beginAtZero=True,
+    #             )
+    #         }
 
-        class labels:
-            Labels = [
-                'Rage',
-                'Vigilance',
-                'Ecstasy',
-                'Admiration',
-                'Terror',
-                'Amazement',
-                'Grief',
-                'Loathing'
+    return ChartMonth, ChartWeek, ChartLeaderboard, heatmap_data
+
+
+def generate_radars():
+    primary, secondary = data_radar()
+    everyone_anytime_primary, everyone_month_primary, everyone_week_primary, everyone_day_primary = primary[0:4]
+    user_anytime_primary, user_month_primary, user_week_primary, user_day_primary = primary[4:9]
+
+    everyone_anytime_secondary, everyone_month_secondary, everyone_week_secondary, everyone_day_secondary = secondary[0:4]
+    user_anytime_secondary, user_month_secondary, user_week_secondary, user_day_secondary = secondary[4:9]
+
+    def generate_one_radar(first_dataset_frequencies, second_dataset_frequencies, secondary_labels=False):
+        if not secondary_labels:
+            emotion_labels = [
+                    'Rage',
+                    'Vigilance',
+                    'Ecstasy',
+                    'Admiration',
+                    'Terror',
+                    'Amazement',
+                    'Grief',
+                    'Loathing'
+                ]
+        else:
+            emotion_labels = [
+                'Aggressiveness',
+                'Optimism',
+                'Love',
+                'Submission',
+                'Awe',
+                'Disapproval',
+                'Remorse',
+                'Contempt'
             ]
 
-        class data:
-            class FirstDataset:
-                label = 'My Data'
-                data = user_frequencies
-                fill = True
-                backgroundColor = Color.RGBA(255, 99, 132, 0.2)
-                borderColor = Color.RGBA(255, 99, 132)
-                pointBackgroundColor = Color.RGBA(255, 99, 132)
-                pointBorderColor = Color.RGBA(255, 255, 255, 1)
-                pointHoverBackgroundColor = Color.RGBA(255, 255, 255, 1)
-                pointHoverBorderColor = Color.RGBA(255, 99, 132)
-                tension = 0.1
+        class ChartRadar(BaseChart):
+            type = ChartType.Radar
 
+            class labels:
+                Labels = emotion_labels
 
-            class SecondDataset:
-                label = 'All Data'
-                data = all_frequencies
-                fill = True
-                backgroundColor = Color.RGBA(54, 162, 235, 0.2)
-                borderColor = Color.RGBA(54, 162, 235)
-                pointBackgroundColor = Color.RGBA(54, 162, 235)
-                pointBorderColor = Color.RGBA(255, 255, 255, 1)
-                pointHoverBackgroundColor = Color.RGBA(255, 255, 255, 1)
-                pointHoverBorderColor = Color.RGBA(54, 162, 235)
-                tension = 0.1
+            class data:
+                class FirstDataset:
+                    label = 'My Data'
+                    data = first_dataset_frequencies
+                    fill = True
+                    backgroundColor = Color.RGBA(255, 99, 132, 0.2)
+                    borderColor = Color.RGBA(255, 99, 132)
+                    pointBackgroundColor = Color.RGBA(255, 99, 132)
+                    pointBorderColor = Color.RGBA(255, 255, 255, 1)
+                    pointHoverBackgroundColor = Color.RGBA(255, 255, 255, 1)
+                    pointHoverBorderColor = Color.RGBA(255, 99, 132)
+                    tension = 0.1
 
-        class options:
-            scales = {
-                "r": dict(
-                    beginAtZero=True,
-                )
-            }
+                class SecondDataset:
+                    label = 'All Data'
+                    data = second_dataset_frequencies
+                    fill = True
+                    backgroundColor = Color.RGBA(54, 162, 235, 0.2)
+                    borderColor = Color.RGBA(54, 162, 235)
+                    pointBackgroundColor = Color.RGBA(54, 162, 235)
+                    pointBorderColor = Color.RGBA(255, 255, 255, 1)
+                    pointHoverBackgroundColor = Color.RGBA(255, 255, 255, 1)
+                    pointHoverBorderColor = Color.RGBA(54, 162, 235)
+                    tension = 0.1
 
+            class options:
+                scales = {
+                    "r": dict(
+                        beginAtZero=True,
+                    )
+                }
 
-    return ChartMonth, ChartWeek, ChartLeaderboard, ChartRadar, heatmap_data
+        return ChartRadar
+
+    primary_anytime = generate_one_radar(user_anytime_primary, everyone_anytime_primary)
+    secondary_anytime = generate_one_radar(user_anytime_secondary, everyone_anytime_secondary, secondary_labels=True)
+
+    primary_month = generate_one_radar(user_month_primary, everyone_month_primary)
+    secondary_month = generate_one_radar(user_month_secondary, everyone_month_secondary, secondary_labels=True)
+
+    primary_week = generate_one_radar(user_week_primary, everyone_week_primary)
+    secondary_week = generate_one_radar(user_week_secondary, everyone_week_secondary, secondary_labels=True)
+
+    primary_day = generate_one_radar(user_day_primary, everyone_day_primary)
+    secondary_day = generate_one_radar(user_day_secondary, everyone_day_secondary, secondary_labels=True)
+
+    return primary_anytime, secondary_anytime, primary_month, secondary_month, \
+           primary_week, secondary_week, primary_day, secondary_day
