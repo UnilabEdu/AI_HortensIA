@@ -10,14 +10,14 @@ class UserModel(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True, server_default='')
     confirmed_at = db.Column(db.DateTime())
     active = db.Column(db.Boolean(), nullable=False, server_default='1')
-    tickets = db.relationship('Ticket', backref='user')
+    tickets = db.relationship('Ticket', backref='users')
 
-    def __init__(self, firstname, lastname, username, password, email):
-        self.firstname = firstname
-        self.lastname = lastname
+    def __init__(self, username, password, email, confirmed_at, active):
         self.username = username
         self.password = password
         self.email = email
+        self.confirmed_at = confirmed_at
+        self.active = active
 
     roles = db.relationship('Role', secondary='user_roles')
 

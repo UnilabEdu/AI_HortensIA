@@ -7,7 +7,7 @@ from project.models.user import UserModel
 class Profile(db.Model):
     __tablename__ = "profiles"
 
-    id = db.Column(db.String, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     first_name = db.Column(db.String(64), nullable=False)
     last_name = db.Column(db.String(64), nullable=False)
@@ -22,16 +22,16 @@ class Profile(db.Model):
 
 class Emotion(db.Model):
     __tablename__ = "emotions"
-    id = db.Column(db.String, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False, unique=True)
     synonym = db.Column(db.String(80), nullable=False)
     example = db.Column(db.Text)
-    tickets = db.relationship('Ticket', backref='emotion')
+    tickets = db.relationship('Ticket', backref='emotions')
 
-    def __init__(self, name, synonyms, description):
+    def __init__(self, name, synonym, example):
         self.name = name
-        self.synonym = synonyms
-        self.example = description
+        self.synonym = synonym
+        self.example = example
 
     def __repr__(self):
         return self.name
@@ -39,9 +39,9 @@ class Emotion(db.Model):
 
 class Text(db.Model):
     __tablename__ = "texts"
-    id = db.Column(db.String, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text)
-    tickets = db.relationship('Ticket', backref='text')
+    tickets = db.relationship('Ticket', backref='texts')
 
     def __init__(self, text):
         self.text = text
@@ -52,15 +52,17 @@ class Text(db.Model):
 
 class Ticket(db.Model):
     __tablename__ = "tickets"
-    id = db.Column(db.String, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.String, db.ForeignKey('users.id'))
     text = db.Column(db.Text, db.ForeignKey('texts.id'))
     emotion = db.Column(db.String, db.ForeignKey('emotions.id'))
     date = db.Column(db.DateTime)
-    
-    def __init__(self):
-        self.date = datetime.datetime.now()
+
+    def __init__(self, user_id, text_id, emotion_id, date=datetime.datetime.now()):
+        self.user = user_id
+        self.text = text_id
+        self.emotion = emotion_id
+        self.date = date
 
     def __repr__(self):
         return f'{self.user} - {self.text}'
-
