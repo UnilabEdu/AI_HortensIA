@@ -19,7 +19,7 @@ def generate_charts():
             data = frequencies_line
             borderColor = Color.Hex("#5D4191")
             borderWidth = 2
-            backgroundColor = purple_gradient
+            backgroundColor = Color.RGBA(127, 92, 194, 1)
             tension = 0.4
             fill = True
 
@@ -61,7 +61,7 @@ def generate_charts():
             data = frequencies_line[-7:]
             borderColor = Color.Hex("#5D4191")
             borderWidth = 2
-            backgroundColor = purple_gradient
+            backgroundColor = Color.RGBA(127, 92, 194, 1)
             tension = 0.4
             fill = True
 

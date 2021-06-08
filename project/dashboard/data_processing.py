@@ -68,7 +68,7 @@ def leaderboard():
     from project import create_app
     from flask_user import current_user
     from project.models import UserModel
-    from pychartjs.Color import JSLinearGradient, Hex
+    from pychartjs.Color import RGBA, Hex
 
     with create_app().app_context():
         start_time = time.time()  # Only to measure time of execution. Remove later
@@ -97,14 +97,8 @@ def leaderboard():
         if current_user.username.capitalize() not in usernames:
             usernames.append("YOU ➤    ")
 
-        base_color = JSLinearGradient('ctx', 0, 0, 600, 0,
-                                      (0, Hex("#F05B6E")),
-                                      (1, Hex("#FCAB5A"))
-                                      ).returnGradient()
-        special_color = JSLinearGradient('ctx', 0, 0, 600, 0,
-                                         (0, Hex("#FCAB5A")),
-                                         (1, Hex("#F05B6E"))
-                                         ).returnGradient()
+        base_color = RGBA(127, 92, 194, 1)
+        special_color = RGBA(156, 92, 194, 1)
         colors = [base_color] * len(usernames)
 
         if len(usernames) == 10:
@@ -122,6 +116,14 @@ def leaderboard():
         print(f"LEADERBOARD TIME: {time.time() - start_time} seconds")
 
         return usernames, frequencies, placements, colors
+        # base_color = JSLinearGradient('ctx', 0, 0, 600, 0,
+        #                               (0, Hex("#F05B6E")),
+        #                               (1, Hex("#FCAB5A"))
+        #                               ).returnGradient()
+        # special_color = JSLinearGradient('ctx', 0, 0, 600, 0,
+        #                                  (0, Hex("#FCAB5A")),
+        #                                  (1, Hex("#F05B6E"))
+        #                                  ).returnGradient()
 
 
 def data_radar():

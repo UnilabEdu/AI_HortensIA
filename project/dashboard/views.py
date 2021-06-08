@@ -102,7 +102,6 @@ def dashboard():
 @dashboard_blueprint.route('/getactivitydata')
 def get_activity_data():
     ChartMonth, ChartWeek, ChartLeaderboard, heatmap_data = generate_charts()
-    import markupsafe
 
     MonthChart = ChartMonth()
     month_chart = MonthChart.get()
@@ -113,12 +112,13 @@ def get_activity_data():
     LeaderboardChart = ChartLeaderboard()
     leaderboard_chart = LeaderboardChart.get()
 
-    heatmap_json = json.dumps(heatmap_data)
+
+
 
     all_activity_chart_data = dict(month_chart=month_chart,
                                    week_chart=week_chart,
                                    leaderboard_chart=leaderboard_chart,
-                                   heatmap_json=heatmap_json)
+                                   heatmap_data=heatmap_data)
 
     return make_response(jsonify(all_activity_chart_data))
 
