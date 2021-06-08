@@ -20,17 +20,40 @@
 
     <div style="margin-left: 5%">
 
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="pills-heatmap-tab" data-toggle="pill" href="#pills-heatmap" role="tab" aria-controls="pills-heatmap" aria-selected="true"> Heatmap </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="pills-month-tab" data-toggle="pill" href="#pills-month" role="tab" aria-controls="pills-month" aria-selected="true"> This Month </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="pills-week-tab" data-toggle="pill" href="#pills-week" role="tab" aria-controls="pills-week" aria-selected="false"> This Week </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="pills-leaderboard-tab" data-toggle="pill" href="#pills-leaderboard" role="tab" aria-controls="pills-leaderboard" aria-selected="false"> Leaderboard </a>
+      </li>
+    </ul>
 
     </div>
     {# TODO: change aria-labelledby #}
+    <div class="tab-content" id="pills-tabContent">
 
-            <div class="chartWrapper">
+
+      <div class="tab-pane fade show active" id="pills-heatmap" role="tabpanel" aria-labelledby="pills-heatmap">
+
+           <div class="chartWrapper">
                 <div class="chartAreaWrapper">
                     <canvas id="heatmapChart" height="210" width="600"></canvas>
                 </div>
                 <canvas id="heatmapChartAxis" height="300" width="0"></canvas>
             </div>
-            <div class="lds-dual-ring"></div>
+
+
+      </div>
+
+        <div class="tab-pane fade" id="pills-month" role="tabpanel" aria-labelledby="pills-month">
+
             <div class="chartWrapper">
                 <div class="chartAreaWrapper">
                     <canvas id="monthChart" height="210" width="400"></canvas>
@@ -38,8 +61,10 @@
                 <canvas id="monthChartAxis" height="300" width="0"></canvas>
             </div>
 
+        </div>
 
 
+        <div class="tab-pane fade" id="pills-week" role="tabpanel" aria-labelledby="pills-week">
 
             <div class="chartWrapper">
                 <div class="chartAreaWrapper">
@@ -48,7 +73,10 @@
                 <canvas id="weekChartAxis" height="300" width="0"></canvas>
             </div>
 
+        </div>
 
+
+        <div class="tab-pane fade" id="pills-leaderboard" role="tabpanel" aria-labelledby="pills-leaderboard">
 
             <div class="chartWrapper">
                 <div class="chartAreaWrapper">
@@ -57,9 +85,13 @@
                 <canvas id="leaderboardChartAxis" height="300" width="0"></canvas>
             </div>
 
+        </div>
+
+    </div>
 
 
                 {% block content %} {% endblock %}
+    </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
