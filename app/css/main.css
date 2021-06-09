@@ -1,3 +1,4 @@
+@import url("http://fonts.cdnfonts.com/css/segoe-ui-4");
 * {
   margin: 0;
   padding: 0;
@@ -16,16 +17,19 @@ a {
   height: 55px;
   opacity: 0.7;
   outline: none;
-  border: 0.5px solid #201f20;
+  border: 1.5px solid #201f20;
 }
 .basic__input::placeholder {
   text-decoration: underline;
   font-size: 18px;
   color: #000000;
+  font-family: "FiraGO", sans-serif;
 }
 
 .basic__btn {
   background-color: #7e57c2;
+  font-family: "FiraGO", sans-serif;
+  font-weight: 700;
   outline: none;
   border-style: none;
   font-size: 18px;
@@ -37,40 +41,109 @@ a {
   background-color: #7251b5;
 }
 
+.nino__mtavruli {
+  font-family: "BPG Nino Mtavruli", sans-serif;
+}
+
+.nino__elit {
+  font-family: "BPG Nino Elite Caps", sans-serif;
+}
+
+.segoe {
+  font-family: "Segoe UI", sans-serif;
+}
+
+.email__error__text {
+  display: none;
+  top: 52px;
+  color: #e64444;
+  font-size: 14px;
+  padding-left: 20px;
+  position: absolute;
+}
+
+.email__error {
+  border-color: #e64444;
+}
+
+.password__error__text {
+  display: none;
+  color: #e19c57;
+  font-size: 14px;
+  padding-left: 20px;
+  bottom: 25px;
+  position: absolute;
+}
+
+.password__error {
+  border-color: #e19c57;
+  color: #e19c57;
+  text-decoration: underline;
+}
+
+.password__wrong__text {
+  display: none;
+  font-size: 14px;
+  padding-left: 20px;
+  bottom: 25px;
+  position: absolute;
+  color: #e64444;
+}
+
+.password__wrong {
+  border: none;
+  background-color: #e79e9e;
+  text-decoration: underline;
+  color: #e64444;
+}
+
+.password__correct {
+  border-color: #b2df8a;
+  color: #b2df8a;
+  text-decoration: underline;
+}
+
+.firago {
+  font-family: "FiraGO", sans-serif;
+}
+
 body {
   background-color: #faf9fb;
-  margin-left: 140px;
-  margin-top: 50px;
   height: 100vh;
   background-image: url(../assets/Polygon1.svg);
   background-repeat: no-repeat;
   background-position-x: -500px;
   background-position-y: -300px;
-}
-
-header {
-  padding-left: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .main__content {
+  width: 80%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.main__content .main__title {
+  width: 100%;
+  flex-grow: 1;
 }
 
 .left__section {
   width: 630px;
-  margin-top: 40px;
   color: #0b0b0c;
   text-align: left;
 }
 .left__section .left__text {
+  margin-top: 50px;
   border-radius: 15px;
   opacity: 0.8;
+  font-weight: bold;
   color: #0b0b0c;
-  font-weight: 500;
   background-color: #ffff;
-  padding: 23px 17px;
-  font-size: 18px;
+  padding: 50px 30px;
+  font-size: 16px;
 }
 .left__section .left__form {
   display: flex;
@@ -88,10 +161,12 @@ header {
   height: 55px;
   border-radius: 0 8px 8px 0;
   flex-grow: 0.2;
+  font-weight: 300;
 }
-.left__section h2 {
-  flex-grow: 1;
-  margin-bottom: 20px;
+.left__section .left__form .left__form__title {
+  width: 100%;
+  margin-bottom: 15px;
+  font-weight: bolder;
 }
 
 .right__section {
@@ -122,12 +197,14 @@ header {
 }
 .right__section .social {
   color: #201f20;
-  font-size: 25px;
-  font-weight: bold;
+  font-size: 20px;
 }
 .right__section .social i {
   margin-left: 20px;
   font-size: 30px;
+}
+.right__section p {
+  font-weight: 700;
 }
 .right__section a {
   display: flex;
@@ -206,6 +283,7 @@ header {
 }
 
 .reg__form {
+  position: relative;
   margin: 0 auto;
   width: 300px;
   display: flex;

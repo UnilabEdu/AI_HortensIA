@@ -3,34 +3,50 @@
 
 body {
   background-color: $light-background;
-  margin-left: 140px;
-  margin-top: 50px;
+  // margin-left: 140px;
+  // margin-top: 50px;
   height: 100vh;
   background-image: url(../assets/Polygon1.svg);
   background-repeat: no-repeat;
   background-position-x: -500px;
   background-position-y: -300px;
-}
-header {
-  padding-left: 110px;
-}
-.main__content {
   display: flex;
+
   justify-content: center;
+  align-items: center;
 }
+// header {
+//   padding-left: 110px;
+// }
+.main__content {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  // height: 600px;
+  // width: 1200px;
+
+  .main__title {
+    width: 100%;
+
+    flex-grow: 1;
+  }
+}
+
 .left__section {
   width: 630px;
-  margin-top: 40px;
   color: #0b0b0c;
   text-align: left;
   .left__text {
+    margin-top: 50px;
     border-radius: 15px;
     opacity: 0.8;
+    font-weight: bold;
     color: #0b0b0c;
-    font-weight: 500;
+
     background-color: #ffff;
-    padding: 23px 17px;
-    font-size: 18px;
+    padding: 50px 30px;
+    font-size: 16px;
   }
   .left__form {
     @include flex($direct: row);
@@ -44,17 +60,20 @@ header {
       height: 55px;
       border-radius: 0 8px 8px 0;
       flex-grow: 0.2;
+      font-weight: 300;
     }
-  }
-  h2 {
-    flex-grow: 1;
-    margin-bottom: 20px;
+    .left__form__title {
+      width: 100%;
+      margin-bottom: 15px;
+      font-weight: bolder;
+    }
   }
 }
 
 .right__section {
   @include flex($direct: column, $justify: space-between);
   flex: 0.8;
+
   padding-top: 70px;
   padding-bottom: 50px;
   .auth__btn {
@@ -76,14 +95,16 @@ header {
   }
   .social {
     color: #201f20;
-    font-size: 25px;
-    font-weight: bold;
+    font-size: 20px;
+
     i {
       margin-left: 20px;
       font-size: 30px;
     }
   }
-
+  p {
+    font-weight: 700;
+  }
   a {
     display: flex;
     margin-bottom: 20px;
@@ -162,6 +183,7 @@ header {
 }
 
 .reg__form {
+  position: relative;
   margin: 0 auto;
   width: 300px;
   display: flex;
@@ -169,6 +191,7 @@ header {
   input {
     border-radius: 5px;
   }
+
   .reg__btn {
     width: 150px;
     margin: 0 auto;
