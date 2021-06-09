@@ -27,8 +27,7 @@ def populate_db():
 
     find_or_create_user(username='username2',
                         password=current_app.user_manager.hash_password('password2'),
-                        email='user2@email.com',
-                        role=admin_role)
+                        email='user2@email.com')
 
     db.session.commit()
 
@@ -49,10 +48,10 @@ def find_or_create_user(username, password, email, role=None):
 
     if not user:
         user = UserModel(username=username,
-                    password=password,
-                    email=email,
-                    confirmed_at=datetime.utcnow(),
-                    active=True)
+                         password=password,
+                         email=email,
+                         confirmed_at=datetime.utcnow(),
+                         active=True)
 
         if role:
             user.roles.append(role)

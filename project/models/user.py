@@ -5,20 +5,19 @@ from flask_user import UserMixin
 class UserModel(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    firstname = db.Column(db.String(50), server_default='')
-    lastname = db.Column(db.String(50), server_default='')
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True, server_default='')
     confirmed_at = db.Column(db.DateTime())
     active = db.Column(db.Boolean(), nullable=False, server_default='1')
+    tickets = db.relationship('Ticket', backref='users')
 
-    def __init__(self, firstname, lastname, username, password, email):
-        self.firstname = firstname
-        self.lastname = lastname
+    def __init__(self, username, password, email, confirmed_at, active):
         self.username = username
         self.password = password
         self.email = email
+        self.confirmed_at = confirmed_at
+        self.active = active
 
     roles = db.relationship('Role', secondary='user_roles')
 

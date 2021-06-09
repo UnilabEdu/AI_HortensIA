@@ -137,3 +137,10 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Flask-migrate
+migrations/
+
+# Database
+
+project/data.db
