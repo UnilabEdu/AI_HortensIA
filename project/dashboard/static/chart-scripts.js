@@ -1,3 +1,38 @@
+    // ctx = document.getElementById("monthChart").getContext('2d');
+    // var monthChart = new Chart(ctx, JSON.parse(data.month_chart));
+    //
+
+    ctx = document.getElementById("monthChart").getContext('2d');
+    const monthChart = new Chart(ctx, JSON.parse('{"type": "line", "data": {"labels": ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"], "datasets": [{"label": "Tickets Filed Last 30 Days", "data": ["1","2","1","2","1","2","1","2","1","2","1","2","1","2","1","2","1","2","1","2","1","2","1","2","1","2","1","2","1","2"], "borderColor": "rgba(93, 65, 145, 1)", "borderWidth": 2, "backgroundColor": "rgba(127, 92, 194, 1)", "tension": 0.4, "fill": true}]}, "options": {"elements": {"point": {"radius": 0, "hitRadius": 25}}, "scales": {"y": {"beginAtZero": true, "grid": {"display": false, "drawBorder": false, "tickMarkLength": 0}}, "x": {"grid": {"display": false, "drawBorder": false, "tickMarkLength": 0}}}, "plugins": {}}}'
+));
+
+    var labelsNew = ["Why", "u", "no", "work", "???"];
+    var dataNew = [2, 4, 5, 6, 10];
+
+
+
+function updateChartData(chart, label, data) {
+    chart.data.labels = label
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data = data;
+    });
+    chart.update();
+}
+
+function updateHeatmap(heatmap, dataNew) {
+    heatmap.data.datasets[0].data = dataNew;
+    heatmap.update();
+}
+
+
+// var monthChartHTML = document.getElementById('monthChart')
+//
+// monthChartHTML.addEventListener('load', (function() {
+updateChartData(monthChart, labelsNew, dataNew);
+// }))
+
+
+
 var fetchActivityData = async function () {
     var response = await fetch('/dashboard/getactivitydata');
     allActivityData = await response.json();
@@ -5,117 +40,38 @@ var fetchActivityData = async function () {
 };
 
 async function renderActivityCharts() {
-    data = await fetchActivityData();
-
     var ctx;
-    heatmapData = data.heatmap_data
-                Utils.load(() => {
-                    Chart.defaults.fontSize = 9;
-                    let ctx = document.getElementById('heatmapChart').getContext('2d');
-                    window.myMatrix = new Chart(ctx, {
-                        type: 'matrix',
-                        data: {
-                            datasets: [{
-                                label: 'Activity Heatmap',
-                                data: heatmapData,
-                                backgroundColor(c) {
-                                    const value = c.dataset.data[c.dataIndex].v * 8;
-                                    const alpha = (10 + value) / 60;
-                                    return Chart.helpers.color('#7E57C2').alpha(alpha).lighten(0.1 / c.dataset.data[c.dataIndex].v).rgbString();
-                                },
-                                borderColor(c) {
-                                    const value = c.dataset.data[c.dataIndex].v * 8;
-                                    const alpha = (10 + value) / 60;
-                                    return Chart.helpers.color('#5D4191').alpha(alpha).darken(0.6).rgbString();
-                                },
-                                borderWidth: 1,
-                                hoverBackgroundColor: 'yellow',
-                                hoverBorderColor: 'yellowgreen',
-                                width(c) {
-                                    const a = c.chart.chartArea || {};
-                                    return (a.right - a.left) / 30 - 1;
-                                },
-                                height(c) {
-                                    const a = c.chart.chartArea || {};
-                                    return (a.bottom - a.top) / 7.5 - 1;
-                                }
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                displayColors: false,
-                                callbacks: {
-                                    title() {
-                                        return '';
-                                    },
-                                    label(context) {
-                                        const v = context.dataset.data[context.dataIndex];
-                                        return ['თარიღი: ' + v.d, 'რაოდენობა: ' + v.v.toFixed(2)];
-                                    }
-                                }
-                            }
-                            },
-                            scales: {
-                                x: {
-                                    type: 'time',
-                                    position: 'bottom',
-                                    offset: true,
-                                    time: {
-                                        unit: 'week',
-                                        round: 'week',
-                                        isoWeekday: 1,
-                                        displayFormats: {
-                                            week: 'MMMMMM'
-                                        }
-                                    },
-                                    ticks: {
-                                        maxRotation: 0,
-                                        autoSkip: true
-                                    },
-                                    grid: {
-                                        display: false,
-                                        drawBorder: false,
-                                        tickMarkLength: 0,
-                                    }
-                                },
-                                y: {
-                                    type: 'time',
-                                    offset: true,
-                                    time: {
-                                        unit: 'day',
-                                        round: 'day',
-                                        isoWeekday: 1,
-                                        parser: 'i',
-                                        displayFormats: {
-                                            day: 'iiiiii'
-                                        }
-                                    },
-                                    reverse: true,
-                                    position: 'right',
-                                    ticks: {
-                                        maxRotation: 0,
-                                        autoSkip: true,
-                                        padding: 1
-                                    },
-                                    grid: {
-                                        display: false,
-                                        drawBorder: false,
-                                        tickMarkLength: 0
-                                    }
-                                }
-                            }
-                        }
-                    });
-                });
+        data = await fetchActivityData();
+        heatmapData = data.heatmap_data
+
+        updateHeatmap(heatmapChart, heatmapData)
 
 
-    ctx = document.getElementById("monthChart").getContext('2d');
-    var monthChart = new Chart(ctx, JSON.parse(data.month_chart));
+    // function updateChartData(chart, label, data) {
+    //     chart.data.labels.push(label);
+    //     chart.data.datasets.forEach((dataset) => {
+    //         dataset.data.push(data);
+    //     });
+    //     chart.update();
+    // }
+    //
+    // function removeData(chart) {
+    //     chart.data.labels.pop();
+    //     chart.data.datasets.forEach((dataset) => {
+    //         dataset.data.pop();
+    //     });
+    //     chart.update();
+    // }
+    //
+    //
+    // removeData(monthChart)
+    //
+    // updateChartData(monthChart, JSON.parse(data.month_chart).data.labels, JSON.parse(data.month_chart).data.datasets[0].data)
+    //
+
+
+    updateChartData(monthChart, JSON.parse(data.month_chart).data.labels, JSON.parse(data.month_chart).data.datasets[0].data);
+
 
     ctx = document.getElementById("weekChart").getContext('2d');
     var weekChart = new Chart(ctx, JSON.parse(data.week_chart));

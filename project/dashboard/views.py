@@ -109,6 +109,8 @@ def get_activity_data():
     WeekChart = ChartWeek()
     week_chart = WeekChart.get()
 
+    print(month_chart)
+
     LeaderboardChart = ChartLeaderboard()
     leaderboard_chart = LeaderboardChart.get()
 

@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@next/dist/chartjs-chart-matrix.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.js"></script>
 </head>
 <body>
 
@@ -40,52 +41,45 @@
     <div class="tab-content" id="pills-tabContent">
 
 
-      <div class="tab-pane fade show active" id="pills-heatmap" role="tabpanel" aria-labelledby="pills-heatmap">
-
-           <div class="chartWrapper">
-                <div class="chartAreaWrapper">
+        <div class="tab-pane fade show active" id="pills-heatmap" role="tabpanel" aria-labelledby="pills-heatmap">
+          <div class="chartWrapper">
+               <div class="chartAreaWrapper">
                     <canvas id="heatmapChart" height="210" width="600"></canvas>
                 </div>
-                <canvas id="heatmapChartAxis" height="300" width="0"></canvas>
-            </div>
+               <canvas id="heatmapChartAxis" height="300" width="0"></canvas>
+           </div>
+        </div>
 
-
-      </div>
 
         <div class="tab-pane fade" id="pills-month" role="tabpanel" aria-labelledby="pills-month">
-
             <div class="chartWrapper">
                 <div class="chartAreaWrapper">
                     <canvas id="monthChart" height="210" width="400"></canvas>
                 </div>
                 <canvas id="monthChartAxis" height="300" width="0"></canvas>
             </div>
-
         </div>
 
 
         <div class="tab-pane fade" id="pills-week" role="tabpanel" aria-labelledby="pills-week">
-
             <div class="chartWrapper">
                 <div class="chartAreaWrapper">
                     <canvas id="weekChart" height="210" width="400"></canvas>
                 </div>
                 <canvas id="weekChartAxis" height="300" width="0"></canvas>
             </div>
-
         </div>
 
 
         <div class="tab-pane fade" id="pills-leaderboard" role="tabpanel" aria-labelledby="pills-leaderboard">
-
             <div class="chartWrapper">
                 <div class="chartAreaWrapper">
                     <canvas id="leaderboardChart" height="210" width="400"></canvas>
                 </div>
                 <canvas id="leaderboardChartAxis" height="300" width="0"></canvas>
             </div>
-
         </div>
+
 
     </div>
 
@@ -100,8 +94,10 @@
 <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 
+    <script src="{{ url_for('dashboard.static', filename='chart-configs.js') }}"></script>
 
     <script src="{{ url_for('dashboard.static', filename='chart-scripts.js') }}"></script>
+
 
 
 

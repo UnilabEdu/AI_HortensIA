@@ -36,7 +36,7 @@ def populate_users():
     user_manager = current_app.user_manager
     hashed_password = user_manager.hash_password('password')
 
-    users_amount = 30  # amount of users to generate
+    users_amount = 300  # amount of users to generate
 
     usernames = ['User_' + gen.word().capitalize() + str(randrange(1, 2003)) for i in range(users_amount)]
     emails = [gen.word()[:3] + gen.email() for i in range(users_amount)]
@@ -53,7 +53,7 @@ def populate_users():
 
 
 def populate_texts():
-    for i in range(200):
+    for i in range(4000):
         db.session.add(Text(text=gen.sentence()))
 
 
@@ -82,12 +82,12 @@ def populate_tickets():
     emotion_id_list = range(1, 33)  # IDs of all emotions
 
     date_end = datetime.now()  # max date
-    date_max_difference = 30  # max difference (in days) between today and Ticket submission date
+    date_max_difference = 90  # max difference (in days) between today and Ticket submission date
 
     # Iterate over 30 User IDs
-    for user_id in range(1, 31):
-        text_id_list = list(range(1, 201))
-        filled_tickets = randrange(100, 200)  # amount of tickets for current user
+    for user_id in range(1, 301):
+        text_id_list = list(range(1, 4001))
+        filled_tickets = randrange(2800, 4000)  # amount of tickets for current user
 
         for i in range(filled_tickets):
             text_id = choice(text_id_list)  # choose a random text to assign to current ticket
