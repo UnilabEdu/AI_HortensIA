@@ -1,3 +1,15 @@
+.animate-left {
+    position:relative;
+    animation:animateleft 0.4s
+}
+
+@keyframes animateleft {
+    from{left:-300px;opacity:0}
+    to{left:0;opacity:1}
+}
+
+
+
 .chartWrapper {
     position: relative;
     margin-left: 3%;
@@ -45,7 +57,7 @@ html, body {
     box-sizing: border-box;
 }
 
-#weekChart, #yearChart, #monthChart {
+.chartAreaWrapper {
     border-radius: 20px;
     box-shadow: 1px 1px 5px 1px rgba(10, 0, 10, 0.16);
     background-color: rgba(250, 250, 249, 0.6);

@@ -1,6 +1,215 @@
+let ctx;
+
+function clone(obj) {
+  var result = Array.isArray(obj) ? [] : {};
+  for (var key in obj) {
+    // include prototype properties
+    var value = obj[key];
+    var type = {}.toString.call(value).slice(8, -1);
+    if (type === 'Array' || type === 'Object') {
+      result[key] = clone(value);
+    } else if (type === 'Date') {
+      result[key] = new Date(value.getTime());
+    }  else {
+      result[key] = value;
+    }
+  }
+  return result;
+}
+
+// CONFIGS
+
+// ["User_wor52", "User_form1363", "User_can1525", "User_302000", "User_cludis32", "User_and957", "User_ar891", "User_and1235", "User_navile849", "User_ther,1251", "YOU \u27a4    "]
+// ["rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(156, 92, 194, 1)"]
+// [3996, 3988, 3984, 3979, 3973, 3955, 3954, 3949, 3944, 3937, 3233]
+const leaderboardChartConfig = {
+         type: "bar",
+         data: {
+             labels: ['', '', '', '', '', '', '', '', '', '', ''],
+             datasets: [{
+                 label: "Leaderboard",
+                 data: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0.5],
+                 backgroundColor: 'red',
+                 barThickness: ["flex"],
+                 barPercentage: [1],
+                 categoryPercentage: [1]
+                 }]
+         },
+        options: {
+             indexAxis: "y",
+             scales: {
+                 y: {
+                     "grid": {
+                         "display": false,
+                         "drawBorder": false,
+                         "tickMarkLength": 0
+                        }
+                     },
+                 x: {
+                     grid: {
+                         display: false,
+                         drawBorder: false,
+                         tickMarkLength: 0
+                     }
+                 }
+             },
+            plugins: {}
+        }
+        }
+
+
+const monthChartConfig = {
+    type: "line",
+    data:
+        {labels:
+                ['', '', '', ''],
+        datasets: [
+            {label: "Tickets Filed Last 30 Days",
+            data: [4, 2, 3, 1],
+            borderColor: function() {
+        var gradient = ctx.createLinearGradient(0, 0, 500, 0);
+        gradient.addColorStop(0, 'orange');
+        gradient.addColorStop(1, 'purple');
+        return gradient
+        },
+            borderWidth: 2,
+            backgroundColor: "rgba(127, 92, 194, 1)",
+            tension: 0.4,
+            fill: true
+            }
+            ]
+        },
+    options:
+        {elements:
+            {point:
+                    {
+                    radius: 0,
+                    hitRadius: 25
+                    }
+            },
+            scales:
+                {
+                y:
+                    {
+                    beginAtZero: true,
+                    grid:
+                        {
+                        display: false,
+                        drawBorder: false,
+                        tickMarkLength: 0}
+                        },
+                x:
+                    {
+                    grid:
+                        {
+                        display: false,
+                        drawBorder: false,
+                        tickMarkLength: 0}
+                        }
+                    },
+        plugins: {}
+        }
+    }
+
+const weekChartConfig = clone(monthChartConfig)
+
+
+const radarAnytimePrimaryConfig = {
+    type: "radar",
+    data: {
+        labels: [
+            "Rage", "Vigilance", "Ecstasy", "Admiration", "Terror", "Amazement", "Grief", "Loathing"
+        ],
+        datasets: [
+            {
+                label:
+                    "My Data",
+                data: [1, 1, 1, 1, 1, 1, 1, 1],
+                fill: true,
+                backgroundColor: "#5200CE13",
+                borderColor: "#4E6FCC",
+                pointBackgroundColor: "rgba(255, 99, 132, 1)",
+                pointBorderColor: "rgba(255, 255, 255, 1)",
+                pointHoverBackgroundColor: "rgba(255, 255, 255, 1)",
+                pointHoverBorderColor: "rgba(255, 99, 132, 1)",
+                tension: 0.1},
+            {
+                label:
+                    "All Data",
+                data: [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+                fill: true,
+                backgroundColor: "#D014C213",
+                borderColor: "#D06FC2",
+                pointBackgroundColor: "rgba(54, 162, 235, 1)",
+                pointBorderColor: "rgba(255, 255, 255, 1)",
+                pointHoverBackgroundColor: "rgba(255, 255, 255, 1)",
+                pointHoverBorderColor: "rgba(54, 162, 235, 1)",
+                tension: 0.1
+            }
+        ]
+    },
+    options: {
+        elements:
+            {point:
+                    {
+                    radius: 0,
+                    hitRadius: 50
+                    }
+            },
+        scales: {
+            r: {
+                beginAtZero: true,
+                grid: {
+                    display: false
+                }
+            }
+            },
+        plugins: {}}}
+
+const radarAnytimeSecondaryConfig = clone(radarAnytimePrimaryConfig)
+radarAnytimeSecondaryConfig.data.labels = ['Aggressiveness', 'Optimism', 'Love', 'Submission', 'Awe', 'Disapproval', 'Remorse', 'Contempt']
+
+
+
+
+    ctx = document.getElementById("monthChart").getContext('2d');
+    var monthChart = new Chart(ctx, monthChartConfig);
+
+    ctx = document.getElementById("weekChart").getContext('2d');
+    var weekChart = new Chart(ctx, weekChartConfig);
+
+    ctx = document.getElementById("leaderboardChart").getContext('2d');
+    var leaderboardChart = new Chart(ctx, leaderboardChartConfig);
+
+    ctx = document.getElementById("radarChartAnytimePrimary").getContext('2d');
+    var radarChartAnytimePrimary = new Chart(ctx, radarAnytimePrimaryConfig)
+
+    ctx = document.getElementById("radarChartAnytimeSecondary").getContext('2d');
+    var radarChartAnytimeSecondary = new Chart(ctx, radarAnytimeSecondaryConfig)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Generate Empty Heatmap
     		function startOfToday() {
 			const d = new Date();
+			// TODO: Fix bug and remove console.log
+			console.log('DATEHERE:')
+            console.log(d)
 			return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0);
 		}
 		function isoDayOfWeek(dt) {
@@ -27,8 +236,8 @@
 }
 
 
-Chart.defaults.fontSize = 9;
-                    let ctx = document.getElementById('heatmapChart').getContext('2d');
+                    Chart.defaults.fontSize = 9;
+    		        ctx = document.getElementById('heatmapChart').getContext('2d');
                     heatmapChart = new Chart(ctx, {
                         type: 'matrix',
                         data: {

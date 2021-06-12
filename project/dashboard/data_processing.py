@@ -7,7 +7,7 @@ import time
 from datetime import date, timedelta
 
 
-def data_user_line():
+def data_user_activity():
     with create_app().app_context():
         start_time = time.time()  # Only to measure time of execution. Remove later
         # TODO: use load_only
@@ -57,10 +57,17 @@ def data_user_line():
 
         print(f"LINE CHARTS TIME: {time.time() - start_time} seconds")
 
+        # print('____________________MONTH LABELS (DATES) DATA:\n', dates_month)
+        # print('____________________MONTH FREQUENCIES DATA:\n', frequencies)
+
+        dates_month = [str(d) for d in dates_month]
+
+        frequencies[5] = 99.5
+        print(frequencies)
         return frequencies, dates_month, final
 
 
-def leaderboard():
+def data_leaderboard():
     # TODO: optimize an clean up
     # TODO: fix 10th user not appearing when current_user in top 10
     import pandas as pd
@@ -115,7 +122,10 @@ def leaderboard():
 
         print(f"LEADERBOARD TIME: {time.time() - start_time} seconds")
 
-        return usernames, frequencies, placements, colors
+        # print('____________________LEADERBOARD USERNAMES (LABELS) DATA:\n', usernames)
+        # print('____________________LEADERBOARD FREQUENCIES DATA\n', frequencies)
+
+        return usernames, frequencies, placements
         # base_color = JSLinearGradient('ctx', 0, 0, 600, 0,
         #                               (0, Hex("#F05B6E")),
         #                               (1, Hex("#FCAB5A"))

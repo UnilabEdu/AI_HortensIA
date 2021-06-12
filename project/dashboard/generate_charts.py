@@ -1,10 +1,10 @@
 from pychartjs import BaseChart, ChartType, Color
-from project.dashboard.data_processing import data_user_line, leaderboard, data_radar
+from project.dashboard.data_processing import data_user_activity, data_leaderboard, data_radar
 
 
 def generate_charts():
-    frequencies_line, dates_month, heatmap_data = data_user_line()
-    usernames, frequencies_leaderboard, placements, colors = leaderboard()
+    frequencies_line, dates_month, heatmap_data = data_user_activity()
+    usernames, frequencies_leaderboard, placements, colors = data_leaderboard()
 
     purple_gradient = Color.JSLinearGradient('ctx', 0, 0, 600, 0,
                                              (0, Color.RGBA(127, 92, 194, 1)),
