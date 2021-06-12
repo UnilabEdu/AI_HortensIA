@@ -1,4 +1,9 @@
 from flask import Blueprint, render_template
+from project import babel
+
+@babel.localeselector
+def get_locale():
+    return 'en'
 
 homepage_blueprint = Blueprint('homepage',
                                __name__,
