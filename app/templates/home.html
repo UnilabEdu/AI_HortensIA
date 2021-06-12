@@ -61,7 +61,26 @@
       <div id="auth-modal" class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
-          <p>ავტორიზაცია</p>
+        <div class="auth__container">
+          <div class="left__container">
+            <h1   class="nino__mtavruli">ავტორიზაცია</h1>
+            <div class="google__logo"><i class="fab fa-google"></i></div>
+            <h4>გარე ავტორიზაციის გამოყნება</h4>
+            <form class="auth__form">
+              
+              <input type="email" placeholder="ელ-ფოსტა/სახელი" class="basic__input" />
+              <input type="password" placeholder="პაროლი" class="basic__input" />
+              <a href="#">პაროლის აღდგენა</a>
+              <button class="auth__btn basic__btn ">შესვლა</button>
+            </form>
+          </div>
+          <div class="right__container">
+            <img class="reg__background" src="../assets/reg__background.svg"/>
+            <h1  class="nino__mtavruli">გამარჯობა, მეგობარო!</h1>
+            <p class="segoe">შეიყვანეთ თქვენი პირადი </br> მონაცემები და დაიწყეთ </br>მოგზაურობა ჩვენთან ერთად</p>
+            <button class="reg__btn basic__btn">რეგისტრაცია</button>
+          </div>
+        </div>
         </div>
       </div>
       <div id="reg-modal" class="modal">
@@ -70,7 +89,7 @@
           <div class="reg__container">
             <div class="left__container">
               <h1 class="nino__mtavruli">რეგისტრაცია</h1>
-              <h4>შექმენით საკუთარი ექაუნთი</h4>
+              <h4 >შექმენით საკუთარი ექაუნთი</h4>
               <form class="reg__form">
                 <input
                   type="email"

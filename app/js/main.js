@@ -35,3 +35,19 @@ window.onclick = function (event) {
     reg_modal.classList.remove("d-block");
   }
 };
+
+// togle modals
+
+const enterBtn = document.querySelector(".enter__btn");
+const regBtn = document.querySelector(".reg__btn");
+
+enterBtn.addEventListener("click", () => {
+  console.log("test");
+  auth_modal.classList.add("d-block");
+  reg_modal.classList.remove("d-block");
+});
+regBtn.addEventListener("click", () => {
+  console.log("test");
+  auth_modal.classList.remove("d-block");
+  reg_modal.classList.add("d-block");
+});
