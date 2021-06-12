@@ -32,4 +32,9 @@ def create_app():
     # flask-admin init
     admin.init_app(app)
 
+    # Blueprint registrations
+    from project.front_integration.views import homepage_blueprint
+    app.register_blueprint(homepage_blueprint, url_prefix="/")
+
+
     return app

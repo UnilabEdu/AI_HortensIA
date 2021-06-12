@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../css/main.css" />
-    <title>Document</title>
-  </head>
+    <link rel="stylesheet" href="{{url_for("static", filename="main.css")}}" />
+    <title>ჰორტენზია</title>
+</head>
   <body>
     <header>
       <h1>ტექსტის კლასიფიკაცია</h1>
@@ -86,7 +82,7 @@
               </form>
             </div>
             <div class="right__container">
-              <img class="reg__background" src="../assets/reg__background.svg"/>
+              <img class="reg__background" src="{{url_for("static", filename="assets/reg__background.svg")}}" />
               <h1>გამარჯობა, მეგობარო!</h1>
               <p>
                 შეიყვანეთ თქვენი პირადი </br> მონაცემები და დაიწყეთ  </br> მოგზაურობა ჩვენთან
@@ -98,6 +94,6 @@
         </div>
       </div>
     </section>
-    <script src="../js/main.js"></script>
+    <script src="{{url_for("static", filename="js/main.js")}}"></script>
   </body>
 </html>
