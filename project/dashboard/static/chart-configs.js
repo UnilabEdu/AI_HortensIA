@@ -168,7 +168,12 @@ const radarAnytimePrimaryConfig = {
 
 const radarAnytimeSecondaryConfig = clone(radarAnytimePrimaryConfig)
 radarAnytimeSecondaryConfig.data.labels = ['Aggressiveness', 'Optimism', 'Love', 'Submission', 'Awe', 'Disapproval', 'Remorse', 'Contempt']
-
+const radarMonthPrimaryConfig = clone(radarAnytimePrimaryConfig)
+const radarMonthSecondaryConfig = clone(radarAnytimeSecondaryConfig)
+const radarWeekPrimaryConfig = clone(radarAnytimePrimaryConfig)
+const radarWeekSecondaryConfig = clone(radarAnytimeSecondaryConfig)
+const radarDayPrimaryConfig = clone(radarAnytimePrimaryConfig)
+const radarDaySecondaryConfig = clone(radarAnytimeSecondaryConfig)
 
 
 
@@ -186,6 +191,28 @@ radarAnytimeSecondaryConfig.data.labels = ['Aggressiveness', 'Optimism', 'Love',
 
     ctx = document.getElementById("radarChartAnytimeSecondary").getContext('2d');
     var radarChartAnytimeSecondary = new Chart(ctx, radarAnytimeSecondaryConfig)
+
+    ctx = document.getElementById("radarChartMonthPrimary").getContext('2d');
+    var radarChartMonthPrimary = new Chart(ctx, radarMonthPrimaryConfig)
+
+    ctx = document.getElementById("radarChartMonthSecondary").getContext('2d');
+    var radarChartMonthSecondary = new Chart(ctx, radarMonthSecondaryConfig)
+
+    ctx = document.getElementById("radarChartWeekPrimary").getContext('2d');
+    var radarChartWeekPrimary = new Chart(ctx, radarWeekPrimaryConfig)
+
+    ctx = document.getElementById("radarChartWeekSecondary").getContext('2d');
+    var radarChartWeekSecondary = new Chart(ctx, radarWeekSecondaryConfig)
+
+    ctx = document.getElementById("radarChartDayPrimary").getContext('2d');
+    var radarChartDayPrimary = new Chart(ctx, radarDayPrimaryConfig)
+
+    ctx = document.getElementById("radarChartDaySecondary").getContext('2d');
+    var radarChartDaySecondary = new Chart(ctx, radarDaySecondaryConfig)
+
+
+
+
 
 
 

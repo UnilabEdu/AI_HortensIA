@@ -93,6 +93,12 @@ async function renderRadarCharts() {
     console.log(data.everyone_anytime_primary)
     updateRadar(radarChartAnytimePrimary, [data.user_anytime_primary, data.everyone_anytime_primary])
     updateRadar(radarChartAnytimeSecondary, [data.user_anytime_secondary, data.everyone_anytime_secondary])
+    updateRadar(radarChartMonthPrimary, [data.user_month_primary, data.everyone_month_primary])
+    updateRadar(radarChartMonthSecondary, [data.user_month_secondary, data.everyone_month_secondary])
+    updateRadar(radarChartWeekPrimary, [data.user_week_primary, data.everyone_week_primary])
+    updateRadar(radarChartWeekSecondary, [data.user_week_secondary, data.everyone_week_secondary])
+    updateRadar(radarChartDayPrimary, [data.user_day_primary, data.everyone_day_primary])
+    updateRadar(radarChartDaySecondary, [data.user_day_secondary, data.everyone_day_secondary])
 
     // ctx = document.getElementById("radarChartAnytimePrimary").getContext('2d');
     // var radarChartAnytimePrimary = new Chart(ctx, JSON.parse(data.primary_anytime_chart));
