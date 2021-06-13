@@ -1,0 +1,41 @@
+$light-background: #faf9fb;
+$dark-background: #7e57c2;
+$black-color: #201f20;
+$green-color: #b2df8a;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.basic__input {
+  padding-left: 27px;
+  height: 55px;
+  opacity: 0.7;
+  outline: none;
+  border: 0.5px solid #201f20;
+  &::placeholder {
+    text-decoration: underline;
+    font-size: 18px;
+    color: #000000;
+  }
+}
+
+.basic__btn {
+  background-color: $dark-background;
+  outline: none;
+  border-style: none;
+  font-size: 18px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #7251b5;
+  }
+}
