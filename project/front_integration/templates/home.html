@@ -22,14 +22,10 @@
           მომხმარებლის მიერ მარკირებულ ბარათს შევინახავთ მონაცემთა საცავში.") }}
 
         </p>
-        <form class="left__form">
+        <form method="POST" class="form-group" >
           <h2>{{ gettext("შეტყობინებების მისაღებად გამოიწერეთ") }}</h2>
-          <input
-            type="text"
-            placeholder="{{ gettext("ელ-ფოსტა") }}"
-            class="left__form__input basic__input"
-          />
-          <button class="left__form__btn basic__btn">{{ gettext("გამოწერა") }}</button>
+        {{ form.email(class="left__form__input basic__input")}}
+        {{ form.submit(class="left__form__btn basic__btn") }}
         </form>
       </div>
       <div class="right__section">
