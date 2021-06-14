@@ -34,6 +34,16 @@ function updateHeatmap(heatmap, dataNew) {
 }
 
 
+function updateLeaderboardColors(chart, userRank) {
+    if (userRank > 10) {
+        chart.data.datasets[0].backgroundColor.push(leaderboardSpecialGradient)
+    } else {
+        chart.data.datasets[0].backgroundColor[userRank-1] = leaderboardSpecialGradient
+    }
+    chart.update()
+}
+
+
 // var monthChartHTML = document.getElementById('monthChart')
 //
 // monthChartHTML.addEventListener('load', (function() {
@@ -48,18 +58,17 @@ function updateHeatmap(heatmap, dataNew) {
 
 var fetchActivityData = async function () {
     var response = await fetch('/dashboard/getactivitydata');
-    allActivityData = await response.json();
-    return allActivityData
+    return await response.json()
 };
 
 async function renderActivityCharts() {
     let ctx;
-        data = await fetchActivityData();
-        let heatmapData = data.heatmap_data
-        let monthLabels = data.month_chart_labels
-        let monthData = data.month_chart_frequencies
-        let weekLabels = data.month_chart_labels.slice(-7)
-        let weekData = data.month_chart_frequencies.slice(-7)
+        activityData = await fetchActivityData();
+        let heatmapData = activityData.heatmap_data
+        let monthLabels = activityData.month_chart_labels
+        let monthData = activityData.month_chart_frequencies
+        let weekLabels = activityData.month_chart_labels.slice(-7)
+        let weekData = activityData.month_chart_frequencies.slice(-7)
         updateHeatmap(heatmapChart, heatmapData)
         updateChartData(monthChart, monthLabels, monthData);
         updateChartData(weekChart, weekLabels, weekData)
@@ -88,17 +97,60 @@ var fetchRadarData = async function () {
 async function renderRadarCharts() {
     data = await fetchRadarData();
 
-    // var ctx;
-    console.log(data.user_anytime_primary)
-    console.log(data.everyone_anytime_primary)
+    var buttonAnytime = document.getElementById('btn-radar-anytime')
+    var buttonMonth = document.getElementById('btn-radar-month')
+    var buttonWeek = document.getElementById('btn-radar-week')
+    var buttonDay = document.getElementById('btn-radar-day')
+
     updateRadar(radarChartAnytimePrimary, [data.user_anytime_primary, data.everyone_anytime_primary])
     updateRadar(radarChartAnytimeSecondary, [data.user_anytime_secondary, data.everyone_anytime_secondary])
-    updateRadar(radarChartMonthPrimary, [data.user_month_primary, data.everyone_month_primary])
-    updateRadar(radarChartMonthSecondary, [data.user_month_secondary, data.everyone_month_secondary])
-    updateRadar(radarChartWeekPrimary, [data.user_week_primary, data.everyone_week_primary])
-    updateRadar(radarChartWeekSecondary, [data.user_week_secondary, data.everyone_week_secondary])
-    updateRadar(radarChartDayPrimary, [data.user_day_primary, data.everyone_day_primary])
-    updateRadar(radarChartDaySecondary, [data.user_day_secondary, data.everyone_day_secondary])
+
+    buttonAnytime.addEventListener("click", function () {
+        updateRadar(radarChartAnytimePrimary, [data.user_anytime_primary, data.everyone_anytime_primary])
+        updateRadar(radarChartAnytimeSecondary, [data.user_anytime_secondary, data.everyone_anytime_secondary])
+        console.log('ANYTIME')
+    })
+
+    buttonMonth.addEventListener("click", function () {
+        updateRadar(radarChartAnytimePrimary, [data.user_month_primary, data.everyone_month_primary])
+        updateRadar(radarChartAnytimeSecondary, [data.user_month_secondary, data.everyone_month_secondary])
+        console.log('MONTH')
+    })
+
+    buttonWeek.addEventListener("click", function () {
+        updateRadar(radarChartAnytimePrimary, [data.user_week_primary, data.everyone_week_primary])
+        updateRadar(radarChartAnytimeSecondary, [data.user_week_secondary, data.everyone_week_secondary])
+        console.log('WEEK')
+
+    })
+
+    buttonDay.addEventListener("click", function () {
+        updateRadar(radarChartAnytimePrimary, [data.user_day_primary, data.everyone_day_primary])
+        updateRadar(radarChartAnytimeSecondary, [data.user_day_secondary, data.everyone_day_secondary])
+        console.log('DAY')
+    })
+
+    // var ctx;
+    // console.log(data.user_anytime_primary)
+    // console.log(data.everyone_anytime_primary)
+    // updateRadar(radarChartAnytimePrimary, [data.user_anytime_primary, data.everyone_anytime_primary])
+    // updateRadar(radarChartAnytimeSecondary, [data.user_anytime_secondary, data.everyone_anytime_secondary])
+    // updateRadar(radarChartMonthPrimary, [data.user_month_primary, data.everyone_month_primary])
+    // updateRadar(radarChartMonthSecondary, [data.user_month_secondary, data.everyone_month_secondary])
+    // updateRadar(radarChartWeekPrimary, [data.user_week_primary, data.everyone_week_primary])
+    // updateRadar(radarChartWeekSecondary, [data.user_week_secondary, data.everyone_week_secondary])
+    // updateRadar(radarChartDayPrimary, [data.user_day_primary, data.everyone_day_primary])
+    // updateRadar(radarChartDaySecondary, [data.user_day_secondary, data.everyone_day_secondary])
+
+
+
+
+
+
+
+
+
+
 
     // ctx = document.getElementById("radarChartAnytimePrimary").getContext('2d');
     // var radarChartAnytimePrimary = new Chart(ctx, JSON.parse(data.primary_anytime_chart));
@@ -139,16 +191,16 @@ renderRadarCharts()
 
 var fetchLeaderboardData = async function () {
     var response = await fetch('/dashboard/getleaderboarddata');
-    leaderboardData = await response.json();
-    return leaderboardData
+    return await response.json();
 };
 
 async function renderLeaderboardChart() {
-    data = await fetchLeaderboardData();
-    let leaderboardLabels = data.leaderboard_labels
-    let leaderboardData = data.leaderboard_data
+    fetchedData = await fetchLeaderboardData();
+    let leaderboardLabels = fetchedData.leaderboard_labels
+    let leaderboardData = fetchedData.leaderboard_data
+    let userRank = fetchedData.current_user_rank
     updateChartData(leaderboardChart, leaderboardLabels, leaderboardData)
-
+    updateLeaderboardColors(leaderboardChart, userRank)
 }
 
 renderLeaderboardChart()

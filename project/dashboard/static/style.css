@@ -1,3 +1,36 @@
+
+
+
+/* Loaders animations */
+
+.loader {
+    position: absolute;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #FF0000;
+    width: 200px;
+    height: 200px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    margin-left: 25%;
+    margin-top: 25%;
+    /*background-color: rgba(0, 0, 0, 0.1)*/
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* Nav-tab view animation */
+
 .animate-left {
     position:relative;
     animation:animateleft 0.4s
@@ -8,6 +41,19 @@
     to{left:0;opacity:1}
 }
 
+.chartWrapper, .chartWrapperRadar {
+    height: 30%;
+    width: 30%
+}
+
+.chartWrapperRadar {
+    position: relative;
+    margin-left: 3%;
+}
+
+.chartAreaWrapperRadar {
+    width: 600px;
+}
 
 
 .chartWrapper {
@@ -16,7 +62,7 @@
 }
 
 .chartWrapper > canvas {
-    position: absolute;
+    /*position: absolute;*/
     left: 0;
     top: 0;
     pointer-events:none;
@@ -51,11 +97,10 @@ html, body {
     padding: 0;
     height: 100%;
     background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    display: flex;
 }
 
-* {
-    box-sizing: border-box;
-}
 
 .chartAreaWrapper {
     border-radius: 20px;

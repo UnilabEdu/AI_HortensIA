@@ -62,26 +62,114 @@ def data_user_activity():
 
         dates_month = [str(d) for d in dates_month]
 
-        frequencies[5] = 99.5
-        print(frequencies)
         return frequencies, dates_month, final
 
 
 def data_leaderboard():
     # TODO: optimize an clean up
     # TODO: fix 10th user not appearing when current_user in top 10
+    # TODO: handle long usernames
     import pandas as pd
     from project.database import db
     from project import create_app
     from flask_user import current_user
     from project.models import UserModel
-    from pychartjs.Color import RGBA, Hex
+    from sqlalchemy.orm import load_only
 
-    with create_app().app_context():
+
+    with create_app(import_blueprints=False).app_context():
+
+        # # TODO: Delete me later (only for testing) also remove import blueprints
+        # class current_user:
+        #     id = 1
+        #     username = 'User_Opt.335'
+
+
         start_time = time.time()  # Only to measure time of execution. Remove later
 
         current_user_frequency = None
-        current_user_placement = None
+        current_user_rank = None
+
+        # Get IDs of every ticket's author
+        tickets = pd.read_sql(db.session.query(Ticket).options(load_only('user')).statement, db.engine)
+
+        # Count the amount of tickets authored by each user ID and sort them
+        s = pd.DataFrame(tickets['user']).value_counts().sort_values(ascending=False)
+
+        # Get Top 10 users, their IDs and amount of filled tickets
+        top_ten = s.head(10)
+        user_ids = [i[0] for i in top_ten.index.tolist()]
+        frequencies = top_ten.values.tolist()
+
+        # Get usernames for the Top 10 users
+        usernames = []
+        count = 1
+        for u in user_ids:
+            usernames.append(str(count) + '. ' + UserModel.query.get(u).username.capitalize())
+            count += 1
+
+        # TODO: what if user hasn't filled a single ticket?
+        # Check if current_user is in Top 10 and whether they have at least one post
+        if current_user.id not in user_ids and Ticket.query.filter_by(user=current_user.id).first():
+            # Determine current_user's index in the list of users sorted by filled tickets
+            x = list(s.index).index((current_user.id,))
+            # Get the amount of tickets filled by current_user and append to other users' frequencies
+            current_user_frequency = int(s.values[x])
+            frequencies.append(current_user_frequency)
+            # Increment x because list indices start with 0
+            current_user_rank = x + 1
+            # Add a label to current_user's column,
+            usernames.append(f"{current_user_rank}. YOU ➤  ")
+        elif current_user.id in user_ids:
+            x = user_ids.index(current_user.id)
+            current_user_rank = x + 1
+            # Change current_user's label
+            usernames[x] = f"{str(x+1)}. YOU ➤    "
+
+        # Else happens when current_user has 0 filled tickets
+        else:
+            print('User has zero tickets')
+
+        print(f"\n\n\nLEADERBOARD TIME (NEW): {time.time() - start_time} seconds")
+
+        print(f'Results: usernames: {usernames} \n frequencies: {frequencies} \n rankings: {current_user_rank}')
+        return usernames, frequencies, current_user_rank
+        # base_color = JSLinearGradient('ctx', 0, 0, 600, 0,
+        #                               (0, Hex("#F05B6E")),
+        #                               (1, Hex("#FCAB5A"))
+        #                               ).returnGradient()
+        # special_color = JSLinearGradient('ctx', 0, 0, 600, 0,
+        #                                  (0, Hex("#FCAB5A")),
+        #                                  (1, Hex("#F05B6E"))
+        #                                  ).returnGradient()
+
+
+# data_leaderboard_test()
+
+
+def data_leaderboard_obsolete():
+    # TODO: optimize an clean up
+    # TODO: fix 10th user not appearing when current_user in top 10
+    import pandas as pd
+    from project.database import db
+    from project import create_app
+    # from flask_user import current_user
+    from project.models import UserModel
+    from pychartjs.Color import RGBA, Hex, JSLinearGradient
+
+    with create_app(import_blueprints=False).app_context():
+
+        # Delete me later (only for testing)
+        class current_user:
+            id = 1
+            username = 'User_Opt.335'
+
+
+
+        start_time = time.time()  # Only to measure time of execution. Remove later
+
+        current_user_frequency = None
+        current_user_rank = None
 
         tickets = pd.read_sql_table('tickets', db.engine)
 
@@ -90,7 +178,7 @@ def data_leaderboard():
         if (current_user.id,) not in s.index[:10] and Ticket.query.filter_by(user=current_user.id).first():
             x = list(s.index).index((current_user.id,))
             current_user_frequency = int(s.values[x])
-            current_user_placement = x + 1
+            current_user_rank = x + 1
 
         # s = s.sort_values(ascending=False).head(10).reset_index()
         s = s.head(10)
@@ -104,8 +192,14 @@ def data_leaderboard():
         if current_user.username.capitalize() not in usernames:
             usernames.append("YOU ➤    ")
 
-        base_color = RGBA(127, 92, 194, 1)
-        special_color = RGBA(156, 92, 194, 1)
+        base_color = JSLinearGradient('ctx', 0, 0, 600, 0,
+                                      (0, Hex("#F05B6E")),
+                                      (1, Hex("#FCAB5A"))
+                                      ).returnGradient()
+        special_color = special_color = JSLinearGradient('ctx', 0, 0, 600, 0,
+                                         (0, Hex("#FCAB5A")),
+                                         (1, Hex("#F05B6E"))
+                                         ).returnGradient()
         colors = [base_color] * len(usernames)
 
         if len(usernames) == 10:
@@ -114,18 +208,19 @@ def data_leaderboard():
         else:
             colors[10] = special_color
 
-        placements = [str(i) + '. ' for i in list(range(1, 11))]
+        rankings = [str(i) + '. ' for i in list(range(1, 11))]
 
-        if current_user_placement and current_user_frequency:
-            placements.append(str(current_user_placement) + '. ')
+        if current_user_rank and current_user_frequency:
+            rankings.append(str(current_user_rank) + '. ')
             frequencies.append(current_user_frequency)
 
-        print(f"LEADERBOARD TIME: {time.time() - start_time} seconds")
+        print(f"\n\n\nLEADERBOARD TIME: {time.time() - start_time} seconds")
 
         # print('____________________LEADERBOARD USERNAMES (LABELS) DATA:\n', usernames)
         # print('____________________LEADERBOARD FREQUENCIES DATA\n', frequencies)
+        print(f'Results: usernames: {usernames} \n frequencies: {frequencies} \n rankings: {rankings} \n colors: {colors}')
 
-        return usernames, frequencies, placements
+        return usernames, frequencies, colors, rankings
         # base_color = JSLinearGradient('ctx', 0, 0, 600, 0,
         #                               (0, Hex("#F05B6E")),
         #                               (1, Hex("#FCAB5A"))
@@ -134,6 +229,9 @@ def data_leaderboard():
         #                                  (0, Hex("#FCAB5A")),
         #                                  (1, Hex("#F05B6E"))
         #                                  ).returnGradient()
+
+
+# data_leaderboard_obsolete()
 
 
 def data_radar():

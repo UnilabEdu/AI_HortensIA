@@ -22,14 +22,42 @@ function clone(obj) {
 // ["User_wor52", "User_form1363", "User_can1525", "User_302000", "User_cludis32", "User_and957", "User_ar891", "User_and1235", "User_navile849", "User_ther,1251", "YOU \u27a4    "]
 // ["rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(156, 92, 194, 1)"]
 // [3996, 3988, 3984, 3979, 3973, 3955, 3954, 3949, 3944, 3937, 3233]
+
+var bar_ctx = document.getElementById('leaderboardChart').getContext('2d');
+
+const leaderboardNormalGradient = bar_ctx.createLinearGradient(0, 0, 1200, 0);
+            leaderboardNormalGradient.addColorStop(0, '#F05B6E');
+            leaderboardNormalGradient.addColorStop(1, '#FCAB5A');
+
+const leaderboardSpecialGradient = bar_ctx.createLinearGradient(0, 0, 400, 0);
+            leaderboardSpecialGradient.addColorStop(0, '#FCAB5A');
+            leaderboardSpecialGradient.addColorStop(1, '#F05B6E');
+
+
+
+// const leaderboardGradient = function() {
+//             var gradient = ctx.createLinearGradient(0, 0, 500, 0);
+//             gradient.addColorStop(0, 'red');
+//             gradient.addColorStop(1, 'purple');
+//             return gradient
+//             }
+
+leaderboardColors = []
+for (let count = 0; count < 10; count++) {
+    leaderboardColors.push(leaderboardNormalGradient)
+}
+
+console.log(leaderboardColors)
+
+
 const leaderboardChartConfig = {
          type: "bar",
          data: {
              labels: ['', '', '', '', '', '', '', '', '', '', ''],
              datasets: [{
                  label: "Leaderboard",
-                 data: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0.5],
-                 backgroundColor: 'red',
+                 data: [10, 9.5, 9, 8.5, 8, 7.5, 7, 6.5, 6, 5.5, 5],
+                 backgroundColor: leaderboardColors,
                  barThickness: ["flex"],
                  barPercentage: [1],
                  categoryPercentage: [1]
@@ -67,11 +95,11 @@ const monthChartConfig = {
             {label: "Tickets Filed Last 30 Days",
             data: [4, 2, 3, 1],
             borderColor: function() {
-        var gradient = ctx.createLinearGradient(0, 0, 500, 0);
-        gradient.addColorStop(0, 'orange');
-        gradient.addColorStop(1, 'purple');
-        return gradient
-        },
+            var gradient = ctx.createLinearGradient(0, 0, 500, 0);
+            gradient.addColorStop(0, 'orange');
+            gradient.addColorStop(1, 'purple');
+            return gradient
+            },
             borderWidth: 2,
             backgroundColor: "rgba(127, 92, 194, 1)",
             tension: 0.4,
@@ -149,6 +177,7 @@ const radarAnytimePrimaryConfig = {
         ]
     },
     options: {
+        maintainAspectRatio: false,
         elements:
             {point:
                     {
@@ -158,6 +187,12 @@ const radarAnytimePrimaryConfig = {
             },
         scales: {
             r: {
+                pointLabels: {
+                    font: {
+                        size: 18,
+                        family: 'sans-serif'
+                    }
+                },
                 beginAtZero: true,
                 grid: {
                     display: false
@@ -168,12 +203,12 @@ const radarAnytimePrimaryConfig = {
 
 const radarAnytimeSecondaryConfig = clone(radarAnytimePrimaryConfig)
 radarAnytimeSecondaryConfig.data.labels = ['Aggressiveness', 'Optimism', 'Love', 'Submission', 'Awe', 'Disapproval', 'Remorse', 'Contempt']
-const radarMonthPrimaryConfig = clone(radarAnytimePrimaryConfig)
-const radarMonthSecondaryConfig = clone(radarAnytimeSecondaryConfig)
-const radarWeekPrimaryConfig = clone(radarAnytimePrimaryConfig)
-const radarWeekSecondaryConfig = clone(radarAnytimeSecondaryConfig)
-const radarDayPrimaryConfig = clone(radarAnytimePrimaryConfig)
-const radarDaySecondaryConfig = clone(radarAnytimeSecondaryConfig)
+// const radarMonthPrimaryConfig = clone(radarAnytimePrimaryConfig)
+// const radarMonthSecondaryConfig = clone(radarAnytimeSecondaryConfig)
+// const radarWeekPrimaryConfig = clone(radarAnytimePrimaryConfig)
+// const radarWeekSecondaryConfig = clone(radarAnytimeSecondaryConfig)
+// const radarDayPrimaryConfig = clone(radarAnytimePrimaryConfig)
+// const radarDaySecondaryConfig = clone(radarAnytimeSecondaryConfig)
 
 
 
@@ -191,24 +226,24 @@ const radarDaySecondaryConfig = clone(radarAnytimeSecondaryConfig)
 
     ctx = document.getElementById("radarChartAnytimeSecondary").getContext('2d');
     var radarChartAnytimeSecondary = new Chart(ctx, radarAnytimeSecondaryConfig)
-
-    ctx = document.getElementById("radarChartMonthPrimary").getContext('2d');
-    var radarChartMonthPrimary = new Chart(ctx, radarMonthPrimaryConfig)
-
-    ctx = document.getElementById("radarChartMonthSecondary").getContext('2d');
-    var radarChartMonthSecondary = new Chart(ctx, radarMonthSecondaryConfig)
-
-    ctx = document.getElementById("radarChartWeekPrimary").getContext('2d');
-    var radarChartWeekPrimary = new Chart(ctx, radarWeekPrimaryConfig)
-
-    ctx = document.getElementById("radarChartWeekSecondary").getContext('2d');
-    var radarChartWeekSecondary = new Chart(ctx, radarWeekSecondaryConfig)
-
-    ctx = document.getElementById("radarChartDayPrimary").getContext('2d');
-    var radarChartDayPrimary = new Chart(ctx, radarDayPrimaryConfig)
-
-    ctx = document.getElementById("radarChartDaySecondary").getContext('2d');
-    var radarChartDaySecondary = new Chart(ctx, radarDaySecondaryConfig)
+    //
+    // ctx = document.getElementById("radarChartMonthPrimary").getContext('2d');
+    // var radarChartMonthPrimary = new Chart(ctx, radarMonthPrimaryConfig)
+    //
+    // ctx = document.getElementById("radarChartMonthSecondary").getContext('2d');
+    // var radarChartMonthSecondary = new Chart(ctx, radarMonthSecondaryConfig)
+    //
+    // ctx = document.getElementById("radarChartWeekPrimary").getContext('2d');
+    // var radarChartWeekPrimary = new Chart(ctx, radarWeekPrimaryConfig)
+    //
+    // ctx = document.getElementById("radarChartWeekSecondary").getContext('2d');
+    // var radarChartWeekSecondary = new Chart(ctx, radarWeekSecondaryConfig)
+    //
+    // ctx = document.getElementById("radarChartDayPrimary").getContext('2d');
+    // var radarChartDayPrimary = new Chart(ctx, radarDayPrimaryConfig)
+    //
+    // ctx = document.getElementById("radarChartDaySecondary").getContext('2d');
+    // var radarChartDaySecondary = new Chart(ctx, radarDaySecondaryConfig)
 
 
 
