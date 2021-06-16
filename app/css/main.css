@@ -247,7 +247,6 @@ body {
 
 .close:hover,
 .close:focus {
-  color: #a00000;
   text-decoration: none;
   cursor: pointer;
 }
@@ -295,7 +294,7 @@ body {
 .reg__form .reg__btn {
   width: 150px;
   margin: 0 auto;
-  height: 40px;
+  height: 55px;
   border-radius: 45px;
 }
 .reg__form * {
@@ -311,13 +310,14 @@ body {
 }
 .right__container h1,
 .right__container p {
+  font-size: 18px;
   margin-bottom: 110px;
   text-align: center;
 }
 .right__container .enter__btn {
   display: block;
   width: 120px;
-  height: 40px;
+  height: 55px;
   margin: 0 auto;
   font-weight: bold;
   border-radius: 45px;
@@ -329,6 +329,52 @@ body {
   top: -490px;
   left: -250px;
   position: absolute;
+}
+
+.auth__container {
+  display: flex;
+  height: 80%;
+  align-items: center;
+}
+.auth__container .left__container .fa-google {
+  display: block;
+  width: 40px;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 30px auto;
+}
+.auth__container .left__container .auth__form {
+  position: relative;
+  margin: 0 auto;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+.auth__container .left__container .auth__form a {
+  text-align: center;
+  text-decoration: underline;
+}
+.auth__container .left__container .auth__form input {
+  border-radius: 5px;
+}
+.auth__container .left__container .auth__form * {
+  margin-bottom: 20px;
+}
+.auth__container .left__container .auth__form .auth__btn {
+  width: 150px;
+  margin: 0 auto;
+  height: 55px;
+  border-radius: 45px;
+}
+.auth__container .right__container .reg__btn {
+  display: block;
+  width: 200px;
+  height: 55px;
+  margin: 0 auto;
+  font-weight: bold;
+  border-radius: 45px;
+  background-color: white;
+  color: #7e57c2;
 }
 
 /*# sourceMappingURL=main.css.map */
