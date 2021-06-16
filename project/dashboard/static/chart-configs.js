@@ -23,6 +23,35 @@ function clone(obj) {
 // ["rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(156, 92, 194, 1)"]
 // [3996, 3988, 3984, 3979, 3973, 3955, 3954, 3949, 3944, 3937, 3233]
 
+const streakChartConfig = {
+        type: "doughnut",
+        data: {
+        labels: [
+            'აქტიურობის დღეები',
+            'დღეები შემდეგ მიზნამდე',
+        ],
+        datasets: [{
+            data: [5, 2],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'white',
+            ],
+            hoverOffset: 0
+            }]
+            },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            }
+        }
+    }
+
+
+
 var bar_ctx = document.getElementById('leaderboardChart').getContext('2d');
 
 const leaderboardNormalGradient = bar_ctx.createLinearGradient(0, 0, 1200, 0);
@@ -94,14 +123,14 @@ const monthChartConfig = {
         datasets: [
             {label: "Tickets Filed Last 30 Days",
             data: [4, 2, 3, 1],
-            borderColor: function() {
+            borderColor: 'purple',
+            borderWidth: 3,
+            backgroundColor: function() {
             var gradient = ctx.createLinearGradient(0, 0, 500, 0);
-            gradient.addColorStop(0, 'orange');
-            gradient.addColorStop(1, 'purple');
+                gradient.addColorStop(0, 'purple');
+                gradient.addColorStop(1, 'rgba(127, 92, 194, 1)');
             return gradient
             },
-            borderWidth: 2,
-            backgroundColor: "rgba(127, 92, 194, 1)",
             tension: 0.4,
             fill: true
             }
@@ -210,6 +239,8 @@ radarAnytimeSecondaryConfig.data.labels = ['Aggressiveness', 'Optimism', 'Love',
 // const radarDayPrimaryConfig = clone(radarAnytimePrimaryConfig)
 // const radarDaySecondaryConfig = clone(radarAnytimeSecondaryConfig)
 
+    ctx = document.getElementById("streakChart").getContext('2d');
+    var streakChart = new Chart(ctx, streakChartConfig);
 
 
     ctx = document.getElementById("monthChart").getContext('2d');

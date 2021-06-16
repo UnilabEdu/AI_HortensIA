@@ -59,6 +59,8 @@ def testme():
     #                        primary_day_chart=primary_day_chart, secondary_day_chart=secondary_day_chart)
     return render_template('test.html')
 
+
+# TODO: use flask-limit on fetching routes
 @dashboard_blueprint.route('/getradarsdata')
 def get_radars_data():
     primary, secondary = data_radar()
@@ -91,7 +93,7 @@ def get_radars_data():
 
 @dashboard_blueprint.route('/getactivitydata')
 def get_activity_data():
-    data_month_frequencies, data_month_labels, heatmap_data = data_user_activity()
+    data_month_frequencies, data_month_labels, heatmap_data, streak = data_user_activity()
 
     month_chart_labels = data_month_labels
     month_chart_frequencies = data_month_frequencies
@@ -106,7 +108,8 @@ def get_activity_data():
 
     all_activity_chart_data = dict(month_chart_labels=month_chart_labels,
                                    month_chart_frequencies=month_chart_frequencies,
-                                   heatmap_data=heatmap_data)
+                                   heatmap_data=heatmap_data,
+                                   streak=streak)
 
     return make_response(jsonify(all_activity_chart_data))
 

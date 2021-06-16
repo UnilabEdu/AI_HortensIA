@@ -8,9 +8,16 @@ from datetime import date, timedelta
 
 
 def data_user_activity():
-    with create_app().app_context():
+    with create_app(import_blueprints=False).app_context():
         start_time = time.time()  # Only to measure time of execution. Remove later
         # TODO: use load_only
+
+        # TODO: Delete me later (only for testing) also remove import blueprints
+        class current_user:
+            id = 1
+            username = 'User_Opt.335'
+
+        today = date.today()
 
         # TODO: why did user=str(current_user.id) still work here?
         user_tickets = pd.read_sql(Ticket.query.filter_by(user=current_user.id).statement, db.engine)  # ~0.16 sec
@@ -20,8 +27,8 @@ def data_user_activity():
         # df = pd.read_sql_table('tickets', db.engine)
         # user_tickets = df.loc[df['user'] == current_user.id]
 
-        dates_month = [date.today() - timedelta(days=i) for i in range(30)]
-        dates_heatmap = [date.today() - timedelta(days=i) for i in range(182)]
+        dates_month = [today - timedelta(days=i) for i in range(30)]
+        dates_heatmap = [today - timedelta(days=i) for i in range(182)]
         dates_month.reverse()
         dates_heatmap.reverse()
 
@@ -62,12 +69,26 @@ def data_user_activity():
 
         dates_month = [str(d) for d in dates_month]
 
-        return frequencies, dates_month, final
+        # ADDITIONAL ACTIVITY STATS START HERE
+
+        # TODO: remove later, only for testing because there's no data for today.
+        check_day = today - timedelta(days=7)
+
+        day_streak = 0
+        while check_day in all_dates.to_list():
+            day_streak += 1
+            check_day = check_day - timedelta(days=1)
+            print(day_streak)
+
+        print(f"NEW FUNCTIONS TIME: {time.time() - start_time} seconds")
+
+        return frequencies, dates_month, final, day_streak
+
+
+# data_user_activity()
 
 
 def data_leaderboard():
-    # TODO: optimize an clean up
-    # TODO: fix 10th user not appearing when current_user in top 10
     # TODO: handle long usernames
     import pandas as pd
     from project.database import db

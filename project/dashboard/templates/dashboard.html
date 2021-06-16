@@ -16,9 +16,14 @@
 <body>
 
     <h1> Dashboard </h1>
+
+        <h4 id="current-streak-text"> ზედიზედ აქტიურობ -- დღე! </h4>
+        <h4 id="target-streak-text"> შემდეგი მიზანი: - კვირა! </h4>
+        <div class="streak-chart" style="height: 200px; width: 200px">
+        <canvas id="streakChart" height="1" width="1"></canvas>
+        </div>
+
 <br><br>
-
-
 
         <div>
               <button onclick="showChart('tab-activity-heatmap')">Heatmap</button>

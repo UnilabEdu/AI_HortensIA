@@ -52,7 +52,46 @@ function updateLeaderboardColors(chart, userRank) {
     } else {
         chart.data.datasets[0].backgroundColor[userRank-1] = leaderboardSpecialGradient
     }
-    chart.update()
+    chart.update();
+}
+
+function updateStreakChart(chart, streakDays) {
+    var colors = ['#914EB2', '#916DD1', '#4B6DD1', '#0098BD', '#00CEBD', '#F7B967', '#F78C67', '#FF5050', '#F74991', '#00C4E3', '#DE2A7C']
+    var brackets = [7, 14, 21, 30, 60, 90, 120, 150, 180, 360, 99999999]
+    let currentBracket = 7
+    let bracketIndex = 0
+    brackets.forEach(function(value, index, array) {
+
+        if (streakDays >= value) {
+            currentBracket = array[index+1]
+            bracketIndex = index + 1
+        }
+    })
+
+    var targetStreakText;
+    if (bracketIndex === 10) {
+        targetStreakText = 'დიდი მადლობა!'
+    } else if (bracketIndex === 9) {
+        targetStreakText = 'შემდეგი მიზანი: 1 წელი.'
+    } else if (bracketIndex > 2) {
+        targetStreakText = 'შემდეგი მიზანი: ' + (bracketIndex - 2).toString() + ' თვე.'
+    } else {
+        targetStreakText = 'შემდეგი მიზანი: ' + (bracketIndex + 1).toString() + ' კვირა.'
+    }
+
+    var currentStreakText = 'ზედიზედ ' + streakDays.toString() + ' დღე აქტიურობ.'
+
+    let values;
+
+    values = [streakDays, currentBracket - streakDays]
+
+    document.getElementById("current-streak-text").innerHTML = currentStreakText;
+    document.getElementById("target-streak-text").innerHTML = targetStreakText;
+
+    chart.data.datasets[0].data = values;
+    chart.data.datasets[0].backgroundColor[0] = colors[bracketIndex]
+
+    chart.update();
 }
 
 
@@ -81,9 +120,11 @@ async function renderActivityCharts() {
         let monthData = activityData.month_chart_frequencies
         let weekLabels = activityData.month_chart_labels.slice(-7)
         let weekData = activityData.month_chart_frequencies.slice(-7)
+        let streakData = activityData.streak
         updateHeatmap(heatmapChart, heatmapData)
         updateChartData(monthChart, monthLabels, monthData);
         updateChartData(weekChart, weekLabels, weekData)
+        updateStreakChart(streakChart, streakData)
         var buttonWeek = document.getElementById('btn-activity-chart-week')
         var buttonMonth = document.getElementById('btn-activity-chart-month')
 
