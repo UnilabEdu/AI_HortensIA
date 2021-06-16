@@ -8,7 +8,7 @@ import json
 # TODO: @login_required
 @dashboard_blueprint.route('/', methods=['GET'])
 def dashboard():
-    return render_template('radars.html',)
+    return render_template('dashboard.html',)
 
 
 @dashboard_blueprint.route('/testme')

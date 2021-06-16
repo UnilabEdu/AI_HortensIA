@@ -177,7 +177,7 @@ const radarAnytimePrimaryConfig = {
         ]
     },
     options: {
-        maintainAspectRatio: false,
+        // maintainAspectRatio: false,
         elements:
             {point:
                     {

@@ -53,6 +53,7 @@
 
 .chartAreaWrapperRadar {
     width: 600px;
+    position: relative;
 }
 
 
@@ -98,7 +99,7 @@ html, body {
     height: 100%;
     background-color: rgb(255, 255, 255);
     box-sizing: border-box;
-    display: flex;
+    /*display: flex;*/
 }
 
 

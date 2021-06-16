@@ -19,14 +19,17 @@
 <br><br>
 
 
+    <div style="margin-left: 5%">
 
-        <div>
+        <div class="w3-bar w3-black">
               <button onclick="showChart('tab-activity-heatmap')">Heatmap</button>
               <button onclick="showChart('tab-activity-month')">Last Month</button>
               <button onclick="showChart('tab-activity-week')">Last Week</button>
               <button onclick="showChart('tab-activity-leaderboard')">Leaderboard</button>
         </div>
 
+    </div>
+    {# TODO: change aria-labelledby #}
 
         <div id="tab-activity-heatmap" class="activity-chart-container animate-left">
           <div class="chartWrapper">
@@ -71,33 +74,19 @@
             </div>
         </div>
 
-    <div class="container">
-{#        <div class="col-3">#}
-              <button id="btn-radar-anytime">Any Time</button>
-              <button id="btn-radar-month">This Month</button>
-              <button id="btn-radar-week">This Week</button>
-              <button id="btn-radar-day">Today</button>
+                <script>
+                    function showChart(chartName) {
+                      var i;
+                      var x = document.getElementsByClassName("activity-chart-container");
+                      for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";
+                      }
+                      document.getElementById(chartName).style.display = "block";
+                    }
+                </script>
 
-            <div class="chartWrapperRadar">
-                <div class="chartAreaWrapperRadar">
-                    <canvas id="radarChartAnytimePrimary" height="210" width="300"></canvas>
-                </div>
-                <canvas id="radarChartAnytimePrimaryAxis" height="300" width="0"></canvas>
-            </div>
-{#        </div>#}
-
-{#        <div class="col-3">#}
-            <div class="chartWrapperRadar">
-                <div class="chartAreaWrapperRadar">
-                    <canvas id="radarChartAnytimeSecondary" height="210" width="100"></canvas>
-                </div>
-                <canvas id="radarChartAnytimeSecondaryAxis" height="300" width="0"></canvas>
-            </div>
-{#        </div>#}
-
+                {% block content %} {% endblock %}
     </div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

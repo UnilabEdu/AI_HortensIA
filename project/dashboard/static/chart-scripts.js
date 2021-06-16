@@ -1,3 +1,15 @@
+function showChart(chartName) {
+    var i;
+    var x = document.getElementsByClassName("activity-chart-container");
+    for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+    }
+    document.getElementById(chartName).style.display = "block";
+}
+
+
+
+
 function updateChartData(chart, label, data) {
     chart.data.labels = label
     chart.data.datasets.forEach((dataset) => {
