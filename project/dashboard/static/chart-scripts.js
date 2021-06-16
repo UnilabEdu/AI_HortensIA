@@ -60,6 +60,13 @@ function updateStreakChart(chart, streakDays) {
     var brackets = [7, 14, 21, 30, 60, 90, 120, 150, 180, 360, 99999999]
     let currentBracket = 7
     let bracketIndex = 0
+    let activeStreak = true
+    if (streakDays < 0) {
+        streakDays = Math.abs(streakDays)
+        activeStreak = false
+    }
+
+
     brackets.forEach(function(value, index, array) {
 
         if (streakDays >= value) {
@@ -68,18 +75,28 @@ function updateStreakChart(chart, streakDays) {
         }
     })
 
+    var currentStreakText;
     var targetStreakText;
-    if (bracketIndex === 10) {
-        targetStreakText = 'დიდი მადლობა!'
-    } else if (bracketIndex === 9) {
-        targetStreakText = 'შემდეგი მიზანი: 1 წელი.'
-    } else if (bracketIndex > 2) {
-        targetStreakText = 'შემდეგი მიზანი: ' + (bracketIndex - 2).toString() + ' თვე.'
-    } else {
-        targetStreakText = 'შემდეგი მიზანი: ' + (bracketIndex + 1).toString() + ' კვირა.'
-    }
+    if (activeStreak === true) {
+        currentStreakText = 'ზედიზედ ' + streakDays.toString() + ' დღე აქტიურობ.'
 
-    var currentStreakText = 'ზედიზედ ' + streakDays.toString() + ' დღე აქტიურობ.'
+        if (streakDays === 0) {
+            currentStreakText = 'დღეს ბარათი არ შეგივსია.'
+            targetStreakText = 'აქ დაგითვლით, ზედიზედ რამდენი დღე იაქტიურე.'
+            chart.data.datasets[0].backgroundColor[1] = '#E5D4F0'
+        } else if (bracketIndex === 10) {
+            targetStreakText = 'დიდი მადლობა!'
+        } else if (bracketIndex === 9) {
+            targetStreakText = 'შემდეგი მიზანი: 1 წელი.'
+        } else if (bracketIndex > 2) {
+            targetStreakText = 'შემდეგი მიზანი: ' + (bracketIndex - 2).toString() + ' თვე.'
+        } else {
+            targetStreakText = 'შემდეგი მიზანი: ' + (bracketIndex + 1).toString() + ' კვირა.'
+        }
+    } else {
+        currentStreakText = 'ზედიზედ ' + streakDays.toString() + ' დღე აქტიურობდი.'
+        targetStreakText = 'შეავსე ბარათი დღესაც, რათა გააგრძელო აქტიურობის მიმდევრობა'
+    }
 
     let values;
 

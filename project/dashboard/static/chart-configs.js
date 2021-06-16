@@ -31,9 +31,9 @@ const streakChartConfig = {
             'დღეები შემდეგ მიზნამდე',
         ],
         datasets: [{
-            data: [5, 2],
+            data: [7, 0],
             backgroundColor: [
-                'rgb(255, 99, 132)',
+                '#914EB2',
                 'white',
             ],
             hoverOffset: 0

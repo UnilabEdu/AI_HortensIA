@@ -71,14 +71,25 @@ def data_user_activity():
 
         # ADDITIONAL ACTIVITY STATS START HERE
 
-        # TODO: remove later, only for testing because there's no data for today.
-        check_day = today - timedelta(days=7)
+        # TODO: remove days=7 later, only for testing because there's no data for today.
 
-        day_streak = 0
-        while check_day in all_dates.to_list():
-            day_streak += 1
-            check_day = check_day - timedelta(days=1)
+
+        def calculate_streak(today_or_yesterday):
+            check_day = today - timedelta(days=today_or_yesterday)
+            day_streak = 0
+            while check_day in all_dates.to_list():
+                day_streak += 1
+                check_day = check_day - timedelta(days=1)
             print(day_streak)
+            # TODO: when done testing or when there's today's data in DB, change 8 to 1 and 7 to 0 below (in the next ~7 lines)
+            if today_or_yesterday == 1:
+                day_streak = 0 - day_streak
+            return day_streak
+
+        day_streak = calculate_streak(0)
+        if day_streak == 0:
+            day_streak = calculate_streak(1)
+
 
         print(f"NEW FUNCTIONS TIME: {time.time() - start_time} seconds")
 
