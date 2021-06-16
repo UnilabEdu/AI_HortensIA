@@ -54,22 +54,26 @@ const streakChartConfig = {
 
 var bar_ctx = document.getElementById('leaderboardChart').getContext('2d');
 
-const leaderboardNormalGradient = bar_ctx.createLinearGradient(0, 0, 1200, 0);
-            leaderboardNormalGradient.addColorStop(0, '#F05B6E');
-            leaderboardNormalGradient.addColorStop(1, '#FCAB5A');
+const leaderboardNormalGradient = bar_ctx.createLinearGradient(0, 0, 600, 0);
+            leaderboardNormalGradient.addColorStop(0, 'purple');
+            leaderboardNormalGradient.addColorStop(1, 'rgba(78, 116, 194, 1)');
 
-const leaderboardSpecialGradient = bar_ctx.createLinearGradient(0, 0, 400, 0);
-            leaderboardSpecialGradient.addColorStop(0, '#FCAB5A');
-            leaderboardSpecialGradient.addColorStop(1, '#F05B6E');
+const leaderboardSpecialGradient = bar_ctx.createLinearGradient(0, 0, 600, 0);
+            leaderboardSpecialGradient.addColorStop(0, 'rgba(78, 116, 194, 1)');
+            leaderboardSpecialGradient.addColorStop(1, 'purple');
+
+// OLD RED-ORANGE COLORS:
+// const leaderboardNormalGradient = bar_ctx.createLinearGradient(0, 0, 1200, 0);
+//             leaderboardNormalGradient.addColorStop(0, '#F05B6E');
+//             leaderboardNormalGradient.addColorStop(1, '#FCAB5A');
+//
+// const leaderboardSpecialGradient = bar_ctx.createLinearGradient(0, 0, 400, 0);
+//             leaderboardSpecialGradient.addColorStop(0, '#FCAB5A');
+//             leaderboardSpecialGradient.addColorStop(1, '#F05B6E');
 
 
 
-// const leaderboardGradient = function() {
-//             var gradient = ctx.createLinearGradient(0, 0, 500, 0);
-//             gradient.addColorStop(0, 'red');
-//             gradient.addColorStop(1, 'purple');
-//             return gradient
-//             }
+
 
 leaderboardColors = []
 for (let count = 0; count < 10; count++) {
@@ -96,7 +100,10 @@ const leaderboardChartConfig = {
              indexAxis: "y",
              scales: {
                  y: {
-                     "grid": {
+                     ticks: {
+                         crossAlign: 'far',
+                     },
+                     grid: {
                          "display": false,
                          "drawBorder": false,
                          "tickMarkLength": 0

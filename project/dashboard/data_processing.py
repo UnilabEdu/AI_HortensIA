@@ -13,9 +13,9 @@ def data_user_activity():
         # TODO: use load_only
 
         # TODO: Delete me later (only for testing) also remove import blueprints
-        class current_user:
-            id = 1
-            username = 'User_Opt.335'
+        # class current_user:
+        #     id = 1
+        #     username = 'User_Opt.335'
 
         today = date.today()
 
@@ -32,25 +32,31 @@ def data_user_activity():
         dates_month.reverse()
         dates_heatmap.reverse()
 
-        all_dates = user_tickets['date'].dt.date  # get datetimes, convert to pd date, sort values
+        raw_dates = user_tickets['date']
+        nonzero_dates = len(raw_dates) > 0
 
+        all_dates = []
         frequencies = [0] * 30
         frequencies_heatmap = [0] * 182
-        # TODO: remove 'try: , except ValueError'
-        for day in all_dates:
-            # get frequencies for this month
-            try:
-                index = dates_month.index(day)
-                frequencies[index] += 1
-            except ValueError:
-                pass
+        if nonzero_dates:
+            all_dates = user_tickets['date'].dt.date  # get datetimes, convert to pd date, sort values
 
-            # get frequencies for last 6 months
-            try:
-                index = dates_heatmap.index(day)
-                frequencies_heatmap[index] += 1
-            except ValueError:
-                pass
+            # TODO: remove 'try: , except ValueError'
+            for day in all_dates:
+                # get frequencies for this month
+                try:
+                    index = dates_month.index(day)
+                    frequencies[index] += 1
+                except ValueError:
+                    pass
+
+                # get frequencies for last 6 months
+                try:
+                    index = dates_heatmap.index(day)
+                    frequencies_heatmap[index] += 1
+                except ValueError:
+                    pass
+
 
         # generate dictionary for heatmap data
         final = []
@@ -77,22 +83,24 @@ def data_user_activity():
         def calculate_streak(today_or_yesterday):
             check_day = today - timedelta(days=today_or_yesterday)
             day_streak = 0
-            while check_day in all_dates.to_list():
-                day_streak += 1
-                check_day = check_day - timedelta(days=1)
-            print(day_streak)
-            # TODO: when done testing or when there's today's data in DB, change 8 to 1 and 7 to 0 below (in the next ~7 lines)
-            if today_or_yesterday == 1:
-                day_streak = 0 - day_streak
+            if nonzero_dates:
+                while check_day in all_dates.to_list():
+                    day_streak += 1
+                    check_day = check_day - timedelta(days=1)
+                print(day_streak)
+                # TODO: when done testing or when there's today's data in DB, change 8 to 1 and 7 to 0 below (in the next ~7 lines)
+                if today_or_yesterday == 8:
+                    day_streak = 0 - day_streak
             return day_streak
 
-        day_streak = calculate_streak(0)
+        day_streak = calculate_streak(7)
         if day_streak == 0:
-            day_streak = calculate_streak(1)
+            day_streak = calculate_streak(8)
 
 
         print(f"NEW FUNCTIONS TIME: {time.time() - start_time} seconds")
 
+        print(f'FREQ: {frequencies} \n DATES_M: {dates_month} \n FINAL(HEAT): {final} \n STREAK: {day_streak}')
         return frequencies, dates_month, final, day_streak
 
 
@@ -137,8 +145,9 @@ def data_leaderboard():
         usernames = []
         count = 1
         for u in user_ids:
-            usernames.append(str(count) + '. ' + UserModel.query.get(u).username.capitalize())
+            usernames.append('   ' + str(count) + '. ' + UserModel.query.get(u).username.capitalize())
             count += 1
+
 
         # TODO: what if user hasn't filled a single ticket?
         # Check if current_user is in Top 10 and whether they have at least one post
@@ -151,12 +160,12 @@ def data_leaderboard():
             # Increment x because list indices start with 0
             current_user_rank = x + 1
             # Add a label to current_user's column,
-            usernames.append(f"{current_user_rank}. YOU ➤  ")
+            usernames.append(f"   {current_user_rank}. YOU     ➤")
         elif current_user.id in user_ids:
             x = user_ids.index(current_user.id)
             current_user_rank = x + 1
             # Change current_user's label
-            usernames[x] = f"{str(x+1)}. YOU ➤    "
+            usernames[x] = f"   {str(x+1)}. YOU     ➤"
 
         # Else happens when current_user has 0 filled tickets
         else:
