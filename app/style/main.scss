@@ -50,6 +50,7 @@ body {
   }
   .left__form {
     @include flex($direct: row);
+    z-index: 1000;
     flex-wrap: wrap;
     margin-top: 100px;
     &__input {
@@ -126,6 +127,7 @@ body {
 
 /* Modal Content */
 .modal-content {
+  background-repeat: no-repeat;
   background-color: #fff;
   border-radius: 48px;
   margin: 10vh auto;
@@ -167,6 +169,7 @@ body {
   align-items: center;
 }
 .left__container {
+  z-index: 900;
   width: 50%;
   padding: 50px;
   h1,
@@ -182,6 +185,7 @@ body {
 }
 
 .reg__form {
+  z-index: 100;
   position: relative;
   margin: 0 auto;
   width: 300px;
@@ -203,7 +207,7 @@ body {
 }
 
 .right__container {
-  z-index: 1000;
+  z-index: 800;
   color: #fff;
   position: relative;
   width: 50%;
@@ -241,6 +245,7 @@ body {
   height: 80%;
   align-items: center;
   .left__container {
+    z-index: 900;
     .fa-google {
       display: block;
       width: 40px;
