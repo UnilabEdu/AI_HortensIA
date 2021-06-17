@@ -150,6 +150,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  z-index: 1000;
   flex-wrap: wrap;
   margin-top: 100px;
 }
@@ -226,6 +227,7 @@ body {
 
 /* Modal Content */
 .modal-content {
+  background-repeat: no-repeat;
   background-color: #fff;
   border-radius: 48px;
   margin: 10vh auto;
@@ -267,6 +269,7 @@ body {
 }
 
 .left__container {
+  z-index: 900;
   width: 50%;
   padding: 50px;
 }
@@ -282,6 +285,7 @@ body {
 }
 
 .reg__form {
+  z-index: 100;
   position: relative;
   margin: 0 auto;
   width: 300px;
@@ -302,7 +306,7 @@ body {
 }
 
 .right__container {
-  z-index: 1000;
+  z-index: 800;
   color: #fff;
   position: relative;
   width: 50%;
@@ -335,6 +339,9 @@ body {
   display: flex;
   height: 80%;
   align-items: center;
+}
+.auth__container .left__container {
+  z-index: 900;
 }
 .auth__container .left__container .fa-google {
   display: block;
