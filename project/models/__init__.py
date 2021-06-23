@@ -23,18 +23,24 @@ class Profile(db.Model):
 class Emotion(db.Model):
     __tablename__ = "emotions"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False, unique=True)
-    synonym = db.Column(db.String(80), nullable=False)
-    example = db.Column(db.Text)
+    name_en = db.Column(db.String(80), nullable=False, unique=True)
+    name_ka = db.Column(db.String(80), nullable=False, unique=True)
+    synonym_ka = db.Column(db.String(80))
+    synonym_en = db.Column(db.String(80))
+    example_ka = db.Column(db.Text)
+    example_en = db.Column(db.Text)
     tickets = db.relationship('Ticket', backref='emotions')
 
-    def __init__(self, name, synonym, example):
-        self.name = name
-        self.synonym = synonym
-        self.example = example
+    def __init__(self, name_ka, name_en, synonym_ka, synonym_en, example_ka, example_en):
+        self.name_ka = name_ka
+        self.name_en = name_en
+        self.synonym_ka = synonym_ka
+        self.synonym_en = synonym_en
+        self.example_ka = example_ka
+        self.example_en = example_en
 
     def __repr__(self):
-        return self.name
+        return self.name_ka, self.name_en
 
 
 class Files(db.Model):

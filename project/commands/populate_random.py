@@ -68,7 +68,7 @@ def populate_texts():
 
 
 def populate_emotions():
-    emotions_list = [  # Primary Emotions
+    emotions_list_en = [  # Primary Emotions
         "Rage", "Anger", "Annoyance",
         "Vigilance", "Anticipation", "Interest",
         "Ecstasy", "Joy", "Serenity",
@@ -80,12 +80,31 @@ def populate_emotions():
         # Secondary Emotions
         'Aggressiveness', 'Optimism', 'Love', 'Submission', 'Awe', 'Disapproval', 'Remorse', 'Contempt'
     ]
-    examples = ['I feel ' + emotion for emotion in emotions_list]
 
-    for emotion, example in zip(emotions_list, examples):
-        db.session.add(Emotion(name=emotion,
-                               synonym=emotion,
-                               example=example))
+    emotions_list_ka = [  # ძირითადი ემოციები TODO: improve translations
+        'რისხვა', 'ბრაზი', 'გაღიზიანება',
+        'სიფხიზლე', 'მოლოდინი', 'ინტერესი',
+        'აღტყინება', 'სიხარული', 'სიმშვიდე',
+        'აღტაცება', 'ნდობა', 'მიმღებლობა',
+        'თავზარდამცემი შიში', 'შიში', 'ღელვა',
+        'აღფრთოვანება', 'გაკვირვება', 'ყურადღების გაფანტვა',
+        'მწუხარება', 'სევდა', 'ნაღვლიანობა',
+        'სიძულვილი', 'გულისრევა', 'მოწყენილობა',
+        # დამატებითი ემოციები
+        'აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'განცვიფრება', 'გაკიცხვა', 'სინანული', 'ზიზღი'
+        # კრძალვა ეწერა განცვიფრების ნაცვლად, ალბათ რამე უკეთესია შესარჩევი
+    ]
+
+    examples_en = ['I feel ' + emotion for emotion in emotions_list_en]
+    examples_ka = [emotion + 'ემოციაა' for emotion in emotions_list_ka]
+
+    for emotion_en, example_en, emotion_ka, example,ka in zip(emotions_list_en, examples_en, emotions_list_ka, examples_ka):
+        db.session.add(Emotion(name_en=emotion_en,
+                               synonym_en=emotion_en,
+                               example_en=example,
+                               name_ka=emotion_ka,
+                               synonym_ka=emotion_ka,
+                               example_ka=examples_ka))
 
 
 def populate_tickets():
