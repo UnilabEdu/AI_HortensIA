@@ -98,10 +98,10 @@ def populate_emotions():
     examples_en = ['I feel ' + emotion for emotion in emotions_list_en]
     examples_ka = [emotion + 'ემოციაა' for emotion in emotions_list_ka]
 
-    for emotion_en, example_en, emotion_ka, example,ka in zip(emotions_list_en, examples_en, emotions_list_ka, examples_ka):
+    for emotion_en, example_en, emotion_ka, example_ka in zip(emotions_list_en, examples_en, emotions_list_ka, examples_ka):
         db.session.add(Emotion(name_en=emotion_en,
                                synonym_en=emotion_en,
-                               example_en=example,
+                               example_en=example_en,
                                name_ka=emotion_ka,
                                synonym_ka=emotion_ka,
                                example_ka=examples_ka))
