@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, date
 from flask_user import UserManager
 from project.database import db
 from project.models.user import UserModel
@@ -37,17 +37,37 @@ class Emotion(db.Model):
         return self.name
 
 
-class Text(db.Model):
+class Files(db.Model):
+    __tablename__ = "files"
+
+    id = db.Column(db.Column, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+    file_name = db.Column(db.String, nullable=False, unique=True)
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
+    sentences = db.relationship('Text', backref='files')
+
+    def __init__(self, title, file_name, user_id):
+        self.title = title
+        self.file_name = file_name
+        self.user = user_id
+
+    def __repr__(self):
+        return f"File Object: title: {self.title} file_name: {self.file_name}. user: {self.user}"
+
+
+class Text(db.Model):  # Sentences
     __tablename__ = "texts"
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text)
+    file = db.Column(db.Integer, db.ForeignKey('files.id'))
     tickets = db.relationship('Ticket', backref='texts')
 
-    def __init__(self, text):
+    def __init__(self, text, file):
         self.text = text
+        self.file = file
 
     def __repr__(self):
-        return self.text
+        return f"Text Object: file {self.file}. sentence: {self.text}. "
 
 
 # TODO: Change relationship columns to Int
@@ -60,12 +80,29 @@ class Ticket(db.Model):
     emotion = db.Column(db.Integer, db.ForeignKey('emotions.id'))
     date = db.Column(db.DateTime)
 
-
-    def __init__(self, user_id, text_id, emotion_id, date=datetime.datetime.now()):
+    def __init__(self, user_id, text_id, emotion_id, commit_date=datetime.now()):
         self.user = user_id
         self.text = text_id
         self.emotion = emotion_id
-        self.date = date
+        self.date = commit_date
 
     def __repr__(self):
         return f'{self.user} - {self.text}'
+
+
+class ActivityStreak(db.Model):
+    __tablename__ = 'streaks'
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
+    start_date = db.Column(db.DateTime)
+    end_date = db.Column(db.DateTime)
+    status = db.Column(db.Boolean(), nullable=False)
+
+    def __init__(self, user_id, start_date=date.today(), end_date=date.today(), status=1):
+        self.user = user_id
+        self.start_date = start_date
+        self.end_date = end_date
+        self.status = status
+
+    def __repr__(self):
+        return f"ActivityStreak Object: start: {self.start_date}. end: {self.end_date}. status: {self.status}. User: {self.user}"

@@ -1,5 +1,5 @@
 from flask_script import Command
-from project.models import db, Emotion, Ticket, Text
+from project.models import db, Emotion, Ticket, Text, Files
 from project.models.user import UserModel
 from essential_generators import DocumentGenerator
 from random import randrange, choice
@@ -52,9 +52,18 @@ def populate_users():
                                  active=active))
 
 
+def populate_files():
+    for i in range(5):
+        random_word = gen.word() + gen.word()
+        random_number = randrange(1, 2000)
+        db.session.add(Files(title=random_word+' '+random_number,
+                             file_name=random_word+'_'+random_number,
+                             user_id=randrange(1, 301)))
+
+
 def populate_texts():
     for i in range(4000):
-        db.session.add(Text(text=gen.sentence()))
+        db.session.add(Text(text=gen.sentence(), file=randrange(1, 6)))
 
 
 def populate_emotions():
@@ -105,6 +114,6 @@ def populate_tickets():
             ticket = Ticket(user_id=user_id,
                             text_id=text_id,
                             emotion_id=emotion_id,
-                            date=date)
+                            commit_date=date)
 
             db.session.add(ticket)
