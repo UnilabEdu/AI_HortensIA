@@ -1,5 +1,7 @@
 from flask_user import current_user
 import pandas as pd
+from sqlalchemy import text
+
 from project import create_app
 from project.database import db
 from project.models import Ticket
@@ -57,7 +59,6 @@ def data_user_activity():
                 except ValueError:
                     pass
 
-
         # generate dictionary for heatmap data
         final = []
         week_numbers = [str(d.isoweekday()) for d in dates_heatmap]
@@ -76,7 +77,6 @@ def data_user_activity():
         dates_month = [str(d) for d in dates_month]
 
         # ADDITIONAL ACTIVITY STATS START HERE
-
 
         # STREAKS
 
@@ -97,7 +97,6 @@ def data_user_activity():
         if day_streak == 0:
             day_streak = calculate_streak(8)
 
-
         print(f"NEW FUNCTIONS TIME: {time.time() - start_time} seconds")
 
         print(f'FREQ: {frequencies} \n DATES_M: {dates_month} \n FINAL(HEAT): {final} \n STREAK: {day_streak}')
@@ -116,14 +115,14 @@ def data_leaderboard():
     from project.models import UserModel
     from sqlalchemy.orm import load_only
 
-
     with create_app(import_blueprints=False).app_context():
 
         # # TODO: Delete me later (only for testing) also remove import blueprints, also uncomment import current_user
-        class current_user:
-            id = 1
-            username = 'User_Argati1870'
+        # class current_user:
+        #     id = 1
+        #     username = 'User_Argati1870'
 
+        current_user = UserModel.query.get(1)
 
         start_time = time.time()  # Only to measure time of execution. Remove later
 
@@ -133,8 +132,22 @@ def data_leaderboard():
         tickets_to_next_rank = 0
         tickets_ahead_of_previous = 0
 
+        users_tickets_count = db.session.query(UserModel, db.func.count(UserModel.tickets).label('total')).outerjoin(
+            Ticket).group_by(UserModel).order_by(text('total DESC'))
+
+        top10_user = users_tickets_count.limit(10).all()
+        print(f'TIME NOW: {time.time() - start_time} ')
+
+        print(f"User is placed at {[user[0] for user in users_tickets_count].index(current_user) + 1} possition")
+        # print(f"{users_tickets_count[0][0]=}, {type(users_tickets_count[0])}")
+
+        print(top10_user)
+        print(f'TIME NOW: {time.time() - start_time} ')
+        # print(UserModel.query.get(5).tickets)
         # Get IDs of every ticket's author
         tickets = pd.read_sql(db.session.query(Ticket).options(load_only('user')).statement, db.engine)
+        user = pd.read_sql(db.session.query(UserModel).statement, db.engine)
+        # print(user.tickets)
 
         # Count the amount of tickets authored by each user ID and sort them
         s = pd.DataFrame(tickets['user']).value_counts().sort_values(ascending=False)
@@ -150,7 +163,6 @@ def data_leaderboard():
         for u in user_ids:
             usernames.append('   ' + str(count) + '. ' + UserModel.query.get(u).username.capitalize())
             count += 1
-
 
         # TODO: what if user hasn't filled a single ticket?
         # Check if current_user is in Top 10 and whether they have at least one post
@@ -168,7 +180,7 @@ def data_leaderboard():
             x = user_ids.index(current_user.id)
             current_user_rank = x + 1
             # Change current_user's label
-            usernames[x] = f"   {str(x+1)}. YOU     ➤"
+            usernames[x] = f"   {str(x + 1)}. YOU     ➤"
 
         # Else happens when current_user has 0 filled tickets
         else:
@@ -176,18 +188,18 @@ def data_leaderboard():
 
         if user_was_active:
             # TODO: add comments
-            tickets_to_next_rank = int(s.iloc[current_user_rank-2]) - current_user_frequency + 1
+            tickets_to_next_rank = int(s.iloc[current_user_rank - 2]) - current_user_frequency + 1
             tickets_ahead_of_previous = current_user_frequency - int(s.iloc[current_user_rank])
 
-            print(s[current_user_rank-5:current_user_rank+5])
+            # print(s[current_user_rank-5:current_user_rank+5])
 
         rank_up_data = [tickets_ahead_of_previous, tickets_to_next_rank]
 
-        print(rank_up_data)
+        # print(rank_up_data)
 
         print(f"\n\n\nLEADERBOARD TIME (NEW): {time.time() - start_time} seconds")
 
-        print(f'Results: usernames: {usernames} \n frequencies: {frequencies} \n rankings: {current_user_rank}')
+        # print(f'Results: usernames: {usernames} \n frequencies: {frequencies} \n rankings: {current_user_rank}')
         return usernames, frequencies, current_user_rank, rank_up_data
         # base_color = JSLinearGradient('ctx', 0, 0, 600, 0,
         #                               (0, Hex("#F05B6E")),
@@ -199,7 +211,7 @@ def data_leaderboard():
         #                                  ).returnGradient()
 
 
-# data_leaderboard()
+data_leaderboard()
 
 
 def data_leaderboard_obsolete():
@@ -218,8 +230,6 @@ def data_leaderboard_obsolete():
         class current_user:
             id = 1
             username = 'User_Opt.335'
-
-
 
         start_time = time.time()  # Only to measure time of execution. Remove later
 
@@ -252,9 +262,9 @@ def data_leaderboard_obsolete():
                                       (1, Hex("#FCAB5A"))
                                       ).returnGradient()
         special_color = special_color = JSLinearGradient('ctx', 0, 0, 600, 0,
-                                         (0, Hex("#FCAB5A")),
-                                         (1, Hex("#F05B6E"))
-                                         ).returnGradient()
+                                                         (0, Hex("#FCAB5A")),
+                                                         (1, Hex("#F05B6E"))
+                                                         ).returnGradient()
         colors = [base_color] * len(usernames)
 
         if len(usernames) == 10:
@@ -273,7 +283,8 @@ def data_leaderboard_obsolete():
 
         # print('____________________LEADERBOARD USERNAMES (LABELS) DATA:\n', usernames)
         # print('____________________LEADERBOARD FREQUENCIES DATA\n', frequencies)
-        print(f'Results: usernames: {usernames} \n frequencies: {frequencies} \n rankings: {rankings} \n colors: {colors}')
+        print(
+            f'Results: usernames: {usernames} \n frequencies: {frequencies} \n rankings: {rankings} \n colors: {colors}')
 
         return usernames, frequencies, colors, rankings
         # base_color = JSLinearGradient('ctx', 0, 0, 600, 0,
@@ -302,11 +313,12 @@ def data_radar():
         today = date.today()
 
         # Remove this and import_blueprints when running server
-        # class current_user:
-        #     id = 2
+        class current_user:
+            id = 2
 
         # Get all tickets
-        all_tickets = pd.read_sql(db.session.query(Ticket).options(load_only('user', 'emotion', 'date')).statement, db.engine)
+        all_tickets = pd.read_sql(db.session.query(Ticket).options(load_only('user', 'emotion', 'date')).statement,
+                                  db.engine)
         # all_tickets = pd.read_sql(db.session.query(Ticket).filter(Ticket.emotion <= 45).options(load_only('user', 'emotion', 'date')).statement, db.engine)
 
         # Change date format of all tickets
@@ -314,7 +326,6 @@ def data_radar():
         # TODO: might remove current_user data (make radar charts be my data vs others' data instead of my data vs all data)
         # Get all current_user tickets
         user_tickets = all_tickets.loc[all_tickets['user'] == current_user.id]
-
 
         # Make dataframes for different time periods (day/week/month) for all data and for current_user
         all_month_tickets = all_tickets.loc[all_tickets['date'] >= (today - timedelta(days=30))]
@@ -347,7 +358,7 @@ def data_radar():
 
                 # Fill indices corresponding to missing emotions with zeroes
                 for i in missing_emotions:
-                    emotion_percentages.insert(i-1, 0)  # Now the previously missing emotions have value 0
+                    emotion_percentages.insert(i - 1, 0)  # Now the previously missing emotions have value 0
 
             # Calculate coefficients of the 8 groups of primary emotions, append the groups and the remaining 8 emotions
             count = 1
@@ -358,7 +369,7 @@ def data_radar():
                 if count <= 24:  # primary emotions
                     if count % 3 == 0:  # third emotion, end of the emotion group
                         current_emotion_group.append(i * 0.6)
-                        current_primary_frequencies.append(round(sum(current_emotion_group*100), 2))
+                        current_primary_frequencies.append(round(sum(current_emotion_group * 100), 2))
                         current_emotion_group = []
                     elif (count + 1) % 3 == 0:  # second emotion
                         current_emotion_group.append(i * 0.8)
@@ -366,7 +377,7 @@ def data_radar():
                         current_emotion_group.append(i)
                     count += 1
                 else:
-                    current_secondary_frequencies.append(round(i*100, 2))
+                    current_secondary_frequencies.append(round(i * 100, 2))
 
             final_primary.append(current_primary_frequencies)
             final_secondary.append(current_secondary_frequencies)
@@ -377,7 +388,6 @@ def data_radar():
         # First 4 elements (out of 8 nested lists) contain coefficients (or %) based on everyone's data in this order:
         # any time/ last month/ week/ day. Last 4 elements have the same structure but only include current_user's data
         return final_primary, final_secondary
-
 
 # data_radar()
 #
