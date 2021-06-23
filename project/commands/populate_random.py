@@ -24,6 +24,7 @@ class PopulateWithRandomCommand(Command):
 
 def populate_with_random():
     populate_users()
+    populate_files()
     populate_texts()
     populate_emotions()
     populate_tickets()
@@ -55,7 +56,7 @@ def populate_users():
 def populate_files():
     for i in range(5):
         random_word = gen.word() + gen.word()
-        random_number = randrange(1, 2000)
+        random_number = str(randrange(1, 2000))
         db.session.add(Files(title=random_word+' '+random_number,
                              file_name=random_word+'_'+random_number,
                              user_id=randrange(1, 301)))

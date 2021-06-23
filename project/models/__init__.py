@@ -40,7 +40,7 @@ class Emotion(db.Model):
 class Files(db.Model):
     __tablename__ = "files"
 
-    id = db.Column(db.Column, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     file_name = db.Column(db.String, nullable=False, unique=True)
     user = db.Column(db.Integer, db.ForeignKey('users.id'))
