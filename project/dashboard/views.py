@@ -116,10 +116,11 @@ def get_activity_data():
 
 @dashboard_blueprint.route('/getleaderboarddata')
 def get_leaderboard_data():
-    leaderboard_labels, leaderboard_data, current_user_rank = data_leaderboard()
+    leaderboard_labels, leaderboard_data, current_user_rank, rank_up_data = data_leaderboard()
 
     all_leaderboard_data = dict(leaderboard_labels=leaderboard_labels,
                                 leaderboard_data=leaderboard_data,
-                                current_user_rank=current_user_rank)
+                                current_user_rank=current_user_rank,
+                                rank_up_data=rank_up_data)
 
     return make_response(jsonify(all_leaderboard_data))

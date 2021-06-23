@@ -77,8 +77,8 @@ def data_user_activity():
 
         # ADDITIONAL ACTIVITY STATS START HERE
 
-        # TODO: remove days=7 later, only for testing because there's no data for today.
 
+        # STREAKS
 
         def calculate_streak(today_or_yesterday):
             check_day = today - timedelta(days=today_or_yesterday)
@@ -112,23 +112,26 @@ def data_leaderboard():
     import pandas as pd
     from project.database import db
     from project import create_app
-    from flask_user import current_user
+    # from flask_user import current_user
     from project.models import UserModel
     from sqlalchemy.orm import load_only
 
 
     with create_app(import_blueprints=False).app_context():
 
-        # # TODO: Delete me later (only for testing) also remove import blueprints
-        # class current_user:
-        #     id = 1
-        #     username = 'User_Opt.335'
+        # # TODO: Delete me later (only for testing) also remove import blueprints, also uncomment import current_user
+        class current_user:
+            id = 1
+            username = 'User_Argati1870'
 
 
         start_time = time.time()  # Only to measure time of execution. Remove later
 
+        user_was_active = True
         current_user_frequency = None
         current_user_rank = None
+        tickets_to_next_rank = 0
+        tickets_ahead_of_previous = 0
 
         # Get IDs of every ticket's author
         tickets = pd.read_sql(db.session.query(Ticket).options(load_only('user')).statement, db.engine)
@@ -169,12 +172,23 @@ def data_leaderboard():
 
         # Else happens when current_user has 0 filled tickets
         else:
-            print('User has zero tickets')
+            user_was_active = False
+
+        if user_was_active:
+            # TODO: add comments
+            tickets_to_next_rank = int(s.iloc[current_user_rank-2]) - current_user_frequency + 1
+            tickets_ahead_of_previous = current_user_frequency - int(s.iloc[current_user_rank])
+
+            print(s[current_user_rank-5:current_user_rank+5])
+
+        rank_up_data = [tickets_ahead_of_previous, tickets_to_next_rank]
+
+        print(rank_up_data)
 
         print(f"\n\n\nLEADERBOARD TIME (NEW): {time.time() - start_time} seconds")
 
         print(f'Results: usernames: {usernames} \n frequencies: {frequencies} \n rankings: {current_user_rank}')
-        return usernames, frequencies, current_user_rank
+        return usernames, frequencies, current_user_rank, rank_up_data
         # base_color = JSLinearGradient('ctx', 0, 0, 600, 0,
         #                               (0, Hex("#F05B6E")),
         #                               (1, Hex("#FCAB5A"))
@@ -185,7 +199,7 @@ def data_leaderboard():
         #                                  ).returnGradient()
 
 
-# data_leaderboard_test()
+# data_leaderboard()
 
 
 def data_leaderboard_obsolete():

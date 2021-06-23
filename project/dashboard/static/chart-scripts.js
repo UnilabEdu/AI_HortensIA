@@ -55,6 +55,20 @@ function updateLeaderboardColors(chart, userRank) {
     chart.update();
 }
 
+// function updateWeeklyTopChart(chart, )
+
+function updateRankupChart(chart, data) {
+    if (data[1] > 0) {
+        chart.data.datasets[0].data = data;
+        chart.update()
+    } else {
+        document.getElementById("rankup-text").innerHTML = 'აქ დაგითვლით ლიდერბორდში გადასასწრებად დარჩენილი ბარათების რაოდენობას';
+        document.getElementById("rankup-text").innerHTML = 'დაიწყე ბარათების შევსება';
+
+
+    }
+}
+
 function updateStreakChart(chart, streakDays) {
     var colors = ['#914EB2', '#916DD1', '#4B6DD1', '#0098BD', '#00CEBD', '#F7B967', '#F78C67', '#FF5050', '#F74991', '#00C4E3', '#DE2A7C']
     var brackets = [7, 14, 21, 30, 60, 90, 120, 150, 180, 360, 99999999]
@@ -269,8 +283,10 @@ async function renderLeaderboardChart() {
     let leaderboardLabels = fetchedData.leaderboard_labels
     let leaderboardData = fetchedData.leaderboard_data
     let userRank = fetchedData.current_user_rank
+    let rankUpData = fetchedData.rank_up_data
     updateChartData(leaderboardChart, leaderboardLabels, leaderboardData)
     updateLeaderboardColors(leaderboardChart, userRank)
+    updateRankupChart(rankupGoalChart, rankUpData)
 }
 
 renderLeaderboardChart()
