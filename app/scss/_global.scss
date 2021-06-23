@@ -1,4 +1,8 @@
-body {
+.home__body{
+    height: 100vh;
+    background: transparent radial-gradient(closest-side at 18% 94%, #FFFFFF 0%, #9170CB 84%, #7E57C2 100%) 0% 0% no-repeat padding-box;    
+}
+.main__body {
     background-color: $light-background;
     // margin-left: 140px;
     // margin-top: 50px;
