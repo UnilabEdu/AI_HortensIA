@@ -1,24 +1,24 @@
 const {src, dest, watch, series} = require('gulp');
 const sass = require('gulp-sass');
 const prefix = require('gulp-autoprefixer');
-// const minfy = require('gulp-clean-css');
+const minfy = require('gulp-clean-css');
 const rename = require('gulp-rename');
 
 // function
 function compilesass() {
-    return src('./app/scss/**/*.scss')
+    return src('./app/scss/main.scss')
         .pipe(sass())
         .pipe(prefix())
-        // .pipe(minfy())
+        .pipe(minfy())
         .pipe(rename(function (path) {
             return {
                 dirname: path.dirname + "",
-                basename: path.basename,
+                basename: path.basename + ".min",
                 extname: ".css"
             };
         }))
-        .pipe(dest('./app/css'))
-}
+    .pipe(dest('./app/css'))
+};
 
 // watchtask
 function watchTask(){
