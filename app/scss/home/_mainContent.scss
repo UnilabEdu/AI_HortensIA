@@ -1,5 +1,12 @@
 .home__body {
-  background: $light-background;
+  background: transparent
+    radial-gradient(
+      closest-side at 18% 85%,
+      #ffffff 0%,
+      #f1eef3 70%,
+      #e8e3f1 100%
+    )
+    0% 0% no-repeat padding-box;
 }
 
 .home__main__content {
@@ -26,7 +33,7 @@
     max-width: 1300px;
     justify-content: space-around;
     margin-top: 20px;
-    .content {
+    .home__right__container {
       max-width: 400px;
       padding-top: 50px;
       .restrict__btn {
