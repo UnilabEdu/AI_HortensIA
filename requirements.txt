@@ -1,4 +1,5 @@
 alembic==1.5.8
+aniso8601==9.0.1
 antiorm==1.2.1
 Babel==2.9.1
 bcrypt==3.2.0
@@ -13,10 +14,12 @@ email-validator==1.1.2
 essential-generators==1.0
 Flask==1.1.2
 Flask-Admin==1.5.8
+Flask-Babel==2.0.0
 Flask-Bcrypt==0.7.1
 Flask-Login==0.5.0
 Flask-Mail==0.9.1
 Flask-Migrate==2.7.0
+Flask-RESTful==0.3.9
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.5.1
 Flask-User==0.6.21
@@ -33,6 +36,7 @@ pycparser==2.20
 pycryptodome==3.10.1
 python-dateutil==2.8.1
 python-editor==1.0.4
+pytz==2021.1
 six==1.16.0
 SQLAlchemy==1.4.17
 Werkzeug==2.0.1

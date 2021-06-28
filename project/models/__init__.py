@@ -2,6 +2,7 @@ import datetime
 from flask_user import UserManager
 from project.database import db
 from project.models.user import UserModel
+from sqlalchemy.sql.expression import func
 
 
 class Profile(db.Model):
@@ -36,6 +37,10 @@ class Emotion(db.Model):
     def __repr__(self):
         return self.name
 
+    @classmethod
+    def get_all(cls):
+        cls.query.all()
+
 
 class Text(db.Model):
     __tablename__ = "texts"
@@ -48,6 +53,10 @@ class Text(db.Model):
 
     def __repr__(self):
         return self.text
+
+    @classmethod
+    def get_random(cls):
+        return cls.query.order_by(func.random()).first()
 
 
 class Ticket(db.Model):
@@ -66,3 +75,7 @@ class Ticket(db.Model):
 
     def __repr__(self):
         return f'{self.user} - {self.text}'
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()

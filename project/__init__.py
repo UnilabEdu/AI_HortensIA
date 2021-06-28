@@ -1,5 +1,5 @@
 import os
-from config import Config
+from project.config import Config
 from flask import Flask, render_template, redirect, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 # from flask_migrate import Migrate
@@ -10,10 +10,13 @@ from project.models import db
 from project.user.admin.admin import admin
 from flask_migrate import Migrate
 from flask_babel import Babel
+from flask_restful import Api
+from project.resources.emotions import EmotionList
 
 migrate = Migrate()
 babel = Babel()
 mail = Mail()
+api = Api()
 
 
 def create_app():
@@ -36,5 +39,8 @@ def create_app():
     from project.front_integration.views import homepage_blueprint
     app.register_blueprint(homepage_blueprint, url_prefix="/")
 
+    # restful api
+    api.init_app(app)
+    api.add_resource(EmotionList, "/")
 
     return app

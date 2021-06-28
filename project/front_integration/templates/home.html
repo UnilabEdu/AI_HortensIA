@@ -30,6 +30,9 @@
       </div>
       <div class="right__section">
         <p>EGN/ქარ</p>
+        <button id="ticket-btn" class="basic__btn">
+          {{ gettext("თეგირება") }}
+        </button>
         <button id="auth-btn" class="auth__btn basic__btn">{{ gettext("ავტორიზაცია") }}</button>
         <button id="reg-btn" class="registration__btn basic__btn">
           {{ gettext("რეგისტრაცია") }}
@@ -45,6 +48,33 @@
           </a>
         </div>
       </div>
+
+      {# აქ ჩავამატე თიქეთების ფანჯარა. სჯ #}
+      <div id="ticket-modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ticket-header"> {{ gettext("ბარათის თეგირება") }}</h5>
+            <span class="close">&times;</span>
+          </div>
+          <div class="modal-body">
+              <span> {{ text }} </span>
+              <form method="post" action="/">
+                  {{ form.hidden_tag() }}
+                <div class="form-row">
+                  {{ ticket_form.emotion.label }}
+                </div>
+                <div class="form-row">
+                  {{ ticket_form.emotion() }}
+                </div>
+                <br />
+                <div class="form-row">
+                  {{ ticket_form.submit() }}
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+
       <div id="auth-modal" class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
