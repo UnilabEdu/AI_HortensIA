@@ -34,7 +34,7 @@ const doughnutChartConfig = {
             data: [7, 0],
             backgroundColor: [
                 '#914EB2',
-                'white',
+                '#FCF3FE',
             ],
             hoverOffset: 0
             }]
@@ -239,10 +239,10 @@ const radarAnytimePrimaryConfig = {
 
 const radarAnytimeSecondaryConfig = clone(radarAnytimePrimaryConfig)
 radarAnytimeSecondaryConfig.data.labels = ['Aggressiveness', 'Optimism', 'Love', 'Submission', 'Awe', 'Disapproval', 'Remorse', 'Contempt']
-const streakChartConfig = clone(doughnutChartConfig)
-streakChartConfig.data.labels = ['აქტიურობის დღეები', 'დღეები შემდეგ მიზნამდე']
-const weeklyTopChartConfig = clone(doughnutChartConfig)
-weeklyTopChartConfig.data.labels = ['ბოლო 7 დღეს შევსებული ბარათები', 'შევსებული ბარათების სამიზნე რაოდენობა']
+const streakGoalChartConfig = clone(doughnutChartConfig)
+streakGoalChartConfig.data.labels = ['აქტიურობის დღეები', 'დღეები შემდეგ მიზნამდე']
+const weeklyGoalChartConfig = clone(doughnutChartConfig)
+weeklyGoalChartConfig.data.labels = ['ბოლო 7 დღეს შევსებული ბარათები', 'შევსებული ბარათების სამიზნე რაოდენობა']
 const rankupGoalChartConfig = clone(doughnutChartConfig)
 rankupGoalChartConfig.data.labels = ['ამდენი ბარათით ასწრებ წინა მომხმარებელს', 'გადასასწრებად დარჩენილი ბარათათები']
 
@@ -254,11 +254,11 @@ rankupGoalChartConfig.data.labels = ['ამდენი ბარათით �
 // const radarDayPrimaryConfig = clone(radarAnytimePrimaryConfig)
 // const radarDaySecondaryConfig = clone(radarAnytimeSecondaryConfig)
 
-    ctx = document.getElementById("streakChart").getContext('2d');
-    var streakChart = new Chart(ctx, streakChartConfig);
+    ctx = document.getElementById("streakGoalChart").getContext('2d');
+    var streakGoalChart = new Chart(ctx, streakGoalChartConfig);
 
-    ctx = document.getElementById("weeklyTopChart").getContext('2d');
-    var weeklyTopChart = new Chart(ctx, weeklyTopChartConfig);
+    ctx = document.getElementById("weeklyGoalChart").getContext('2d');
+    var weeklyGoalChart = new Chart(ctx, weeklyGoalChartConfig);
 
     ctx = document.getElementById("rankupGoalChart").getContext('2d');
     var rankupGoalChart = new Chart(ctx, rankupGoalChartConfig);

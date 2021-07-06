@@ -17,31 +17,30 @@
 
     <h1> Dashboard </h1>
 
-        <h4 id="current-streak-text"> ზედიზედ აქტიურობ -- დღე. </h4>
-        <h4 id="target-streak-text"> შემდეგი მიზანი: - კვირა. </h4>
+        <h4 id="current-streak-text"> მიმდინარეობს მონაცემების დამუშავება... </h4>
+        <h4 id="target-streak-text"> დაელოდე </h4>
         <div class="streak-chart" style="height: 200px; width: 200px">
-            <canvas id="streakChart" height="1" width="1"></canvas>
+            <canvas id="streakGoalChart" height="1" width="1"></canvas>
         </div>
 
-        <h4 id="rankup-text"> გადაასწარი ლიდერბორდში შემდეგ მომხმარებელს </h4>
-        <h4 id="rankup-goal"> შეავსე კიდევ -- ბარათი. </h4>
+        <h4 id="rankup-text"> მიმდინარეობს მონაცემების დამუშავება... </h4>
+        <h4 id="rankup-goal"> დაელოდე </h4>
         <div class="streak-chart" style="height: 200px; width: 200px">
             <canvas id="rankupGoalChart" height="1" width="1"></canvas>
         </div>
 
-        <h4 id="weekly-text"> ბოლო 7 დღეში შეავსე -- ბარათი. </h4>
-        <h4 id="weekly-stage"> შეავსე კიდევ -- ბარათი და გადადი - დონეზე. </h4>
+        <h4 id="weekly-goal-text"> მიმდინარეობს მონაცემების დამუშავება... </h4>
+        <h4 id="weekly-goal-stage"> დაელოდე </h4>
         <div class="streak-chart" style="height: 200px; width: 200px">
-            <canvas id="weeklyTopChart" height="1" width="1"></canvas>
+            <canvas id="weeklyGoalChart" height="1" width="1"></canvas>
         </div>
 
 <br><br>
 
         <div>
-              <button onclick="showChart('tab-activity-heatmap')">Heatmap</button>
-              <button onclick="showChart('tab-activity-month')">Last Month</button>
-              <button onclick="showChart('tab-activity-week')">Last Week</button>
-              <button onclick="showChart('tab-activity-leaderboard')">Leaderboard</button>
+              <button onclick="showChart('tab-activity-heatmap', 'activity')">Heatmap</button>
+              <button onclick="showChart('tab-activity-month', 'activity')">Last Month</button>
+              <button onclick="showChart('tab-activity-week', 'activity')">Last Week</button>
         </div>
 
 
@@ -78,14 +77,41 @@
             </div>
         </div>
 
+        <div>
+            <button onclick="showChart('tab-leaderboards-leaderboard', 'leaderboards')">Leaderboard</button>
+            <button onclick="showChart('tab-leaderboards-weekly', 'leaderboards', 'buttons-leaderboards-weekly')">Weekly</button>
+        </div>
 
-        <div id="tab-activity-leaderboard" class="activity-chart-container animate-left" style="display:none">
+        <div id="tab-leaderboards-leaderboard" class="leaderboard-chart-container animate-left">
             <div class="chartWrapper">
                 <div class="chartAreaWrapper">
                     <canvas id="leaderboardChart" height="210" width="400"></canvas>
                 </div>
                 <canvas id="leaderboardChartAxis" height="300" width="0"></canvas>
             </div>
+        </div>
+
+        <div id="buttons-leaderboards-weekly" class="leaderboard-chart-container" style="display: none">
+            <button onclick="updateWeeklyLevelsTable('table-leaderboards-weekly', 1)">Level 1</button>
+            <button onclick="updateWeeklyLevelsTable('table-leaderboards-weekly', 2)">Level 2</button>
+            <button onclick="updateWeeklyLevelsTable('table-leaderboards-weekly', 3)">Level 3</button>
+        </div>
+        <div id="tab-leaderboards-weekly" class="leaderboard-chart-container animate-left scrollable-table-div" style="display:none">
+
+                  <table id="table-leaderboards-weekly">
+                    <thead>
+                      <tr>
+                        <th>მომხმარებლის სახელი</th>
+                        <th>ბოლო 7 დღეში შევსებული ბარათები</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
         </div>
 
     <div class="container">

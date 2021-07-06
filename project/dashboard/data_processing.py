@@ -1,3 +1,5 @@
+import datetime
+
 from flask_user import current_user
 import pandas as pd
 from sqlalchemy import text
@@ -6,7 +8,7 @@ from project import create_app
 from project.database import db
 from project.models import Ticket
 import time
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 
 def data_user_activity():
@@ -79,7 +81,7 @@ def data_user_activity():
         # ADDITIONAL ACTIVITY STATS START HERE
 
         # STREAKS
-
+        # TODO: remove this function as it's obsolete now: streaks shouldn't be calculated later -- they should be created, stored in a DB and updated constantly
         def calculate_streak(today_or_yesterday):
             check_day = today - timedelta(days=today_or_yesterday)
             day_streak = 0
@@ -99,11 +101,135 @@ def data_user_activity():
 
         print(f"NEW FUNCTIONS TIME: {time.time() - start_time} seconds")
 
+        print(frequencies[-7:])
+        print(sum(frequencies[-7:]))
+        print(len(frequencies[-7:]))
+
         print(f'FREQ: {frequencies} \n DATES_M: {dates_month} \n FINAL(HEAT): {final} \n STREAK: {day_streak}')
         return frequencies, dates_month, final, day_streak
 
 
 # data_user_activity()
+
+
+def data_leaderboard_optimized():
+    # TODO: handle long usernames
+    import pandas as pd
+    from project.database import db
+    from project import create_app
+    # from flask_user import current_user
+    from project.models import UserModel
+    from sqlalchemy.orm import load_only
+
+    with create_app(import_blueprints=False).app_context():
+
+        # # TODO: Delete me later (only for testing) also remove import blueprints, also uncomment import current_user
+        # class current_user:
+        #     id = 1
+        #     username = 'User_Argati1870'
+
+        current_user = UserModel.query.get(1)
+
+        start_time = time.time()  # Only to measure time of execution. Remove later
+
+        user_was_active = True
+        current_user_frequency = None
+        current_user_rank = None
+        tickets_to_next_rank = 0
+        tickets_ahead_of_previous = 0
+
+        t0 = time.time()
+        # Make a query for Users and Amount of Filled Tickets sorted by descending
+        users_ticket_count = db.session.query(UserModel, db.func.count(UserModel.tickets).label('total')).outerjoin(
+            Ticket).group_by(UserModel).order_by(text('total DESC'))
+        print(time.time() - t0)
+        # print('started ;)')
+
+        # TODO: handle zero filled tickets (again)
+        # Get Top 10 users
+        t1 = time.time()
+        # top_ten = users_ticket_count[:1]
+        print(time.time() - t1)
+        t2 = time.time()
+        top_ten = users_ticket_count[:10]
+        print(time.time() - t2)
+
+
+        # Get usernames for the Top 10 users
+        usernames = []
+        frequencies = []
+        count = 1
+        for user, frequency in top_ten:
+            usernames.append('   ' + str(count) + '. ' + user.username)
+            frequencies.append(frequency)
+            count += 1
+
+        # Get user frequency and rank
+        current_user_frequency = users_ticket_count.filter_by(user=1).first()[1]
+        current_user_rank = [user[0] for user in users_ticket_count].index(current_user) + 1  # THIS STATEMENT TAKES TOO MUCH TIME
+
+        frequencies.append(current_user_frequency)
+        usernames.append(f"   {current_user_rank}. YOU     ➤")
+
+        tickets_to_next_rank = users_ticket_count[current_user_rank-2][1] - current_user_frequency + 1  # THIS STATEMENT TAKES TOO MUCH TIME
+        tickets_ahead_of_previous = current_user_frequency - users_ticket_count[current_user_rank][1]  # THIS STATEMENT TAKES TOO MUCH TIME
+
+
+
+        # # Get IDs of every ticket's author
+        # tickets = pd.read_sql(db.session.query(Ticket).options(load_only('user')).statement, db.engine)
+        # user = pd.read_sql(db.session.query(UserModel).statement, db.engine)
+        #
+        # # Count the amount of tickets authored by each user ID and sort them
+        # s = pd.DataFrame(tickets['user']).value_counts().sort_values(ascending=False)
+        #
+        # # Get Top 10 users, their IDs and amount of filled tickets
+        # top_ten = s.head(10)
+
+
+        # TODO: what if user hasn't filled a single ticket?
+        # Check if current_user is in Top 10 and whether they have at least one post
+        # if current_user.id not in user_ids and Ticket.query.filter_by(user=current_user.id).first():
+        #     # Determine current_user's index in the list of users sorted by filled tickets
+        #     x = list(s.index).index((current_user.id,))
+        #     # Get the amount of tickets filled by current_user and append to other users' frequencies
+        #     current_user_frequency = int(s.values[x])
+        #     frequencies.append(current_user_frequency)
+        #     # Increment x because list indices start with 0
+        #     current_user_rank = x + 1
+        #     # Add a label to current_user's column,
+        #     usernames.append(f"   {current_user_rank}. YOU     ➤")
+        # elif current_user.id in user_ids:
+        #     x = user_ids.index(current_user.id)
+        #     current_user_rank = x + 1
+        #     # Change current_user's label
+        #     usernames[x] = f"   {str(x + 1)}. YOU     ➤"
+
+        # # Else happens when current_user has 0 filled tickets
+        # else:
+        #     user_was_active = False
+
+        # if user_was_active:
+        #     # TODO: add comments
+        #     tickets_to_next_rank = int(s.iloc[current_user_rank - 2]) - current_user_frequency + 1
+        #     tickets_ahead_of_previous = current_user_frequency - int(s.iloc[current_user_rank])
+
+        rank_up_data = [tickets_ahead_of_previous, tickets_to_next_rank]
+        print(f"\n\n\nLEADERBOARD TIME (NEW): {time.time() - start_time} seconds")
+
+        # print(f'Results: usernames: {usernames} \n frequencies: {frequencies} \n rankings: {current_user_rank}')
+        return usernames, frequencies, current_user_rank, rank_up_data
+        # base_color = JSLinearGradient('ctx', 0, 0, 600, 0,
+        #                               (0, Hex("#F05B6E")),
+        #                               (1, Hex("#FCAB5A"))
+        #                               ).returnGradient()
+        # special_color = JSLinearGradient('ctx', 0, 0, 600, 0,
+        #                                  (0, Hex("#FCAB5A")),
+        #                                  (1, Hex("#F05B6E"))
+        #                                  ).returnGradient()
+
+
+# data_leaderboard_optimized()
 
 
 def data_leaderboard():
@@ -132,18 +258,6 @@ def data_leaderboard():
         tickets_to_next_rank = 0
         tickets_ahead_of_previous = 0
 
-        users_tickets_count = db.session.query(UserModel, db.func.count(UserModel.tickets).label('total')).outerjoin(
-            Ticket).group_by(UserModel).order_by(text('total DESC'))
-
-        top10_user = users_tickets_count.limit(10).all()
-        print(f'TIME NOW: {time.time() - start_time} ')
-
-        print(f"User is placed at {[user[0] for user in users_tickets_count].index(current_user) + 1} possition")
-        # print(f"{users_tickets_count[0][0]=}, {type(users_tickets_count[0])}")
-
-        print(top10_user)
-        print(f'TIME NOW: {time.time() - start_time} ')
-        # print(UserModel.query.get(5).tickets)
         # Get IDs of every ticket's author
         tickets = pd.read_sql(db.session.query(Ticket).options(load_only('user')).statement, db.engine)
         user = pd.read_sql(db.session.query(UserModel).statement, db.engine)
@@ -195,7 +309,7 @@ def data_leaderboard():
 
         rank_up_data = [tickets_ahead_of_previous, tickets_to_next_rank]
 
-        # print(rank_up_data)
+        print(rank_up_data)
 
         print(f"\n\n\nLEADERBOARD TIME (NEW): {time.time() - start_time} seconds")
 
@@ -210,94 +324,7 @@ def data_leaderboard():
         #                                  (1, Hex("#F05B6E"))
         #                                  ).returnGradient()
 
-
-data_leaderboard()
-
-
-def data_leaderboard_obsolete():
-    # TODO: optimize an clean up
-    # TODO: fix 10th user not appearing when current_user in top 10
-    import pandas as pd
-    from project.database import db
-    from project import create_app
-    # from flask_user import current_user
-    from project.models import UserModel
-    from pychartjs.Color import RGBA, Hex, JSLinearGradient
-
-    with create_app(import_blueprints=False).app_context():
-
-        # Delete me later (only for testing)
-        class current_user:
-            id = 1
-            username = 'User_Opt.335'
-
-        start_time = time.time()  # Only to measure time of execution. Remove later
-
-        current_user_frequency = None
-        current_user_rank = None
-
-        tickets = pd.read_sql_table('tickets', db.engine)
-
-        s = pd.DataFrame(tickets['user']).value_counts().sort_values(ascending=False)
-
-        if (current_user.id,) not in s.index[:10] and Ticket.query.filter_by(user=current_user.id).first():
-            x = list(s.index).index((current_user.id,))
-            current_user_frequency = int(s.values[x])
-            current_user_rank = x + 1
-
-        # s = s.sort_values(ascending=False).head(10).reset_index()
-        s = s.head(10)
-        user_ids = [i[0] for i in s.index.tolist()]
-        frequencies = s.values.tolist()
-
-        usernames = []
-        for i in user_ids:
-            usernames.append(UserModel.query.get(i).username.capitalize())
-
-        if current_user.username.capitalize() not in usernames:
-            usernames.append("YOU ➤    ")
-
-        base_color = JSLinearGradient('ctx', 0, 0, 600, 0,
-                                      (0, Hex("#F05B6E")),
-                                      (1, Hex("#FCAB5A"))
-                                      ).returnGradient()
-        special_color = special_color = JSLinearGradient('ctx', 0, 0, 600, 0,
-                                                         (0, Hex("#FCAB5A")),
-                                                         (1, Hex("#F05B6E"))
-                                                         ).returnGradient()
-        colors = [base_color] * len(usernames)
-
-        if len(usernames) == 10:
-            current_user_index = usernames.index(current_user.username.capitalize())
-            colors[current_user_index] = special_color
-        else:
-            colors[10] = special_color
-
-        rankings = [str(i) + '. ' for i in list(range(1, 11))]
-
-        if current_user_rank and current_user_frequency:
-            rankings.append(str(current_user_rank) + '. ')
-            frequencies.append(current_user_frequency)
-
-        print(f"\n\n\nLEADERBOARD TIME: {time.time() - start_time} seconds")
-
-        # print('____________________LEADERBOARD USERNAMES (LABELS) DATA:\n', usernames)
-        # print('____________________LEADERBOARD FREQUENCIES DATA\n', frequencies)
-        print(
-            f'Results: usernames: {usernames} \n frequencies: {frequencies} \n rankings: {rankings} \n colors: {colors}')
-
-        return usernames, frequencies, colors, rankings
-        # base_color = JSLinearGradient('ctx', 0, 0, 600, 0,
-        #                               (0, Hex("#F05B6E")),
-        #                               (1, Hex("#FCAB5A"))
-        #                               ).returnGradient()
-        # special_color = JSLinearGradient('ctx', 0, 0, 600, 0,
-        #                                  (0, Hex("#FCAB5A")),
-        #                                  (1, Hex("#F05B6E"))
-        #                                  ).returnGradient()
-
-
-# data_leaderboard_obsolete()
+# data_leaderboard()
 
 
 def data_radar():
@@ -533,3 +560,56 @@ def data_radar():
 
 
 # data_radar()
+
+def data_weekly_levels():
+    import pandas as pd
+    from project.database import db
+    from project import create_app
+    from project.models import UserModel
+    from sqlalchemy.orm import load_only
+
+    with create_app(import_blueprints=False).app_context():
+        # TODO: CHANGE TIMEDELTA DAYS=1 TO DAYS=7 (after done testing)
+        start_time = time.time()  # Only to measure time of execution. Remove later
+
+        users_week_frequencies = pd.read_sql(Ticket.query.options(load_only('user')).filter(Ticket.date > datetime.now() - timedelta(days=1)).statement, db.engine)
+        users_week_counts_dict = pd.DataFrame(users_week_frequencies['user']).value_counts().to_dict()
+
+        level_three_users = []
+        level_two_users = []
+        level_one_users = []
+        for user, count in users_week_counts_dict.items():  # TODO: use proper brackets: 105, 70, 35. (50, 40, 30 is only for testing)
+            if count > 50:
+                level_three_users.append([user[0], count])
+            elif count > 40:
+                level_two_users.append([user[0], count])
+            elif count > 30:
+                level_one_users.append([user[0], count])
+        # TODO: else stop iterating because values are sorted. Why are values sorted without sort_values()  (PD function)?
+
+        # TODO: Optimize this part (next 3 lines)
+        level_three_users = [[UserModel.query.get(i[0]).username.capitalize(), i[1]] for i in level_three_users]
+        level_two_users = [[UserModel.query.get(i[0]).username.capitalize(), i[1]] for i in level_two_users]
+        level_one_users = [[UserModel.query.get(i[0]).username.capitalize(), i[1]] for i in level_one_users]
+
+        print(level_three_users)
+        print(len(level_three_users))
+
+        print(level_two_users)
+        print(len(level_two_users))
+
+        print(level_one_users)
+        print(len(level_one_users))
+
+
+
+        print(users_week_counts_dict)
+        print(len(users_week_counts_dict))
+
+        print('TIME: ', time.time() - start_time)
+
+        # TODO: change activity calculations to be the same as this function's methods: get frequencies based on datetimes, not just dates (firstly check if it's wrong now)
+
+        return level_one_users, level_two_users, level_three_users
+
+# data_weekly_levels()

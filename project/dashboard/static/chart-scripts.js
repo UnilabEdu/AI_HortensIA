@@ -1,10 +1,19 @@
-function showChart(chartName) {
+function showChart(chartName, chartGroup, additionalDiv = 0) {
     var i;
-    var x = document.getElementsByClassName("activity-chart-container");
+    let x;
+    if (chartGroup === 'activity') {
+        x = document.getElementsByClassName("activity-chart-container");
+    } else if (chartGroup === 'leaderboards') {
+        x = document.getElementsByClassName("leaderboard-chart-container");
+    }
     for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";
     }
     document.getElementById(chartName).style.display = "block";
+
+    if (additionalDiv !== 0) {
+        document.getElementById(additionalDiv).style.display = "block"
+    }
 }
 
 
@@ -55,21 +64,24 @@ function updateLeaderboardColors(chart, userRank) {
     chart.update();
 }
 
-// function updateWeeklyTopChart(chart, )
 
 function updateRankupChart(chart, data) {
     if (data[1] > 0) {
+        if (data[0] === 0) {
+            data[0] = 0.1
+        }
         chart.data.datasets[0].data = data;
         chart.update()
+        document.getElementById("rankup-text").innerHTML = 'გადაასწარი ლიდერბორდში შემდეგ მომხმარებელს'
+        document.getElementById("rankup-goal").innerHTML = 'შეავსე კიდევ ' + data[1].toString() + ' ბარათი.';
+
     } else {
         document.getElementById("rankup-text").innerHTML = 'აქ დაგითვლით ლიდერბორდში გადასასწრებად დარჩენილი ბარათების რაოდენობას';
-        document.getElementById("rankup-text").innerHTML = 'დაიწყე ბარათების შევსება';
-
-
+        document.getElementById("rankup-goal").innerHTML = 'დაიწყე ბარათების შევსება';
     }
 }
 
-function updateStreakChart(chart, streakDays) {
+function updateStreakGoalChart(chart, streakDays) {
     var colors = ['#914EB2', '#916DD1', '#4B6DD1', '#0098BD', '#00CEBD', '#F7B967', '#F78C67', '#FF5050', '#F74991', '#00C4E3', '#DE2A7C']
     var brackets = [7, 14, 21, 30, 60, 90, 120, 150, 180, 360, 99999999]
     let currentBracket = 7
@@ -126,15 +138,84 @@ function updateStreakChart(chart, streakDays) {
 }
 
 
-// var monthChartHTML = document.getElementById('monthChart')
-//
-// monthChartHTML.addEventListener('load', (function() {
+function updateWeeklyGoalChart(chart, weekData) {
+    let levelGoals = [35, 70, 105]
 
-// W
-// updateChartData(monthChart, labelsNew, dataNew);
+    let weekDataSum = weekData.reduce(function (a, b) {
+        return a + b;
+    }, 0);
+
+    document.getElementById("weekly-goal-text").innerHTML = "ბოლო 7 დღეში შეავსე " + weekDataSum.toString() + " ბარათი.";
+
+    let goalText;
+    let targetAmount;
+    if (weekDataSum >= levelGoals[2]) {
+        targetAmount = 0
+        goalText = "მესამე დონის კონტრიბუტორი ხარ. დიდი მადლობა!"
+    } else if (weekDataSum >= levelGoals[1]) {
+        targetAmount = levelGoals[2] - weekDataSum
+        goalText = "მესამე დონეზე გადასასვლელად შეავსე კიდევ " + targetAmount.toString() + " ბარათი"
+    } else if (weekDataSum >= levelGoals[0]) {
+        targetAmount = levelGoals[1] - weekDataSum
+        goalText = "მეორე დონეზე გადასასვლელად შეავსე კიდევ " + targetAmount.toString() + " ბარათი"
+    } else {
+        targetAmount = levelGoals[0] - weekDataSum
+        goalText = "პირველ დონეზე გადასასვლელად შეავსე კიდევ " + targetAmount.toString() + " ბარათი"
+    }
+    document.getElementById("weekly-goal-stage").innerHTML = goalText
+
+    chart.data.datasets[0].data = [weekDataSum, targetAmount];
+    chart.update()
+}
 
 
-// }))
+function updateWeeklyLevelsTable(tableID, displayLevel) {
+    let table = document.getElementById(tableID)
+    let tbody = table.getElementsByTagName('tbody')[0];
+
+    let data = weeklyLevelsData
+
+    if (weeklyTableCurrentLevel !== displayLevel) {
+        // clear table
+        while (table.rows.length > 1) {
+            table.deleteRow(1)
+        }
+
+        if (displayLevel === 1) {
+            levelData = data.level_one
+            console.log(levelData)
+            weeklyTableCurrentLevel = 1
+        } else if (displayLevel === 2) {
+            levelData = data.level_two
+            weeklyTableCurrentLevel = 2
+        } else if (displayLevel === 3) {
+            levelData = data.level_three
+            weeklyTableCurrentLevel = 3
+        }
+
+        let rowsToAppend = []
+        for (let i = 0; i < levelData.length; i++) {
+            let row = document.createElement('tr')
+            var cellUsername = document.createElement("td");
+            var cellFrequency = document.createElement("td");
+            var cellUsernameText = document.createTextNode(levelData[i][0]);
+            var cellFrequencyText = document.createTextNode(levelData[i][1].toString())
+            cellUsername.appendChild(cellUsernameText)
+            cellFrequency.appendChild(cellFrequencyText)
+            row.appendChild(cellUsername)
+            row.appendChild(cellFrequency)
+            rowsToAppend.push(row)
+        }
+
+        for (let i = 0; i < rowsToAppend.length; i++) {
+            tbody.appendChild(rowsToAppend[i])
+        }
+    }
+}
+
+
+
+
 
 
 
@@ -155,7 +236,10 @@ async function renderActivityCharts() {
         updateHeatmap(heatmapChart, heatmapData)
         updateChartData(monthChart, monthLabels, monthData);
         updateChartData(weekChart, weekLabels, weekData)
-        updateStreakChart(streakChart, streakData)
+        updateWeeklyGoalChart(weeklyGoalChart, weekData)
+        updateStreakGoalChart(streakGoalChart, streakData)
+
+
         var buttonWeek = document.getElementById('btn-activity-chart-week')
         var buttonMonth = document.getElementById('btn-activity-chart-month')
 
@@ -290,3 +374,19 @@ async function renderLeaderboardChart() {
 }
 
 renderLeaderboardChart()
+
+
+
+
+var fetchWeeklyLevelsData = async function () {
+    var response = await fetch('/dashboard/getweeklylevelsdata');
+    return await response.json();
+};
+
+async function renderWeeklyLevelsTable() {
+    weeklyLevelsData = await fetchWeeklyLevelsData();
+    weeklyTableCurrentLevel = 0
+    updateWeeklyLevelsTable('table-leaderboards-weekly', 1)
+}
+
+renderWeeklyLevelsTable()

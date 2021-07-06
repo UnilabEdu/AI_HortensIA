@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from flask_user import UserManager
 from project.database import db
 from project.models.user import UserModel
@@ -93,7 +93,7 @@ class Ticket(db.Model):
         self.date = commit_date
 
     def __repr__(self):
-        return f'{self.user} - {self.text}'
+        return f'Ticket author:{self.user}; ticket text: {self.text}'
 
 
 class ActivityStreak(db.Model):
@@ -102,13 +102,27 @@ class ActivityStreak(db.Model):
     user = db.Column(db.Integer, db.ForeignKey('users.id'))
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
+    total_days = db.Column(db.Integer)
     status = db.Column(db.Boolean(), nullable=False)
 
     def __init__(self, user_id, start_date=date.today(), end_date=date.today(), status=1):
         self.user = user_id
         self.start_date = start_date
         self.end_date = end_date
+        self.total_days = 1
         self.status = status
+
+    def update_streak(self):
+        today = date.today()
+        # Continuing a Streak
+        if today - timedelta(days=1) == self.end_date:
+            self.end_date = today
+            self.total_days += 1
+        # When Streak was already continued today
+        elif today == self.end_date:
+            pass
+        else:
+            self.status = 0
 
     def __repr__(self):
         return f"ActivityStreak Object: start: {self.start_date}. end: {self.end_date}. status: {self.status}. User: {self.user}"
