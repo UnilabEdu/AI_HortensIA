@@ -80,9 +80,7 @@ for (let count = 0; count < 10; count++) {
     leaderboardColors.push(leaderboardNormalGradient)
 }
 
-console.log(leaderboardColors)
-
-
+// console.log(leaderboardColors)
 const leaderboardChartConfig = {
          type: "bar",
          data: {
@@ -175,7 +173,12 @@ const monthChartConfig = {
         }
     }
 
+
+
+const topStreaksChartConfig = clone(leaderboardChartConfig)
+topStreaksChartConfig.data.datasets[0].label = "Activity Streaks"
 const weekChartConfig = clone(monthChartConfig)
+
 
 
 const radarAnytimePrimaryConfig = {
@@ -273,6 +276,9 @@ rankupGoalChartConfig.data.labels = ['ამდენი ბარათით �
 
     ctx = document.getElementById("leaderboardChart").getContext('2d');
     var leaderboardChart = new Chart(ctx, leaderboardChartConfig);
+
+    ctx = document.getElementById("topStreaksChart").getContext('2d');
+    var topStreaksChart = new Chart(ctx, topStreaksChartConfig);
 
     ctx = document.getElementById("radarChartAnytimePrimary").getContext('2d');
     var radarChartAnytimePrimary = new Chart(ctx, radarAnytimePrimaryConfig)

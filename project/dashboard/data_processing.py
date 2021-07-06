@@ -613,3 +613,40 @@ def data_weekly_levels():
         return level_one_users, level_two_users, level_three_users
 
 # data_weekly_levels()
+
+
+def data_streaks_leaderboard():
+    import pandas as pd
+    from project.database import db
+    from project import create_app
+    # from flask_user import current_user
+    from project.models import UserModel, ActivityStreak
+    from sqlalchemy.orm import load_only
+
+    with create_app(import_blueprints=False).app_context():
+        # # TODO: Delete me later (only for testing) also remove import blueprints, also uncomment import current_user
+        # class current_user:
+        #     id = 1
+        #     username = 'User_Argati1870'
+
+        current_user = UserModel.query.get(1)
+
+        start_time = time.time()
+
+        all_streaks = pd.read_sql(db.session.query(ActivityStreak).options(load_only('user', 'total_days')).statement, db.engine).drop(columns='id')
+        all_streaks = all_streaks.sort_values('total_days', ascending=False).head(10)
+
+        usernames = []
+        count = 1
+        for user_id in all_streaks.user.to_list():
+            usernames.append('   ' + str(count) + '. ' + UserModel.query.get(user_id).username.capitalize())
+            count += 1
+
+        top_streaks = all_streaks.total_days.to_list()
+
+        print('ACTIVITYSTREAKS TIME: ', time.time() - start_time, ' seconds')
+
+        return usernames, top_streaks
+
+
+data_streaks_leaderboard()

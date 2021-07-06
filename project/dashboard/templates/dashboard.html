@@ -80,6 +80,7 @@
         <div>
             <button onclick="showChart('tab-leaderboards-leaderboard', 'leaderboards')">Leaderboard</button>
             <button onclick="showChart('tab-leaderboards-weekly', 'leaderboards', 'buttons-leaderboards-weekly')">Weekly</button>
+            <button onclick="showChart('tab-leaderboards-streaks', 'leaderboards')">Activity Streaks</button>
         </div>
 
         <div id="tab-leaderboards-leaderboard" class="leaderboard-chart-container animate-left">
@@ -90,6 +91,7 @@
                 <canvas id="leaderboardChartAxis" height="300" width="0"></canvas>
             </div>
         </div>
+
 
         <div id="buttons-leaderboards-weekly" class="leaderboard-chart-container" style="display: none">
             <button onclick="updateWeeklyLevelsTable('table-leaderboards-weekly', 1)">Level 1</button>
@@ -112,6 +114,16 @@
                       </tr>
                     </tbody>
                   </table>
+        </div>
+
+
+        <div id="tab-leaderboards-streaks" class="leaderboard-chart-container animate-left">
+            <div class="chartWrapper">
+                <div class="chartAreaWrapper">
+                    <canvas id="topStreaksChart" height="210" width="400"></canvas>
+                </div>
+                <canvas id="topStreaksChartAxis" height="300" width="0"></canvas>
+            </div>
         </div>
 
     <div class="container">

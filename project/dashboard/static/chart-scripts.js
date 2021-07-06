@@ -377,7 +377,6 @@ renderLeaderboardChart()
 
 
 
-
 var fetchWeeklyLevelsData = async function () {
     var response = await fetch('/dashboard/getweeklylevelsdata');
     return await response.json();
@@ -390,3 +389,19 @@ async function renderWeeklyLevelsTable() {
 }
 
 renderWeeklyLevelsTable()
+
+
+
+var fetchTopStreaksData = async function () {
+    var response = await fetch('/dashboard/gettopstreaksdata');
+    return await response.json();
+};
+
+async function renderTopStreaksChart() {
+    streaksData = await fetchTopStreaksData();
+    var usernames = streaksData.usernames
+    var scores = streaksData.top_streaks
+    updateChartData(topStreaksChart, usernames, scores)
+}
+
+renderTopStreaksChart()

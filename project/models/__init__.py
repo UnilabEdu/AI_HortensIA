@@ -100,29 +100,38 @@ class ActivityStreak(db.Model):
     __tablename__ = 'streaks'
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer, db.ForeignKey('users.id'))
-    start_date = db.Column(db.DateTime)
-    end_date = db.Column(db.DateTime)
+    start_date = db.Column(db.Date)
+    end_date = db.Column(db.Date)
     total_days = db.Column(db.Integer)
     status = db.Column(db.Boolean(), nullable=False)
 
-    def __init__(self, user_id, start_date=date.today(), end_date=date.today(), status=1):
+    def __init__(self, user_id, start_date=date.today(), end_date=date.today(), total_days=1, status=1):
         self.user = user_id
         self.start_date = start_date
         self.end_date = end_date
-        self.total_days = 1
+        self.total_days = total_days
         self.status = status
 
     def update_streak(self):
+        """
+        Returns Boolean which determines whether the Streak was valid or not
+        If a Streak is invalid, a new streak should be created separately, using __init__
+        """
         today = date.today()
         # Continuing a Streak
         if today - timedelta(days=1) == self.end_date:
             self.end_date = today
             self.total_days += 1
+            db.session.commit()
+            return True
         # When Streak was already continued today
         elif today == self.end_date:
-            pass
+            return True
+        # When Streak was already broken and won't be continued
         else:
             self.status = 0
+            db.session.commit()
+            return False
 
     def __repr__(self):
         return f"ActivityStreak Object: start: {self.start_date}. end: {self.end_date}. status: {self.status}. User: {self.user}"
