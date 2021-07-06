@@ -1,6 +1,7 @@
 from pychartjs import BaseChart, ChartType, Color
 from project.dashboard.data_processing import data_user_activity, data_leaderboard, data_radar
 
+# TODO: REMOVE PYCHARTJS FROM REQUIREMENTS.TXT
 
 def generate_charts():
     frequencies_line, dates_month, heatmap_data = data_user_activity()

@@ -3,7 +3,6 @@ from flask_script import Manager
 from flask_migrate import MigrateCommand
 from .db_init import InitDbCommand
 from .populate_random import PopulateWithRandomCommand
-# from .populate_streaks import
 
 manager = Manager(create_app())
 

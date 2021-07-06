@@ -1,0 +1,124 @@
+# English translations for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-06-13 15:24+0400\n"
+"PO-Revision-Date: 2021-06-12 10:52+0400\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: project/front_integration/templates/home.html:8
+msgid "ჰორტენზია"
+msgstr "Hortensia"
+
+#: project/front_integration/templates/home.html:12
+msgid "ტექსტის კლასიფიკაცია"
+msgstr "Text classification"
+
+#: project/front_integration/templates/home.html:16
+msgid ""
+"ხელსაწყო შესაძლებლობას იძლევა ტექსტური ფაილის რუბერტ პლუტჩიკის\n"
+"          ემოციური ბორბლის მიხედვით მარკირების. მომხმარებელს ვებ სერვისი\n"
+"          სთავაზობს ბარათებს, რომელზეც გამოსახულია შემთხვევითი "
+"წინადადებები,\n"
+"          ამოღებული საერთო ტექსტის საცავიდან. ბარათის ქვეშ მოთავსებულია "
+"ემოციური\n"
+"          ბორბლის გრაფიკული სელექტორი, რომლის მიხედვითაც მომხმარებელი "
+"ამოირჩევს\n"
+"          თუ რა ემოციას იწვევს მასში ბარათზე გამოტანილი მონაცემი. ჩვენ\n"
+"          მომხმარებლის მიერ მარკირებულ ბარათს შევინახავთ მონაცემთა "
+"საცავში."
+msgstr ""
+"With this tool you can mark text file with Plutchik's Wheel of Emotions."
+" \n"
+"as professor emeritus at the Albert Einstein College of Medicine and "
+"adjunct professor at the University of South Florida.\n"
+"He received his Ph.D. from Columbia University and he was also a "
+"psychologist. \n"
+"He authored or coauthored more than 260 articles, 45 chapters and eight "
+"books and edited seven books.\n"
+"His research interests included the study of emotions, the study of "
+"suicide and violence, and the study of the psychotherapy process.\n"
+"Plutchik proposed a psychoevolutionary classification approach for "
+"general emotional responses.\n"
+"e considered there to be eight primary emotions—anger, fear, sadness, "
+"disgust, surprise, anticipation, trust, and joy. \n"
+
+#: project/front_integration/templates/home.html:26
+msgid "შეტყობინებების მისაღებად გამოიწერეთ"
+msgstr "Subscribe for updates"
+
+#: project/front_integration/templates/home.html:33
+#: project/front_integration/templates/home.html:51
+msgid "ავტორიზაცია"
+msgstr "Authorization"
+
+#: project/front_integration/templates/home.html:35
+msgid "რეგისტრაცია"
+msgstr "Registration"
+
+#: project/front_integration/templates/home.html:39
+msgid "გამოგვყევით Facebook-ზე"
+msgstr "Follow us on Facebook"
+
+#: project/front_integration/templates/home.html:43
+msgid "გამოგვყევით Github-ზე"
+msgstr "Follow us on GitHub"
+
+#: project/front_integration/templates/home.html:59
+#: project/front_integration/templates/home.html:77
+msgid "რეგისტაცია"
+msgstr "Registration"
+
+#: project/front_integration/templates/home.html:60
+msgid "შექმენით საკუთარი ექაუნთი"
+msgstr "Create your account"
+
+#: project/front_integration/templates/home.html:64
+#: project/subscribe_function/subscribe_form.py:9
+msgid "ელ-ფოსტა"
+msgstr "E-mail"
+
+#: project/front_integration/templates/home.html:69
+msgid "მომხმარებლის სახელი"
+msgstr "Username"
+
+#: project/front_integration/templates/home.html:74
+msgid "პაროლი"
+msgstr "Password"
+
+#: project/front_integration/templates/home.html:82
+msgid "გამარჯობა, მეგობარო!"
+msgstr "Hello, friend!"
+
+#: project/front_integration/templates/home.html:84
+msgid "შეიყვანეთ თქვენი პირადი"
+msgstr "Input your personal"
+
+#: project/front_integration/templates/home.html:85
+msgid "მონაცემები და დაიწყეთ"
+msgstr "details and start"
+
+#: project/front_integration/templates/home.html:86
+msgid "მოგზაურობა ჩვენთან ერთად"
+msgstr "the journey with us "
+
+#: project/front_integration/templates/home.html:88
+msgid "შესვლა"
+msgstr "Login"
+
+#: project/subscribe_function/subscribe_form.py:10
+msgid "გამოწერა"
+msgstr "Subscribe"
+
