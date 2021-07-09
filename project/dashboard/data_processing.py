@@ -572,18 +572,18 @@ def data_weekly_levels():
         # TODO: CHANGE TIMEDELTA DAYS=1 TO DAYS=7 (after done testing)
         start_time = time.time()  # Only to measure time of execution. Remove later
 
-        users_week_frequencies = pd.read_sql(Ticket.query.options(load_only('user')).filter(Ticket.date > datetime.now() - timedelta(days=1)).statement, db.engine)
+        users_week_frequencies = pd.read_sql(Ticket.query.options(load_only('user')).filter(Ticket.date > datetime.now() - timedelta(days=7)).statement, db.engine)
         users_week_counts_dict = pd.DataFrame(users_week_frequencies['user']).value_counts().to_dict()
 
         level_three_users = []
         level_two_users = []
         level_one_users = []
-        for user, count in users_week_counts_dict.items():  # TODO: use proper brackets: 105, 70, 35. (50, 40, 30 is only for testing)
-            if count > 50:
+        for user, count in users_week_counts_dict.items():  # TODO: use proper brackets: 105, 70, 35. (200, 150, 100 is only for testing)
+            if count > 200:
                 level_three_users.append([user[0], count])
-            elif count > 40:
+            elif count > 150:
                 level_two_users.append([user[0], count])
-            elif count > 30:
+            elif count > 100:
                 level_one_users.append([user[0], count])
         # TODO: else stop iterating because values are sorted. Why are values sorted without sort_values()  (PD function)?
 
@@ -611,6 +611,7 @@ def data_weekly_levels():
         # TODO: change activity calculations to be the same as this function's methods: get frequencies based on datetimes, not just dates (firstly check if it's wrong now)
 
         return level_one_users, level_two_users, level_three_users
+
 
 # data_weekly_levels()
 
@@ -647,6 +648,3 @@ def data_streaks_leaderboard():
         print('ACTIVITYSTREAKS TIME: ', time.time() - start_time, ' seconds')
 
         return usernames, top_streaks
-
-
-data_streaks_leaderboard()
