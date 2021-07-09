@@ -1,96 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{url_for("static", filename="main.css")}}" />
-    <title>{{ gettext("ჰორტენზია") }}</title>
-</head>
-  <body>
+    <link href="http://fonts.cdnfonts.com/css/segoe-ui-4" rel="stylesheet" />
+    <!-- <link href="https://free.bboxtype.com/embedfonts/?family=FiraGO:300,400,500,700,800" rel="stylesheet"> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.min.css') }}" />
+    <title>Document</title>
+  </head>
+  <body class="home__body">
     <header>
-      <h1>{{ gettext("ტექსტის კლასიფიკაცია") }}</h1>
-    </header>
-    <section class="main__content">
-      <div class="left__section">
-        <p class="left__text">{{ gettext("ხელსაწყო შესაძლებლობას იძლევა ტექსტური ფაილის რუბერტ პლუტჩიკის
-          ემოციური ბორბლის მიხედვით მარკირების. მომხმარებელს ვებ სერვისი
-          სთავაზობს ბარათებს, რომელზეც გამოსახულია შემთხვევითი წინადადებები,
-          ამოღებული საერთო ტექსტის საცავიდან. ბარათის ქვეშ მოთავსებულია ემოციური
-          ბორბლის გრაფიკული სელექტორი, რომლის მიხედვითაც მომხმარებელი ამოირჩევს
-          თუ რა ემოციას იწვევს მასში ბარათზე გამოტანილი მონაცემი. ჩვენ
-          მომხმარებლის მიერ მარკირებულ ბარათს შევინახავთ მონაცემთა საცავში.") }}
-
-        </p>
-        <form method="POST" class="left__form" >
-          <h2>{{ gettext("შეტყობინებების მისაღებად გამოიწერეთ") }}</h2>
-        {{ form.email(class="left__form__input basic__input")}}
-        {{ form.submit(class="left__form__btn basic__btn") }}
-        </form>
+      <div class="header__left__cont">
+        <p id="eng" class="lang">ENG</p>
+        <label class="switch">
+          <input id="lang-checkbox" type="checkbox" checked />
+          <span class="slider round"></span>
+        </label>
+        <p id="geo" class="lang lang__action">ქარ</p>
       </div>
-      <div class="right__section">
-        <p>EGN/ქარ</p>
-        <button id="auth-btn" class="auth__btn basic__btn">{{ gettext("ავტორიზაცია") }}</button>
-        <button id="reg-btn" class="registration__btn basic__btn">
-          {{ gettext("რეგისტრაცია") }}
-        </button>
-        <div class="social">
-          <a href="#" target="_blank">
-            <p>{{ gettext("გამოგვყევით Facebook-ზე") }}</p>
-            <i class="fab fa-facebook"></i>
-          </a>
-          <a href="#" target="_blank">
-            <p>{{ gettext("გამოგვყევით Github-ზე") }}</p>
-            <i class="fab fa-github"></i>
-          </a>
-        </div>
-      </div>
-      <div id="auth-modal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <p>{{ gettext("ავტორიზაცია") }}</p>
-        </div>
-      </div>
-      <div id="reg-modal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <div class="reg__container">
-            <div class="left__container">
-              <h1>{{ gettext("რეგისტაცია") }}</h1>
-              <h4>{{ gettext("შექმენით საკუთარი ექაუნთი") }}</h4>
-              <form class="reg__form">
-                <input
-                  type="email"
-                  placeholder="{{ gettext("ელ-ფოსტა") }}"
-                  class="basic__input"
-                />
-                <input
-                  type="text"
-                  placeholder="{{ gettext("მომხმარებლის სახელი") }}"
-                  class="basic__input"
-                />
-                <input
-                  type="password"
-                  placeholder="{{ gettext("პაროლი") }}"
-                  class="basic__input"
-                />
-                <button class="reg__btn basic__btn">{{ gettext("რეგისტაცია") }}</button>
-              </form>
-            </div>
-            <div class="right__container">
-              <img class="reg__background" src="{{url_for("static", filename="assets/reg__background.svg")}}" />
-              <h1>{{ gettext("გამარჯობა, მეგობარო!") }}</h1>
-              <p>
-                {{ gettext("შეიყვანეთ თქვენი პირადი") }} </br>
-                {{ gettext("მონაცემები და დაიწყეთ") }}  </br>
-                {{ gettext("მოგზაურობა ჩვენთან ერთად") }}
-              </p>
-              <button class="enter__btn basic__btn">{{ gettext("შესვლა") }}</button>
-            </div>
+      <div class="header__right__cont">
+        <a class="page__name action" href="#">ემოციური ყვავილი</a>
+        <a class="username" href="#">ელენე არაბული</a>
+        <div class="profile">
+          <img
+            class="avatar__img"
+            src="{{ url_for('static', filename='assets/142589748_2009267505880094_5454304750578971336_o@2x.png') }}"
+            alt="avatar"
+          />
+          <img src="{{ url_for('static', filename='assets/Icon.svg') }}" alt="arrow" class="arrow" />
+          <div class="nav d-none">
+            <ul>
+              <li>
+                <button href="#">
+                  <img
+                    src="{{ url_for('static', filename='assets/manage_accounts_black_24dp.svg') }}"
+                    alt="manage accounts"
+                    class="param_i"
+                  />პარამეტრები
+                </button>
+              </li>
+              <hr />
+              <li>
+                <button href="#">
+                  <img
+                    src="{{ url_for('static', filename='assets/logout_black_24dp.svg') }}"
+                    alt="log out"
+                    class="log__out_i"
+                  />გასვლა
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    </section>
-    <script src="{{url_for("static", filename="js/main.js")}}"></script>
+    </header>
+    <div class="home__main__content firago">
+      <p class="home__title">
+        დაუმუშავებელი ტექსტისა და მარკირებული ბარათების საცავი დაუმუშავებელი
+        ტექსტისა და მარკირებული ბარათების საცავი
+      </p>
+      <div class="movifiqreb">
+        <div class="home__left__container">
+          <img class="flower" src="{{ url_for('static', filename='assets/hortesia.svg') }}" alt="" />
+        </div>
+        <div class="home__right__container">
+          <button class="restrict__btn basic__btn">აკრძალვა</button>
+          <ul>
+            <li>
+              <h3>სინონიმი:</h3>
+              <p>ასდ ადასდაასდ</p>
+            </li>
+            <li>
+              <h3>რას გვეუბნება აკრძალვა:</h3>
+              <p>ასდ ადასდაასდ</p>
+            </li>
+            <li>
+              <h3>როგორ დაგეხმარება აკრძალვა:</h3>
+              <p>
+                რაღაც რაღაც რაღაცრაღაც რაღაც რაღაცრაღაც რაღაც რაღაცრაღაც რაღაც
+                რაღაც
+              </p>
+            </li>
+          </ul>
+          <button class="next__btn">
+            შემდეგი <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
   </body>
 </html>

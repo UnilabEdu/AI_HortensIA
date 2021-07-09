@@ -13,6 +13,10 @@ var span_close_2 = document.getElementsByClassName("close")[1];
 // When the user clicks on the button, open the modal
 auth_btn.onclick = function () {
   auth_modal.classList.add("d-block");
+  if(auth_inside_cont.classList.contains("d-none")){
+    auth_inside_cont.classList.remove("d-none");
+    reset_pass_cont.classList.add("d-none");
+  }
 };
 
 reg_btn.onclick = function () {
@@ -35,3 +39,27 @@ window.onclick = function (event) {
     reg_modal.classList.remove("d-block");
   }
 };
+
+// togle modals
+const auth_inside_cont = document.querySelector(".auth__left__container");
+const reset_pass_cont = document.querySelector(".reset__pass__left__container")
+const enter_btn = document.querySelector(".enter__btn");
+const inside_reg_btn = document.querySelector(".reg__btn");
+const reset_password = document.querySelector(".reset__password")
+
+enter_btn.addEventListener("click", () => {
+  auth_modal.classList.add("d-block");
+  reg_modal.classList.remove("d-block");
+  if(auth_inside_cont.classList.contains("d-none")){
+    auth_inside_cont.classList.remove("d-none");
+    reset_pass_cont.classList.add("d-none");
+  }
+});
+inside_reg_btn.addEventListener("click", () => {
+  auth_modal.classList.remove("d-block");
+  reg_modal.classList.add("d-block");
+});
+reset_password.addEventListener('click', () => {
+    auth_inside_cont.classList.add("d-none");
+    reset_pass_cont.classList.remove("d-none");
+})
