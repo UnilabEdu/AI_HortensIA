@@ -1,5 +1,5 @@
 import os
-from config import Config
+from project.config import Config
 from flask import Flask, render_template, redirect, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 # from flask_migrate import Migrate

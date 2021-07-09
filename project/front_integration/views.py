@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, session
 from project import babel, Config
-from subscribe_function.subscribe_form import subscribe_form
+from project.subscribe_function.subscribe_form import subscribe_form
 
 
 @babel.localeselector
