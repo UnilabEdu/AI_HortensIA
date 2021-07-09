@@ -39,6 +39,9 @@ def create_app():
     from project.front_integration.views import homepage_blueprint
     app.register_blueprint(homepage_blueprint, url_prefix="/")
 
+    from project.tickets.views import tickets_blueprint
+    app.register_blueprint(tickets_blueprint, url_prefix="/tickets")
+
     # restful api
     api.init_app(app)
     api.add_resource(EmotionList, "/")
