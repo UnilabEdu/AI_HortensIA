@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, session
 from project import babel, Config
-from subscribe_function.subscribe_form import subscribe_form
+from project.subscribe_function.subscribe_form import subscribe_form
 
 
 @babel.localeselector
@@ -23,5 +23,4 @@ def home():
     if form.validate_on_submit():
         session['email'] = email
         print(session['email'])
-
     return render_template('home.html', form=form, email=email)

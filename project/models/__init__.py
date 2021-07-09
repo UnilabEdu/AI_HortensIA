@@ -2,6 +2,7 @@ from datetime import datetime, date, timedelta
 from flask_user import UserManager
 from project.database import db
 from project.models.user import UserModel
+from sqlalchemy.sql.expression import func
 
 
 class Profile(db.Model):
@@ -42,6 +43,9 @@ class Emotion(db.Model):
     def __repr__(self):
         return self.name_ka, self.name_en
 
+    @classmethod
+    def get_all(cls):
+        cls.query.all()
 
 class Files(db.Model):
     __tablename__ = "files"
@@ -75,6 +79,9 @@ class Text(db.Model):  # Sentences
     def __repr__(self):
         return f"Text Object: file {self.file}. sentence: {self.text}. "
 
+    @classmethod
+    def get_random(cls):
+        return cls.query.order_by(func.random()).first()
 
 # TODO: Change relationship columns to Int
 
@@ -94,6 +101,10 @@ class Ticket(db.Model):
 
     def __repr__(self):
         return f'Ticket author:{self.user}; ticket text: {self.text}'
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
 
 
 class ActivityStreak(db.Model):
@@ -134,4 +145,5 @@ class ActivityStreak(db.Model):
             return False
 
     def __repr__(self):
-        return f"ActivityStreak Object: start: {self.start_date}. end: {self.end_date}. status: {self.status}. User: {self.user}"
+        return f"ActivityStreak Object: start: {self.start_date}. end: {self.end_date}. " \
+               f"status: {self.status}. User: {self.user}"
