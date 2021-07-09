@@ -10,6 +10,7 @@ class Config(object):
 
     # Flask settings
     CSRF_ENABLED = True
+    PROPAGATE_EXCEPTIONS = True
 
     # Flask SQLAlchemy settings
     SECRET_KEY = "Cannottell"

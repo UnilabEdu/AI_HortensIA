@@ -23,5 +23,4 @@ def home():
     if form.validate_on_submit():
         session['email'] = email
         print(session['email'])
-
     return render_template('home.html', form=form, email=email)

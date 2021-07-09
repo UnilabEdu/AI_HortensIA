@@ -11,6 +11,8 @@ class UserModel(db.Model, UserMixin):
     confirmed_at = db.Column(db.DateTime())
     active = db.Column(db.Boolean(), nullable=False, server_default='1')
     tickets = db.relationship('Ticket', backref='users')
+    files = db.relationship('Files', backref='users')
+    roles = db.relationship('Role', secondary='user_roles')
 
     def __init__(self, username, password, email, confirmed_at, active):
         self.username = username
@@ -18,8 +20,6 @@ class UserModel(db.Model, UserMixin):
         self.email = email
         self.confirmed_at = confirmed_at
         self.active = active
-
-    roles = db.relationship('Role', secondary='user_roles')
 
 
 class Role(db.Model):
