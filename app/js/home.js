@@ -49,7 +49,7 @@ fetch('https://jsonplaceholder.typicode.com/posts')
         title.innerHTML = data[i].title; 
         synonym.innerHTML = data[i].title; 
         about.innerHTML = data[i].body; 
-        about.innerHTML = data[i].body; 
+        help.innerHTML = data[i].body; 
       });
     }
   });
