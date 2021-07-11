@@ -3,7 +3,7 @@ from project.config import Config
 from flask import Flask, render_template, redirect, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 # from flask_migrate import Migrate
-from project.models.user import UserModel
+from project.models.user import User
 from flask_mail import Mail, Message
 from flask_user import SQLAlchemyAdapter, UserManager
 from project.models import db
@@ -26,7 +26,7 @@ def create_app(import_blueprints=True):
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
     # flask-user init
-    db_adapter = SQLAlchemyAdapter(db, UserModel)  # Setup the SQLAlchemy DB Adapter
+    db_adapter = SQLAlchemyAdapter(db, User)  # Setup the SQLAlchemy DB Adapter
     UserManager(db_adapter, app)  # Init Flask-User and bind to app
     # flask-mail init
     mail.init_app(app)

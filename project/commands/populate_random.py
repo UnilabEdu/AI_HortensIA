@@ -1,6 +1,6 @@
 from flask_script import Command
 from project.models import db, Emotion, Ticket, Text, Files
-from project.models.user import UserModel
+from project.models.user import User
 from essential_generators import DocumentGenerator
 from random import randrange, choice
 from flask import current_app
@@ -46,11 +46,11 @@ def populate_users():
     active = 1
 
     for username, email in zip(usernames, emails):
-        db.session.add(UserModel(username=username,
-                                 password=hashed_password,
-                                 email=email,
-                                 confirmed_at=confirmed_at,
-                                 active=active))
+        db.session.add(User(username=username,
+                            password=hashed_password,
+                            email=email,
+                            confirmed_at=confirmed_at,
+                            active=active))
 
 
 def populate_files():

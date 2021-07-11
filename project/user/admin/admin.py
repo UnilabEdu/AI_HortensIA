@@ -1,6 +1,6 @@
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
-from project.models.user import UserModel, Role
+from project.models.user import User, Role
 from project.models import db
 from flask import redirect, url_for, request, flash, abort
 from flask_user import current_user
@@ -30,7 +30,7 @@ class HomeAdminView(AdminIndexView):
 
 admin = Admin(name='Panel', template_mode='bootstrap4', url='/', index_view=HomeAdminView(name='home'))
 
-admin.add_view(AdminModelView(UserModel, db.session, category="User Managements"))
+admin.add_view(AdminModelView(User, db.session, category="User Managements"))
 admin.add_view(AdminModelView(Role, db.session, name="User Roles", category="User Managements"))
 admin.add_view(AdminModelView(Emotion, db.session))
 admin.add_view(AdminModelView(Text, db.session))

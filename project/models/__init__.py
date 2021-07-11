@@ -1,7 +1,7 @@
 from datetime import datetime, date, timedelta
 from flask_user import UserManager
 from project.database import db
-from project.models.user import UserModel
+from project.models.user import User
 from sqlalchemy.sql.expression import func
 
 

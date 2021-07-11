@@ -2,7 +2,7 @@ from project.models import db
 from flask_user import UserMixin
 
 
-class UserModel(db.Model, UserMixin):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), nullable=False, unique=True)

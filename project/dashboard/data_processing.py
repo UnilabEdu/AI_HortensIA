@@ -118,7 +118,7 @@ def data_leaderboard_optimized():
     from project.database import db
     from project import create_app
     # from flask_user import current_user
-    from project.models import UserModel
+    from project.models import User
     from sqlalchemy.orm import load_only
 
     with create_app(import_blueprints=False).app_context():
@@ -128,7 +128,7 @@ def data_leaderboard_optimized():
         #     id = 1
         #     username = 'User_Argati1870'
 
-        current_user = UserModel.query.get(1)
+        current_user = User.query.get(1)
 
         start_time = time.time()  # Only to measure time of execution. Remove later
 
@@ -140,8 +140,8 @@ def data_leaderboard_optimized():
 
         t0 = time.time()
         # Make a query for Users and Amount of Filled Tickets sorted by descending
-        users_ticket_count = db.session.query(UserModel, db.func.count(UserModel.tickets).label('total')).outerjoin(
-            Ticket).group_by(UserModel).order_by(text('total DESC'))
+        users_ticket_count = db.session.query(User, db.func.count(User.tickets).label('total')).outerjoin(
+            Ticket).group_by(User).order_by(text('total DESC'))
         print(time.time() - t0)
         # print('started ;)')
 
@@ -238,7 +238,7 @@ def data_leaderboard():
     from project.database import db
     from project import create_app
     # from flask_user import current_user
-    from project.models import UserModel
+    from project.models import User
     from sqlalchemy.orm import load_only
 
     with create_app(import_blueprints=False).app_context():
@@ -248,7 +248,7 @@ def data_leaderboard():
         #     id = 1
         #     username = 'User_Argati1870'
 
-        current_user = UserModel.query.get(1)
+        current_user = User.query.get(1)
 
         start_time = time.time()  # Only to measure time of execution. Remove later
 
@@ -260,7 +260,7 @@ def data_leaderboard():
 
         # Get IDs of every ticket's author
         tickets = pd.read_sql(db.session.query(Ticket).options(load_only('user')).statement, db.engine)
-        user = pd.read_sql(db.session.query(UserModel).statement, db.engine)
+        user = pd.read_sql(db.session.query(User).statement, db.engine)
         # print(user.tickets)
 
         # Count the amount of tickets authored by each user ID and sort them
@@ -275,7 +275,7 @@ def data_leaderboard():
         usernames = []
         count = 1
         for u in user_ids:
-            usernames.append('   ' + str(count) + '. ' + UserModel.query.get(u).username.capitalize())
+            usernames.append('   ' + str(count) + '. ' + User.query.get(u).username.capitalize())
             count += 1
 
         # TODO: what if user hasn't filled a single ticket?
@@ -565,7 +565,7 @@ def data_weekly_levels():
     import pandas as pd
     from project.database import db
     from project import create_app
-    from project.models import UserModel
+    from project.models import User
     from sqlalchemy.orm import load_only
 
     with create_app(import_blueprints=False).app_context():
@@ -588,9 +588,9 @@ def data_weekly_levels():
         # TODO: else stop iterating because values are sorted. Why are values sorted without sort_values()  (PD function)?
 
         # TODO: Optimize this part (next 3 lines)
-        level_three_users = [[UserModel.query.get(i[0]).username.capitalize(), i[1]] for i in level_three_users]
-        level_two_users = [[UserModel.query.get(i[0]).username.capitalize(), i[1]] for i in level_two_users]
-        level_one_users = [[UserModel.query.get(i[0]).username.capitalize(), i[1]] for i in level_one_users]
+        level_three_users = [[User.query.get(i[0]).username.capitalize(), i[1]] for i in level_three_users]
+        level_two_users = [[User.query.get(i[0]).username.capitalize(), i[1]] for i in level_two_users]
+        level_one_users = [[User.query.get(i[0]).username.capitalize(), i[1]] for i in level_one_users]
 
         print(level_three_users)
         print(len(level_three_users))
@@ -621,7 +621,7 @@ def data_streaks_leaderboard():
     from project.database import db
     from project import create_app
     # from flask_user import current_user
-    from project.models import UserModel, ActivityStreak
+    from project.models import User, ActivityStreak
     from sqlalchemy.orm import load_only
 
     with create_app(import_blueprints=False).app_context():
@@ -630,7 +630,7 @@ def data_streaks_leaderboard():
         #     id = 1
         #     username = 'User_Argati1870'
 
-        current_user = UserModel.query.get(1)
+        current_user = User.query.get(1)
 
         start_time = time.time()
 
@@ -640,7 +640,7 @@ def data_streaks_leaderboard():
         usernames = []
         count = 1
         for user_id in all_streaks.user.to_list():
-            usernames.append('   ' + str(count) + '. ' + UserModel.query.get(user_id).username.capitalize())
+            usernames.append('   ' + str(count) + '. ' + User.query.get(user_id).username.capitalize())
             count += 1
 
         top_streaks = all_streaks.total_days.to_list()
