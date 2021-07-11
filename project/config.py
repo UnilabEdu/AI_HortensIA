@@ -32,6 +32,11 @@ class Config(object):
     USER_AUTO_LOGIN_AT_LOGIN = True
     USER_AUTO_LOGIN_AFTER_CONFIRM = True
 
+    USER_LOGIN_TEMPLATE = 'flask_user/login_or_register.html'
+    USER_REGISTER_TEMPLATE = 'flask_user/login_or_register.html'
+
+    USER_ENABLE_RETYPE_PASSWORD = False
+
     LANGUAGES = {
         "en": "English",
         "ka": "Georgian"

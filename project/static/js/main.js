@@ -40,7 +40,7 @@ window.onclick = function (event) {
   }
 };
 
-// togle modals
+// toggle modals
 const auth_inside_cont = document.querySelector(".auth__left__container");
 const reset_pass_cont = document.querySelector(".reset__pass__left__container")
 const enter_btn = document.querySelector(".enter__btn");

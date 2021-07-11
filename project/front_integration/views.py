@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, request, session
+from flask import Blueprint, render_template, request, session, current_app
 from project import babel, Config
-from project.subscribe_function.subscribe_form import subscribe_form
+from project.subscribe_function.subscribe_form import SubscribeForm
 
 
 @babel.localeselector
@@ -16,11 +16,21 @@ homepage_blueprint = Blueprint('homepage',
 
 
 @homepage_blueprint.route('/', methods=['GET', 'POST'])
-def home():
-    email = None
-    form = subscribe_form()
+def index():
+    user_manager = current_app.user_manager
 
-    if form.validate_on_submit():
-        session['email'] = email
-        print(session['email'])
-    return render_template('home.html', form=form, email=email)
+    login_form = user_manager.login_form(request.form)          # for login.html
+    register_form = user_manager.register_form()                # for login_or_register.html
+    subscribe_form = SubscribeForm()
+
+    if subscribe_form.validate_on_submit():
+        session['subscribe_email'] = subscribe_form.email
+        print(session['subscribe_email'])
+    else:
+        print('invalid email')
+
+    return render_template('index.html',
+                           form=login_form,
+                           login_form=login_form,
+                           register_form=register_form,
+                           subscribe_form=subscribe_form)

@@ -7,8 +7,8 @@
   <link href="http://fonts.cdnfonts.com/css/segoe-ui-4" rel="stylesheet">
   <!-- <link href="https://free.bboxtype.com/embedfonts/?family=FiraGO:300,400,500,700,800" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <link rel="stylesheet" href="../css/main.min.css" />
-  <title>Document</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.min.css') }}" />
+  <title>ჰორტენზია</title>
 </head>
 <body class="main__body">
   <div class="main__content">
@@ -25,8 +25,9 @@
       </p>
       <form class="left__form">
         <h3 class="left__form__title nino__elit">შეტყობინებების მისაღებად გამოიწერეთ</h3>
-        <input type="text" placeholder="ელ-ფოსტა" class="left__form__input basic__input" />
-        <button class="left__form__btn basic__btn">გამოწერა</button>
+        {{ subscribe_form.hidden_tag() }}
+        {{ subscribe_form.email(class="left__form__input basic__input", required=False) }}
+        {{ subscribe_form.submit(class="left__form__btn basic__btn") }}
       </form>
 
     </div>
@@ -47,6 +48,7 @@
         </a>
       </div>
     </div>
+
     <div id="auth-modal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
@@ -73,7 +75,7 @@
             </form>
           </div>
           <div class="right__container">
-            <img class="reg__background" src="../assets/reg__background.svg" />
+            <img class="reg__background" src="{{ url_for('static', filename='assets/reg__background.svg') }}" />
             <p class="nino__mtavruli">გამარჯობა, მეგობარო!</p>
             <p class="segoe">შეიყვანეთ თქვენი პირადი </br> მონაცემები და დაიწყეთ </br>მოგზაურობა ჩვენთან ერთად</p>
             <button class="reg__btn basic__btn">რეგისტრაცია</button>
@@ -94,23 +96,23 @@
               <input type="text" placeholder="მომხმარებლის სახელი" class="basic__input" />
               <input type="password" placeholder="პაროლი" class="basic__input password__input" />
               <span class="password__wrong__text">*პაროლი არასწორია</span>
-              <span class="password__error__text">*გამოიყენეთ რვა სიმბოლო</span>
-              <button class="reg__btn basic__btn">რეგისტაცია</button>
-            </form>
-          </div>
-          <div class="right__container">
-            <img class="reg__background" src="../assets/reg__background.svg" />
-            <p class="nino__mtavruli ">გამარჯობა, მეგობარო!</p>
-            <p class="segoe">
-              შეიყვანეთ თქვენი პირადი </br> მონაცემები და დაიწყეთ </br> მოგზაურობა ჩვენთან
-              ერთად
-            </p>
-            <button class="enter__btn basic__btn">შესვლა</button>
-          </div>
-        </div>
-      </div>
-    </div>
+{#              <span class="password__error__text">*გამოიყენეთ რვა სიმბოლო</span>#}
+{#              <button class="reg__btn basic__btn">რეგისტაცია</button>#}
+{#            </form>#}
+{#          </div>#}
+{#          <div class="right__container">#}
+{#            <img class="reg__background" src="{{ url_for('static', filename='assets/reg__background.svg') }}" />#}
+{#            <p class="nino__mtavruli ">გამარჯობა, მეგობარო!</p>#}
+{#            <p class="segoe">#}
+{#              შეიყვანეთ თქვენი პირადი </br> მონაცემები და დაიწყეთ </br> მოგზაურობა ჩვენთან#}
+{#              ერთად#}
+{#            </p>#}
+{#            <button class="enter__btn basic__btn">შესვლა</button>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
   </div>
-  <script src="../js/main.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

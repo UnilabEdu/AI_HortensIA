@@ -1,0 +1,144 @@
+{% extends 'flask_user/public_base.html' %}
+
+{% block content %}
+{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
+  <div class="main__content">
+    <h1 class="main__title nino__mtavruli">ტექსტის კლასიფიკაცია</h1>
+    <div class="left__section">
+      <p class="left__text firago ">
+        ხელსაწყო შესაძლებლობას იძლევა ტექსტური ფაილის რუბერტ პლუტჩიკის
+        "ემოციური ბორბლის" მიხედვით მარკირების. მომხმარებელს ვებ სერვისი
+        სთავაზობს ბარათებს, რომელზეც გამოსახულია შემთხვევითი წინადადებები,
+        ამოღებული საერთო ტექსტის საცავიდან. ბარათის ქვეშ მოთავსებულია ემოციური
+        ბორბლის გრაფიკული სელექტორი, რომლის მიხედვითაც მომხმარებელი ამოირჩევს
+        თუ რა ემოციას იწვევს მასში ბარათზე გამოტანილი მონაცემი. ჩვენ
+        მომხმარებლის მიერ მარკირებულ ბარათს შევინახავთ მონაცემთა საცავში.
+      </p>
+
+{#      <form class="left__form">#}
+{#        <h3 class="left__form__title nino__elit">შეტყობინებების მისაღებად გამოიწერეთ</h3>#}
+{#        {{ subscribe_form.hidden_tag() }}#}
+{#        {{ subscribe_form.email(class="left__form__input basic__input", required=False) }}#}
+{#        {{ subscribe_form.submit(class="left__form__btn basic__btn") }}#}
+{#      </form>#}
+
+    </div>
+    <div class="right__section">
+      <p class="language nino__mtavruli">ENG/ქარ</p>
+      <button id="auth-btn" class="auth__btn basic__btn ">ავტორიზაცია</button>
+      <button id="reg-btn" class="registration__btn basic__btn ">
+        რეგისტრაცია
+      </button>
+      <div class="social">
+        <a href="#" target="_blank">
+          <p class="segoe">Follow us on Facebook</p>
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="#" target="_blank">
+          <p class="segoe">Follow us on GitHub</p>
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </div>
+
+    <div id="auth-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="auth__container">
+          <div class="auth__left__container">
+            <h1 class="nino__mtavruli">ავტორიზაცია</h1>
+            <div class="google__logo"><i class="fab fa-google"></i></div>
+            <h4>გარე ავტორიზაციის გამოყნება</h4>
+
+
+
+
+              {# ** Login form ** #}
+            <form action="{{ url_for('user.login') }}" method="POST" class="auth__form" role="form">
+                {{ login_form.hidden_tag() }}
+
+                {# Username or Email #}
+                {% set field = login_form.username if user_manager.enable_username else login_form.email %}
+                {{ render_field(field, placeholder='ელ-ფოსტა/სახელი') }}
+
+                {# Password #}
+                {{ render_field(login_form.password, placeholder='პაროლი') }}
+
+                {# Submit button #}
+                {{ render_submit_field(login_form.submit, auth_action='login') }}
+            </form>
+
+          </div>
+          <div class="reset__pass__left__container d-none">
+
+                {% if user_manager.enable_forgot_password %}
+                    <p>
+                        <br/>
+                        <a href="{{ url_for('user.forgot_password') }}" tabindex='190'>
+                        {%trans%}Forgot your Password?{%endtrans%}</a>
+                    </p>
+                {% endif %}
+
+{#            <h1 class="nino__mtavruli">პაროლის აღდგენა</h1>#}
+{#            <h4>შეიყვანეთ ახალი პაროლი</h4>#}
+
+{#            <form class="reset__pass__form">#}
+{#              <input type="email" placeholder="ელ-ფოსტა/სახელი" class="basic__input" />#}
+{#              <input type="password" placeholder="პაროლი" class="basic__input" />#}
+{#              <button class="reset__pass__btn basic__btn ">დამახსოვრება</button>#}
+{#            </form>#}
+
+
+          </div>
+          <div class="right__container">
+            <img class="reg__background" src="{{ url_for('static', filename='assets/reg__background.svg') }}" />
+            <p class="nino__mtavruli">გამარჯობა, მეგობარო!</p>
+            <p class="segoe">შეიყვანეთ თქვენი პირადი </br> მონაცემები და დაიწყეთ </br>მოგზაურობა ჩვენთან ერთად</p>
+            <button class="reg__btn basic__btn">რეგისტრაცია</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="reg-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="reg__container">
+          <div class="left__container">
+            <h1 class="nino__mtavruli">რეგისტრაცია</h1>
+            <h4>შექმენით საკუთარი ექაუნთი</h4>
+
+                {# ** Register form ** #}
+                <form action="{{ url_for('user.register') }}" method="POST" novalidate formnovalidate class="reg__form" role="form">
+                    {{ register_form.hidden_tag() }}
+
+                    {# Username or Email #}
+                    {% set field = register_form.username if user_manager.enable_username else register_form.email %}
+                    {{ render_field(field, placeholder='მომხმარებლის სახელი', extra_class='') }}
+
+                    {% if user_manager.enable_email and user_manager.enable_username %}
+                        {{ render_field(register_form.email, placeholder='ელ-ფოსტა', extra_class='email__input') }}
+                    {% endif %}
+
+                    {{ render_field(register_form.password, placeholder='პაროლი', extra_class='password__input') }}
+
+                    {{ render_submit_field(register_form.submit, auth_action='register') }}
+                </form>
+
+          </div>
+          <div class="right__container">
+            <img class="reg__background" src="{{ url_for('static', filename='assets/reg__background.svg') }}" />
+            <p class="nino__mtavruli ">გამარჯობა, მეგობარო!</p>
+            <p class="segoe">
+              შეიყვანეთ თქვენი პირადი </br> მონაცემები და დაიწყეთ </br> მოგზაურობა ჩვენთან
+              ერთად
+            </p>
+            <button class="enter__btn basic__btn">შესვლა</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
