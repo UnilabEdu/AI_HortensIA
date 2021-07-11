@@ -28,24 +28,13 @@ leng_checkbox.addEventListener('change', () => {
 
 
 // Hortensia
-// const AI_hortensia = {
-//   0: {
-//     id: 1,
-//     tit: "blabla1",
-//     sinonimi: 'sinonimi1',
-//     rasgv: 'bskdlfahdsklfhasdf',
-//     rogdag: 'foasdfas'
-//   },
-//   1: {
-//     id: 2,
-//     tit: "blabla2",
-//     sinonimi: 'sinonimi2',
-//     rasgv: 'bskdlfahdskl222222222222',
-//     rogdag: 'foasdfa222 2222 222222 222'
-//   }  
-// }
+
 const allObjClass = document.querySelectorAll('.emotions');
-var x = document.getElementById('title');
+const title = document.getElementById('title');
+const synonym = document.getElementById('synonym');
+const about = document.getElementById('about');
+const help = document.getElementById('help');
+
 
 fetch('https://jsonplaceholder.typicode.com/posts')
   .then((response) => {
@@ -57,7 +46,10 @@ fetch('https://jsonplaceholder.typicode.com/posts')
   .then((data) => {
     for (let i = 0; i < allObjClass.length; i++) {
       allObjClass[i].addEventListener('click', () => {
-        x.innerHTML = data[i].title; 
+        title.innerHTML = data[i].title; 
+        synonym.innerHTML = data[i].title; 
+        about.innerHTML = data[i].body; 
+        about.innerHTML = data[i].body; 
       });
     }
   });
