@@ -47,6 +47,7 @@ class Emotion(db.Model):
     def get_all(cls):
         cls.query.all()
 
+
 class Files(db.Model):
     __tablename__ = "files"
 

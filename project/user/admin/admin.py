@@ -29,7 +29,7 @@ class HomeAdminView(AdminIndexView):
         return redirect(url_for('login', next=request.url))
 
 
-admin = Admin(name='Panel', template_mode='bootstrap4', url='/', index_view = HomeAdminView(name='home'))
+admin = Admin(name='Panel', template_mode='bootstrap4', url='/', index_view=HomeAdminView(name='home'))
 
 admin.add_view(AdminModelView(UserModel, db.session, category="User Managements"))
 admin.add_view(AdminModelView(Role, db.session, name="User Roles", category="User Managements"))
