@@ -5,7 +5,7 @@
   <div class="main__content">
     <h1 class="main__title nino__mtavruli">ტექსტის კლასიფიკაცია</h1>
     <div class="left__section">
-      <p class="left__text firago ">
+      <p class="left__text firago">
         ხელსაწყო შესაძლებლობას იძლევა ტექსტური ფაილის რუბერტ პლუტჩიკის
         "ემოციური ბორბლის" მიხედვით მარკირების. მომხმარებელს ვებ სერვისი
         სთავაზობს ბარათებს, რომელზეც გამოსახულია შემთხვევითი წინადადებები,
@@ -15,12 +15,12 @@
         მომხმარებლის მიერ მარკირებულ ბარათს შევინახავთ მონაცემთა საცავში.
       </p>
 
-{#      <form class="left__form">#}
-{#        <h3 class="left__form__title nino__elit">შეტყობინებების მისაღებად გამოიწერეთ</h3>#}
-{#        {{ subscribe_form.hidden_tag() }}#}
-{#        {{ subscribe_form.email(class="left__form__input basic__input", required=False) }}#}
-{#        {{ subscribe_form.submit(class="left__form__btn basic__btn") }}#}
-{#      </form>#}
+      <form class="left__form">
+        <h3 class="left__form__title nino__elit">შეტყობინებების მისაღებად გამოიწერეთ</h3>
+        <input id="email-subscription-input" type="text" placeholder="ელ-ფოსტა" class="left__form__input basic__input" />
+        <button id="email-subscription-btn" class="left__form__btn basic__btn" type="button">გამოწერა</button>
+        <p id="email-subscription-help-text" class="firago" style="display: none; width: 100%"></p>
+      </form>
 
     </div>
     <div class="right__section">
@@ -30,12 +30,12 @@
         რეგისტრაცია
       </button>
       <div class="social">
-        <a href="#" target="_blank">
+        <a href="https://www.facebook.com/UniLabEdu/" target="_blank">
           <p class="segoe">Follow us on Facebook</p>
           <i class="fab fa-facebook"></i>
         </a>
-        <a href="#" target="_blank">
-          <p class="segoe">Follow us on GitHub</p>
+        <a href="https://github.com/temurchichua/AI_HortensIA" target="_blank">
+          <p class="segoe">Fork us on GitHub</p>
           <i class="fab fa-github"></i>
         </a>
       </div>

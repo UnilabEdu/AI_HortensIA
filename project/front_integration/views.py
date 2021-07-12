@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, session, current_app
 from project import babel, Config
-from project.subscribe_function.subscribe_form import SubscribeForm
+from project.models import SubscribedEmails
 
 
 @babel.localeselector
@@ -21,16 +21,21 @@ def index():
 
     login_form = user_manager.login_form(request.form)          # for login.html
     register_form = user_manager.register_form()                # for login_or_register.html
-    subscribe_form = SubscribeForm()
 
-    if subscribe_form.validate_on_submit():
-        session['subscribe_email'] = subscribe_form.email
-        print(session['subscribe_email'])
-    else:
-        print('invalid email')
+    # if subscribe_form.validate_on_submit():
+    #     session['subscribe_email'] = subscribe_form.email
+    #     print(session['subscribe_email'])
+    # else:
+    #     print('invalid email')
 
     return render_template('index.html',
                            form=login_form,
                            login_form=login_form,
-                           register_form=register_form,
-                           subscribe_form=subscribe_form)
+                           register_form=register_form)
+
+
+# @homepage_blueprint.route('/subscribe', methods=['GET', 'POST'])
+# def subscribe():
+#     print(request.json)
+#     email = 1
+#     return {'done': 'done'}

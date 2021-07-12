@@ -48,9 +48,10 @@ def populate_users():
     for username, email in zip(usernames, emails):
         db.session.add(User(username=username,
                             password=hashed_password,
-                            email=email,
-                            confirmed_at=confirmed_at,
-                            active=active))
+                            email=email))
+                            # confirmed_at=confirmed_at,
+                            # active=active))
+    # TODO: fix confirmed_at and active
 
 
 def populate_files():
@@ -92,7 +93,6 @@ def populate_emotions():
         'სიძულვილი', 'გულისრევა', 'მოწყენილობა',
         # დამატებითი ემოციები
         'აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'განცვიფრება', 'გაკიცხვა', 'სინანული', 'ზიზღი'
-        # კრძალვა ეწერა განცვიფრების ნაცვლად, ალბათ რამე უკეთესია შესარჩევი
     ]
 
     examples_en = ['I feel ' + emotion for emotion in emotions_list_en]
