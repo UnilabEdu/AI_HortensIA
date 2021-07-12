@@ -183,14 +183,19 @@ function updateWeeklyLevelsTable(tableID, displayLevel) {
 
         if (displayLevel === 1) {
             levelData = data.level_one
-            console.log(levelData)
             weeklyTableCurrentLevel = 1
+            table.className = 'table__green'
+
         } else if (displayLevel === 2) {
             levelData = data.level_two
             weeklyTableCurrentLevel = 2
+            table.className = 'table__blue'
+
         } else if (displayLevel === 3) {
             levelData = data.level_three
             weeklyTableCurrentLevel = 3
+            table.className = 'table__red'
+
         }
 
         let rowsToAppend = []
