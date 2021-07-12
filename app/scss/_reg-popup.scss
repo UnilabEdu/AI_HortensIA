@@ -1,0 +1,82 @@
+.reg__container {
+    display: flex;
+    height: 80%;
+    align-items: center;
+}
+
+.left__container,
+.auth__left__container {
+    z-index: 900;
+    width: 50%;
+    padding: 50px;
+
+    h1,
+    h4 {
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 30px;
+    }
+
+    h4 {
+        margin-bottom: 5px;
+    }
+}
+
+.reg__form {
+    z-index: 100;
+    position: relative;
+    margin: 0 auto;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+
+    input {
+        border-radius: 5px;
+    }
+
+    .reg__btn {
+        width: 150px;
+        margin: 0 auto;
+        height: 55px;
+        border-radius: 45px;
+    }
+
+    * {
+        margin-bottom: 20px;
+    }
+}
+
+.right__container {
+    z-index: 800;
+    color: #fff;
+    position: relative;
+    width: 50%;
+    padding: 50px;
+
+    h1,
+    p {
+        font-size: 18px;
+        margin-bottom: 110px;
+        text-align: center;
+    }
+
+    .enter__btn {
+        display: block;
+        width: 120px;
+        height: 55px;
+        margin: 0 auto;
+        font-weight: bold;
+        border-radius: 45px;
+        background-color: white;
+        color: $dark-background;
+    }
+
+    .reg__background {
+        z-index: -1;
+        top: -490px;
+        left: -250px;
+        position: absolute;
+    }
+}

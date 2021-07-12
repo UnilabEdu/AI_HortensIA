@@ -1,27 +1,19 @@
-from flask import Flask
+from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-from app.settings import Config
-from app.models import db
+app = Flask(__name__)
+
+app.config['SECRET_KEY'] = "Cannottell"
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(basedir, "data.db")}'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+Migrate(app, db)
 
 
-migrate = Migrate()
-
-
-def create_app():
-    app = Flask(__name__)
-
-    # inserting configurations from settings
-    app.config.from_object(Config)
-
-    # Setup Flask-SQLAlchemy
-    db.init_app(app)
-
-    # Setup Flask-Migrate
-    migrate.init_app(app, db, render_as_batch=True)
-
-    # Blueprint registrations
-    from app.main.views import main_blueprint
-    app.register_blueprint(main_blueprint, url_prefix="/main")
-
-    return app
+@app.route('/')
+def hello_world():
+    return render_template('home.html')
