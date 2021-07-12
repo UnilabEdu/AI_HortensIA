@@ -21,10 +21,10 @@ email_submit_btn.addEventListener('click', function() {
     let email = document.getElementById('email-subscription-input').value
     let help_text = document.getElementById('email-subscription-help-text')
     if (email.length < 1) {
-        help_text.innerHTML = "გთხოვთ შეიყვანოთ ელ-ფოსტის მისამართი."
+        help_text.innerHTML = txt.subscr.zero
             help_text.style.display = 'block'
     } else if (email.length > 355 || !email.includes('@') || !email.includes('.')) {
-        help_text.innerHTML = "გთხოვთ სწორად შეიყვანოთ ელ-ფოსტის მისამართი."
+        help_text.innerHTML = txt.subscr.invalid
             help_text.style.display = 'block'
     } else {
         fetch('/api/subscribe',{
@@ -36,11 +36,11 @@ email_submit_btn.addEventListener('click', function() {
         body: JSON.stringify({email: email})
       }).then(response => response.json())
         .then(data => {
-          help_text.innerHTML = "ელ-ფოსტის მისამართი მიღებულია."
+          help_text.innerHTML = txt.subscr.success
           help_text.style.display = 'block'
         })
         .catch((error) => {
-          help_text.innerHTML = "დაფიქსირდა შეცდომა. თავიდან სცადეთ."
+          help_text.innerHTML = txt.subscr.error
           help_text.style.display = 'block'
           console.log(error)
         });

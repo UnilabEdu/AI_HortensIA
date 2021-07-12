@@ -11,9 +11,9 @@ class Config(object):
     # Flask settings
     CSRF_ENABLED = True
     PROPAGATE_EXCEPTIONS = True
+    SECRET_KEY = "Cannottell"  # TODO: move secret key to environmental variables
 
     # Flask SQLAlchemy settings
-    SECRET_KEY = "Cannottell"  # TODO: move secret key to environmental variables
     SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(basedir, "data.db")}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -43,3 +43,6 @@ class Config(object):
         "en": "English",
         "ka": "Georgian"
     }
+
+    BABEL_DEFAULT_LOCALE = 'ka'
+    BABEL_DOMAIN = 'messages'

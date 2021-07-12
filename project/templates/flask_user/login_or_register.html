@@ -3,39 +3,38 @@
 {% block content %}
 {% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
   <div class="main__content">
-    <h1 class="main__title nino__mtavruli">ტექსტის კლასიფიკაცია</h1>
+    <h1 class="main__title nino__mtavruli"> {{ _('Hortensia - Text Classification') }}</h1>
     <div class="left__section">
       <p class="left__text firago">
-        ხელსაწყო შესაძლებლობას იძლევა ტექსტური ფაილის რუბერტ პლუტჩიკის
-        "ემოციური ბორბლის" მიხედვით მარკირების. მომხმარებელს ვებ სერვისი
-        სთავაზობს ბარათებს, რომელზეც გამოსახულია შემთხვევითი წინადადებები,
-        ამოღებული საერთო ტექსტის საცავიდან. ბარათის ქვეშ მოთავსებულია ემოციური
-        ბორბლის გრაფიკული სელექტორი, რომლის მიხედვითაც მომხმარებელი ამოირჩევს
-        თუ რა ემოციას იწვევს მასში ბარათზე გამოტანილი მონაცემი. ჩვენ
-        მომხმარებლის მიერ მარკირებულ ბარათს შევინახავთ მონაცემთა საცავში.
+          {{ _(
+          'Hortensia provides a tool which lets you label sentences based on Robert Plutchik\'s \
+          Wheel of Emotions. You will be presented with random sentences derived from our database. \
+          The wheel of emotions can be used to choose the specific emotion that followed reading the \
+          sentence. Our goal is to collect said data and use it for statistical analysis and machine learning'
+          ) }}
       </p>
 
       <form class="left__form">
-        <h3 class="left__form__title nino__elit">შეტყობინებების მისაღებად გამოიწერეთ</h3>
-        <input id="email-subscription-input" type="text" placeholder="ელ-ფოსტა" class="left__form__input basic__input" />
-        <button id="email-subscription-btn" class="left__form__btn basic__btn" type="button">გამოწერა</button>
-        <p id="email-subscription-help-text" class="firago" style="display: none; width: 100%"></p>
+        <h3 class="left__form__title nino__elit">{{ _('Subscribe to our newsletter') }}</h3>
+        <input id="email-subscription-input" type="text" placeholder="{{ _('Email') }}" class="left__form__input basic__input" />
+        <button id="email-subscription-btn" class="left__form__btn basic__btn" type="button">{{ _('Submit') }}</button>
+        <p id="email-subscription-help-text" class="firago" style="width: 100%"> <br> </p>
       </form>
 
     </div>
     <div class="right__section">
       <p class="language nino__mtavruli">ENG/ქარ</p>
-      <button id="auth-btn" class="auth__btn basic__btn ">ავტორიზაცია</button>
+      <button id="auth-btn" class="auth__btn basic__btn ">{{ _('Sign in') }}</button>
       <button id="reg-btn" class="registration__btn basic__btn ">
-        რეგისტრაცია
+          {{ _('Register') }}
       </button>
       <div class="social">
         <a href="https://www.facebook.com/UniLabEdu/" target="_blank">
-          <p class="segoe">Follow us on Facebook</p>
+          <p class="segoe">{{ _('Follow us on Facebook') }}</p>
           <i class="fab fa-facebook"></i>
         </a>
         <a href="https://github.com/temurchichua/AI_HortensIA" target="_blank">
-          <p class="segoe">Fork us on GitHub</p>
+          <p class="segoe">{{ _('Fork us on GitHub') }}</p>
           <i class="fab fa-github"></i>
         </a>
       </div>
@@ -46,9 +45,9 @@
         <span class="close">&times;</span>
         <div class="auth__container">
           <div class="auth__left__container">
-            <h1 class="nino__mtavruli">ავტორიზაცია</h1>
+            <h1 class="nino__mtavruli">{{ _('SIGN IN') }}</h1>
             <div class="google__logo"><i class="fab fa-google"></i></div>
-            <h4>გარე ავტორიზაციის გამოყნება</h4>
+            <h4>{{ _('Continue with Google') }}</h4>
 
 
 
@@ -59,13 +58,16 @@
 
                 {# Username or Email #}
                 {% set field = login_form.username if user_manager.enable_username else login_form.email %}
-                {{ render_field(field, placeholder='ელ-ფოსტა/სახელი') }}
+                {% set identifier_placeholder = _('Username or Email') %}
+                {{ render_field(field, placeholder=identifier_placeholder) }}
 
                 {# Password #}
-                {{ render_field(login_form.password, placeholder='პაროლი') }}
+                {% set password_placeholder = _('Password') %}
+                {{ render_field(login_form.password, placeholder=password_placeholder) }}
 
                 {# Submit button #}
-                {{ render_submit_field(login_form.submit, auth_action='login') }}
+                {% set submit_login = _('login') %}
+                {{ render_submit_field(login_form.submit, auth_action=submit_login) }}
             </form>
 
           </div>
@@ -92,9 +94,12 @@
           </div>
           <div class="right__container">
             <img class="reg__background" src="{{ url_for('static', filename='assets/reg__background.svg') }}" />
-            <p class="nino__mtavruli">გამარჯობა, მეგობარო!</p>
-            <p class="segoe">შეიყვანეთ თქვენი პირადი </br> მონაცემები და დაიწყეთ </br>მოგზაურობა ჩვენთან ერთად</p>
-            <button class="reg__btn basic__btn">რეგისტრაცია</button>
+            <p class="nino__mtavruli">{{ _('Welcome, Friend!') }}</p>
+            <p class="segoe">{{ _('Please, provide your') }}
+                </br> {{ _('details and start') }}
+                </br> {{ _('the journey with us') }} </p>
+
+            <button class="reg__btn basic__btn">{{ _('Register') }}</button>
           </div>
         </div>
       </div>
@@ -106,8 +111,8 @@
         <span class="close">&times;</span>
         <div class="reg__container">
           <div class="left__container">
-            <h1 class="nino__mtavruli">რეგისტრაცია</h1>
-            <h4>შექმენით საკუთარი ექაუნთი</h4>
+            <h1 class="nino__mtavruli">{{ _('REGISTER') }}</h1>
+            <h4>{{ _('Create a new account') }}</h4>
 
                 {# ** Register form ** #}
                 <form action="{{ url_for('user.register') }}" method="POST" novalidate formnovalidate class="reg__form" role="form">
@@ -115,26 +120,29 @@
 
                     {# Username or Email #}
                     {% set field = register_form.username if user_manager.enable_username else register_form.email %}
-                    {{ render_field(field, placeholder='მომხმარებლის სახელი', extra_class='') }}
+                    {% set username_placeholder_reg = _('Username') %}
+                    {{ render_field(field, placeholder=username_placeholder_reg, extra_class='') }}
 
                     {% if user_manager.enable_email and user_manager.enable_username %}
-                        {{ render_field(register_form.email, placeholder='ელ-ფოსტა', extra_class='email__input') }}
+                        {% set email_placeholder_reg = _('Email') %}
+                        {{ render_field(register_form.email, placeholder=email_placeholder_reg, extra_class='email__input') }}
                     {% endif %}
 
-                    {{ render_field(register_form.password, placeholder='პაროლი', extra_class='password__input') }}
+                    {% set password_placeholder_reg = _('Password') %}
+                    {{ render_field(register_form.password, placeholder=password_placeholder_reg, extra_class='password__input') }}
 
-                    {{ render_submit_field(register_form.submit, auth_action='register') }}
+                    {% set submit_register = _('register') %}
+                    {{ render_submit_field(register_form.submit, auth_action=submit_register) }}
                 </form>
 
           </div>
           <div class="right__container">
             <img class="reg__background" src="{{ url_for('static', filename='assets/reg__background.svg') }}" />
-            <p class="nino__mtavruli ">გამარჯობა, მეგობარო!</p>
-            <p class="segoe">
-              შეიყვანეთ თქვენი პირადი </br> მონაცემები და დაიწყეთ </br> მოგზაურობა ჩვენთან
-              ერთად
-            </p>
-            <button class="enter__btn basic__btn">შესვლა</button>
+            <p class="nino__mtavruli ">{{ _('Welcome, Friend!') }}</p>
+            <p class="segoe">{{ _('Please, provide your') }}
+                </br> {{ _('details and start') }}
+                </br> {{ _('the journey with us') }} </p>
+            <button class="enter__btn basic__btn">{{ _('Sign in') }}</button>
           </div>
         </div>
       </div>

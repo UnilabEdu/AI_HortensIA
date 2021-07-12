@@ -31,10 +31,18 @@
     {% if not label %}{% set label=field.label.text %}{% endif %}
     {#<button type="submit" class="form-control btn btn-default btn-primary">{{label}}</button>#}
     {% if auth_action =='login' %}
-    <input type="submit" class="auth__btn basic__btn" value="შესვლა"
+    <input type="submit" class="auth__btn basic__btn" value="Sign in"
            {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
            >
     {% elif auth_action == 'register' %}
+    <input type="submit" class="reg__btn basic__btn" value="Register"
+           {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
+           >
+    {% elif auth_action == 'შესვლა' %}
+    <input type="submit" class="auth__btn basic__btn" value="შესვლა"
+           {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
+           >
+    {% elif auth_action == 'რეგისტრაცია' %}
     <input type="submit" class="reg__btn basic__btn" value="რეგისტრაცია"
            {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
            >
