@@ -42,16 +42,15 @@ def populate_users():
     usernames = ['User_' + gen.word().capitalize() + str(randrange(1, 2003)) for i in range(users_amount)]
     emails = [gen.word()[:3] + gen.email() for i in range(users_amount)]
 
-    confirmed_at = datetime.now()
     active = 1
+    confirmed_at = datetime.now()
 
     for username, email in zip(usernames, emails):
         db.session.add(User(username=username,
                             password=hashed_password,
-                            email=email))
-                            # confirmed_at=confirmed_at,
-                            # active=active))
-    # TODO: fix confirmed_at and active
+                            email=email,
+                            active=active,
+                            confirmed_at=confirmed_at))
 
 
 def populate_files():

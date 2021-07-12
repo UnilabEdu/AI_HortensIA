@@ -32,10 +32,3 @@ def index():
                            form=login_form,
                            login_form=login_form,
                            register_form=register_form)
-
-
-# @homepage_blueprint.route('/subscribe', methods=['GET', 'POST'])
-# def subscribe():
-#     print(request.json)
-#     email = 1
-#     return {'done': 'done'}

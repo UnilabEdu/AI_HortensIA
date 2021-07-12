@@ -13,17 +13,19 @@ class Config(object):
     PROPAGATE_EXCEPTIONS = True
 
     # Flask SQLAlchemy settings
-    SECRET_KEY = "Cannottell"
+    SECRET_KEY = "Cannottell"  # TODO: move secret key to environmental variables
     SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(basedir, "data.db")}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # TODO: configure to unilab mail
     # Flask mail configuration
     MAIL_SERVER = 'smtp.mailtrap.io'
     MAIL_PORT = 2525
-    MAIL_USERNAME = '630ddbfbb61f3c'
-    MAIL_PASSWORD = '18f185a477f02f'
+    MAIL_USERNAME = '02f8e167040c3d'
+    MAIL_PASSWORD = 'eb53bb82c96877'
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
+    MAIL_DEFAULT_SENDER = 'denissanturyan@gmail.com'
 
     # Flask-User settings
     USER_ENABLE_EMAIL = True

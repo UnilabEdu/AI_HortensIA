@@ -14,10 +14,12 @@ class User(db.Model, UserMixin):
     files = db.relationship('Files', backref='users')
     roles = db.relationship('Role', secondary='user_roles')
 
-    def __init__(self, username, password, email):
+    def __init__(self, username, password, email, active, confirmed_at=None):
         self.username = username
         self.password = password
         self.email = email
+        self.active = active
+        self.confirmed_at = confirmed_at
 
 
 class Role(db.Model):
