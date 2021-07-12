@@ -42,6 +42,7 @@ def create_app(import_blueprints=True):
     from project.tickets.views import tickets_blueprint
     app.register_blueprint(tickets_blueprint, url_prefix="/tickets")
 
+
     # restful api
     api.init_app(app)
 

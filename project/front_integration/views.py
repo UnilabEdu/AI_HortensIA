@@ -1,13 +1,28 @@
-from flask import Blueprint, render_template, request, session, current_app
+from flask import Blueprint, render_template, request, session, current_app, g
 from project import babel, Config
 from project.models import SubscribedEmails
-from flask_babel import get_locale
+# from flask_babel import get_locale
 
 
 @babel.localeselector
 def get_locale():
-    return request.accept_languages.best_match(Config.LANGUAGES.keys())
-    # return "ka"
+    return 'en'
+    # return "ka_GE"
+    # if session.get('locale'):
+    #     session['locale'] = 'ka'
+
+
+
+# @babel.localeselector
+# def get_locale():
+#     # if a user is logged in, use the locale from the user settings
+#     user = getattr(g, 'user', None)
+#     if user is not None:
+#         return user.locale
+#     # otherwise try to guess the language from the user accept
+#     # header the browser transmits.  We support de/fr/en in this
+#     # example.  The best match wins.
+#     return request.accept_languages.best_match(['en', 'ka'])
 
 
 homepage_blueprint = Blueprint('homepage',
