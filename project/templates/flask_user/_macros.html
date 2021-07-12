@@ -1,0 +1,50 @@
+{% macro render_field(field, placeholder='', extra_class='') -%}
+     {{ field(class_='basic__input ' + extra_class, placeholder=placeholder) }}
+    {% if field.errors %}
+        {% for e in field.errors %}
+            <p class="help-block">{{ e }}</p>
+        {% endfor %}
+    {% endif %}
+{%- endmacro %}
+ 
+{% macro render_checkbox_field(field, label=None) -%}
+    {% if not label %}{% set label=field.label.text %}{% endif %}
+    <div class="checkbox">
+        <label>
+            {{ field(type='checkbox', **kwargs) }} {{ label }}
+        </label>
+    </div>
+{%- endmacro %}
+ 
+{% macro render_radio_field(field) -%}
+    {% for value, label, checked in field.iter_choices() %}
+        <div class="radio">
+            <label>
+                <input type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}"{% if checked %} checked{% endif %}>
+                {{ label }}
+            </label>
+        </div>
+    {% endfor %}
+{%- endmacro %}
+
+{% macro render_submit_field(field, label=None, tabindex=None, auth_action=None) -%}
+    {% if not label %}{% set label=field.label.text %}{% endif %}
+    {#<button type="submit" class="form-control btn btn-default btn-primary">{{label}}</button>#}
+    {% if auth_action =='login' %}
+    <input type="submit" class="auth__btn basic__btn" value="Sign in"
+           {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
+           >
+    {% elif auth_action == 'register' %}
+    <input type="submit" class="reg__btn basic__btn" value="Register"
+           {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
+           >
+    {% elif auth_action == 'შესვლა' %}
+    <input type="submit" class="auth__btn basic__btn" value="შესვლა"
+           {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
+           >
+    {% elif auth_action == 'რეგისტრაცია' %}
+    <input type="submit" class="reg__btn basic__btn" value="რეგისტრაცია"
+           {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
+           >
+    {% endif %}
+{%- endmacro %}

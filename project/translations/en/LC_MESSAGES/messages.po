@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-13 15:24+0400\n"
-"PO-Revision-Date: 2021-06-12 10:52+0400\n"
+"POT-Creation-Date: 2021-07-12 13:27+0400\n"
+"PO-Revision-Date: 2021-07-12 12:57+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
@@ -18,107 +18,323 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: project/front_integration/templates/home.html:8
-msgid "ჰორტენზია"
-msgstr "Hortensia"
-
-#: project/front_integration/templates/home.html:12
-msgid "ტექსტის კლასიფიკაცია"
-msgstr "Text classification"
-
-#: project/front_integration/templates/home.html:16
-msgid ""
-"ხელსაწყო შესაძლებლობას იძლევა ტექსტური ფაილის რუბერტ პლუტჩიკის\n"
-"          ემოციური ბორბლის მიხედვით მარკირების. მომხმარებელს ვებ სერვისი\n"
-"          სთავაზობს ბარათებს, რომელზეც გამოსახულია შემთხვევითი "
-"წინადადებები,\n"
-"          ამოღებული საერთო ტექსტის საცავიდან. ბარათის ქვეშ მოთავსებულია "
-"ემოციური\n"
-"          ბორბლის გრაფიკული სელექტორი, რომლის მიხედვითაც მომხმარებელი "
-"ამოირჩევს\n"
-"          თუ რა ემოციას იწვევს მასში ბარათზე გამოტანილი მონაცემი. ჩვენ\n"
-"          მომხმარებლის მიერ მარკირებულ ბარათს შევინახავთ მონაცემთა "
-"საცავში."
+#: project/templates/flask_user/change_password.html:5
+#: project/templates/flask_user/user_profile.html:11
+#: venv/Lib/site-packages/flask_user/forms.py:89
+#: venv/Lib/site-packages/flask_user/forms.py:315
+msgid "Change password"
 msgstr ""
-"With this tool you can mark text file with Plutchik's Wheel of Emotions."
-" \n"
-"as professor emeritus at the Albert Einstein College of Medicine and "
-"adjunct professor at the University of South Florida.\n"
-"He received his Ph.D. from Columbia University and he was also a "
-"psychologist. \n"
-"He authored or coauthored more than 260 articles, 45 chapters and eight "
-"books and edited seven books.\n"
-"His research interests included the study of emotions, the study of "
-"suicide and violence, and the study of the psychotherapy process.\n"
-"Plutchik proposed a psychoevolutionary classification approach for "
-"general emotional responses.\n"
-"e considered there to be eight primary emotions—anger, fear, sadness, "
-"disgust, surprise, anticipation, trust, and joy. \n"
 
-#: project/front_integration/templates/home.html:26
-msgid "შეტყობინებების მისაღებად გამოიწერეთ"
-msgstr "Subscribe for updates"
+#: project/templates/flask_user/change_username.html:5
+#: project/templates/flask_user/user_profile.html:8
+#: venv/Lib/site-packages/flask_user/forms.py:126
+msgid "Change username"
+msgstr ""
 
-#: project/front_integration/templates/home.html:33
-#: project/front_integration/templates/home.html:51
-msgid "ავტორიზაცია"
-msgstr "Authorisation"
+#: project/templates/flask_user/forgot_password.html:5
+msgid "Forgot Password"
+msgstr ""
 
-#: project/front_integration/templates/home.html:35
-msgid "რეგისტრაცია"
-msgstr "Registration"
+#: project/templates/flask_user/invite.html:5
+msgid "Invite User"
+msgstr ""
 
-#: project/front_integration/templates/home.html:39
-msgid "გამოგვყევით Facebook-ზე"
-msgstr "Follow us on Facebook"
+#: project/templates/flask_user/login.html:5
+#: project/templates/flask_user/login_or_register.html:27
+#: project/templates/flask_user/login_or_register.html:145
+#: venv/Lib/site-packages/flask_user/forms.py:182
+msgid "Sign in"
+msgstr ""
 
-#: project/front_integration/templates/home.html:43
-msgid "გამოგვყევით Github-ზე"
-msgstr "Follow us on Github"
+#: project/templates/flask_user/login.html:21
+msgid "New here? Register."
+msgstr ""
 
-#: project/front_integration/templates/home.html:59
-#: project/front_integration/templates/home.html:77
-msgid "რეგისტაცია"
-msgstr "Registration"
+#: project/templates/flask_user/login.html:44
+#: project/templates/flask_user/login_or_register.html:80
+msgid "Forgot your Password?"
+msgstr ""
 
-#: project/front_integration/templates/home.html:60
-msgid "შექმენით საკუთარი ექაუნთი"
-msgstr "Create your account"
+#: project/templates/flask_user/login_or_register.html:6
+msgid "Hortensia - Text Classification"
+msgstr ""
 
-#: project/front_integration/templates/home.html:64
-#: project/subscribe_function/subscribe_form.py:9
-msgid "ელ-ფოსტა"
-msgstr "E-mail"
+#: project/templates/flask_user/login_or_register.html:9
+msgid ""
+"Hortensia provides a tool which lets you label sentences based on Robert "
+"Plutchik's           Wheel of Emotions. You will be presented with random"
+" sentences derived from our database.           The wheel of emotions can"
+" be used to choose the specific emotion that followed reading the"
+"           sentence. Our goal is to collect said data and use it for "
+"statistical analysis and machine learning"
+msgstr ""
 
-#: project/front_integration/templates/home.html:69
-msgid "მომხმარებლის სახელი"
-msgstr "User name"
+#: project/templates/flask_user/login_or_register.html:18
+msgid "Subscribe to our newsletter"
+msgstr ""
 
-#: project/front_integration/templates/home.html:74
-msgid "პაროლი"
-msgstr "Password"
+#: project/templates/flask_user/login_or_register.html:19
+#: project/templates/flask_user/login_or_register.html:127
+#: venv/Lib/site-packages/flask_user/forms.py:72
+#: venv/Lib/site-packages/flask_user/forms.py:163
+#: venv/Lib/site-packages/flask_user/forms.py:173
+#: venv/Lib/site-packages/flask_user/forms.py:232
+#: venv/Lib/site-packages/flask_user/forms.py:260
+#: venv/Lib/site-packages/flask_user/forms.py:336
+msgid "Email"
+msgstr ""
 
-#: project/front_integration/templates/home.html:82
-msgid "გამარჯობა, მეგობარო!"
-msgstr "Hello, friend!"
+#: project/templates/flask_user/login_or_register.html:20
+msgid "Submit"
+msgstr ""
 
-#: project/front_integration/templates/home.html:84
-msgid "შეიყვანეთ თქვენი პირადი"
-msgstr "Type your personal"
+#: project/templates/flask_user/login_or_register.html:29
+#: project/templates/flask_user/login_or_register.html:102
+#: project/templates/flask_user/register.html:5
+#: venv/Lib/site-packages/flask_user/forms.py:270
+msgid "Register"
+msgstr ""
 
-#: project/front_integration/templates/home.html:85
-msgid "მონაცემები და დაიწყეთ"
-msgstr "information and start"
+#: project/templates/flask_user/login_or_register.html:33
+msgid "Follow us on Facebook"
+msgstr ""
 
-#: project/front_integration/templates/home.html:86
-msgid "მოგზაურობა ჩვენთან ერთად"
-msgstr "the journey with us "
+#: project/templates/flask_user/login_or_register.html:37
+msgid "Fork us on GitHub"
+msgstr ""
 
-#: project/front_integration/templates/home.html:88
-msgid "შესვლა"
-msgstr "Login"
+#: project/templates/flask_user/login_or_register.html:48
+msgid "SIGN IN"
+msgstr ""
 
-#: project/subscribe_function/subscribe_form.py:10
-msgid "გამოწერა"
-msgstr "Subscribe"
+#: project/templates/flask_user/login_or_register.html:50
+msgid "Continue with Google"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:61
+#: venv/Lib/site-packages/flask_user/forms.py:189
+msgid "Username or Email"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:65
+#: project/templates/flask_user/login_or_register.html:131
+#: venv/Lib/site-packages/flask_user/forms.py:177
+#: venv/Lib/site-packages/flask_user/forms.py:264
+msgid "Password"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:69
+msgid "login"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:97
+#: project/templates/flask_user/login_or_register.html:141
+msgid "Welcome, Friend!"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:98
+#: project/templates/flask_user/login_or_register.html:142
+msgid "Please, provide your"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:99
+#: project/templates/flask_user/login_or_register.html:143
+msgid "details and start"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:100
+#: project/templates/flask_user/login_or_register.html:144
+msgid "the journey with us"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:114
+msgid "REGISTER"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:115
+msgid "Create a new account"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:123
+#: venv/Lib/site-packages/flask_user/forms.py:170
+#: venv/Lib/site-packages/flask_user/forms.py:229
+#: venv/Lib/site-packages/flask_user/forms.py:257
+msgid "Username"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:134
+msgid "register"
+msgstr ""
+
+#: project/templates/flask_user/manage_emails.html:5
+msgid "Manage Emails"
+msgstr ""
+
+#: project/templates/flask_user/register.html:21
+msgid "Already registered? Sign in."
+msgstr ""
+
+#: project/templates/flask_user/resend_confirm_email.html:5
+msgid "Resend Confirmation Email"
+msgstr ""
+
+#: project/templates/flask_user/reset_password.html:5
+msgid "Reset Password"
+msgstr ""
+
+#: project/templates/flask_user/user_profile.html:5
+msgid "User profile"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:41
+msgid ""
+"Password must have at least 6 characters with one lowercase letter, one "
+"uppercase letter and one number"
+msgstr "Use at least 6 characters: upper-/lowercase letters and numbers"
+
+#: venv/Lib/site-packages/flask_user/forms.py:47
+msgid "Username must be at least 3 characters long"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:52
+msgid "Username may only contain letters, numbers, '-', '.' and '_'"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:58
+msgid "This Username is already in use. Please try another one."
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:65
+msgid "This Email is already in use. Please try another one."
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:73
+#: venv/Lib/site-packages/flask_user/forms.py:174
+#: venv/Lib/site-packages/flask_user/forms.py:261
+#: venv/Lib/site-packages/flask_user/forms.py:337
+msgid "Email is required"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:74
+#: venv/Lib/site-packages/flask_user/forms.py:175
+#: venv/Lib/site-packages/flask_user/forms.py:262
+#: venv/Lib/site-packages/flask_user/forms.py:338
+msgid "Invalid Email"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:76
+msgid "Add Email"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:79
+#: venv/Lib/site-packages/flask_user/forms.py:122
+msgid "Old Password"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:80
+#: venv/Lib/site-packages/flask_user/forms.py:123
+msgid "Old Password is required"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:82
+#: venv/Lib/site-packages/flask_user/forms.py:310
+msgid "New Password"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:83
+#: venv/Lib/site-packages/flask_user/forms.py:311
+msgid "New Password is required"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:85
+#: venv/Lib/site-packages/flask_user/forms.py:312
+msgid "Retype New Password"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:86
+#: venv/Lib/site-packages/flask_user/forms.py:313
+msgid "New Password and Retype Password did not match"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:111
+#: venv/Lib/site-packages/flask_user/forms.py:145
+msgid "Old Password is incorrect"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:118
+msgid "New Username"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:119
+#: venv/Lib/site-packages/flask_user/forms.py:171
+#: venv/Lib/site-packages/flask_user/forms.py:258
+msgid "Username is required"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:152
+#: venv/Lib/site-packages/flask_user/forms.py:303
+msgid "Your email address"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:153
+#: venv/Lib/site-packages/flask_user/forms.py:304
+msgid "Email address is required"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:154
+#: venv/Lib/site-packages/flask_user/forms.py:305
+msgid "Invalid Email address"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:156
+msgid "Send reset password email"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:163
+#: venv/Lib/site-packages/flask_user/forms.py:237
+#, python-format
+msgid "%(username_or_email)s does not exist"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:178
+#: venv/Lib/site-packages/flask_user/forms.py:265
+msgid "Password is required"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:180
+msgid "Remember me"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:226
+msgid "Username/Email"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:240
+msgid "Incorrect Password"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:244
+#, python-format
+msgid "Incorrect %(username_or_email)s and/or Password"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:266
+msgid "Retype Password"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:267
+msgid "Password and Retype Password did not match"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:268
+msgid "Token"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:307
+msgid "Resend email confirmation email"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:340
+msgid "Invite!"
+msgstr ""
 
