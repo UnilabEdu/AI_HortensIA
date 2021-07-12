@@ -27,7 +27,7 @@
     font-weight: bold;
     margin: 0 auto;
   }
-  .movifiqreb {
+  .big__cont {
     display: flex;
     margin: 0 auto;
     max-width: 1300px;
@@ -38,14 +38,14 @@
       padding-top: 50px;
       .restrict__btn {
         width: 368px;
-        height: 69px;
+        padding:22px 10px;
         border-radius: 10px;
         font-size: 22px;
       }
       ul {
-        margin-top: 20px;
+        margin-top: 33px;
         li {
-          margin-top: 20px;
+          margin-top: 25px;
         }
         p {
           font-size: 18px;
@@ -53,6 +53,7 @@
       }
       h3 {
         color: #6e10cc;
+        margin-bottom: 5px;
       }
       .next__btn {
         cursor: pointer;
