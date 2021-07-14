@@ -1,6 +1,6 @@
 from flask_script import Command
 from project.models import db
-from project.models.user import UserModel, Role
+from project.models.user import User, Role
 from flask import current_app
 from datetime import datetime
 
@@ -44,14 +44,14 @@ def find_or_create_role(name):
 
 
 def find_or_create_user(username, password, email, role=None):
-    user = UserModel.query.filter_by(email=email).first()
+    user = User.query.filter_by(email=email).first()
 
     if not user:
-        user = UserModel(username=username,
-                         password=password,
-                         email=email,
-                         confirmed_at=datetime.utcnow(),
-                         active=True)
+        user = User(username=username,
+                    password=password,
+                    email=email,
+                    confirmed_at=datetime.utcnow(),
+                    active=True)
 
         if role:
             user.roles.append(role)

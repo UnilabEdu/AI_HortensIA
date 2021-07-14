@@ -1,16 +1,15 @@
 from flask import Blueprint, render_template, request
-from project import babel, Config
+# from project import babel, Config
 from project.tickets.forms import EmotionForm
 from project.models import Text, Ticket
 from flask_user import current_user
 import logging
 
 
-@babel.localeselector
-def get_locale():
-    return request.accept_languages.best_match(Config.LANGUAGES.keys())
-    # return "en"
-
+# @babel.localeselector
+# def get_locale():
+#     return request.accept_languages.best_match(Config.LANGUAGES.keys())
+#     # return "en"
 
 tickets_blueprint = Blueprint('tickets',
                               __name__,

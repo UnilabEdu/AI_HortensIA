@@ -1,6 +1,6 @@
 from flask_script import Command
 from project.models import db, Emotion, Ticket, Text, Files
-from project.models.user import UserModel
+from project.models.user import User
 from essential_generators import DocumentGenerator
 from random import randrange, choice
 from flask import current_app
@@ -36,21 +36,28 @@ def populate_users():
     #  Generate a hashed password
     user_manager = current_app.user_manager
     hashed_password = user_manager.hash_password('password')
-
-    users_amount = 50  # amount of users to generate
-
+    users_amount = 300  # amount of users to generate
     usernames = ['User_' + gen.word().capitalize() + str(randrange(1, 2003)) for i in range(users_amount)]
     emails = [gen.word()[:3] + gen.email() for i in range(users_amount)]
 
-    confirmed_at = datetime.now()
     active = 1
+    confirmed_at = datetime.now()
 
     for username, email in zip(usernames, emails):
-        db.session.add(UserModel(username=username,
-                                 password=hashed_password,
-                                 email=email,
-                                 confirmed_at=confirmed_at,
-                                 active=active))
+        db.session.add(User(username=username,
+                            password=hashed_password,
+                            email=email,
+                            active=active,
+                            confirmed_at=confirmed_at))
+
+
+def populate_files():
+    for i in range(5):
+        random_word = gen.word() + gen.word()
+        random_number = str(randrange(1, 2000))
+        db.session.add(Files(title=random_word+' '+random_number,
+                             file_name=random_word+'_'+random_number,
+                             user_id=randrange(1, 301)))
 
 
 def populate_files():
@@ -63,7 +70,7 @@ def populate_files():
 
 
 def populate_texts():
-    for i in range(100):
+    for i in range(4000):
         db.session.add(Text(text=gen.sentence(), file=randrange(1, 6)))
 
 
@@ -92,14 +99,12 @@ def populate_emotions():
         'სიძულვილი', 'გულისრევა', 'მოწყენილობა',
         # დამატებითი ემოციები
         'აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'განცვიფრება', 'გაკიცხვა', 'სინანული', 'ზიზღი'
-        # კრძალვა ეწერა განცვიფრების ნაცვლად, ალბათ რამე უკეთესია შესარჩევი
     ]
 
     examples_en = ['I feel ' + emotion for emotion in emotions_list_en]
     examples_ka = [emotion + ' ემოციაა' for emotion in emotions_list_ka]
 
-    for emotion_en, example_en, emotion_ka, example_ka in \
-            zip(emotions_list_en, examples_en, emotions_list_ka, examples_ka):
+    for emotion_en, example_en, emotion_ka, example_ka in zip(emotions_list_en, examples_en, emotions_list_ka, examples_ka):
         db.session.add(Emotion(name_en=emotion_en,
                                synonym_en=emotion_en,
                                example_en=example_en,
@@ -115,13 +120,13 @@ def populate_tickets():
     date_max_difference = 90  # max difference (in days) between today and Ticket submission date
 
     # Iterate over 30 User IDs
-    for user_id in range(1, 51):
-        text_id_list = list(range(1, 101))
+    for user_id in range(1, 301):
+        text_id_list = list(range(1, 4001))
 
         # Random numbers used to skip some dates to better showcase Streaks
         skip_these_dates = [date_end - timedelta(days=randrange(1, 90)) for i in range(1, randrange(1, 10))]
 
-        filled_tickets = randrange(5, 100)  # amount of tickets for current user
+        filled_tickets = randrange(2800, 4000)  # amount of tickets for current user
 
         for i in range(filled_tickets):
             text_id = choice(text_id_list)  # choose a random text to assign to current ticket

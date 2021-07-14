@@ -1,0 +1,124 @@
+# Georgian translations for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-07-12 08:03+0400\n"
+"PO-Revision-Date: 2021-07-12 08:03+0400\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ka\n"
+"Language-Team: ka <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: templates/flask_user/change_password.html:5
+#: templates/flask_user/user_profile.html:11
+msgid "Change password"
+msgstr "პაროლის შეცვლა"
+
+#: templates/flask_user/change_username.html:5
+#: templates/flask_user/user_profile.html:8
+msgid "Change username"
+msgstr "მომხმარებლის სახელის შეცვლა"
+
+#: templates/flask_user/forgot_password.html:5
+msgid "Forgot Password"
+msgstr "დაგავიწყდათ პაროლი?"
+
+#: templates/flask_user/invite.html:5
+msgid "Invite User"
+msgstr ""
+
+#: templates/flask_user/login.html:5
+#: templates/flask_user/login_or_register.html:35
+msgid "Sign in"
+msgstr "შესვლა"
+
+#: templates/flask_user/login.html:21
+msgid "New here? Register."
+msgstr ""
+
+#: templates/flask_user/login.html:44
+#: templates/flask_user/login_or_register.html:85
+msgid "Forgot your Password?"
+msgstr "დაგავიწყდათ პაროლი?"
+
+#: templates/flask_user/login_or_register.html:6
+#, fuzzy
+msgid "Hortensia - Text Classification"
+msgstr "ტექსტის კლასიფიკაცია"
+
+#: templates/flask_user/login_or_register.html:9
+msgid ""
+"Hortensia provides a tool which lets you label sentences based on Robert "
+"Plutchik's           Wheel of Emotions. You will be presented with random"
+" sentences derived from our database.           The wheel of emotions can"
+" be used to choose the specific emotion that followed reading the"
+"           sentence. Our goal is to collect said data and use it for "
+"statistical analysis and machine learning"
+msgstr ""
+"ხელსაწყო შესაძლებლობას იძლევა ტექსტური ფაილის რუბერტ პლუტჩიკის\"ემოციური "
+"ბორბლის\" მიხედვით მარკირების. მომხმარებელს ვებ სერვისისთავაზობს "
+"ბარათებს, რომელზეც გამოსახულია შემთხვევითი წინადადებებიამოღებული საერთო "
+"ტექსტის საცავიდან. ბარათის ქვეშ მოთავსებულია ემოციურიბორბლის გრაფიკული "
+"სელექტორი, რომლის მიხედვითაც მომხმარებელი ამოირჩევსთუ რა ემოციას იწვევს "
+"მასში ბარათზე გამოტანილი მონაცემი. ჩვენმომხმარებლის მიერ მარკირებულ "
+"ბარათს შევინახავთ მონაცემთა საცავში."
+
+#: templates/flask_user/login_or_register.html:25
+msgid "Subscribe to our newsletter"
+msgstr "შეტყობინებების მისაღებად გამოიწერეთ"
+
+#: templates/flask_user/login_or_register.html:27
+msgid "Email"
+msgstr "ელ-ფოსტა"
+
+#: templates/flask_user/login_or_register.html:28
+msgid "Submit"
+msgstr "გამოწერა"
+
+#: templates/flask_user/login_or_register.html:37
+#: templates/flask_user/register.html:5
+msgid "Register"
+msgstr "რეგისტრაცია"
+
+#: templates/flask_user/login_or_register.html:41
+#: templates/flask_user/login_or_register.html:45
+msgid " "
+msgstr ""
+
+#: templates/flask_user/login_or_register.html:56
+msgid "SIGN IN"
+msgstr "ავტორიზაცია"
+
+#: templates/flask_user/login_or_register.html:58
+msgid "Continue with Google"
+msgstr "Google ანგარიშით შესვლა"
+
+#: templates/flask_user/manage_emails.html:5
+msgid "Manage Emails"
+msgstr ""
+
+#: templates/flask_user/register.html:21
+msgid "Already registered? Sign in."
+msgstr ""
+
+#: templates/flask_user/resend_confirm_email.html:5
+msgid "Resend Confirmation Email"
+msgstr ""
+
+#: templates/flask_user/reset_password.html:5
+msgid "Reset Password"
+msgstr ""
+
+#: templates/flask_user/user_profile.html:5
+msgid "User profile"
+msgstr ""
+

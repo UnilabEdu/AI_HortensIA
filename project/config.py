@@ -11,19 +11,21 @@ class Config(object):
     # Flask settings
     CSRF_ENABLED = True
     PROPAGATE_EXCEPTIONS = True
+    SECRET_KEY = "Cannottell"  # TODO: move secret key to environmental variables
 
     # Flask SQLAlchemy settings
-    SECRET_KEY = "Cannottell"
     SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(basedir, "data.db")}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # TODO: configure to unilab mail
     # Flask mail configuration
     MAIL_SERVER = 'smtp.mailtrap.io'
     MAIL_PORT = 2525
-    MAIL_USERNAME = '630ddbfbb61f3c'
-    MAIL_PASSWORD = '18f185a477f02f'
+    MAIL_USERNAME = '02f8e167040c3d'
+    MAIL_PASSWORD = 'eb53bb82c96877'
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
+    MAIL_DEFAULT_SENDER = 'denissanturyan@gmail.com'
 
     # Flask-User settings
     USER_ENABLE_EMAIL = True
@@ -32,7 +34,16 @@ class Config(object):
     USER_AUTO_LOGIN_AT_LOGIN = True
     USER_AUTO_LOGIN_AFTER_CONFIRM = True
 
+    USER_LOGIN_TEMPLATE = 'flask_user/login_or_register.html'
+    USER_REGISTER_TEMPLATE = 'flask_user/login_or_register.html'
+
+    USER_ENABLE_RETYPE_PASSWORD = False
+
     LANGUAGES = {
         "en": "English",
         "ka": "Georgian"
     }
+
+    BABEL_DEFAULT_LOCALE = 'ka'
+    BABEL_DOMAIN = 'messages'
+

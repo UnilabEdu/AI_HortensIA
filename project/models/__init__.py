@@ -1,7 +1,7 @@
 from datetime import datetime, date, timedelta
 from flask_user import UserManager
 from project.database import db
-from project.models.user import UserModel
+from project.models.user import User
 from sqlalchemy.sql.expression import func
 
 
@@ -84,8 +84,10 @@ class Text(db.Model):  # Sentences
     def get_random(cls):
         return cls.query.order_by(func.random()).first()
 
+# TODO: Change relationship columns to Int
 
 # TODO: Change relationship columns to Int
+
 
 class Ticket(db.Model):
     __tablename__ = "tickets"
@@ -102,7 +104,7 @@ class Ticket(db.Model):
         self.date = commit_date
 
     def __repr__(self):
-        return f'{self.user} - {self.text} - {self.emotion}'
+        return f'Ticket author:{self.user}; ticket text: {self.text}'
 
     def save_to_db(self):
         db.session.add(self)
@@ -149,3 +151,20 @@ class ActivityStreak(db.Model):
     def __repr__(self):
         return f"ActivityStreak Object: start: {self.start_date}. end: {self.end_date}. " \
                f"status: {self.status}. User: {self.user}"
+
+
+class SubscribedEmails(db.Model):
+    __tablename__ = "subscribed_emails"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String)
+    timestamp = db.Column(db.DateTime)
+    active = db.Column(db.Boolean)
+
+    def __init__(self, email, timestamp=datetime.now(), active=1):
+        self.email = email
+        self.timestamp = timestamp
+        self.active = active
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()

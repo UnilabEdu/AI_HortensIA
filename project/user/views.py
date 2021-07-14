@@ -15,5 +15,3 @@ def login():
 @user_blueprint.route('/registration', methods=['GET', 'POST'])
 def registration():
     return render_template('register.html')
-
-
