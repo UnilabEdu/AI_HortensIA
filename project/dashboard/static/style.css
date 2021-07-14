@@ -1,113 +1,113 @@
 
 
 
-/* Loaders animations */
+/*!* Loaders animations *!*/
 
-.loader {
-    position: absolute;
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #FF0000;
-    width: 200px;
-    height: 200px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 2s linear infinite;
-    margin-left: 25%;
-    margin-top: 25%;
-    /*background-color: rgba(0, 0, 0, 0.1)*/
-}
+/*.loader {*/
+/*    position: absolute;*/
+/*    border: 16px solid #f3f3f3;*/
+/*    border-radius: 50%;*/
+/*    border-top: 16px solid #FF0000;*/
+/*    width: 200px;*/
+/*    height: 200px;*/
+/*    -webkit-animation: spin 2s linear infinite; !* Safari *!*/
+/*    animation: spin 2s linear infinite;*/
+/*    margin-left: 25%;*/
+/*    margin-top: 25%;*/
+/*    !*background-color: rgba(0, 0, 0, 0.1)*!*/
+/*}*/
 
-/* Safari */
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
+/*!* Safari *!*/
+/*@-webkit-keyframes spin {*/
+/*  0% { -webkit-transform: rotate(0deg); }*/
+/*  100% { -webkit-transform: rotate(360deg); }*/
+/*}*/
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-
-/* Nav-tab view animation */
-
-.animate-left {
-    position:relative;
-    animation:animateleft 0.4s
-}
-
-@keyframes animateleft {
-    from{left:-300px;opacity:0}
-    to{left:0;opacity:1}
-}
-
-.chartWrapper, .chartWrapperRadar {
-    height: 30%;
-    width: 30%
-}
-
-.chartWrapperRadar {
-    position: relative;
-    margin-left: 3%;
-}
-
-.chartAreaWrapperRadar {
-    width: 600px;
-    position: relative;
-}
+/*@keyframes spin {*/
+/*  0% { transform: rotate(0deg); }*/
+/*  100% { transform: rotate(360deg); }*/
+/*}*/
 
 
-.chartWrapper {
-    position: relative;
-    margin-left: 3%;
-}
+/*!* Nav-tab view animation *!*/
 
-.chartWrapper > canvas {
-    /*position: absolute;*/
-    left: 0;
-    top: 0;
-    pointer-events:none;
-}
+/*.animate-left {*/
+/*    position:relative;*/
+/*    animation:animateleft 0.4s*/
+/*}*/
 
-.chartAreaWrapperScrollable {
-    width: 800px;
-    overflow-x: scroll;
-}
+/*@keyframes animateleft {*/
+/*    from{left:-300px;opacity:0}*/
+/*    to{left:0;opacity:1}*/
+/*}*/
 
-.chartAreaWrapper {
-    width: 800px;
-}
+/*.chartWrapper, .chartWrapperRadar {*/
+/*    height: 30%;*/
+/*    width: 30%*/
+/*}*/
 
-.nav-pills > li > a {
-    color: rgba(127, 92, 194, 1);
-}
+/*.chartWrapperRadar {*/
+/*    position: relative;*/
+/*    margin-left: 3%;*/
+/*}*/
 
-.nav-pills > li > a:hover {
-    background-color: rgba(127, 92, 194, 0.7);
-    color: white
-}
-
-.nav-pills > li > a.active {
-    background-color: rgba(127, 92, 194, 1)!important;
-    color: white;
-}
+/*.chartAreaWrapperRadar {*/
+/*    width: 600px;*/
+/*    position: relative;*/
+/*}*/
 
 
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-color: rgb(255, 255, 255);
-    box-sizing: border-box;
-    /*display: flex;*/
-}
+/*.chartWrapper {*/
+/*    position: relative;*/
+/*    margin-left: 3%;*/
+/*}*/
+
+/*.chartWrapper > canvas {*/
+/*    !*position: absolute;*!*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    pointer-events:none;*/
+/*}*/
+
+/*.chartAreaWrapperScrollable {*/
+/*    width: 800px;*/
+/*    overflow-x: scroll;*/
+/*}*/
+
+/*.chartAreaWrapper {*/
+/*    width: 800px;*/
+/*}*/
+
+/*.nav-pills > li > a {*/
+/*    color: rgba(127, 92, 194, 1);*/
+/*}*/
+
+/*.nav-pills > li > a:hover {*/
+/*    background-color: rgba(127, 92, 194, 0.7);*/
+/*    color: white*/
+/*}*/
+
+/*.nav-pills > li > a.active {*/
+/*    background-color: rgba(127, 92, 194, 1)!important;*/
+/*    color: white;*/
+/*}*/
 
 
-.chartAreaWrapper {
-    border-radius: 20px;
-    box-shadow: 1px 1px 5px 1px rgba(10, 0, 10, 0.16);
-    background-color: rgba(250, 250, 249, 0.6);
-}
+/*html, body {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    height: 100%;*/
+/*    background-color: rgb(255, 255, 255);*/
+/*    box-sizing: border-box;*/
+/*    !*display: flex;*!*/
+/*}*/
+
+
+/*.chartAreaWrapper {*/
+/*    border-radius: 20px;*/
+/*    box-shadow: 1px 1px 5px 1px rgba(10, 0, 10, 0.16);*/
+/*    background-color: rgba(250, 250, 249, 0.6);*/
+/*}*/
 
 
 .scrollable-table-div {
@@ -204,3 +204,43 @@ html, body {
 /*	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/
 /*	background-color: #7b7b7b;*/
 /*}*/
+
+
+
+.goal__centered__text {
+    text-align: center;
+}
+
+canvas, .mediumbox__content {
+    background-color: #faf9fb!important;
+}
+
+.statistics__mediumContainer {
+    margin-bottom:40px
+}
+
+.statistics__content .statistics__radarBox .mediumbox__content{width:98%;height:250px;background-color:#fff;border-radius:10px}
+
+.statistics__content .statistics__radarBox .heatmap__btn{border:1px solid #7e57c2;width:112px;height:38px;border-radius:7px;margin-right:20px}
+
+.statistics__content .statistics__radarBox{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;align-content:flex-start;opacity:.9;width:536px;padding:10px;height:700px;flex-grow:1}
+
+.statistics__radarBox:not(:last-child){margin-right:20px}
+
+.statistics__content .statistics__radarContainer{display:flex;justify-content:center;flex-direction: column; background-color:#faf9fb;box-shadow:0 3px 6px #00000029;border-radius:18px;}
+
+.radarBoxWrapper {flex-direction: row; display: flex; justify-content: center}
+
+.statistics__content {padding: 20px 5%!important;}
+
+.statistics__box {padding: 5px!important;font-size: 14px!important; height: 2%!important; width: 100%!important; background-color: inherit!important; box-shadow: none!important; display:flex!important; flex-direction: row!important; justify-content: space-around!important;}
+
+.statistics__box p {margin: 0; width: 25%;}
+
+.statistics__box .chart {margin: 10px auto!important; height: 153px!important;}
+
+.statistics__smallContainer {background-color:#faf9fb!important;box-shadow:0 3px 6px #00000029!important;border-radius:18px!important; flex-direction: column!important;}
+
+.statistics__mediumBox {padding: 2px!important; height: 400px!important;}
+
+.statistics__mediumBox canvas {height: inherit!important;}

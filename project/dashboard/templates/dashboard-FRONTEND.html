@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="http://fonts.cdnfonts.com/css/segoe-ui-4" rel="stylesheet" />
+    <!-- <link href="https://free.bboxtype.com/embedfonts/?family=FiraGO:300,400,500,700,800" rel="stylesheet"> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/main.min.css" />
+    <title>Document</title>
+  </head>
+  <body class="statistics__body">
+    <header>
+      <div class="header__left__cont">
+        <p id="eng" class="lang">ENG</p>
+        <label class="switch">
+          <input id="lang-checkbox" type="checkbox" checked />
+          <span class="slider round"></span>
+        </label>
+        <p id="geo" class="lang lang__action">ქარ</p>
+      </div>
+      <div class="header__right__cont">
+        <a class="page__name action" href="#">ემოციური ყვავილი</a>
+        <a class="username" href="#">ელენე არაბული</a>
+        <div class="profile">
+          <img
+            class="avatar__img"
+            src="../assets/142589748_2009267505880094_5454304750578971336_o@2x.png"
+            alt="avatar"
+          />
+          <img src="../assets/Icon.svg" alt="arrow" class="arrow" />
+          <div class="nav d-none">
+            <ul>
+              <li>
+                <button href="#">
+                  <img
+                    src="../assets/manage_accounts_black_24dp.svg"
+                    alt="manage accounts"
+                    class="param_i"
+                  />პარამეტრები
+                </button>
+              </li>
+              <hr />
+              <li>
+                <button href="#">
+                  <img
+                    src="../assets/logout_black_24dp.svg"
+                    alt="log out"
+                    class="log__out_i"
+                  />გასვლა
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="statistics__content">
+      <div class="statistics__smallContainer">
+        <div class="statistics__box">
+          <p>ზედიზედ აქტიურობის: 16 დღე</p>
+          <div class="chart">test</div>
+          <p>შემდეგი მიზანი: 1 კვირა</p>
+        </div>
+        <div class="statistics__box">
+          <p>
+            გადაასწარი ლიდერბორდში <br />
+            შემდეგ მომხმარებელს
+          </p>
+          <div class="chart" id="second__chart">test</div>
+          <p>შეავსე კიდევ 2 ბარათი</p>
+        </div>
+        <div class="statistics__box">
+          <p>ბოლო 7 დღეში შავსე 3 ბარათი</p>
+          <div class="chart">test</div>
+          <p>
+            შეავსე კიდევ 1 ბარათი და <br />
+            გადადი 5 დონეზე
+          </p>
+        </div>
+      </div>
+      <div class="statistics__mediumContainer">
+        <div class="statistics__mediumBox">
+          <button class="heatmap__btn statistics__btn active__btn">
+            Heatmap
+          </button>
+          <button class="linecharts__btn statistics__btn">Linecharts</button>
+          <div class="mediumbox__content"></div>
+        </div>
+        <div class="statistics__mediumBox">
+          <button class="statistics__btn weakly__btn">Weakly</button>
+          <button class="statistics__btn top10__btn active__btn">Top 10</button>
+          <button class="statistics__btn records__btn">Records</button>
+          <div class="mediumbox__content"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="statistics__largeBox">
+      <button class="statistics__btn anytime__btn">Anytime</button>
+      <button class="statistics__btn month__btn active__btn">This Month</button>
+      <button class="statistics__btn week__btn">This Week</button>
+      <button class="statistics__btn today__btn">Today</button>
+      <div class="largebox__content"></div>
+    </div>
+    <script src="../js/statistics.js"></script>
+  </body>
+</html>
