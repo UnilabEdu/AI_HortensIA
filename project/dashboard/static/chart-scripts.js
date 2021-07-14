@@ -182,17 +182,30 @@ function updateWeeklyLevelsTable(tableID, displayLevel) {
         }
 
         if (displayLevel === 1) {
-            levelData = data.level_one
+            if (data.level_one.length > 0) {
+                levelData = data.level_one
+            } else {
+                levelData = [['ცხრილი ცარიელია', 'აქ მოსახვედრად, ბოლო 7 დღეში შევსებული უნდა გქონდეს 35 ბარათი']]
+            }
             weeklyTableCurrentLevel = 1
             table.className = 'table__green'
 
         } else if (displayLevel === 2) {
-            levelData = data.level_two
+            if (data.level_two.length > 0) {
+                levelData = data.level_two
+            } else {
+                levelData = [['ცხრილი ცარიელია', 'აქ მოსახვედრად, ბოლო 7 დღეში შევსებული უნდა გქონდეს 70 ბარათი']]
+            }
             weeklyTableCurrentLevel = 2
             table.className = 'table__blue'
 
         } else if (displayLevel === 3) {
-            levelData = data.level_three
+            if (data.level_three.length > 0) {
+                levelData = data.level_three
+            } else {
+                levelData = [['ცხრილი ცარიელია', 'აქ მოსახვედრად, ბოლო 7 დღეში შევსებული უნდა გქონდეს 105 ბარათი']]
+
+            }
             weeklyTableCurrentLevel = 3
             table.className = 'table__red'
 
