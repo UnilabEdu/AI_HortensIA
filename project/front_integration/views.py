@@ -33,24 +33,8 @@ def toggle_lang():
         return redirect(url_for('user.login'))
 
 
-# @babel.localeselector
-# def get_locale():
-#     # if a user is logged in, use the locale from the user settings
-#     user = getattr(g, 'user', None)
-#     if user is not None:
-#         return user.locale
-#     # otherwise try to guess the language from the user accept
-#     # header the browser transmits.  We support de/fr/en in this
-#     # example.  The best match wins.
-#     return request.accept_languages.best_match(['en', 'ka'])
-
-
-
-
-
 @homepage_blueprint.route('/', methods=['GET', 'POST'])
 def index():
-    print(get_locale())
     user_manager = current_app.user_manager
 
     login_form = user_manager.login_form(request.form)          # for login.html

@@ -123,9 +123,16 @@
 
 #table-leaderboards-weekly {
     border-collapse: collapse;
-    min-height: 400px;
-    width: 100%;
+    min-height: 260px;
+    height: 260px;
+    max-height: 260px;
+    width: 96%;
+    margin: 10px;
 }
+#table-leaderboards-weekly * {
+    font-size: 14px;
+}
+
 
 #table-leaderboards-weekly th, #table-leaderboards-weekly td {
     padding: 8px 16px;
@@ -223,7 +230,7 @@ canvas, .mediumbox__content {
 
 .statistics__content .statistics__radarBox .heatmap__btn{border:1px solid #7e57c2;width:112px;height:38px;border-radius:7px;margin-right:20px}
 
-.statistics__content .statistics__radarBox{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;align-content:flex-start;opacity:.9;width:536px;padding:10px;height:700px;flex-grow:1}
+.statistics__content .statistics__radarBox{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;align-content:flex-start;opacity:.9;width:536px;padding:10px;height:550px;flex-grow:1}
 
 .statistics__radarBox:not(:last-child){margin-right:20px}
 
@@ -241,6 +248,22 @@ canvas, .mediumbox__content {
 
 .statistics__smallContainer {background-color:#faf9fb!important;box-shadow:0 3px 6px #00000029!important;border-radius:18px!important; flex-direction: column!important;}
 
-.statistics__mediumBox {padding: 2px!important; height: 400px!important;}
+.statistics__mediumBox {padding: 2px!important; height: 400px!important; align-content: flex-start}
 
-.statistics__mediumBox canvas {height: inherit!important;}
+#heatmapChart, #monthChart, #leaderboardChart, #streakChart {height: 280px!important;}
+
+#topStreaksChart {height: 290px!important;}
+
+.statistics__buttons {margin: 10px 0!important;}
+
+.statistics__buttons button {width:124px;height:38px;border:1px solid #7e57c2;border-radius:7px;background-color:#fff;color:#7e57c2;margin-right:15px;font-size:16px;cursor:pointer;font-weight:700}
+
+.statistics__buttons button:hover {background-color: #8f72d5;color:#f5f5f5}
+
+.statistics__buttons button:active{background-color: #4b2d80;color:#f5f5f5}
+
+
+.statistics__buttons .statistics__active {background-color:#7e57c2;color:#f5f5f5;}
+.statistics__buttons .statistics__active:hover {background-color:#7e57c2;color:#f5f5f5;}
+
+.statistics__buttonsSmall button {width: 62px;height:28px;border-radius:5px;margin-right:7px;font-size: 12px}
