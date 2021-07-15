@@ -111,8 +111,8 @@
 
 
 .scrollable-table-div {
-    overflow-y: auto;
-    height: 400px;
+    overflow-y: scroll;
+    height: 260px;
     width: 800px;
 }
 
@@ -250,20 +250,25 @@ canvas, .mediumbox__content {
 
 .statistics__mediumBox {padding: 2px!important; height: 400px!important; align-content: flex-start}
 
-#heatmapChart, #monthChart, #leaderboardChart, #streakChart {height: 280px!important;}
+#heatmapChart, #monthChart, #leaderboardChart, #streakChart {height: 270px!important;}
 
-#topStreaksChart {height: 290px!important;}
+#topStreaksChart {height: 275px!important;}
 
 .statistics__buttons {margin: 10px 0!important;}
 
-.statistics__buttons button {width:124px;height:38px;border:1px solid #7e57c2;border-radius:7px;background-color:#fff;color:#7e57c2;margin-right:15px;font-size:16px;cursor:pointer;font-weight:700}
+.statistics__buttons button {width:124px;height:38px;border-radius:17px;background-color: #8a70c2;color: #ffffff;margin-right:15px;font-size:16px;cursor:pointer;font-weight:700;box-shadow: 0.1rem 0.18rem 0.4rem rgba(2, 12, 47, 0.27);border: none}
 
-.statistics__buttons button:hover {background-color: #8f72d5;color:#f5f5f5}
+.statistics__buttons button:hover {color: #ffffff; box-shadow: inset 0.1rem 0.09rem 0.2rem rgba(2, 12, 47, 0.27)}
 
-.statistics__buttons button:active{background-color: #4b2d80;color:#f5f5f5}
+.statistics__buttons button:active{color:#ffffff}
 
 
-.statistics__buttons .statistics__active {background-color:#7e57c2;color:#f5f5f5;}
-.statistics__buttons .statistics__active:hover {background-color:#7e57c2;color:#f5f5f5;}
+.statistics__buttons .statistics__active {width:128px;height:40px; background-color: #ffffff; color: #1f0839; box-shadow: inset 0.1rem 0.18rem 0.4rem rgba(2, 12, 47, 0.27);}
+.statistics__buttons .statistics__active:hover {color: #1f0839; box-shadow: inset 0.1rem 0.18rem 0.4rem rgba(2, 12, 47, 0.27);}
+.statistics__buttons .statistics__active:active {color: #1f0839}
 
-.statistics__buttonsSmall button {width: 62px;height:28px;border-radius:5px;margin-right:7px;font-size: 12px}
+.statistics__buttonsSmall button, .statistics__buttonsSmall .statistics__active {width: 62px;height:28px;border-radius:17px;font-size: 12px; margin: 3px!important;}
+
+#tab-activity-heatmap, #tab-activity-month, #tab-leaderboards-leaderboard, #tab-leaderboards-weekly, #tab-leaderboards-streaks {
+    position:relative;animation:animatetop 0.5s}@keyframes animatetop{from{top:-100px;opacity:0} to{top:0;opacity:1}
+}

@@ -583,7 +583,7 @@ def data_weekly_levels():
                 level_three_users.append([user[0], count])
             elif count > 150:
                 level_two_users.append([user[0], count])
-            elif count > 100:
+            elif count > 25:
                 level_one_users.append([user[0], count])
         # TODO: else stop iterating because values are sorted. Why are values sorted without sort_values()  (PD function)?
 

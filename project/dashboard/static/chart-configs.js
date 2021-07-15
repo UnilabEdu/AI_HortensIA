@@ -40,6 +40,11 @@ const doughnutChartConfig = {
             }]
             },
         options: {
+            elements: {
+                arc: {
+                    borderWidth: 0
+                }
+            },
             maintainAspectRatio: false,
             responsive: true,
             plugins: {
