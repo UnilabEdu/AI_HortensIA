@@ -66,7 +66,7 @@ let loginHelpTexts_ka = ['შეიყვანეთ მომხმარე�
     'გამოიყენეთ 6+ სიმბოლო: დიდი/პატარა ასოები, ციფრები',
     ]
 
-let loginHelpTexts_enShort = loginHelpTexts_en
+let loginHelpTexts_enShort = loginHelpTexts_en.slice()
 loginHelpTexts_enShort[8] = 'This Email is already in use';
 loginHelpTexts_enShort[9] = 'This Username is already in use';
 loginHelpTexts_enShort[10] = 'Use only letters, numbers, -, ., and _'
@@ -75,11 +75,14 @@ loginHelpTexts_enShort[12] = 'Use 6+ characters: uppercase/lowercase letters, nu
 
 let helpTexts = document.querySelectorAll('.help-block')
 
-if (helpTexts) {
+if (helpTexts.length > 0) {
     console.log('VALIDATORS DETECTED')
+    // console.log(helpTexts[0].innerHTML)
     for (let i = 0; i < helpTexts.length; i++) {
-        let currentTextIndex = loginHelpTexts_en.indexOf(helpTexts[i])
-        console.log('VERY IMPORTANT FOR THE NEXT LINE TO BE DEFINED')
+        console.log('VERY IMPORTANT FOR THE NEXT LINES TO BE DEFINED')
+        let currentTextIndex = loginHelpTexts_en.indexOf(helpTexts[i].innerHTML)
+        console.log(loginHelpTexts_en)
+        console.log(helpTexts[i].innerHTML)
         console.log(currentTextIndex)
         if (current_lang === 'ka') {
             helpTexts[i].innerHTML = loginHelpTexts_ka[currentTextIndex]

@@ -3,10 +3,11 @@ from .generate_charts import generate_charts, generate_radars
 from .data_processing import data_user_activity, data_leaderboard, data_radar, data_weekly_levels, data_streaks_leaderboard
 from . import dashboard_blueprint
 import json
+from flask_user import login_required
 
 
-# TODO: @login_required
 @dashboard_blueprint.route('/', methods=['GET'])
+@login_required
 def dashboard():
     return render_template('dashboard.html',)
 
