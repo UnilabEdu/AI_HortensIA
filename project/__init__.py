@@ -3,6 +3,7 @@ from flask import Flask
 from project.models.user import User
 from flask_mail import Mail, Message
 from flask_user import SQLAlchemyAdapter, UserManager
+from flask_login import LoginManager
 from project.models import db
 from project.user.admin.admin import admin
 from flask_migrate import Migrate
@@ -21,6 +22,10 @@ def create_app(import_blueprints=True):
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
     # flask-user init
+    login_manager = LoginManager()
+    # Added this line fixed the issue.
+    login_manager.init_app(app)
+
     db_adapter = SQLAlchemyAdapter(db, User)  # Setup the SQLAlchemy DB Adapter
     UserManager(db_adapter, app)  # Init Flask-User and bind to app
     # flask-mail init
@@ -41,7 +46,6 @@ def create_app(import_blueprints=True):
 
     from project.tickets.views import tickets_blueprint
     app.register_blueprint(tickets_blueprint, url_prefix="/tickets")
-
 
     # restful api
     api.init_app(app)

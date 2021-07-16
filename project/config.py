@@ -34,8 +34,13 @@ class Config(object):
     USER_AUTO_LOGIN_AT_LOGIN = True
     USER_AUTO_LOGIN_AFTER_CONFIRM = True
 
+    USER_REGISTER_URL = '/'
+    USER_LOGIN_URL = '/'
+
     USER_LOGIN_TEMPLATE = 'flask_user/login_or_register.html'
     USER_REGISTER_TEMPLATE = 'flask_user/login_or_register.html'
+
+    USER_AFTER_LOGIN_ENDPOINT = 'tickets.tickets'
 
     USER_ENABLE_RETYPE_PASSWORD = False
 

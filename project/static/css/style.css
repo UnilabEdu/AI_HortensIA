@@ -2,3 +2,15 @@
     color: #863434;
     font-family: "FiraGO", sans-serif;
 }
+
+
+.log__out_i {
+    margin-left: 20px;
+    margin-bottom: 7px;
+}
+
+
+.log__out_i span {
+    font-size: 20px;
+    border-bottom:1px solid #7e57c2;
+}

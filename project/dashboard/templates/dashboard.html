@@ -1,88 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-{#                                      COLOR: #faf9fb                            #}
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='style.css') }}">
+{% extends "base.html" %}
 
-{#    #}
-    <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='main.min.css') }}">
-{#    FROM FRONT #}
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="http://fonts.cdnfonts.com/css/segoe-ui-4" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-{#    END FROM FRONT #}
+{% block content %}
+{% from 'macros/navbar.html' import navbar with context %}
 
 
-    <script src="{{ url_for('dashboard.static', filename='utils.js') }}"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@next/dist/chartjs-chart-matrix.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.js"></script>
-</head>
 <body class="statistics__body">
-    <header>
-      <div class="header__left__cont">
-        <p id="eng" class="lang">ENG</p>
-        <label class="switch">
-          <input id="lang-checkbox" type="checkbox" checked />
-          <span class="slider round"></span>
-        </label>
-        <p id="geo" class="lang lang__action">ქარ</p>
-      </div>
-      <div class="header__right__cont">
-        <a class="page__name action" href="#">ემოციის ყვავილი</a>
-        <a class="username" href="#">ელენე არაბული</a>
-        <div class="profile">
-          <img
-            class="avatar__img"
-            src="../assets/142589748_2009267505880094_5454304750578971336_o@2x.png"
-            alt="avatar"
-          />
-          <img src="../assets/Icon.svg" alt="arrow" class="arrow" />
-          <div class="nav d-none">
-            <ul>
-              <li>
-                <button href="#">
-                  <img
-                    src="../assets/manage_accounts_black_24dp.svg"
-                    alt="manage accounts"
-                    class="param_i"
-                  />პარამეტრები
-                </button>
-              </li>
-              <hr />
-              <li>
-                <button href="#">
-                  <img
-                    src="../assets/logout_black_24dp.svg"
-                    alt="log out"
-                    class="log__out_i"
-                  />გასვლა
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </header>
 
-
-
-
-
-
-
-
-
-
+    {{ navbar() }}
 
     <div class="statistics__content">
 
@@ -221,19 +145,7 @@
 
     </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-
     <script src="{{ url_for('dashboard.static', filename='chart-configs.js') }}"></script>
-
     <script src="{{ url_for('dashboard.static', filename='chart-scripts.js') }}"></script>
 
-
-
-
-</body>
-</html>
+{% endblock %}
