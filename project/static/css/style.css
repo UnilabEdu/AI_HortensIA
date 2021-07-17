@@ -19,3 +19,21 @@
 .center {
     text-align: center;
 }
+
+.emotions:hover {
+    opacity: 0.3;
+}
+
+.home__left__container {
+    width: 200%;
+}
+
+#emotion-wheel {
+    width: 87%;
+    height: 87%;
+}
+
+.next__btn {
+    font-family: "BPG Nino Mtavruli", sans-serif;
+    text-align: center;
+}

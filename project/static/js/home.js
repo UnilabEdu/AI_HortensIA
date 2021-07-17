@@ -33,6 +33,8 @@ const title = document.getElementById('title');
 const synonym = document.getElementById('synonym');
 const about = document.getElementById('about');
 const help = document.getElementById('help');
+const aboutQuestion = document.getElementById('about-question');
+const helpQuestion = document.getElementById('help-question');
 
 const emotionAreaIdentifiers = ['38', '30', '29',
   '28', '31', 'Group_1540',
@@ -44,19 +46,6 @@ const emotionAreaIdentifiers = ['38', '30', '29',
   'Group_1525', '19', '10',
   '27', '26', '6', '5', '4', '3', '2', '1', '40']  // selectors for clickable areas corresponding to an emotion have these IDs
 const emptyAreaIdentifiers = ['33', '32', '16', '24', '23', '22', '20', '18']  // selectors for empty areas, not corresponding to any emotion
-
-const emotionnames =  [
-        'რისხვა', 'ბრაზი', 'გაღიზიანება',
-        'სიფხიზლე', 'მოლოდინი', 'ინტერესი',
-        'აღტყინება', 'სიხარული', 'სიმშვიდე',
-        'აღტაცება', 'ნდობა', 'მიმღებლობა',
-        'თავზარდამცემი შიში', 'შიში', 'ღელვა',
-        'აღფრთოვანება', 'გაკვირვება', 'ყურადღების გაფანტვა',
-        'მწუხარება', 'სევდა', 'ნაღვლიანობა',
-        'სიძულვილი', 'გულისრევა', 'მოწყენილობა',
-
-        'აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'განცვიფრება', 'გაკიცხვა', 'სინანული', 'ზიზღი', 'ნეიტრალური'
-    ]
 
 
 fetch('http://localhost:5000/api/emotionlist')
@@ -74,36 +63,15 @@ fetch('http://localhost:5000/api/emotionlist')
 
 for (let i = 0; i < emotionSelectors.length; i++) {
   emotionSelectors[i].addEventListener('click', () => {
-    let correctIndex = emotionAreaIdentifiers.indexOf(emotionSelectors[i].id)
-    console.log(emotionnames[correctIndex])
-    console.log(correctIndex)
-    console.log(emotionSelectors[i].id)
-    title.innerHTML = emotionNamesData[correctIndex].emotion;
-    synonym.innerHTML = emotionNamesData[correctIndex].emotion;
-    about.innerHTML = emotionNamesData[correctIndex].synonym;
-    help.innerHTML = emotionNamesData[correctIndex].example;
+    if (!emptyAreaIdentifiers.includes(emotionSelectors[i].id)) {
+        let correctIndex = emotionAreaIdentifiers.indexOf(emotionSelectors[i].id)
+
+        title.innerHTML = emotionNamesData[correctIndex].emotion;
+        synonym.innerHTML = emotionNamesData[correctIndex].synonym;
+        about.innerHTML = emotionNamesData[correctIndex].example;
+        help.innerHTML = emotionNamesData[correctIndex].example;
+        aboutQuestion.innerHTML = "რას გვეუბნება " + emotionNamesData[correctIndex].emotion + ":"
+        helpQuestion.innerHTML = "როგორ დაგეხმარება " + emotionNamesData[correctIndex].emotion + ":"
+  }
   });
-};
-
-
-
-
-
-
-
-
-
-// function my(e) {
-//   var element = e.document.getElementById(id);
-//   AI_hortensia.e
-//   x.innerHTML = "Swapped text!";
-// }
-
-
-// for (let o = 0; o < AI_hortensia.length; o++) {
-//   console.log('gkns')
-//   if(allObjClass[i] == AI_hortensia[o]){
-//     console.log('bal')
-//     x.innerHTML = AI_hortensia[i.tit];
-//   }
-// }
+}
