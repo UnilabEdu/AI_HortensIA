@@ -78,7 +78,7 @@ def populate_emotions():
         "Grief", "Sadness", "Pensiveness",
         "Loathing", "Disgust", "Boredom",
         # Secondary Emotions
-        'Aggressiveness', 'Optimism', 'Love', 'Submission', 'Awe', 'Disapproval', 'Remorse', 'Contempt'
+        'Aggressiveness', 'Optimism', 'Love', 'Submission', 'Awe', 'Disapproval', 'Remorse', 'Contempt', 'Neutral'
     ]
 
     emotions_list_ka = [  # ძირითადი ემოციები TODO: improve translations
@@ -91,7 +91,7 @@ def populate_emotions():
         'მწუხარება', 'სევდა', 'ნაღვლიანობა',
         'სიძულვილი', 'გულისრევა', 'მოწყენილობა',
         # დამატებითი ემოციები
-        'აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'განცვიფრება', 'გაკიცხვა', 'სინანული', 'ზიზღი'
+        'აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'განცვიფრება', 'გაკიცხვა', 'სინანული', 'ზიზღი', 'ნეიტრალური'
     ]
 
     examples_en = ['I feel ' + emotion for emotion in emotions_list_en]

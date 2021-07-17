@@ -8,7 +8,6 @@ from project.models import db
 from project.user.admin.admin import admin
 from flask_migrate import Migrate
 from flask_babel import Babel
-from project.api import api
 
 migrate = Migrate()
 babel = Babel()
@@ -47,6 +46,7 @@ def create_app(import_blueprints=True):
     from project.tickets.views import tickets_blueprint
     app.register_blueprint(tickets_blueprint, url_prefix="/tickets")
 
+    from project.api import api
     # restful api
     api.init_app(app)
 

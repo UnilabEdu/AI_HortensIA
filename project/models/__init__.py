@@ -41,11 +41,11 @@ class Emotion(db.Model):
         self.example_en = example_en
 
     def __repr__(self):
-        return self.name_ka, self.name_en
+        return 'Emotion object: self.name_ka, self.name_en'
 
     @classmethod
     def get_all(cls):
-        cls.query.all()
+        return cls.query.all()
 
 
 class Files(db.Model):
