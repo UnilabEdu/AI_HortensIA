@@ -4,7 +4,6 @@ const profile = document.querySelector(".profile");
 const nav = document.querySelector(".nav");
 
 profile.addEventListener('click', () => {
-    console.log('asdfknsapdjf')
   if (nav.classList.contains("d-none")){
     nav.classList.remove("d-none");
   } else {
@@ -53,21 +52,3 @@ fetch('https://jsonplaceholder.typicode.com/posts')
       });
     }
   });
-
-
-
-
-// function my(e) {
-//   var element = e.document.getElementById(id);
-//   AI_hortensia.e
-//   x.innerHTML = "Swapped text!";
-// }
-
-
-// for (let o = 0; o < AI_hortensia.length; o++) {
-//   console.log('gkns')
-//   if(allObjClass[i] == AI_hortensia[o]){
-//     console.log('bal')
-//     x.innerHTML = AI_hortensia[i.tit];
-//   }
-// }  
