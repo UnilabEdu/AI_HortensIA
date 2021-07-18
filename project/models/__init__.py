@@ -106,6 +106,7 @@ class Ticket(db.Model):
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
+        print('ticket added: ', self)
 
 
 class ActivityStreak(db.Model):

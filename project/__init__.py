@@ -8,11 +8,12 @@ from project.models import db
 from project.user.admin.admin import admin
 from flask_migrate import Migrate
 from flask_babel import Babel
+from flask_bcrypt import Bcrypt
 
 migrate = Migrate()
 babel = Babel()
 mail = Mail()
-
+bcrypt = Bcrypt()
 
 def create_app(import_blueprints=True):
     app = Flask(__name__)
@@ -33,6 +34,8 @@ def create_app(import_blueprints=True):
     babel.init_app(app)
     # flask-admin init
     admin.init_app(app)
+
+    bcrypt.init_app(app)
 
     # TODO: remove import_blueprints (it's required for testing data_processing.py functions)
     if import_blueprints:

@@ -24,9 +24,7 @@
     {{ navbar() }}
 
     <div class="home__main__content firago">
-      <p class="home__title">
-        დაუმუშავებელი ტექსტისა და მარკირებული ბარათების საცავი დაუმუშავებელი
-        ტექსტისა და მარკირებული ბარათების საცავი
+      <p id="target-card-text" class="home__title">
       </p>
       <div class="big__cont">
         <div class="home__left__container">
@@ -1917,9 +1915,10 @@
               </p>
             </li>
           </ul>
-          <button class="next__btn">
+          <button id="next-submit-ticket" class="next__btn" disabled>
             შემდეგი <i class="fas fa-chevron-right"></i>
           </button>
+            <p id="ticket-submit-success"> </p>
         </div>
       </div>
     </div>
