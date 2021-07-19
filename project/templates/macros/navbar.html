@@ -1,0 +1,53 @@
+{% macro navbar() -%}
+    <header>
+      <div class="header__left__cont">
+        <p id="eng" class="lang">ENG</p>
+        <label class="switch">
+          <input id="lang-checkbox" type="checkbox" checked />
+          <span class="slider round"></span>
+        </label>
+        <p id="geo" class="lang lang__action">ქარ</p>
+      </div>
+      <div class="header__right__cont">
+        <a class="page__name {% if not request.endpoint.endswith('tickets') %} action"
+           href="{{ url_for('tickets.tickets') }}{% endif %}">
+           ემოციის ყვავილი
+        </a>
+
+        <a class="username {% if not request.endpoint.endswith('dashboard') %} action"
+           href="{{ url_for('dashboard.dashboard') }}{% endif %}">
+           {{ current_user.username.upper() }}
+        </a>
+
+
+{# TODO: uncomment if frontend makes a profile parameters page #}
+{#        <div class="profile">#}
+{#          <img#}
+{#            class="avatar__img"#}
+{#            src="{{ url_for('static', filename='assets/142589748_2009267505880094_5454304750578971336_o@2x.png') }}"#}
+{#            alt="avatar"#}
+{#          />#}
+{#          <img src="{{ url_for('static', filename='assets/Icon.svg') }}" alt="arrow" class="arrow" />#}
+{#          <div class="nav d-none">#}
+{#            <ul>#}
+{#              <li>#}
+{#                <a href="#">#}
+{#                  <img#}
+{#                    src="{{ url_for('static', filename='assets/manage_accounts_black_24dp.svg') }}"#}
+{#                    alt="manage accounts"#}
+{#                    class="param_i"#}
+{#                  />პარამეტრები#}
+{#                </a>#}
+{#              </li>#}
+{#              <hr />#}
+{#              <li>#}
+                <a href="{{ url_for('user.logout') }}" class="log__out_i">
+                    <span class="nino__mtavruli"><img src="{{ url_for('static', filename='assets/logout_black_24dp.svg') }}" alt="log out"/>გასვლა</span>
+                </a>
+{#              </li>#}
+{#            </ul>#}
+{#          </div>#}
+{#        </div>#}
+      </div>
+    </header>
+{% endmacro %}
