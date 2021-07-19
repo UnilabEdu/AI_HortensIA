@@ -1,11 +1,9 @@
-{% extends "base.html" %}
+{% extends 'flask_user/public_base.html' %}
 
 {% block content %}
 {% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
-
-<body class="main__body">
-    <div class="main__content">
-    <h1 class="main__title nino__mtavruli"> {{ _('Hortensia - Text Classification') }} </h1>
+  <div class="main__content">
+    <h1 class="main__title nino__mtavruli"> {{ _('Hortensia - Text Classification') }}</h1>
     <div class="left__section">
       <p class="left__text firago">
           {{ _(
@@ -25,7 +23,6 @@
 
     </div>
     <div class="right__section">
-
       <a href="/language" class="language nino__mtavruli">ENG/ქარ</a>
       <button id="auth-btn" class="auth__btn basic__btn ">{{ _('Sign in') }}</button>
       <button id="reg-btn" class="registration__btn basic__btn ">
@@ -151,4 +148,5 @@
       </div>
     </div>
   </div>
+
 {% endblock %}

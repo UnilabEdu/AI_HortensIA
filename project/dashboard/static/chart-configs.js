@@ -40,11 +40,6 @@ const doughnutChartConfig = {
             }]
             },
         options: {
-            elements: {
-                arc: {
-                    borderWidth: 0
-                }
-            },
             maintainAspectRatio: false,
             responsive: true,
             plugins: {
@@ -85,7 +80,6 @@ for (let count = 0; count < 10; count++) {
     leaderboardColors.push(leaderboardNormalGradient)
 }
 
-
 // console.log(leaderboardColors)
 const leaderboardChartConfig = {
          type: "bar",
@@ -101,7 +95,6 @@ const leaderboardChartConfig = {
                  }]
          },
         options: {
-             maintainAspectRatio: false,
              indexAxis: "y",
              scales: {
                  y: {
@@ -122,11 +115,7 @@ const leaderboardChartConfig = {
                      }
                  }
              },
-            plugins: {
-                 legend: {
-                     display: false
-                 }
-            }
+            plugins: {}
         }
         }
 
@@ -180,11 +169,7 @@ const monthChartConfig = {
                         tickMarkLength: 0}
                         }
                     },
-        plugins: {
-            legend: {
-                display: false
-            }
-        }
+        plugins: {}
         }
     }
 
@@ -192,6 +177,7 @@ const monthChartConfig = {
 
 const topStreaksChartConfig = clone(leaderboardChartConfig)
 topStreaksChartConfig.data.datasets[0].label = "Activity Streaks"
+const weekChartConfig = clone(monthChartConfig)
 
 
 
@@ -213,7 +199,7 @@ const radarAnytimePrimaryConfig = {
                 pointBorderColor: "rgba(255, 255, 255, 1)",
                 pointHoverBackgroundColor: "rgba(255, 255, 255, 1)",
                 pointHoverBorderColor: "rgba(255, 99, 132, 1)",
-                tension: 0.3},
+                tension: 0.1},
             {
                 label:
                     "All Data",
@@ -225,12 +211,12 @@ const radarAnytimePrimaryConfig = {
                 pointBorderColor: "rgba(255, 255, 255, 1)",
                 pointHoverBackgroundColor: "rgba(255, 255, 255, 1)",
                 pointHoverBorderColor: "rgba(54, 162, 235, 1)",
-                tension: 0.3
+                tension: 0.1
             }
         ]
     },
     options: {
-        responsive: true,
+        // maintainAspectRatio: false,
         elements:
             {point:
                     {
@@ -285,6 +271,8 @@ rankupGoalChartConfig.data.labels = ['ამდენი ბარათით �
     ctx = document.getElementById("monthChart").getContext('2d');
     var monthChart = new Chart(ctx, monthChartConfig);
 
+    ctx = document.getElementById("weekChart").getContext('2d');
+    var weekChart = new Chart(ctx, weekChartConfig);
 
     ctx = document.getElementById("leaderboardChart").getContext('2d');
     var leaderboardChart = new Chart(ctx, leaderboardChartConfig);

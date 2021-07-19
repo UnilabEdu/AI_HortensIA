@@ -1,4 +1,6 @@
-current_lang = 'en'
+// contains
+
+current_lang = 'ka'
 
 if (current_lang === 'en') {
 

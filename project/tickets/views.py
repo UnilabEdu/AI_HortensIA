@@ -4,7 +4,12 @@ from project.tickets.forms import EmotionForm
 from project.models import Text, Ticket
 from flask_user import current_user
 import logging
-from flask_user import login_required
+
+
+# @babel.localeselector
+# def get_locale():
+#     return request.accept_languages.best_match(Config.LANGUAGES.keys())
+#     # return "en"
 
 
 tickets_blueprint = Blueprint('tickets',
@@ -14,7 +19,6 @@ tickets_blueprint = Blueprint('tickets',
 
 
 @tickets_blueprint.route('/', methods=['GET', 'POST'])
-@login_required
 def tickets():
     text = Text.get_random().text
     form = EmotionForm()

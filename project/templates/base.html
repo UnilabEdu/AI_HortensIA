@@ -5,24 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="http://fonts.cdnfonts.com/css/segoe-ui-4" rel="stylesheet">
+    <!-- <link href="https://free.bboxtype.com/embedfonts/?family=FiraGO:300,400,500,700,800" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.min.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('dashboard.static', filename='style.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@next/dist/chartjs-chart-matrix.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.js"></script>
-    <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
-
     <title>ჰორტენზია</title>
 </head>
+<body class="main__body">
 
 {% block content %}{% endblock %}
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="{{ url_for('static', filename='js/home.js') }}"></script>
     <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
 
 
 </body>

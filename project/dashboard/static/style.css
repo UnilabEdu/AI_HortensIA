@@ -111,8 +111,8 @@
 
 
 .scrollable-table-div {
-    overflow-y: scroll;
-    height: 260px;
+    overflow-y: auto;
+    height: 400px;
     width: 800px;
 }
 
@@ -123,16 +123,9 @@
 
 #table-leaderboards-weekly {
     border-collapse: collapse;
-    min-height: 260px;
-    height: 260px;
-    max-height: 260px;
-    width: 96%;
-    margin: 10px;
+    min-height: 400px;
+    width: 100%;
 }
-#table-leaderboards-weekly * {
-    font-size: 14px;
-}
-
 
 #table-leaderboards-weekly th, #table-leaderboards-weekly td {
     padding: 8px 16px;
