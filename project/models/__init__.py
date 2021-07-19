@@ -41,11 +41,11 @@ class Emotion(db.Model):
         self.example_en = example_en
 
     def __repr__(self):
-        return 'Emotion object: self.name_ka, self.name_en'
+        return self.name_ka, self.name_en
 
     @classmethod
     def get_all(cls):
-        return cls.query.all()
+        cls.query.all()
 
 
 class Files(db.Model):
@@ -106,7 +106,6 @@ class Ticket(db.Model):
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
-        print('ticket added: ', self)
 
 
 class ActivityStreak(db.Model):
