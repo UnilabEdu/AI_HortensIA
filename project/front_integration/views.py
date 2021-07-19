@@ -9,6 +9,20 @@ homepage_blueprint = Blueprint('homepage',
                                template_folder='templates'
                                )
 
+@homepage_blueprint.route('/language', methods=['GET', 'POST'])
+def toggle_lang():
+    if 'locale' in session.keys():
+        if session['locale'] == 'en':
+            session['locale'] = 'ka'
+        elif session['locale'] == 'ka':
+            session['locale'] = 'en'
+    else:
+        session['locale'] = 'ka'
+
+    if request.referrer:
+        return redirect(request.referrer)
+    else:
+        return redirect(url_for('user.login'))
 
 @babel.localeselector
 def get_locale():
@@ -27,10 +41,6 @@ def toggle_lang():
     else:
         session['locale'] = 'ka'
 
-    if request.referrer:
-        return redirect(request.referrer)
-    else:
-        return redirect(url_for('user.login'))
 
 
 @homepage_blueprint.route('/', methods=['GET', 'POST'])
