@@ -1,4 +1,4 @@
-function showChart(chartName, chartGroup, additionalDiv = 0) {
+function showChart(chartName, chartGroup, button, additionalDiv = 0) {
     var i;
     let x;
     if (chartGroup === 'activity') {
@@ -14,6 +14,27 @@ function showChart(chartName, chartGroup, additionalDiv = 0) {
     if (additionalDiv !== 0) {
         document.getElementById(additionalDiv).style.display = "block"
     }
+
+    let allButtons;
+    console.log('aaaaa')
+    console.log(button.classList)
+    if (button.classList.contains('statistics__buttonsActivity')) {
+        console.log('activity')
+        allButtons = document.querySelectorAll('.statistics__buttonsActivity')
+        console.log('allButtons')
+        console.log(allButtons)
+    } else if (button.classList.contains('statistics__buttonsLeaderboards')) {
+        console.log('leaderboard')
+        allButtons = document.querySelectorAll('.statistics__buttonsLeaderboards')
+    }
+
+    for (let i = 0; i < allButtons.length; i++) {
+        if (allButtons[i].classList.contains('statistics__active')) {
+            console.log('contains')
+            allButtons[i].classList.remove('statistics__active')
+        }
+    }
+    button.classList.add('statistics__active')
 }
 
 
@@ -34,6 +55,19 @@ function updateChartData(chart, label, data) {
 //     });
 //     chart.update();
 // }
+
+function activateRadarButtons(btn) {
+    let allRadarButtons = document.querySelectorAll('.statistics__buttonsRadars button')
+    for (let i = 0; i < allRadarButtons.length; i++) {
+        console.log('bbbbbbbb')
+        console.log(btn.classList)
+        if (allRadarButtons[i].classList.contains('statistics__active')) {
+            allRadarButtons[i].classList.remove('statistics__active')
+        }
+    }
+    btn.classList.add('statistics__active')
+}
+
 
 function updateRadar(chart, data) {
     var count = 0
@@ -169,7 +203,7 @@ function updateWeeklyGoalChart(chart, weekData) {
 }
 
 
-function updateWeeklyLevelsTable(tableID, displayLevel) {
+function updateWeeklyLevelsTable(tableID, displayLevel, button) {
     let table = document.getElementById(tableID)
     let tbody = table.getElementsByTagName('tbody')[0];
 
@@ -228,6 +262,14 @@ function updateWeeklyLevelsTable(tableID, displayLevel) {
         for (let i = 0; i < rowsToAppend.length; i++) {
             tbody.appendChild(rowsToAppend[i])
         }
+
+        let allButtons = document.querySelectorAll('.statistics__buttonsTableLevels')
+        for (let i = 0; i < allButtons.length; i++) {
+            if (allButtons[i].classList.contains('statistics__active')) {
+                allButtons[i].classList.remove('statistics__active')
+            }
+            button.classList.add('statistics__active')
+        }
     }
 }
 
@@ -243,32 +285,39 @@ var fetchActivityData = async function () {
 };
 
 async function renderActivityCharts() {
-    let ctx;
-        activityData = await fetchActivityData();
-        let heatmapData = activityData.heatmap_data
-        let monthLabels = activityData.month_chart_labels
-        let monthData = activityData.month_chart_frequencies
-        let weekLabels = activityData.month_chart_labels.slice(-7)
-        let weekData = activityData.month_chart_frequencies.slice(-7)
-        let streakData = activityData.streak
-        updateHeatmap(heatmapChart, heatmapData)
-        updateChartData(monthChart, monthLabels, monthData);
-        updateChartData(weekChart, weekLabels, weekData)
-        updateWeeklyGoalChart(weeklyGoalChart, weekData)
-        updateStreakGoalChart(streakGoalChart, streakData)
+    activityData = await fetchActivityData();
+    let heatmapData = activityData.heatmap_data
+    let monthLabels = activityData.month_chart_labels
+    let monthData = activityData.month_chart_frequencies
+    let weekLabels = activityData.month_chart_labels.slice(-7)
+    let weekData = activityData.month_chart_frequencies.slice(-7)
+    let streakData = activityData.streak
+    updateHeatmap(heatmapChart, heatmapData)
+    updateChartData(monthChart, monthLabels, monthData);
+    updateWeeklyGoalChart(weeklyGoalChart, weekData)
+    updateStreakGoalChart(streakGoalChart, streakData)
 
 
-        var buttonWeek = document.getElementById('btn-activity-chart-week')
-        var buttonMonth = document.getElementById('btn-activity-chart-month')
+    var buttonWeek = document.getElementById('btn-activity-chart-week')
+    var buttonMonth = document.getElementById('btn-activity-chart-month')
 
 
-        buttonWeek.addEventListener("click", function () {
-                    updateChartData(monthChart, weekLabels, weekData)
-        })
+    buttonWeek.addEventListener("click", function () {
+                updateChartData(monthChart, weekLabels, weekData)
+                console.log(buttonMonth.classList)
+                if (buttonMonth.classList.contains('statistics__active')) {
+                    buttonMonth.classList.remove('statistics__active')
+                }
+                buttonWeek.classList.add('statistics__active')
+    })
 
-        buttonMonth.addEventListener("click", function () {
-                    updateChartData(monthChart, monthLabels, monthData)
-        })
+    buttonMonth.addEventListener("click", function () {
+                updateChartData(monthChart, monthLabels, monthData)
+                if (buttonWeek.classList.contains('statistics__active')) {
+                    buttonWeek.classList.remove('statistics__active')
+                }
+                buttonMonth.classList.add('statistics__active')
+    })
 }
 
 renderActivityCharts()
@@ -294,26 +343,25 @@ async function renderRadarCharts() {
     buttonAnytime.addEventListener("click", function () {
         updateRadar(radarChartAnytimePrimary, [data.user_anytime_primary, data.everyone_anytime_primary])
         updateRadar(radarChartAnytimeSecondary, [data.user_anytime_secondary, data.everyone_anytime_secondary])
-        console.log('ANYTIME')
+        activateRadarButtons(buttonAnytime)
     })
 
     buttonMonth.addEventListener("click", function () {
         updateRadar(radarChartAnytimePrimary, [data.user_month_primary, data.everyone_month_primary])
         updateRadar(radarChartAnytimeSecondary, [data.user_month_secondary, data.everyone_month_secondary])
-        console.log('MONTH')
+        activateRadarButtons(buttonMonth)
     })
 
     buttonWeek.addEventListener("click", function () {
         updateRadar(radarChartAnytimePrimary, [data.user_week_primary, data.everyone_week_primary])
         updateRadar(radarChartAnytimeSecondary, [data.user_week_secondary, data.everyone_week_secondary])
-        console.log('WEEK')
-
+        activateRadarButtons(buttonWeek)
     })
 
     buttonDay.addEventListener("click", function () {
         updateRadar(radarChartAnytimePrimary, [data.user_day_primary, data.everyone_day_primary])
         updateRadar(radarChartAnytimeSecondary, [data.user_day_secondary, data.everyone_day_secondary])
-        console.log('DAY')
+        activateRadarButtons(buttonDay)
     })
 
     // var ctx;
@@ -403,7 +451,7 @@ var fetchWeeklyLevelsData = async function () {
 async function renderWeeklyLevelsTable() {
     weeklyLevelsData = await fetchWeeklyLevelsData();
     weeklyTableCurrentLevel = 0
-    updateWeeklyLevelsTable('table-leaderboards-weekly', 1)
+    updateWeeklyLevelsTable('table-leaderboards-weekly', 1, document.querySelector('.statistics__buttonsTableLevels'))
 }
 
 renderWeeklyLevelsTable()
