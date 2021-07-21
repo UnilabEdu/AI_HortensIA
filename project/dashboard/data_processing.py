@@ -91,13 +91,13 @@ def data_user_activity():
                     check_day = check_day - timedelta(days=1)
                 print(day_streak)
                 # TODO: when done testing or when there's today's data in DB, change 8 to 1 and 7 to 0 below (in the next ~7 lines)
-                if today_or_yesterday == 8:
+                if today_or_yesterday == 1:
                     day_streak = 0 - day_streak
             return day_streak
 
-        day_streak = calculate_streak(7)
+        day_streak = calculate_streak(0)
         if day_streak == 0:
-            day_streak = calculate_streak(8)
+            day_streak = calculate_streak(1)
 
         print(f"NEW FUNCTIONS TIME: {time.time() - start_time} seconds")
 
@@ -379,9 +379,9 @@ def data_radar():
 
             # Check if there are any missing emotions
             present_emotions = df.index.to_list()
-            if len(present_emotions) != 32:
+            if len(present_emotions) != 34:
                 # Find out which emotions are missing
-                missing_emotions = [e for e in range(1, 33) if e not in present_emotions]
+                missing_emotions = [e for e in range(1, 34) if e not in present_emotions]
 
                 # Fill indices corresponding to missing emotions with zeroes
                 for i in missing_emotions:
@@ -404,11 +404,13 @@ def data_radar():
                         current_emotion_group.append(i)
                     count += 1
                 else:
-                    current_secondary_frequencies.append(round(i * 100, 2))
+                    current_secondary_frequencies.append(round(i * 100, 200))
 
             final_primary.append(current_primary_frequencies)
-            final_secondary.append(current_secondary_frequencies)
-
+            final_secondary.append(current_secondary_frequencies[:-1])
+            print('-------------------------------', current_secondary_frequencies)
+            print(len(current_secondary_frequencies))
+            print('------', final_secondary)
         print(f"RADARS TIME: {time.time() - start_time} seconds")
 
         # Returns 2 lists, each with data on primary and secondary emotions, both containing 8 nested lists
