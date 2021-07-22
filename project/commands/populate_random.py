@@ -1,11 +1,11 @@
 from flask_script import Command
-from project.models import db, Emotion, Ticket, Text, Files
+from project.models import db, Ticket, Text, Files
 from project.models.user import User
 from essential_generators import DocumentGenerator
 from random import randrange, choice
 from flask import current_app
 from datetime import datetime, timedelta
-
+from .populate_initial import populate_emotions
 
 gen = DocumentGenerator()  # used to generate random words and sentences
 
@@ -62,48 +62,7 @@ def populate_files():
                              user_id=randrange(1, 301)))
 
 
-def populate_texts():
-    for i in range(4000):
-        db.session.add(Text(text=gen.sentence(), file=randrange(1, 6)))
 
-
-def populate_emotions():
-    emotions_list_en = [  # Primary Emotions
-        "Rage", "Anger", "Annoyance",
-        "Vigilance", "Anticipation", "Interest",
-        "Ecstasy", "Joy", "Serenity",
-        "Admiration", "Trust", "Acceptance",
-        "Terror", "Fear", "Apprehension",
-        "Amazement", "Surprise", "Distraction",
-        "Grief", "Sadness", "Pensiveness",
-        "Loathing", "Disgust", "Boredom",
-        # Secondary Emotions
-        'Aggressiveness', 'Optimism', 'Love', 'Submission', 'Awe', 'Disapproval', 'Remorse', 'Contempt', 'Neutral'
-    ]
-
-    emotions_list_ka = [  # ძირითადი ემოციები TODO: improve translations
-        'რისხვა', 'ბრაზი', 'გაღიზიანება',
-        'სიფხიზლე', 'მოლოდინი', 'ინტერესი',
-        'აღტყინება', 'სიხარული', 'სიმშვიდე',
-        'აღტაცება', 'ნდობა', 'მიმღებლობა',
-        'თავზარდამცემი შიში', 'შიში', 'ღელვა',
-        'აღფრთოვანება', 'გაკვირვება', 'ყურადღების გაფანტვა',
-        'მწუხარება', 'სევდა', 'ნაღვლიანობა',
-        'სიძულვილი', 'გულისრევა', 'მოწყენილობა',
-        # დამატებითი ემოციები
-        'აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'განცვიფრება', 'გაკიცხვა', 'სინანული', 'ზიზღი', 'ნეიტრალური'
-    ]
-
-    examples_en = ['I feel ' + emotion for emotion in emotions_list_en]
-    examples_ka = [emotion + ' ემოციაა' for emotion in emotions_list_ka]
-
-    for emotion_en, example_en, emotion_ka, example_ka in zip(emotions_list_en, examples_en, emotions_list_ka, examples_ka):
-        db.session.add(Emotion(name_en=emotion_en,
-                               synonym_en=emotion_en,
-                               example_en=example_en,
-                               name_ka=emotion_ka,
-                               synonym_ka=emotion_ka,
-                               example_ka=example_ka))
 
 
 def populate_tickets():
