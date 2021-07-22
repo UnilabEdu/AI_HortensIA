@@ -1,3 +1,9 @@
+console.log('Loaded SCRIPTS')
+
+
+// function runChartScripts() {
+
+
 function showChart(chartName, chartGroup, button, additionalDiv = 0) {
     var i;
     let x;
@@ -16,7 +22,6 @@ function showChart(chartName, chartGroup, button, additionalDiv = 0) {
     }
 
     let allButtons;
-    console.log('aaaaa')
     console.log(button.classList)
     if (button.classList.contains('statistics__buttonsActivity')) {
         console.log('activity')
@@ -40,10 +45,13 @@ function showChart(chartName, chartGroup, button, additionalDiv = 0) {
 
 
 
-function updateChartData(chart, label, data) {
+function updateChartData(chart, label, data, infoLabel=null) {
     chart.data.labels = label
     chart.data.datasets.forEach((dataset) => {
         dataset.data = data;
+        if (infoLabel) {
+            dataset.label = infoLabel
+        }
     });
     chart.update();
 }
@@ -59,7 +67,6 @@ function updateChartData(chart, label, data) {
 function activateRadarButtons(btn) {
     let allRadarButtons = document.querySelectorAll('.statistics__buttonsRadars button')
     for (let i = 0; i < allRadarButtons.length; i++) {
-        console.log('bbbbbbbb')
         console.log(btn.classList)
         if (allRadarButtons[i].classList.contains('statistics__active')) {
             allRadarButtons[i].classList.remove('statistics__active')
@@ -106,12 +113,12 @@ function updateRankupChart(chart, data) {
         }
         chart.data.datasets[0].data = data;
         chart.update()
-        document.getElementById("rankup-text").innerHTML = 'გადაასწარი ლიდერბორდში შემდეგ მომხმარებელს'
-        document.getElementById("rankup-goal").innerHTML = 'შეავსე კიდევ ' + data[1].toString() + ' ბარათი.';
+        document.getElementById("rankup-text").innerHTML = txt.dash.goal.rank.calculated.info
+        document.getElementById("rankup-goal").innerHTML = txt.dash.goal.rank.calculated.targ[0] + data[1].toString() + txt.dash.goal.rank.calculated.targ[1];
 
     } else {
-        document.getElementById("rankup-text").innerHTML = 'აქ დაგითვლით ლიდერბორდში გადასასწრებად დარჩენილი ბარათების რაოდენობას';
-        document.getElementById("rankup-goal").innerHTML = 'დაიწყე ბარათების შევსება';
+        document.getElementById("rankup-text").innerHTML = txt.dash.goal.rank.default.info
+        document.getElementById("rankup-goal").innerHTML = txt.dash.goal.rank.default.targ
     }
 }
 
@@ -138,24 +145,24 @@ function updateStreakGoalChart(chart, streakDays) {
     var currentStreakText;
     var targetStreakText;
     if (activeStreak === true) {
-        currentStreakText = 'ზედიზედ ' + streakDays.toString() + ' დღე აქტიურობ.'
+        currentStreakText = txt.dash.goal.streak.calculated.active.curr[0] + streakDays.toString() + txt.dash.goal.streak.calculated.active.curr[1]
 
         if (streakDays === 0) {
-            currentStreakText = 'დღეს ბარათი არ შეგივსია.'
-            targetStreakText = 'აქ დაგითვლით, ზედიზედ რამდენი დღე იაქტიურე.'
+            currentStreakText = txt.dash.goal.streak.default.curr
+            targetStreakText = txt.dash.goal.streak.default.targ
             chart.data.datasets[0].backgroundColor[1] = '#E5D4F0'
         } else if (bracketIndex === 10) {
-            targetStreakText = 'დიდი მადლობა!'
+            targetStreakText = txt.dash.goal.streak.calculated.active.targ.end
         } else if (bracketIndex === 9) {
-            targetStreakText = 'შემდეგი მიზანი: 1 წელი.'
+            targetStreakText = txt.dash.goal.streak.calculated.active.targ.year
         } else if (bracketIndex > 2) {
-            targetStreakText = 'შემდეგი მიზანი: ' + (bracketIndex - 2).toString() + ' თვე.'
+            targetStreakText = txt.dash.goal.streak.calculated.active.targ.month[0] + (bracketIndex - 2).toString() + txt.dash.goal.streak.calculated.active.targ.month[1]
         } else {
-            targetStreakText = 'შემდეგი მიზანი: ' + (bracketIndex + 1).toString() + ' კვირა.'
+            targetStreakText = txt.dash.goal.streak.calculated.active.targ.week[0] + (bracketIndex + 1).toString() + txt.dash.goal.streak.calculated.active.targ.week[1]
         }
     } else {
-        currentStreakText = 'ზედიზედ ' + streakDays.toString() + ' დღე აქტიურობდი.'
-        targetStreakText = 'შეავსე ბარათი დღესაც, რათა გააგრძელო აქტიურობის მიმდევრობა'
+        currentStreakText = txt.dash.goal.streak.calculated.paused.curr[0] + streakDays.toString() + txt.dash.goal.streak.calculated.paused.curr[1]
+        targetStreakText = txt.dash.goal.streak.calculated.paused.targ
     }
 
     let values;
@@ -179,22 +186,22 @@ function updateWeeklyGoalChart(chart, weekData) {
         return a + b;
     }, 0);
 
-    document.getElementById("weekly-goal-text").innerHTML = "ბოლო 7 დღეში შეავსე " + weekDataSum.toString() + " ბარათი.";
+    document.getElementById("weekly-goal-text").innerHTML = txt.dash.goal.lvl.curr[0] + weekDataSum.toString() + txt.dash.goal.lvl.curr[1];
 
     let goalText;
     let targetAmount;
     if (weekDataSum >= levelGoals[2]) {
         targetAmount = 0
-        goalText = "მესამე დონის კონტრიბუტორი ხარ. დიდი მადლობა!"
+        goalText = txt.dash.goal.lvl.targ[3]
     } else if (weekDataSum >= levelGoals[1]) {
         targetAmount = levelGoals[2] - weekDataSum
-        goalText = "მესამე დონეზე გადასასვლელად შეავსე კიდევ " + targetAmount.toString() + " ბარათი"
+        goalText = txt.dash.goal.lvl.targ[2][0] + targetAmount.toString() + txt.dash.goal.lvl.targ[2][1]
     } else if (weekDataSum >= levelGoals[0]) {
         targetAmount = levelGoals[1] - weekDataSum
-        goalText = "მეორე დონეზე გადასასვლელად შეავსე კიდევ " + targetAmount.toString() + " ბარათი"
+        goalText = txt.dash.goal.lvl.targ[1][0] + targetAmount.toString() + txt.dash.goal.lvl.targ[0][1]
     } else {
         targetAmount = levelGoals[0] - weekDataSum
-        goalText = "პირველ დონეზე გადასასვლელად შეავსე კიდევ " + targetAmount.toString() + " ბარათი"
+        goalText = txt.dash.goal.lvl.targ[0][0] + targetAmount.toString() + txt.dash.goal.lvl.targ[0][1]
     }
     document.getElementById("weekly-goal-stage").innerHTML = goalText
 
@@ -219,7 +226,7 @@ function updateWeeklyLevelsTable(tableID, displayLevel, button) {
             if (data.level_one.length > 0) {
                 levelData = data.level_one
             } else {
-                levelData = [['ცხრილი ცარიელია', 'აქ მოსახვედრად, ბოლო 7 დღეში შევსებული უნდა გქონდეს 35 ბარათი']]
+                levelData = [txt.dash.lead.levels.one]
             }
             weeklyTableCurrentLevel = 1
             table.className = 'table__green'
@@ -228,7 +235,7 @@ function updateWeeklyLevelsTable(tableID, displayLevel, button) {
             if (data.level_two.length > 0) {
                 levelData = data.level_two
             } else {
-                levelData = [['ცხრილი ცარიელია', 'აქ მოსახვედრად, ბოლო 7 დღეში შევსებული უნდა გქონდეს 70 ბარათი']]
+                levelData = [txt.dash.lead.levels.two]
             }
             weeklyTableCurrentLevel = 2
             table.className = 'table__blue'
@@ -237,7 +244,7 @@ function updateWeeklyLevelsTable(tableID, displayLevel, button) {
             if (data.level_three.length > 0) {
                 levelData = data.level_three
             } else {
-                levelData = [['ცხრილი ცარიელია', 'აქ მოსახვედრად, ბოლო 7 დღეში შევსებული უნდა გქონდეს 105 ბარათი']]
+                levelData = [txt.dash.lead.levels.three]
 
             }
             weeklyTableCurrentLevel = 3
@@ -471,3 +478,5 @@ async function renderTopStreaksChart() {
 }
 
 renderTopStreaksChart()
+
+// }

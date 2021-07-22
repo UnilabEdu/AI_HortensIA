@@ -2,11 +2,11 @@
     <header>
       <div class="header__left__cont">
         <p id="eng" class="lang">ENG</p>
-        <label class="switch">
+        <a href="/language" class="switch">
           <input id="lang-checkbox" type="checkbox" checked />
           <span class="slider round"></span>
-        </label>
-        <p id="geo" class="lang lang__action">ქარ</p>
+        </a>
+        <p id="geo" class="lang">ქარ</p>
       </div>
       <div class="header__right__cont">
         <a class="page__name {% if not request.endpoint.endswith('tickets') %} action"

@@ -63,3 +63,7 @@ reset_password.addEventListener('click', () => {
     auth_inside_cont.classList.add("d-none");
     reset_pass_cont.classList.remove("d-none");
 })
+
+
+
+//
