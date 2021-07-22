@@ -1,5 +1,4 @@
 from flask import render_template, make_response, jsonify
-from .generate_charts import generate_charts, generate_radars
 from .data_processing import data_user_activity, data_leaderboard, data_radar, data_weekly_levels, data_streaks_leaderboard
 from . import dashboard_blueprint
 import json
@@ -74,7 +73,8 @@ def get_leaderboard_data():
                                 leaderboard_data=leaderboard_data,
                                 current_user_rank=current_user_rank,
                                 rank_up_data=rank_up_data)
-
+    print(make_response(jsonify(all_leaderboard_data)))
+    print(all_leaderboard_data)
     return make_response(jsonify(all_leaderboard_data))
 
 
@@ -97,5 +97,7 @@ def get_top_streaks_data():
                             top_streaks=top_streaks
                             )
 
-    return make_response(jsonify(top_streaks_data))
+    print(make_response(jsonify(top_streaks_data)))
+    print(top_streaks_data)
 
+    return make_response(jsonify(top_streaks_data))

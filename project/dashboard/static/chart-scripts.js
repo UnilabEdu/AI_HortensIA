@@ -101,7 +101,13 @@ function updateLeaderboardColors(chart, userRank) {
 
 
 function updateRankupChart(chart, data) {
-    if (data[1] > 0) {
+    if (data[1] === 'leader') {
+        chart.data.datasets[0].data = [data[0], 0]
+        document.getElementById("rankup-text").innerHTML = txt.dash.goal.rank.top.info
+        document.getElementById("rankup-goal").innerHTML = txt.dash.goal.rank.top.targ
+        chart.data.datasets[0].backgroundColor = ['#2E9877']
+        chart.update()
+    } else if (data[1] > 0) {
         if (data[0] === 0) {
             data[0] = 0.1
         }

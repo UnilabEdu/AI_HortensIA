@@ -237,7 +237,7 @@ def data_leaderboard():
     import pandas as pd
     from project.database import db
     from project import create_app
-    # from flask_user import current_user
+    from flask_user import current_user
     from project.models import User
     from sqlalchemy.orm import load_only
 
@@ -248,7 +248,7 @@ def data_leaderboard():
         #     id = 1
         #     username = 'User_Argati1870'
 
-        current_user = User.query.get(1)
+        # current_user = User.query.get(1)
 
         start_time = time.time()  # Only to measure time of execution. Remove later
 
@@ -302,9 +302,23 @@ def data_leaderboard():
 
         if user_was_active:
             # TODO: add comments
-            tickets_to_next_rank = int(s.iloc[current_user_rank - 2]) - current_user_frequency + 1
-            tickets_ahead_of_previous = current_user_frequency - int(s.iloc[current_user_rank])
+            print('DEBUG')
+            print(type(current_user_frequency))
+            if current_user_rank == 1:
+                current_user_frequency = frequencies[current_user_rank-1]
+                tickets_to_next_rank = 'leader'
 
+            elif current_user.id in user_ids:
+                current_user_frequency = frequencies[current_user_rank-1]
+                tickets_to_next_rank = int(s.iloc[current_user_rank - 2]) - current_user_frequency + 1
+
+            else:
+                tickets_to_next_rank = int(s.iloc[current_user_rank - 2]) - current_user_frequency + 1
+
+            if len(s) > current_user_rank:
+                tickets_ahead_of_previous = current_user_frequency - int(s.iloc[current_user_rank])
+            else:
+                tickets_ahead_of_previous = current_user_frequency
             # print(s[current_user_rank-5:current_user_rank+5])
 
         rank_up_data = [tickets_ahead_of_previous, tickets_to_next_rank]
@@ -348,8 +362,11 @@ def data_radar():
                                   db.engine)
         # all_tickets = pd.read_sql(db.session.query(Ticket).filter(Ticket.emotion <= 45).options(load_only('user', 'emotion', 'date')).statement, db.engine)
 
-        # Change date format of all tickets
+        if len(all_tickets) == 0:  # abort to avoid an error if there are 0 tickets, return zeroes for everything
+            return [[0] * 8, [0] * 8]
+
         all_tickets['date'] = all_tickets['date'].dt.date
+        # Change date format of all tickets
         # TODO: might remove current_user data (make radar charts be my data vs others' data instead of my data vs all data)
         # Get all current_user tickets
         user_tickets = all_tickets.loc[all_tickets['user'] == current_user.id]

@@ -47,6 +47,11 @@ if (current_lang === 'en') {
                 calculated: {
                     info: 'Surpass the next user in the leaderboard:',
                     targ: ['Submit ', ' more tickets']
+                },
+
+                top: {
+                    info: 'You are at the top of the leaderboard',
+                    targ: 'Good job!'
                 }
             },
             lvl: {
@@ -168,6 +173,11 @@ else if (current_lang === 'ka') {
                         calculated: {
                             info: 'გადაასწარით ლიდერბორდში შემდეგ მომხმარებელს',
                             targ: ['შეავსეთ კიდევ ', ' ბარათი.']
+                        },
+
+                        top: {
+                            info: 'შევსებული ბარათების რაოდენობით პირველ ადგილზე ხართ',
+                            targ: 'ყოჩაღ!'
                         }
                     },
                     lvl: {
