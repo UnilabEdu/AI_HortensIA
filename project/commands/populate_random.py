@@ -5,7 +5,7 @@ from essential_generators import DocumentGenerator
 from random import randrange, choice
 from flask import current_app
 from datetime import datetime, timedelta
-from .populate_initial import populate_emotions
+from .populate_initial import populate_emotions, populate_texts
 
 gen = DocumentGenerator()  # used to generate random words and sentences
 
