@@ -2,6 +2,7 @@
 
 {% block content %}
 {% from 'macros/navbar.html' import navbar with context %}
+{% from 'macros/current_lang.html' import current_lang with context %}
 
 
 <!DOCTYPE html>
@@ -22,6 +23,19 @@
   <body class="home__body">
 
     {{ navbar() }}
+
+    {{ current_lang() }}
+
+
+{#    <script>#}
+{#        const txt = {{ translations | tojson }}#}
+{#        const current_lang = {{ current_lang | tojson }}#}
+{##}
+{#        if (current_lang === 'en') {#}
+{#            lang_toggler = document.getElementById('lang-checkbox')#}
+{#            lang_toggler.removeAttribute('checked')#}
+{#        }#}
+{#    </script>#}
 
     <div class="home__main__content firago">
       <p id="target-card-text" class="home__title">
@@ -1899,24 +1913,24 @@
           </svg>
         </div>
         <div class="home__right__container">
-          <h2 id="title" class="restrict__btn basic__btn center">აირჩიეთ ემოცია</h2>
+          <h2 id="title" class="restrict__btn basic__btn center">{{ _('Choose an Emotion') }}</h2>
           <ul>
             <li>
-              <h3>სინონიმი:</h3>
-              <p id="synonym">არჩეული ემოციის სინონიმი</p>
+              <h3>{{ _('Synonym:') }}</h3>
+              <p id="synonym">{{ _('A synonym of the chosen emotion') }}</p>
             </li>
             <li>
-              <h3 id="about-question">რას გვეუბნება ეს ემოცია:</h3>
-              <p id="about">არჩეული ემოციის განმარტება</p>
+              <h3 id="about-question">{{ _('What does this emotion mean:') }}</h3>
+              <p id="about">{{ _('The definition of the chosen emotion') }} </p>
             </li>
             <li>
-              <h3 id="help-question">როგორ დაგეხმარება ეს ემოცია:</h3>
-              <p id="help">არჩეული ემოციის მნიშვნელობის განმარტება
+              <h3 id="help-question">{{ _('How does this emotion help you:') }}</h3>
+              <p id="help">{{ _("The description of the emotion's significance") }}
               </p>
             </li>
           </ul>
           <button id="next-submit-ticket" class="next__btn" disabled>
-            შემდეგი <i class="fas fa-chevron-right"></i>
+            {{ _('Next') }} <i class="fas fa-chevron-right"></i>
           </button>
             <p id="ticket-submit-success"> </p>
         </div>

@@ -1,9 +1,3 @@
-console.log('Loaded SCRIPTS')
-
-
-// function runChartScripts() {
-
-
 function showChart(chartName, chartGroup, button, additionalDiv = 0) {
     var i;
     let x;
@@ -478,5 +472,3 @@ async function renderTopStreaksChart() {
 }
 
 renderTopStreaksChart()
-
-// }

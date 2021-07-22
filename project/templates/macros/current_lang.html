@@ -1,0 +1,9 @@
+{% macro current_lang() -%}
+
+    <script>
+    const current_lang = {{ session['locale'] | tojson }}
+    </script>
+
+    <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
+
+{% endmacro %}

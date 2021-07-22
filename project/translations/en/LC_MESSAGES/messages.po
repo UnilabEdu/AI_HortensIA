@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-07-12 13:27+0400\n"
-"PO-Revision-Date: 2021-07-12 12:57+0400\n"
+"POT-Creation-Date: 2021-07-22 08:09+0400\n"
+"PO-Revision-Date: 2021-07-22 08:21+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
@@ -18,48 +18,91 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: project/templates/flask_user/change_password.html:5
-#: project/templates/flask_user/user_profile.html:11
-#: venv/Lib/site-packages/flask_user/forms.py:89
-#: venv/Lib/site-packages/flask_user/forms.py:315
-msgid "Change password"
+#: project/dashboard/templates/dashboard.html:28
+#: project/dashboard/templates/dashboard.html:29
+#: project/dashboard/templates/dashboard.html:30
+msgid "Loading..."
 msgstr ""
 
-#: project/templates/flask_user/change_username.html:5
-#: project/templates/flask_user/user_profile.html:8
-#: venv/Lib/site-packages/flask_user/forms.py:126
-msgid "Change username"
+#: project/dashboard/templates/dashboard.html:46
+#: project/dashboard/templates/dashboard.html:47
+#: project/dashboard/templates/dashboard.html:48
+msgid "Please wait..."
 msgstr ""
 
-#: project/templates/flask_user/forgot_password.html:5
-msgid "Forgot Password"
+#: project/dashboard/templates/dashboard.html:60
+msgid "Heatmap"
 msgstr ""
 
-#: project/templates/flask_user/invite.html:5
-msgid "Invite User"
+#: project/dashboard/templates/dashboard.html:61
+msgid "Last Month"
 msgstr ""
 
-#: project/templates/flask_user/login.html:5
-#: project/templates/flask_user/login_or_register.html:27
-#: project/templates/flask_user/login_or_register.html:145
-#: venv/Lib/site-packages/flask_user/forms.py:182
-msgid "Sign in"
+#: project/dashboard/templates/dashboard.html:71
+msgid "Month"
 msgstr ""
 
-#: project/templates/flask_user/login.html:21
-msgid "New here? Register."
+#: project/dashboard/templates/dashboard.html:72
+msgid "Week"
 msgstr ""
 
-#: project/templates/flask_user/login.html:44
-#: project/templates/flask_user/login_or_register.html:80
-msgid "Forgot your Password?"
+#: project/dashboard/templates/dashboard.html:81
+msgid "Leaderboard"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:6
+#: project/dashboard/templates/dashboard.html:82
+msgid "Weekly Table"
+msgstr ""
+
+#: project/dashboard/templates/dashboard.html:83
+msgid "Activity Streaks"
+msgstr ""
+
+#: project/dashboard/templates/dashboard.html:99
+#: project/templates/flask_user/login_or_register.html:127
+#: venv/Lib/site-packages/flask_user/forms.py:170
+#: venv/Lib/site-packages/flask_user/forms.py:229
+#: venv/Lib/site-packages/flask_user/forms.py:257
+msgid "Username"
+msgstr ""
+
+#: project/dashboard/templates/dashboard.html:100
+msgid "Tickets filled in the last 7 days"
+msgstr ""
+
+#: project/dashboard/templates/dashboard.html:112
+msgid "Level 1"
+msgstr ""
+
+#: project/dashboard/templates/dashboard.html:113
+msgid "Level 2"
+msgstr ""
+
+#: project/dashboard/templates/dashboard.html:114
+msgid "Level 3"
+msgstr ""
+
+#: project/dashboard/templates/dashboard.html:132
+msgid "Any Time"
+msgstr ""
+
+#: project/dashboard/templates/dashboard.html:133
+msgid "This Month"
+msgstr ""
+
+#: project/dashboard/templates/dashboard.html:134
+msgid "This Week"
+msgstr ""
+
+#: project/dashboard/templates/dashboard.html:135
+msgid "Today"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:8
 msgid "Hortensia - Text Classification"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:9
+#: project/templates/flask_user/login_or_register.html:11
 msgid ""
 "Hortensia provides a tool which lets you label sentences based on Robert "
 "Plutchik's           Wheel of Emotions. You will be presented with random"
@@ -69,12 +112,12 @@ msgid ""
 "statistical analysis and machine learning"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:18
+#: project/templates/flask_user/login_or_register.html:20
 msgid "Subscribe to our newsletter"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:19
-#: project/templates/flask_user/login_or_register.html:127
+#: project/templates/flask_user/login_or_register.html:21
+#: project/templates/flask_user/login_or_register.html:131
 #: venv/Lib/site-packages/flask_user/forms.py:72
 #: venv/Lib/site-packages/flask_user/forms.py:163
 #: venv/Lib/site-packages/flask_user/forms.py:173
@@ -84,106 +127,128 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:20
+#: project/templates/flask_user/login_or_register.html:22
 msgid "Submit"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:29
-#: project/templates/flask_user/login_or_register.html:102
-#: project/templates/flask_user/register.html:5
+#: project/templates/flask_user/login_or_register.html:31
+#: project/templates/flask_user/login_or_register.html:149
+#: venv/Lib/site-packages/flask_user/forms.py:182
+msgid "Sign in"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:33
+#: project/templates/flask_user/login_or_register.html:106
 #: venv/Lib/site-packages/flask_user/forms.py:270
 msgid "Register"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:33
+#: project/templates/flask_user/login_or_register.html:37
 msgid "Follow us on Facebook"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:37
+#: project/templates/flask_user/login_or_register.html:41
 msgid "Fork us on GitHub"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:48
+#: project/templates/flask_user/login_or_register.html:52
 msgid "SIGN IN"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:50
+#: project/templates/flask_user/login_or_register.html:54
 msgid "Continue with Google"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:61
+#: project/templates/flask_user/login_or_register.html:65
 #: venv/Lib/site-packages/flask_user/forms.py:189
 msgid "Username or Email"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:65
-#: project/templates/flask_user/login_or_register.html:131
+#: project/templates/flask_user/login_or_register.html:69
+#: project/templates/flask_user/login_or_register.html:135
 #: venv/Lib/site-packages/flask_user/forms.py:177
 #: venv/Lib/site-packages/flask_user/forms.py:264
 msgid "Password"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:69
+#: project/templates/flask_user/login_or_register.html:73
 msgid "login"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:97
-#: project/templates/flask_user/login_or_register.html:141
+#: project/templates/flask_user/login_or_register.html:84
+msgid "Forgot your Password?"
+msgstr ""
+
+#: project/templates/flask_user/login_or_register.html:101
+#: project/templates/flask_user/login_or_register.html:145
 msgid "Welcome, Friend!"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:98
-#: project/templates/flask_user/login_or_register.html:142
+#: project/templates/flask_user/login_or_register.html:102
+#: project/templates/flask_user/login_or_register.html:146
 msgid "Please, provide your"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:99
-#: project/templates/flask_user/login_or_register.html:143
+#: project/templates/flask_user/login_or_register.html:103
+#: project/templates/flask_user/login_or_register.html:147
 msgid "details and start"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:100
-#: project/templates/flask_user/login_or_register.html:144
+#: project/templates/flask_user/login_or_register.html:104
+#: project/templates/flask_user/login_or_register.html:148
 msgid "the journey with us"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:114
+#: project/templates/flask_user/login_or_register.html:118
 msgid "REGISTER"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:115
+#: project/templates/flask_user/login_or_register.html:119
 msgid "Create a new account"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:123
-#: venv/Lib/site-packages/flask_user/forms.py:170
-#: venv/Lib/site-packages/flask_user/forms.py:229
-#: venv/Lib/site-packages/flask_user/forms.py:257
-msgid "Username"
-msgstr ""
-
-#: project/templates/flask_user/login_or_register.html:134
+#: project/templates/flask_user/login_or_register.html:138
 msgid "register"
 msgstr ""
 
-#: project/templates/flask_user/manage_emails.html:5
-msgid "Manage Emails"
+#: project/templates/macros/navbar.html:14
+msgid "EMOTION WHEEL"
 msgstr ""
 
-#: project/templates/flask_user/register.html:21
-msgid "Already registered? Sign in."
+#: project/templates/macros/navbar.html:45
+msgid "Sign out"
 msgstr ""
 
-#: project/templates/flask_user/resend_confirm_email.html:5
-msgid "Resend Confirmation Email"
+#: project/tickets/templates/tickets.html:1912
+msgid "Choose an Emotion"
 msgstr ""
 
-#: project/templates/flask_user/reset_password.html:5
-msgid "Reset Password"
+#: project/tickets/templates/tickets.html:1915
+msgid "Synonym:"
 msgstr ""
 
-#: project/templates/flask_user/user_profile.html:5
-msgid "User profile"
+#: project/tickets/templates/tickets.html:1916
+msgid "A synonym of the chosen emotion"
+msgstr ""
+
+#: project/tickets/templates/tickets.html:1919
+msgid "What does this emotion mean:"
+msgstr ""
+
+#: project/tickets/templates/tickets.html:1920
+msgid "The definition of the chosen emotion"
+msgstr ""
+
+#: project/tickets/templates/tickets.html:1923
+msgid "How does this emotion help you:"
+msgstr ""
+
+#: project/tickets/templates/tickets.html:1924
+msgid "The description of the emotion's significance"
+msgstr ""
+
+#: project/tickets/templates/tickets.html:1929
+msgid "Next"
 msgstr ""
 
 #: venv/Lib/site-packages/flask_user/forms.py:41
@@ -256,6 +321,11 @@ msgstr ""
 msgid "New Password and Retype Password did not match"
 msgstr ""
 
+#: venv/Lib/site-packages/flask_user/forms.py:89
+#: venv/Lib/site-packages/flask_user/forms.py:315
+msgid "Change password"
+msgstr ""
+
 #: venv/Lib/site-packages/flask_user/forms.py:111
 #: venv/Lib/site-packages/flask_user/forms.py:145
 msgid "Old Password is incorrect"
@@ -269,6 +339,10 @@ msgstr ""
 #: venv/Lib/site-packages/flask_user/forms.py:171
 #: venv/Lib/site-packages/flask_user/forms.py:258
 msgid "Username is required"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_user/forms.py:126
+msgid "Change username"
 msgstr ""
 
 #: venv/Lib/site-packages/flask_user/forms.py:152

@@ -17,17 +17,17 @@ def get_locale():
     return session['locale']
 
 
-@homepage_blueprint.route('/currentlang', methods=['GET', 'POST'])
-def current_lang():
-    if 'locale' not in session.keys():
-        return make_response(jsonify(
-            dict(language='ka')
-        ))
-
-    else:
-        return make_response(jsonify(
-            dict(language=session['locale'])
-        ))
+# @homepage_blueprint.route('/currentlang', methods=['GET', 'POST'])
+# def current_lang():
+#     if 'locale' not in session.keys():
+#         return make_response(jsonify(
+#             dict(language='ka')
+#         ))
+#
+#     else:
+#         return make_response(jsonify(
+#             dict(language=session['locale'])
+#         ))
 
 
 @homepage_blueprint.route('/language', methods=['GET', 'POST'])

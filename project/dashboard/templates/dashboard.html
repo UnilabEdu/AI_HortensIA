@@ -2,21 +2,34 @@
 
 {% block content %}
 {% from 'macros/navbar.html' import navbar with context %}
-
+{% from 'macros/current_lang.html' import current_lang with context %}
 
 <body class="statistics__body">
 
     {{ navbar() }}
 
+    {{ current_lang() }}
+
+{#    <script>#}
+{#        const txt = {{ translations | tojson }}#}
+{#        const current_lang = {{ current_lang | tojson }}#}
+{##}
+{#        if (current_lang === 'en') {#}
+{#            lang_toggler = document.getElementById('lang-checkbox')#}
+{#            lang_toggler.removeAttribute('checked')#}
+{#        }#}
+{#    </script>#}
+
+
     <div class="statistics__content">
 
         <div class="statistics__smallContainer">
 
-
+{# მიმდინარეობს მონაცემების დამუშავება... #}
             <div class="statistics__box">
-                <p id="current-streak-text" class="goal__centered__text"> მიმდინარეობს მონაცემების დამუშავება... </p>
-                <p id="rankup-text" class="goal__centered__text"> მიმდინარეობს მონაცემების დამუშავება... </p>
-                <p id="weekly-goal-text" class="goal__centered__text"> მიმდინარეობს მონაცემების დამუშავება... </p>
+                <p id="current-streak-text" class="goal__centered__text"> {{ _('Loading...') }} </p>
+                <p id="rankup-text" class="goal__centered__text"> {{ _('Loading...') }} </p>
+                <p id="weekly-goal-text" class="goal__centered__text"> {{ _('Loading...') }} </p>
             </div>
 
             <div class="statistics__box">
@@ -32,9 +45,9 @@
             </div>
 
             <div class="statistics__box">
-                <p id="target-streak-text" class="goal__centered__text"> დაელოდეთ... </p>
-                <p id="rankup-goal" class="goal__centered__text"> დაელოდეთ... </p>
-                <p id="weekly-goal-stage" class="goal__centered__text"> დაელოდეთ... </p>
+                <p id="target-streak-text" class="goal__centered__text"> {{ _('Please wait...') }} </p>
+                <p id="rankup-goal" class="goal__centered__text"> {{ _('Please wait...') }} </p>
+                <p id="weekly-goal-stage" class="goal__centered__text"> {{ _('Please wait...') }} </p>
             </div>
 
 
@@ -46,8 +59,8 @@
             <div class="statistics__mediumBox">
 
                  <div class="statistics__buttons">
-                    <button onclick="showChart('tab-activity-heatmap', 'activity', this)" class="statistics__buttonsActivity statistics__active">Heatmap</button>
-                    <button onclick="showChart('tab-activity-month', 'activity', this)" class="statistics__buttonsActivity">Last Month</button>
+                    <button onclick="showChart('tab-activity-heatmap', 'activity', this)" class="statistics__buttonsActivity statistics__active">{{ _('Heatmap') }}</button>
+                    <button onclick="showChart('tab-activity-month', 'activity', this)" class="statistics__buttonsActivity">{{ _('Last Month') }}</button>
                  </div>
 
                 <div id="tab-activity-heatmap" class="activity-chart-container animate-left mediumbox__content">
@@ -57,8 +70,8 @@
 
                 <div id="tab-activity-month" class="activity-chart-container animate-left mediumbox__content statistics__buttons statistics__buttonsSmall statistics__buttonsLineCharts" style="display:none">
                      <canvas id="monthChart"></canvas>
-                          <button id="btn-activity-chart-month" class="statistics__active"> Month </button>
-                          <button id="btn-activity-chart-week"> Week </button>
+                          <button id="btn-activity-chart-month" class="statistics__active"> {{ _('Month') }} </button>
+                          <button id="btn-activity-chart-week"> {{ _('Week') }} </button>
                 </div>
 
             </div>
@@ -67,9 +80,9 @@
             <div class="statistics__mediumBox">
 
                 <div class="statistics__buttons">
-                    <button onclick="showChart('tab-leaderboards-leaderboard', 'leaderboards', this)" class="statistics__buttonsLeaderboards statistics__active">Leaderboard</button>
-                    <button onclick="showChart('tab-leaderboards-weekly', 'leaderboards', this, 'buttons-leaderboards-weekly', this)" class="statistics__buttonsLeaderboards">Weekly</button>
-                    <button onclick="showChart('tab-leaderboards-streaks', 'leaderboards', this)" class="statistics__buttonsLeaderboards">Activity Streaks</button>
+                    <button onclick="showChart('tab-leaderboards-leaderboard', 'leaderboards', this)" class="statistics__buttonsLeaderboards statistics__active">{{ _('Leaderboard') }}</button>
+                    <button onclick="showChart('tab-leaderboards-weekly', 'leaderboards', this, 'buttons-leaderboards-weekly', this)" class="statistics__buttonsLeaderboards">{{ _('Weekly Table') }}</button>
+                    <button onclick="showChart('tab-leaderboards-streaks', 'leaderboards', this)" class="statistics__buttonsLeaderboards">{{ _('Activity Streaks') }}</button>
                 </div>
 
                 <div id="tab-leaderboards-leaderboard" class="leaderboard-chart-container animate-left mediumbox__content">
@@ -83,8 +96,10 @@
                           <table id="table-leaderboards-weekly" class="table__green mediumbox__content">
                             <thead>
                               <tr>
-                                <th>მომხმარებლის სახელი</th>
-                                <th>ბოლო 7 დღეში შევსებული ბარათები</th>
+{#                                  მომხმარებლის სახელი#}
+{#                                  ბოლო 7 დღეში შევსებული ბარათები#}
+                                <th>{{ _('Username') }}</th>
+                                <th>{{ _('Tickets filled in the last 7 days') }}</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -96,9 +111,9 @@
                           </table>
                 </div>
                 <div id="buttons-leaderboards-weekly" class="leaderboard-chart-container statistics__buttons statistics__buttonsSmall" style="display: none">
-                    <button onclick="updateWeeklyLevelsTable('table-leaderboards-weekly', 1, this)" class="statistics__buttonsTableLevels statistics__active">Level 1</button>
-                    <button onclick="updateWeeklyLevelsTable('table-leaderboards-weekly', 2, this)" class="statistics__buttonsTableLevels">Level 2</button>
-                    <button onclick="updateWeeklyLevelsTable('table-leaderboards-weekly', 3, this)" class="statistics__buttonsTableLevels">Level 3</button>
+                    <button onclick="updateWeeklyLevelsTable('table-leaderboards-weekly', 1, this)" class="statistics__buttonsTableLevels statistics__active">{{ _('Level 1') }}</button>
+                    <button onclick="updateWeeklyLevelsTable('table-leaderboards-weekly', 2, this)" class="statistics__buttonsTableLevels">{{ _('Level 2') }}</button>
+                    <button onclick="updateWeeklyLevelsTable('table-leaderboards-weekly', 3, this)" class="statistics__buttonsTableLevels">{{ _('Level 3') }}</button>
                 </div>
 
 
@@ -116,10 +131,10 @@
 
             <div class="radarBoxWrapper">
                 <div class="statistics__buttons statistics__buttonsRadars">
-                      <button id="btn-radar-anytime" class="statistics__active">Any Time</button>
-                      <button id="btn-radar-month">This Month</button>
-                      <button id="btn-radar-week">This Week</button>
-                      <button id="btn-radar-day">Today</button>
+                      <button id="btn-radar-anytime" class="statistics__active">{{ _('Any Time') }}</button>
+                      <button id="btn-radar-month">{{ _('This Month') }}</button>
+                      <button id="btn-radar-week">{{ _('This Week') }}</button>
+                      <button id="btn-radar-day">{{ _('Today') }}</button>
                 </div>
             </div>
 

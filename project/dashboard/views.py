@@ -9,7 +9,7 @@ from flask_user import login_required
 @dashboard_blueprint.route('/', methods=['GET'])
 @login_required
 def dashboard():
-    return render_template('dashboard.html',)
+    return render_template('dashboard.html')
 
 
 # TODO: use flask-limit on fetching routes

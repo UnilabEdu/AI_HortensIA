@@ -2,8 +2,13 @@
 
 {% block content %}
 {% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
+{% from 'macros/current_lang.html' import current_lang with context %}
+
 
 <body class="main__body">
+
+    {{ current_lang() }}
+
     <div class="main__content">
     <h1 class="main__title nino__mtavruli"> {{ _('Hortensia - Text Classification') }} </h1>
     <div class="left__section">
