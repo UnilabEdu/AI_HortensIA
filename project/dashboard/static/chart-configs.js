@@ -21,6 +21,8 @@ function clone(obj) {
 // ["User_wor52", "User_form1363", "User_can1525", "User_302000", "User_cludis32", "User_and957", "User_ar891", "User_and1235", "User_navile849", "User_ther,1251", "YOU \u27a4    "]
 // ["rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(156, 92, 194, 1)"]
 // [3996, 3988, 3984, 3979, 3973, 3955, 3954, 3949, 3944, 3937, 3233]
+Chart.defaults.font.family = "'FiraGO', 'BPG Nino Mtavruli', sans-serif"
+
 
 Chart.overrides.doughnut.cutout = '45%'
 const doughnutChartConfig = {
@@ -198,13 +200,10 @@ topStreaksChartConfig.data.datasets[0].label = txt.dash.lead.streaks.title
 const radarAnytimePrimaryConfig = {
     type: "radar",
     data: {
-        labels: [
-            txt.dash.radar.primary.emotions
-        ],
+        labels: txt.dash.radar.primary.emotions,
         datasets: [
             {
-                label:
-                txt.dash.radar.labels.my,
+                label: txt.dash.radar.labels.my,
                 data: [1, 1, 1, 1, 1, 1, 1, 1],
                 fill: true,
                 backgroundColor: "#5200CE13",
@@ -216,8 +215,7 @@ const radarAnytimePrimaryConfig = {
                 tension: 0.3
             },
             {
-                label:
-                txt.dash.radar.labels.all,
+                label: txt.dash.radar.labels.all,
                 data: [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
                 fill: true,
                 backgroundColor: "#D014C213",
@@ -254,7 +252,15 @@ const radarAnytimePrimaryConfig = {
                 }
             }
         },
-        plugins: {}
+        plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        family: "'FiraGO', 'BPG Nino Mtavruli', sans-serif"
+                    }
+                }
+            }
+        }
     }
 }
 
