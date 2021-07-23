@@ -6,7 +6,7 @@ from sqlalchemy import text
 
 from project import create_app
 from project.database import db
-from project.models import Ticket
+from project.models import Ticket, ActivityStreak
 import time
 from datetime import date, timedelta, datetime
 
@@ -61,6 +61,12 @@ def data_user_activity():
                 except ValueError:
                     pass
 
+        print('DEBUGGING HERE')
+        # calculate the minimum and maximum frequency to better generate heatmap colors
+        min_freq = min(frequencies_heatmap)
+        max_freq = max(frequencies_heatmap)
+        min_max = [min_freq, max_freq]
+
         # generate dictionary for heatmap data
         final = []
         week_numbers = [str(d.isoweekday()) for d in dates_heatmap]
@@ -80,24 +86,15 @@ def data_user_activity():
 
         # ADDITIONAL ACTIVITY STATS START HERE
 
-        # STREAKS
-        # TODO: remove this function as it's obsolete now: streaks shouldn't be calculated later -- they should be created, stored in a DB and updated constantly
-        def calculate_streak(today_or_yesterday):
-            check_day = today - timedelta(days=today_or_yesterday)
-            day_streak = 0
-            if nonzero_dates:
-                while check_day in all_dates.to_list():
-                    day_streak += 1
-                    check_day = check_day - timedelta(days=1)
-                print(day_streak)
-                # TODO: when done testing or when there's today's data in DB, change 8 to 1 and 7 to 0 below (in the next ~7 lines)
-                if today_or_yesterday == 1:
-                    day_streak = 0 - day_streak
-            return day_streak
+        current_streak = ActivityStreak.query.filter_by(user=current_user.id, status=1).first()
 
-        day_streak = calculate_streak(0)
-        if day_streak == 0:
-            day_streak = calculate_streak(1)
+        if current_streak and current_streak.end_date == date.today():
+            day_streak = current_streak.total_days
+        elif current_streak and current_streak.end_date == date.today() - timedelta(days=1):
+            day_streak = 0 - current_streak.total_days  # a negative number is used to indicate that the streak is paused
+        else:
+            day_streak = 0
+
 
         print(f"NEW FUNCTIONS TIME: {time.time() - start_time} seconds")
 
@@ -106,7 +103,7 @@ def data_user_activity():
         print(len(frequencies[-7:]))
 
         print(f'FREQ: {frequencies} \n DATES_M: {dates_month} \n FINAL(HEAT): {final} \n STREAK: {day_streak}')
-        return frequencies, dates_month, final, day_streak
+        return frequencies, dates_month, final, min_max, day_streak
 
 
 # data_user_activity()
@@ -302,7 +299,6 @@ def data_leaderboard():
 
         if user_was_active:
             # TODO: add comments
-            print('DEBUG')
             print(type(current_user_frequency))
             if current_user_rank == 1:
                 current_user_frequency = frequencies[current_user_rank-1]
@@ -347,6 +343,7 @@ def data_radar():
     from project import create_app
     from datetime import date, timedelta
     from sqlalchemy.orm import load_only
+    from flask_user import current_user
 
     with create_app(import_blueprints=False).app_context():
         start_time = time.time()  # Only to measure time of execution. Remove later
@@ -354,8 +351,8 @@ def data_radar():
         today = date.today()
 
         # Remove this and import_blueprints when running server
-        class current_user:
-            id = 2
+        # class current_user:
+        #     id = 1
 
         # Get all tickets
         all_tickets = pd.read_sql(db.session.query(Ticket).options(load_only('user', 'emotion', 'date')).statement,

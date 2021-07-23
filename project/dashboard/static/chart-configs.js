@@ -360,6 +360,7 @@ function generateData() {
 
 
 Chart.defaults.fontSize = 9;
+let heatmapColorHelper = [0, 1]
 ctx = document.getElementById('heatmapChart').getContext('2d');
 heatmapChart = new Chart(ctx, {
     type: 'matrix',
@@ -369,13 +370,13 @@ heatmapChart = new Chart(ctx, {
             data: generateData(), // heatmapData
             // TODO: create a proper formula for choosing colors
             backgroundColor(c) {
-                const value = c.dataset.data[c.dataIndex].v * 0.9;
-                const alpha = (10 + value) / 60;
+                const value = c.dataset.data[c.dataIndex].v - heatmapColorHelper[0] / (heatmapColorHelper[1] - heatmapColorHelper[0]);
+                const alpha = (value * 10) / 60;
                 return Chart.helpers.color('#7E57C2').alpha(alpha).lighten(0.1 / c.dataset.data[c.dataIndex].v).rgbString();
-            },
+            }, // #7E57C2
             borderColor(c) {
-                const value = c.dataset.data[c.dataIndex].v * 0.9;
-                const alpha = (10 + value) / 60;
+                const value = c.dataset.data[c.dataIndex].v - heatmapColorHelper[0] / (heatmapColorHelper[1] - heatmapColorHelper[0]);
+                const alpha = (10 + value * 10) / 60;
                 return Chart.helpers.color('#5D4191').alpha(alpha).darken(0.6).rgbString();
             },
             borderWidth: 1,

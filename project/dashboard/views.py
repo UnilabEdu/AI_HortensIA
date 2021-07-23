@@ -44,7 +44,7 @@ def get_radars_data():
 
 @dashboard_blueprint.route('/getactivitydata')
 def get_activity_data():
-    data_month_frequencies, data_month_labels, heatmap_data, streak = data_user_activity()
+    data_month_frequencies, data_month_labels, heatmap_data, min_max, streak = data_user_activity()
 
     month_chart_labels = data_month_labels
     month_chart_frequencies = data_month_frequencies
@@ -60,6 +60,7 @@ def get_activity_data():
     all_activity_chart_data = dict(month_chart_labels=month_chart_labels,
                                    month_chart_frequencies=month_chart_frequencies,
                                    heatmap_data=heatmap_data,
+                                   min_max=min_max,
                                    streak=streak)
 
     return make_response(jsonify(all_activity_chart_data))

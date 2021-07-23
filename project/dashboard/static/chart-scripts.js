@@ -124,7 +124,7 @@ function updateRankupChart(chart, data) {
 
 function updateStreakGoalChart(chart, streakDays) {
     var colors = ['#914EB2', '#916DD1', '#4B6DD1', '#0098BD', '#00CEBD', '#F7B967', '#F78C67', '#FF5050', '#F74991', '#00C4E3', '#DE2A7C']
-    var brackets = [7, 14, 21, 30, 60, 90, 120, 150, 180, 360, 99999999]
+    var brackets = [7, 14, 21, 30, 60, 90, 120, 150, 180, 365, 99999999]
     let currentBracket = 7
     let bracketIndex = 0
     let activeStreak = true
@@ -303,6 +303,8 @@ async function renderActivityCharts() {
     updateChartData(monthChart, monthLabels, monthData);
     updateWeeklyGoalChart(weeklyGoalChart, weekData)
     updateStreakGoalChart(streakGoalChart, streakData)
+
+    heatmapColorHelper = activityData.min_max
 
 
     var buttonWeek = document.getElementById('btn-activity-chart-week')
