@@ -6,7 +6,7 @@ from sqlalchemy import text
 
 from project import create_app
 from project.database import db
-from project.models import Ticket
+from project.models import Ticket, ActivityStreak
 import time
 from datetime import date, timedelta, datetime
 
@@ -61,6 +61,12 @@ def data_user_activity():
                 except ValueError:
                     pass
 
+        print('DEBUGGING HERE')
+        # calculate the minimum and maximum frequency to better generate heatmap colors
+        min_freq = min(frequencies_heatmap)
+        max_freq = max(frequencies_heatmap)
+        min_max = [min_freq, max_freq]
+
         # generate dictionary for heatmap data
         final = []
         week_numbers = [str(d.isoweekday()) for d in dates_heatmap]
@@ -80,24 +86,15 @@ def data_user_activity():
 
         # ADDITIONAL ACTIVITY STATS START HERE
 
-        # STREAKS
-        # TODO: remove this function as it's obsolete now: streaks shouldn't be calculated later -- they should be created, stored in a DB and updated constantly
-        def calculate_streak(today_or_yesterday):
-            check_day = today - timedelta(days=today_or_yesterday)
-            day_streak = 0
-            if nonzero_dates:
-                while check_day in all_dates.to_list():
-                    day_streak += 1
-                    check_day = check_day - timedelta(days=1)
-                print(day_streak)
-                # TODO: when done testing or when there's today's data in DB, change 8 to 1 and 7 to 0 below (in the next ~7 lines)
-                if today_or_yesterday == 8:
-                    day_streak = 0 - day_streak
-            return day_streak
+        current_streak = ActivityStreak.query.filter_by(user=current_user.id, status=1).first()
 
-        day_streak = calculate_streak(7)
-        if day_streak == 0:
-            day_streak = calculate_streak(8)
+        if current_streak and current_streak.end_date == date.today():
+            day_streak = current_streak.total_days
+        elif current_streak and current_streak.end_date == date.today() - timedelta(days=1):
+            day_streak = 0 - current_streak.total_days  # a negative number is used to indicate that the streak is paused
+        else:
+            day_streak = 0
+
 
         print(f"NEW FUNCTIONS TIME: {time.time() - start_time} seconds")
 
@@ -106,7 +103,7 @@ def data_user_activity():
         print(len(frequencies[-7:]))
 
         print(f'FREQ: {frequencies} \n DATES_M: {dates_month} \n FINAL(HEAT): {final} \n STREAK: {day_streak}')
-        return frequencies, dates_month, final, day_streak
+        return frequencies, dates_month, final, min_max, day_streak
 
 
 # data_user_activity()
@@ -237,7 +234,7 @@ def data_leaderboard():
     import pandas as pd
     from project.database import db
     from project import create_app
-    # from flask_user import current_user
+    from flask_user import current_user
     from project.models import User
     from sqlalchemy.orm import load_only
 
@@ -248,7 +245,7 @@ def data_leaderboard():
         #     id = 1
         #     username = 'User_Argati1870'
 
-        current_user = User.query.get(1)
+        # current_user = User.query.get(1)
 
         start_time = time.time()  # Only to measure time of execution. Remove later
 
@@ -302,9 +299,22 @@ def data_leaderboard():
 
         if user_was_active:
             # TODO: add comments
-            tickets_to_next_rank = int(s.iloc[current_user_rank - 2]) - current_user_frequency + 1
-            tickets_ahead_of_previous = current_user_frequency - int(s.iloc[current_user_rank])
+            print(type(current_user_frequency))
+            if current_user_rank == 1:
+                current_user_frequency = frequencies[current_user_rank-1]
+                tickets_to_next_rank = 'leader'
 
+            elif current_user.id in user_ids:
+                current_user_frequency = frequencies[current_user_rank-1]
+                tickets_to_next_rank = int(s.iloc[current_user_rank - 2]) - current_user_frequency + 1
+
+            else:
+                tickets_to_next_rank = int(s.iloc[current_user_rank - 2]) - current_user_frequency + 1
+
+            if len(s) > current_user_rank:
+                tickets_ahead_of_previous = current_user_frequency - int(s.iloc[current_user_rank])
+            else:
+                tickets_ahead_of_previous = current_user_frequency
             # print(s[current_user_rank-5:current_user_rank+5])
 
         rank_up_data = [tickets_ahead_of_previous, tickets_to_next_rank]
@@ -333,6 +343,7 @@ def data_radar():
     from project import create_app
     from datetime import date, timedelta
     from sqlalchemy.orm import load_only
+    from flask_user import current_user
 
     with create_app(import_blueprints=False).app_context():
         start_time = time.time()  # Only to measure time of execution. Remove later
@@ -340,16 +351,19 @@ def data_radar():
         today = date.today()
 
         # Remove this and import_blueprints when running server
-        class current_user:
-            id = 2
+        # class current_user:
+        #     id = 1
 
         # Get all tickets
         all_tickets = pd.read_sql(db.session.query(Ticket).options(load_only('user', 'emotion', 'date')).statement,
                                   db.engine)
         # all_tickets = pd.read_sql(db.session.query(Ticket).filter(Ticket.emotion <= 45).options(load_only('user', 'emotion', 'date')).statement, db.engine)
 
-        # Change date format of all tickets
+        if len(all_tickets) == 0:  # abort to avoid an error if there are 0 tickets, return zeroes for everything
+            return [[0] * 8, [0] * 8]
+
         all_tickets['date'] = all_tickets['date'].dt.date
+        # Change date format of all tickets
         # TODO: might remove current_user data (make radar charts be my data vs others' data instead of my data vs all data)
         # Get all current_user tickets
         user_tickets = all_tickets.loc[all_tickets['user'] == current_user.id]
@@ -379,9 +393,9 @@ def data_radar():
 
             # Check if there are any missing emotions
             present_emotions = df.index.to_list()
-            if len(present_emotions) != 32:
+            if len(present_emotions) != 34:
                 # Find out which emotions are missing
-                missing_emotions = [e for e in range(1, 33) if e not in present_emotions]
+                missing_emotions = [e for e in range(1, 34) if e not in present_emotions]
 
                 # Fill indices corresponding to missing emotions with zeroes
                 for i in missing_emotions:
@@ -404,11 +418,13 @@ def data_radar():
                         current_emotion_group.append(i)
                     count += 1
                 else:
-                    current_secondary_frequencies.append(round(i * 100, 2))
+                    current_secondary_frequencies.append(round(i * 100, 200))
 
             final_primary.append(current_primary_frequencies)
-            final_secondary.append(current_secondary_frequencies)
-
+            final_secondary.append(current_secondary_frequencies[:-1])
+            print('-------------------------------', current_secondary_frequencies)
+            print(len(current_secondary_frequencies))
+            print('------', final_secondary)
         print(f"RADARS TIME: {time.time() - start_time} seconds")
 
         # Returns 2 lists, each with data on primary and secondary emotions, both containing 8 nested lists

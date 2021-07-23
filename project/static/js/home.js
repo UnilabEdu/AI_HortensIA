@@ -58,7 +58,7 @@ async function displayNextText() {
         targetCardText.style.color = '#000000'
         nextButton.style.opacity = 1
     } else {
-        targetCardText.innerHTML = 'თქვენ ამოწურეთ მარკირებისთვის განკუთვნილი წინადადებების საცავი. ახალი წინადადებები მოგვიანებით დაემატება. '
+        targetCardText.innerHTML = txt.ticket.nomore
         targetCardText.style.color = '#320606'
         nextButton.style.opacity = 0.5
         nextButton.disabled = true
@@ -113,8 +113,8 @@ for (let i = 0; i < emotionSelectors.length; i++) {
         synonym.innerHTML = emotionNamesData[correctIndex].synonym;
         about.innerHTML = emotionNamesData[correctIndex].example;
         help.innerHTML = emotionNamesData[correctIndex].example;
-        aboutQuestion.innerHTML = "რას გვეუბნება " + emotionNamesData[correctIndex].emotion + ":"
-        helpQuestion.innerHTML = "როგორ დაგეხმარება " + emotionNamesData[correctIndex].emotion + ":"
+        aboutQuestion.innerHTML = txt.ticket.about[0] + emotionNamesData[correctIndex].emotion + txt.ticket.about[1]
+        helpQuestion.innerHTML = txt.ticket.help[0] + emotionNamesData[correctIndex].emotion + txt.ticket.help[1]
         nextButton.disabled = false
 
         chosenEmotion = correctIndex
@@ -126,12 +126,12 @@ for (let i = 0; i < emotionSelectors.length; i++) {
 // Initialize function to reset the selected emotion after the emotion is submitted
 
 function resetSelectedEmotion() {
-    title.innerHTML = 'აირჩიეთ ემოცია'
-    synonym.innerHTML = 'არჩეული ემოციის სინონიმი'
-    about.innerHTML = 'არჩეული ემოციის განმარტება'
-    help.innerHTML = 'არჩეული ემოციის მნიშვნელობის განმარტება'
-    aboutQuestion.innerHTML = 'რას გვეუბნება ეს ემოცია:'
-    helpQuestion.innerHTML = 'როგორ დაგეხმარება ეს ემოცია:'
+    title.innerHTML = txt.ticket.reset.title
+    synonym.innerHTML = txt.ticket.reset.synonym
+    about.innerHTML = txt.ticket.reset.about
+    help.innerHTML = txt.ticket.reset.help
+    aboutQuestion.innerHTML = txt.ticket.reset.about_question
+    helpQuestion.innerHTML = txt.ticket.reset.help_question
     nextButton.disabled = true
 
     chosenEmotion = null
@@ -163,7 +163,7 @@ nextButton.addEventListener('click', function() {
             }).then(response => response.json())
                 .then(data => {
                     successField.style.color = '#054718'
-                    successField.innerHTML = 'მონამეცები მიღებულია (ემოცია: ' + emotionNamesData[chosenEmotion].emotion + ')'
+                    successField.innerHTML = txt.ticket.submit + emotionNamesData[chosenEmotion].emotion + ')'
                     successField.style.display = 'block'
 
                     targetCardText.style.position = 'absolute'
@@ -180,7 +180,7 @@ nextButton.addEventListener('click', function() {
                 .catch((error) => {
                     console.log(error)
                     successField.style.color = '#47050b'
-                    successField.innerHTML = 'დაფიქსირდა შეცდომა'
+                    successField.innerHTML = txt.ticket.error
                     successField.style.display = 'block'
                 });
         }

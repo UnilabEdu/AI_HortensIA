@@ -1,5 +1,4 @@
 from flask import render_template, make_response, jsonify
-from .generate_charts import generate_charts, generate_radars
 from .data_processing import data_user_activity, data_leaderboard, data_radar, data_weekly_levels, data_streaks_leaderboard
 from . import dashboard_blueprint
 import json
@@ -9,7 +8,7 @@ from flask_user import login_required
 @dashboard_blueprint.route('/', methods=['GET'])
 @login_required
 def dashboard():
-    return render_template('dashboard.html',)
+    return render_template('dashboard.html')
 
 
 # TODO: use flask-limit on fetching routes
@@ -45,7 +44,7 @@ def get_radars_data():
 
 @dashboard_blueprint.route('/getactivitydata')
 def get_activity_data():
-    data_month_frequencies, data_month_labels, heatmap_data, streak = data_user_activity()
+    data_month_frequencies, data_month_labels, heatmap_data, min_max, streak = data_user_activity()
 
     month_chart_labels = data_month_labels
     month_chart_frequencies = data_month_frequencies
@@ -61,6 +60,7 @@ def get_activity_data():
     all_activity_chart_data = dict(month_chart_labels=month_chart_labels,
                                    month_chart_frequencies=month_chart_frequencies,
                                    heatmap_data=heatmap_data,
+                                   min_max=min_max,
                                    streak=streak)
 
     return make_response(jsonify(all_activity_chart_data))
@@ -74,7 +74,8 @@ def get_leaderboard_data():
                                 leaderboard_data=leaderboard_data,
                                 current_user_rank=current_user_rank,
                                 rank_up_data=rank_up_data)
-
+    print(make_response(jsonify(all_leaderboard_data)))
+    print(all_leaderboard_data)
     return make_response(jsonify(all_leaderboard_data))
 
 
@@ -97,5 +98,7 @@ def get_top_streaks_data():
                             top_streaks=top_streaks
                             )
 
-    return make_response(jsonify(top_streaks_data))
+    print(make_response(jsonify(top_streaks_data)))
+    print(top_streaks_data)
 
+    return make_response(jsonify(top_streaks_data))

@@ -76,10 +76,7 @@ loginHelpTexts_enShort[12] = 'Use 6+ characters: uppercase/lowercase letters, nu
 let helpTexts = document.querySelectorAll('.help-block')
 
 if (helpTexts.length > 0) {
-    console.log('VALIDATORS DETECTED')
-    // console.log(helpTexts[0].innerHTML)
     for (let i = 0; i < helpTexts.length; i++) {
-        console.log('VERY IMPORTANT FOR THE NEXT LINES TO BE DEFINED')
         let currentTextIndex = loginHelpTexts_en.indexOf(helpTexts[i].innerHTML)
         console.log(loginHelpTexts_en)
         console.log(helpTexts[i].innerHTML)

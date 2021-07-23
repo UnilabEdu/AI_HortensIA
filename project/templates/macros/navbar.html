@@ -2,16 +2,16 @@
     <header>
       <div class="header__left__cont">
         <p id="eng" class="lang">ENG</p>
-        <label class="switch">
+        <a href="/language" class="switch">
           <input id="lang-checkbox" type="checkbox" checked />
           <span class="slider round"></span>
-        </label>
-        <p id="geo" class="lang lang__action">ქარ</p>
+        </a>
+        <p id="geo" class="lang">ქარ</p>
       </div>
       <div class="header__right__cont">
         <a class="page__name {% if not request.endpoint.endswith('tickets') %} action"
            href="{{ url_for('tickets.tickets') }}{% endif %}">
-           ემოციის ყვავილი
+           {{ _('EMOTION WHEEL') }}
         </a>
 
         <a class="username {% if not request.endpoint.endswith('dashboard') %} action"
@@ -42,7 +42,7 @@
 {#              <hr />#}
 {#              <li>#}
                 <a href="{{ url_for('user.logout') }}" class="log__out_i">
-                    <span class="nino__mtavruli"><img src="{{ url_for('static', filename='assets/logout_black_24dp.svg') }}" alt="log out"/>გასვლა</span>
+                    <span class="nino__mtavruli"><img src="{{ url_for('static', filename='assets/logout_black_24dp.svg') }}" alt="log out"/>{{ _('Sign out') }}</span>
                 </a>
 {#              </li>#}
 {#            </ul>#}

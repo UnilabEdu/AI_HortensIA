@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from project import create_app
 from project.database import db
-from project.models import Text, Ticket
+from project.models import Text, Ticket, ActivityStreak
 from flask_user import current_user
 from sqlalchemy.orm import load_only
 import pandas as pd
@@ -65,6 +65,18 @@ class GetTextPostTicket(Resource):
             net_ticket = Ticket(data['user'], data['text'], data['emotion']+1)
             net_ticket.save_to_db()
             print('final success')
+
+            # create or update streak
+            current_streak = ActivityStreak.query.filter_by(user=current_user.id, status=1).first()
+
+            if current_streak and current_streak.update_streak():
+                pass  # update_streak updates an active streak upon being called
+            else:
+                new_streak = ActivityStreak(current_user.id)
+                db.session.add(new_streak)
+                db.session.commit()
+
+
             return {'success': 'ticket added'}, 200
         else:
             return {'error': 'secret key is wrong. use the website to send requests'}, 400

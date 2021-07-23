@@ -70,3 +70,8 @@
     position: absolute;
     opacity: 0;
 }
+
+#target-card-text {
+    overflow: auto;
+    height: auto;
+}
