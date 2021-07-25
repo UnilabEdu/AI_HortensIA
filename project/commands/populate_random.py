@@ -71,12 +71,12 @@ def populate_tickets():
 
     # Iterate over 30 User IDs
     for user_id in range(1, 301):
-        text_id_list = list(range(1, 4001))
+        text_id_list = list(range(1, 2736))
 
         # Random numbers used to skip some dates to better showcase Streaks
         skip_these_dates = [date_end - timedelta(days=randrange(1, 90)) for i in range(1, randrange(1, 10))]
 
-        filled_tickets = randrange(10, 500)  # amount of tickets for current user
+        filled_tickets = randrange(0, 2736)  # amount of tickets for current user
 
         for i in range(filled_tickets):
             text_id = choice(text_id_list)  # choose a random text to assign to current ticket

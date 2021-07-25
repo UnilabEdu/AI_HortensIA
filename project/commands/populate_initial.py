@@ -42,8 +42,6 @@ def populate_db():
     populate_texts()
     db.session.commit()
 
-    print(repr(Text.query.get(2).text))
-
 
 def find_or_create_role(name):
     role = Role.query.filter_by(name=name).first()
