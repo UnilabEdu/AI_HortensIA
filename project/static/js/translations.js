@@ -109,15 +109,12 @@ if (current_lang === 'en') {
 
     ticket: {
         nomore: 'There are no tickets left for you to submit. Please come back later.  ',
-        about: ["What does ", ' mean:'],
-        help: ["How does ", ' help you:'],
+        about: ['What is ', ' telling you:'],
         reset: {
             title: 'Choose an Emotion',
-            synonym: 'A synonym of the chosen emotion',
+            synonym: 'Similar emotions or synonyms of the chosen emotion',
             about: 'The definition of the chosen emotion',
-            help: "The description of the emotion's significance",
-            about_question: 'What does this emotion mean:',
-            help_question: 'How does this emotion help you:'
+            about_question: 'What is this emotion telling you?',
         },
         submit: 'Ticket submitted (Emotion: ',
         error: 'An error occurred'
@@ -225,7 +222,7 @@ else if (current_lang === 'ka') {
                         emotions: ["რისხვა", "სიფხიზლე", "აღტყინება", "აღტაცება", "თავზარდამცემი შიში", "აღფრთოვანება", "მწუხარება", "სიძულვილი"]
                     },
                     secondary: {
-                        emotions: ['აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'აკრძალვა', 'გაკიცხვა', 'სინანული', 'ზიზღი']
+                        emotions: ['აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'კრძალვა', 'გაკიცხვა', 'სინანული', 'ზიზღი']
                     }
                 }
 
@@ -235,14 +232,11 @@ else if (current_lang === 'ka') {
             ticket: {
                 nomore: 'თქვენ ამოწურეთ მარკირებისთვის განკუთვნილი წინადადებების საცავი. ახალი წინადადებები მოგვიანებით დაემატება. ',
                 about: ["რას გვეუბნება ", ':'],
-                help: ["როგორ დაგეხმარება ", ':'],
                 reset: {
                     title: 'აირჩიეთ ემოცია',
-                    synonym: 'არჩეული ემოციის სინონიმი',
+                    synonym: 'არჩეული ემოციის სინონიმები ან მსგავსი ემოციები',
                     about: 'არჩეული ემოციის განმარტება',
-                    help: 'არჩეული ემოციის მნიშვნელობის განმარტება',
-                    about_question: 'რას გვეუბნება ეს ემოცია:',
-                    help_question: 'როგორ დაგეხმარება ეს ემოცია:'
+                    about_question: 'რას გვეუბნება ეს ემოცია?',
                 },
                 submit: 'მონამეცები მიღებულია (ემოცია: ',
                 error: 'დაფიქსირდა შეცდომა'

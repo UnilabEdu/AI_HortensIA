@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-07-22 08:09+0400\n"
-"PO-Revision-Date: 2021-07-22 08:21+0400\n"
+"POT-Creation-Date: 2021-07-25 06:23+0400\n"
+"PO-Revision-Date: 2021-07-25 06:24+0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ka\n"
 "Language-Team: ka <LL@li.org>\n"
@@ -18,91 +18,95 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: project/dashboard/templates/dashboard.html:28
-#: project/dashboard/templates/dashboard.html:29
+#: project/dashboard/data_processing.py:169
+msgid "YOU     ➤"
+msgstr "თქვენ     ➤"
+
 #: project/dashboard/templates/dashboard.html:30
+#: project/dashboard/templates/dashboard.html:31
+#: project/dashboard/templates/dashboard.html:32
 msgid "Loading..."
 msgstr "მიმდინარეობს მონაცემების დამუშავება..."
 
-#: project/dashboard/templates/dashboard.html:46
-#: project/dashboard/templates/dashboard.html:47
 #: project/dashboard/templates/dashboard.html:48
+#: project/dashboard/templates/dashboard.html:49
+#: project/dashboard/templates/dashboard.html:50
 msgid "Please wait..."
 msgstr "დაელოდეთ..."
 
-#: project/dashboard/templates/dashboard.html:60
+#: project/dashboard/templates/dashboard.html:62
 msgid "Heatmap"
 msgstr "აქტივობის რუკა"
 
-#: project/dashboard/templates/dashboard.html:61
+#: project/dashboard/templates/dashboard.html:63
 msgid "Last Month"
 msgstr "აქტივობის გრაფიკი"
 
-#: project/dashboard/templates/dashboard.html:71
+#: project/dashboard/templates/dashboard.html:73
 msgid "Month"
 msgstr "თვე"
 
-#: project/dashboard/templates/dashboard.html:72
+#: project/dashboard/templates/dashboard.html:74
 msgid "Week"
 msgstr "კვირა"
 
-#: project/dashboard/templates/dashboard.html:81
+#: project/dashboard/templates/dashboard.html:83
 msgid "Leaderboard"
 msgstr "ლიდერბორდი"
 
-#: project/dashboard/templates/dashboard.html:82
+#: project/dashboard/templates/dashboard.html:84
 msgid "Weekly Table"
 msgstr "ყოველკვირეული სია"
 
-#: project/dashboard/templates/dashboard.html:83
+#: project/dashboard/templates/dashboard.html:85
 msgid "Activity Streaks"
 msgstr "აქტივობის რეკორდები"
 
-#: project/dashboard/templates/dashboard.html:99
-#: project/templates/flask_user/login_or_register.html:127
+#: project/dashboard/templates/dashboard.html:101
+#: project/templates/flask_user/login_or_register.html:132
 #: venv/Lib/site-packages/flask_user/forms.py:170
 #: venv/Lib/site-packages/flask_user/forms.py:229
 #: venv/Lib/site-packages/flask_user/forms.py:257
 msgid "Username"
 msgstr "მომხმარებლის სახელი"
 
-#: project/dashboard/templates/dashboard.html:100
+#: project/dashboard/templates/dashboard.html:102
 msgid "Tickets filled in the last 7 days"
 msgstr "ბოლო 7 დღეში შევსებული ბარათები"
 
-#: project/dashboard/templates/dashboard.html:112
+#: project/dashboard/templates/dashboard.html:114
 msgid "Level 1"
 msgstr "პირველი დონე"
 
-#: project/dashboard/templates/dashboard.html:113
+#: project/dashboard/templates/dashboard.html:115
 msgid "Level 2"
 msgstr "მეორე დონე"
 
-#: project/dashboard/templates/dashboard.html:114
+#: project/dashboard/templates/dashboard.html:116
 msgid "Level 3"
 msgstr "მესამე დონე"
 
-#: project/dashboard/templates/dashboard.html:132
+#: project/dashboard/templates/dashboard.html:134
 msgid "Any Time"
 msgstr "სულ"
 
-#: project/dashboard/templates/dashboard.html:133
+#: project/dashboard/templates/dashboard.html:135
 msgid "This Month"
 msgstr "ბოლო თვე"
 
-#: project/dashboard/templates/dashboard.html:134
+#: project/dashboard/templates/dashboard.html:136
 msgid "This Week"
 msgstr "ბოლო კვირა"
 
-#: project/dashboard/templates/dashboard.html:135
+#: project/dashboard/templates/dashboard.html:137
 msgid "Today"
 msgstr "დღეს"
 
-#: project/templates/flask_user/login_or_register.html:8
+#: project/templates/flask_user/login_or_register.html:13
 msgid "Hortensia - Text Classification"
 msgstr "ჰორტენზია - ტექსტის კლასიფიკაცია"
 
-#: project/templates/flask_user/login_or_register.html:11
+#: project/templates/flask_user/login_or_register.html:16
 msgid ""
 "Hortensia provides a tool which lets you label sentences based on Robert "
 "Plutchik's           Wheel of Emotions. You will be presented with random"
@@ -119,12 +123,12 @@ msgstr ""
 "მასში ბარათზე გამოტანილი მონაცემი. ჩვენ მომხმარებლის მიერ მარკირებულ "
 "ბარათს შევინახავთ მონაცემთა საცავში."
 
-#: project/templates/flask_user/login_or_register.html:20
+#: project/templates/flask_user/login_or_register.html:25
 msgid "Subscribe to our newsletter"
 msgstr "შეტყობინებების მისაღებად გამოიწერეთ"
 
-#: project/templates/flask_user/login_or_register.html:21
-#: project/templates/flask_user/login_or_register.html:131
+#: project/templates/flask_user/login_or_register.html:26
+#: project/templates/flask_user/login_or_register.html:136
 #: venv/Lib/site-packages/flask_user/forms.py:72
 #: venv/Lib/site-packages/flask_user/forms.py:163
 #: venv/Lib/site-packages/flask_user/forms.py:173
@@ -134,87 +138,87 @@ msgstr "შეტყობინებების მისაღებად �
 msgid "Email"
 msgstr "ელ-ფოსტა"
 
-#: project/templates/flask_user/login_or_register.html:22
+#: project/templates/flask_user/login_or_register.html:27
 msgid "Submit"
 msgstr "გამოწერა"
 
-#: project/templates/flask_user/login_or_register.html:31
-#: project/templates/flask_user/login_or_register.html:149
+#: project/templates/flask_user/login_or_register.html:36
+#: project/templates/flask_user/login_or_register.html:154
 #: venv/Lib/site-packages/flask_user/forms.py:182
 msgid "Sign in"
 msgstr "შესვლა"
 
-#: project/templates/flask_user/login_or_register.html:33
-#: project/templates/flask_user/login_or_register.html:106
+#: project/templates/flask_user/login_or_register.html:38
+#: project/templates/flask_user/login_or_register.html:111
 #: venv/Lib/site-packages/flask_user/forms.py:270
 msgid "Register"
 msgstr "რეგისტრაცია"
 
-#: project/templates/flask_user/login_or_register.html:37
+#: project/templates/flask_user/login_or_register.html:42
 msgid "Follow us on Facebook"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:41
+#: project/templates/flask_user/login_or_register.html:46
 msgid "Fork us on GitHub"
 msgstr ""
 
-#: project/templates/flask_user/login_or_register.html:52
+#: project/templates/flask_user/login_or_register.html:57
 msgid "SIGN IN"
 msgstr "ავტორიზაცია"
 
-#: project/templates/flask_user/login_or_register.html:54
+#: project/templates/flask_user/login_or_register.html:59
 msgid "Continue with Google"
 msgstr "Google-ით ავტორიზაცია"
 
-#: project/templates/flask_user/login_or_register.html:65
+#: project/templates/flask_user/login_or_register.html:70
 #: venv/Lib/site-packages/flask_user/forms.py:189
 msgid "Username or Email"
 msgstr "ელ-ფოსტა/სახელი"
 
-#: project/templates/flask_user/login_or_register.html:69
-#: project/templates/flask_user/login_or_register.html:135
+#: project/templates/flask_user/login_or_register.html:74
+#: project/templates/flask_user/login_or_register.html:140
 #: venv/Lib/site-packages/flask_user/forms.py:177
 #: venv/Lib/site-packages/flask_user/forms.py:264
 msgid "Password"
 msgstr "პაროლი"
 
-#: project/templates/flask_user/login_or_register.html:73
+#: project/templates/flask_user/login_or_register.html:78
 msgid "login"
 msgstr "შესვლა"
 
-#: project/templates/flask_user/login_or_register.html:84
+#: project/templates/flask_user/login_or_register.html:89
 msgid "Forgot your Password?"
 msgstr "დაგავიწყდათ პაროლი?"
 
-#: project/templates/flask_user/login_or_register.html:101
-#: project/templates/flask_user/login_or_register.html:145
+#: project/templates/flask_user/login_or_register.html:106
+#: project/templates/flask_user/login_or_register.html:150
 msgid "Welcome, Friend!"
 msgstr "გამარჯობა, მეგობარო"
 
-#: project/templates/flask_user/login_or_register.html:102
-#: project/templates/flask_user/login_or_register.html:146
+#: project/templates/flask_user/login_or_register.html:107
+#: project/templates/flask_user/login_or_register.html:151
 msgid "Please, provide your"
 msgstr "შეიყვანეთ თქვენი მონაცემები"
 
-#: project/templates/flask_user/login_or_register.html:103
-#: project/templates/flask_user/login_or_register.html:147
+#: project/templates/flask_user/login_or_register.html:108
+#: project/templates/flask_user/login_or_register.html:152
 msgid "details and start"
 msgstr "და დაიწყეთ"
 
-#: project/templates/flask_user/login_or_register.html:104
-#: project/templates/flask_user/login_or_register.html:148
+#: project/templates/flask_user/login_or_register.html:109
+#: project/templates/flask_user/login_or_register.html:153
 msgid "the journey with us"
 msgstr "მოგზაურობა ჩვენთან ერთად"
 
-#: project/templates/flask_user/login_or_register.html:118
+#: project/templates/flask_user/login_or_register.html:123
 msgid "REGISTER"
 msgstr "რეგისტრაცია"
 
-#: project/templates/flask_user/login_or_register.html:119
+#: project/templates/flask_user/login_or_register.html:124
 msgid "Create a new account"
 msgstr "ახალი ანგარიშის შექმნა"
 
-#: project/templates/flask_user/login_or_register.html:138
+#: project/templates/flask_user/login_or_register.html:143
 msgid "register"
 msgstr "რეგისტრაცია"
 
@@ -226,35 +230,27 @@ msgstr "ემოციის ყვავილი"
 msgid "Sign out"
 msgstr "გამოსვლა"
 
-#: project/tickets/templates/tickets.html:1912
+#: project/tickets/templates/tickets.html:1916
 msgid "Choose an Emotion"
 msgstr "აირჩიეთ ემოცია"
 
-#: project/tickets/templates/tickets.html:1915
-msgid "Synonym:"
-msgstr "სინონიმი:"
-
-#: project/tickets/templates/tickets.html:1916
-msgid "A synonym of the chosen emotion"
-msgstr "არჩეული ემოციის სინონიმი"
-
 #: project/tickets/templates/tickets.html:1919
-msgid "What does this emotion mean:"
-msgstr "რას გვეუბნება ეს ემოცია:"
+msgid "Similar words:"
+msgstr "მსგავსი ემოციები:"
 
 #: project/tickets/templates/tickets.html:1920
+msgid "Similar words or synonyms of the chosen emotion"
+msgstr "არჩეული ემოციის სინონიმები ან მსგავსი ემოციები"
+
+#: project/tickets/templates/tickets.html:1923
+msgid "What is this emotion telling you?"
+msgstr "რას გვეუბნება ეს ემოცია?"
+
+#: project/tickets/templates/tickets.html:1924
 msgid "The definition of the chosen emotion"
 msgstr "არჩეული ემოციის განმარტება"
 
-#: project/tickets/templates/tickets.html:1923
-msgid "How does this emotion help you:"
-msgstr "როგორ დაგეხმარება ეს ემოცია:"
-
-#: project/tickets/templates/tickets.html:1924
-msgid "The description of the emotion's significance"
-msgstr "არჩეული ემოციის მნიშვნელობის განმარტება"
-
-#: project/tickets/templates/tickets.html:1929
+#: project/tickets/templates/tickets.html:1928
 msgid "Next"
 msgstr "შემდეგი"
 

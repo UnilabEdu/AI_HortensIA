@@ -93,19 +93,86 @@ def populate_emotions():
         'მწუხარება', 'სევდა', 'ნაღვლიანობა',
         'სიძულვილი', 'გულისრევა', 'მოწყენილობა',
         # დამატებითი ემოციები
-        'აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'განცვიფრება', 'გაკიცხვა', 'სინანული', 'ზიზღი', 'ნეიტრალური'
+        'აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'კრძალვა', 'გაკიცხვა', 'სინანული', 'ზიზღი', 'ნეიტრალური'
     ]
 
-    examples_en = ['I feel ' + emotion for emotion in emotions_list_en]
-    examples_ka = [emotion + ' ემოციაა' for emotion in emotions_list_ka]
+    similar_list_en = [  # Primary Emotions - similar words
+                    'Overwhelmed, Furious', 'Mad, Fierce', 'Frustrated, Prickly',
+                    'Intense, Focused', 'Curious, Considering', 'Open, Looking',
+                    'Delighted, Giddy', 'Excited, Pleased', 'Calm, Peaceful',
+                    'Connected, Proud', 'Accepting, Safe', 'Open, Welcoming',
+                    'Alarmed, Petrified', 'Stressed, Scared', 'Worried, Anxious',
+                    'Inspired, Astonished', 'Shocked, Unexpected', 'Scattered, Uncertain',
+                    'Heartbroken, Distraught', 'Bummed, Loss', 'Blue, Unhappy',
+                    'Disturbed, Horrified', 'Distrust, Rejecting', 'Tired, Uninterested',
+                    # Secondary Emotions
+                    'Hostile, Belligerent', 'Hopeful, Cheerful',
+                    'Intimate, Passionate', 'Obedient, Compliant',
+                    'Amazed, Astonished', 'Dissatisfied, Criticizing',
+                    'Sorry, Regretful', 'Disrespectful, Mocking'
+                    'Indistinct, Unemotional'
+                  ]
 
-    for emotion_en, example_en, emotion_ka, example_ka in zip(emotions_list_en, examples_en, emotions_list_ka, examples_ka):
+    similar_list_ka = [  # ძირითადი ემოციები - მსგავსი სიტყვები
+                    'მძვინვარე, გააფთრებული', 'ბოღმიანი, გაცოფებული', 'შეწუხებული, აღელვებული',
+                    'ფოკუსირებული, ცოცხალი', 'ცნობისმოყვარე, მისწრაფების მქონე', 'გახსნილი, დაკვირვებული',
+                    'აღტაცებული, აღფრთოვანებული', 'აგზნებული, კმაყოფილი', 'წყნარი, მშვიდი',
+                    'მოხიბლული, გახარებული', 'დამჯერი, უსაფრთხოდ მყოფი', 'გახსნილი, გულღია',
+                    'შეძრწუნებული, აღშფოთებული', 'დაძაბული, ანერვიულებული', 'შეშფოთებული, ფრთხილი',
+                    'გაოცებული, გაოგნებული', 'გაკვირვებული, შეცბუნებული', 'დაბნებული, მოდუნებული',
+                    'გულგატეხილი, თავგზააბნეული', 'შეწუხებული, უბედური', 'ცხვირჩამოშვებული, დარდიანი',
+                    'აფორიაქებული, გაგულისებული', 'უნდობელი, უარმყოფი', 'დაღლილი, დაუინტერესებელი',
+                    # დამატებითი ემოციები
+                    'მტრული, ბოროტი', 'იმედიანი, მხნე',
+                    'კეთილგანწყობილი, ვნებიანი', 'დამჯერი, შემგუებელი',
+                    'განცვიფრებული, მოწიწებული', 'უკმაყოფილო, მაკრიტიკებელი',
+                    'დანაღვლიანებული, სიბრალულის გრძნობის მქონე', 'უპატივცემლობა, დაცინვა',
+                    'გაურკვეველი, უემოციო'
+                  ]
+
+    definition_list_en = [  # Primary Emotions - meaning
+                    "I'm blocked from something vital", "Something is in the way", "Something is unresolved",
+                    "Something big is coming", "Change is happening", "Something useful might come",
+                    "This is better than I imagined", "Life is going well", "Something is happening that's essential, pure, or purposeful",
+                    "I want to support the person or thing", "This is safe", "We are in this together",
+                    "There is big danger", "Something I care about is at risk", "There could be a problem",
+                    "Something is totally unexpected", "Something new happened", "I don't know what to prioritize",
+                    "Love is lost", "Love is going away", "Love is distant",
+                    "Fundamental values are violated", "Something is wrong and violates rules", "The potential for this situation isn't being met",
+                    # Secondary Emotions
+                    'Something hurtful or insulting happened', "I feel like something good is coming",
+                    "I want this person to be happy", 'I have to rely on outside factors',
+                    'An unexpected and impactful event occurred', 'This is unacceptable',
+                    "I shouldn't have done it", 'This is beneath me',
+                    "This didn't impact me in any way"
+    ]
+
+    definition_list_ka = [  # ძირითადი ემოციები - განმარტება
+                    "საციცოცხლოდ მნიშვნელოვან საკითხში ხელი მეშლება", "რაღაც წინააღმდეგობას მიწევს", "რაღაც პრობლემა უნდა გადავწყვიტო",
+                    "ძალიან მნიშვნელოვან მოვლენას ველოდები", "გარკვეული ცვლილება უნდა მოხდეს", "შეიძლება რაიმე მნიშვნელოვანი მოხდეს",
+                    "ყველაფერი მოულოდნელად პოზიტიურად განვითარდა", "ცხოვრება მშვენივრად მიდის", "მოცემული მოვლენები მოსალოდნელი და მიზანშეწონილია",
+                    "ამას სრულიად ვუჭერ მხარს", "ეს სრულიად უსაფრთხოა", "ეს სიტუაცია მაწყობს და ჩვეულებრივ ვეგუები",
+                    "დიდი საფრთხის წინაშე ვიმყოფები", "ჩემთვის მნიშვნელოვანი რაღაც ან ვიღაც საფრთხის ქვეშაა", "შეიძლება გარკვეული პრობლემა გამიჩნდეს",
+                    "სრულიად მოულოდნელი რაღაც შემემთხვა", "რაღაც ახალი განვიცადე", "არ ვიცი რას მივაქციო ყურადღება",
+                    "სიყვარული დავრკარგე", "სიყვარულს ვკარგავ", "სიყვარულის შეგრძნება იკლებს",
+                    "ჩემი მთავარი ღირებულებები შეურაცხყოფილია", "რაღაც არასწორი და დაუშვებელი ხდება", "ამ სიტუაციის სრული პოტენციალი არ რეალიზდება",
+                    # დამატებითი ემოციები
+                    'ამ მოვლენამ ზიანი ან შეურაცხყოფა მომაყენა', 'მგონია რომ რაღაც კარგი მოხდება',
+                    "ამ ადამიანის გაბედნიერება მინდა", 'მიწევს გარე ფაქტორებს მივენდო',
+                    'რაღაც განმაცვიფრებელი მოხდა', 'ეს სრულიად მიუღებელია',
+                    "ეს არ უნდა მექნა", 'მე ამაზე მაღლა ვდგავარ',
+                    "ამან ჩემზე გავლენა არ იქონია"
+                  ]
+
+    for emotion_en, similar_en, definition_en, emotion_ka, similar_ka, definition_ka in \
+            zip(emotions_list_en, similar_list_en, definition_list_en, emotions_list_ka, similar_list_ka, definition_list_ka):
+
         db.session.add(Emotion(name_en=emotion_en,
-                               synonym_en=emotion_en,
-                               example_en=example_en,
+                               similar_en=similar_en,
+                               definition_en=definition_en,
                                name_ka=emotion_ka,
-                               synonym_ka=emotion_ka,
-                               example_ka=example_ka))
+                               similar_ka=similar_ka,
+                               definition_ka=definition_ka))
 
 
 def populate_texts():

@@ -9,7 +9,7 @@ from project.database import db
 from project.models import Ticket, ActivityStreak
 import time
 from datetime import date, timedelta, datetime
-
+from flask_babel import lazy_gettext
 
 def data_user_activity():
     with create_app(import_blueprints=False).app_context():
@@ -166,7 +166,7 @@ def data_leaderboard_optimized():
         current_user_rank = [user[0] for user in users_ticket_count].index(current_user) + 1  # THIS STATEMENT TAKES TOO MUCH TIME
 
         frequencies.append(current_user_frequency)
-        usernames.append(f"   {current_user_rank}. YOU     ➤")
+        usernames.append(f"   {current_user_rank}. " + lazy_gettext("YOU     ➤"))
 
         tickets_to_next_rank = users_ticket_count[current_user_rank-2][1] - current_user_frequency + 1  # THIS STATEMENT TAKES TOO MUCH TIME
         tickets_ahead_of_previous = current_user_frequency - users_ticket_count[current_user_rank][1]  # THIS STATEMENT TAKES TOO MUCH TIME

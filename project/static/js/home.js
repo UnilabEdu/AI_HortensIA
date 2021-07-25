@@ -76,9 +76,7 @@ const emotionSelectors = document.querySelectorAll('.emotions');
 const title = document.getElementById('title');
 const synonym = document.getElementById('synonym');
 const about = document.getElementById('about');
-const help = document.getElementById('help');
 const aboutQuestion = document.getElementById('about-question');
-const helpQuestion = document.getElementById('help-question');
 
 const emotionAreaIdentifiers = ['38', '30', '29',
   '28', '31', 'Group_1540',
@@ -110,11 +108,9 @@ for (let i = 0; i < emotionSelectors.length; i++) {
         let correctIndex = emotionAreaIdentifiers.indexOf(emotionSelectors[i].id)
 
         title.innerHTML = emotionNamesData[correctIndex].emotion;
-        synonym.innerHTML = emotionNamesData[correctIndex].synonym;
-        about.innerHTML = emotionNamesData[correctIndex].example;
-        help.innerHTML = emotionNamesData[correctIndex].example;
+        synonym.innerHTML = emotionNamesData[correctIndex].similar;
+        about.innerHTML = emotionNamesData[correctIndex].definition;
         aboutQuestion.innerHTML = txt.ticket.about[0] + emotionNamesData[correctIndex].emotion + txt.ticket.about[1]
-        helpQuestion.innerHTML = txt.ticket.help[0] + emotionNamesData[correctIndex].emotion + txt.ticket.help[1]
         nextButton.disabled = false
 
         chosenEmotion = correctIndex
@@ -129,9 +125,7 @@ function resetSelectedEmotion() {
     title.innerHTML = txt.ticket.reset.title
     synonym.innerHTML = txt.ticket.reset.synonym
     about.innerHTML = txt.ticket.reset.about
-    help.innerHTML = txt.ticket.reset.help
     aboutQuestion.innerHTML = txt.ticket.reset.about_question
-    helpQuestion.innerHTML = txt.ticket.reset.help_question
     nextButton.disabled = true
 
     chosenEmotion = null
