@@ -112,8 +112,8 @@ def populate_emotions():
         'Hostile, Belligerent', 'Hopeful, Cheerful',
         'Intimate, Passionate', 'Obedient, Compliant',
         'Amazed, Astonished', 'Dissatisfied, Criticizing',
-        'Sorry, Regretful', 'Disrespectful, Mocking'
-                            'Indistinct, Unemotional'
+        'Sorry, Regretful', 'Disrespectful, Mocking',
+        'Indistinct, Unemotional'
     ]
 
     similar_list_ka = [  # ძირითადი ემოციები - მსგავსი სიტყვები
