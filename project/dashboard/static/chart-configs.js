@@ -60,13 +60,13 @@ const doughnutChartConfig = {
 
 var bar_ctx = document.getElementById('leaderboardChart').getContext('2d');
 
-const leaderboardNormalGradient = bar_ctx.createLinearGradient(0, 0, 600, 0);
-leaderboardNormalGradient.addColorStop(0, 'purple');
-leaderboardNormalGradient.addColorStop(1, 'rgba(78, 116, 194, 1)');
+const leaderboardNormalGradient = bar_ctx.createLinearGradient(0, 0, 400, 0);
+leaderboardNormalGradient.addColorStop(0, 'rgba(159,13,180,0.8)');
+leaderboardNormalGradient.addColorStop(1, 'rgba(243,77,94,0.8)');
 
-const leaderboardSpecialGradient = bar_ctx.createLinearGradient(0, 0, 600, 0);
-leaderboardSpecialGradient.addColorStop(0, 'rgba(78, 116, 194, 1)');
-leaderboardSpecialGradient.addColorStop(1, 'purple');
+const leaderboardSpecialGradient = bar_ctx.createLinearGradient(0, 0, 400, 0);
+leaderboardSpecialGradient.addColorStop(0, 'rgba(243,77,94,0.8)');
+leaderboardSpecialGradient.addColorStop(1, 'rgba(159,13,180,0.8)');
 
 // OLD RED-ORANGE COLORS:
 // const leaderboardNormalGradient = bar_ctx.createLinearGradient(0, 0, 1200, 0);
@@ -139,12 +139,12 @@ const monthChartConfig = {
                 {
                     label: txt.dash.act.line.month,
                     data: [4, 2, 3, 1],
-                    borderColor: 'purple',
+                    borderColor: '#8f1993',
                     borderWidth: 3,
                     backgroundColor: function () {
-                        var gradient = ctx.createLinearGradient(0, 0, 500, 0);
-                        gradient.addColorStop(0, 'purple');
-                        gradient.addColorStop(1, 'rgba(127, 92, 194, 1)');
+                        var gradient = ctx.createLinearGradient(0, 0, 600, 0);
+                        gradient.addColorStop(0, '#791993');
+                        gradient.addColorStop(1, 'rgb(236,93,105)');
                         return gradient
                     },
                     tension: 0.4,
@@ -208,10 +208,10 @@ const radarAnytimePrimaryConfig = {
                 fill: true,
                 backgroundColor: "#5200CE13",
                 borderColor: "#4E6FCC",
-                pointBackgroundColor: "rgba(255, 99, 132, 1)",
-                pointBorderColor: "rgba(255, 255, 255, 1)",
-                pointHoverBackgroundColor: "rgba(255, 255, 255, 1)",
-                pointHoverBorderColor: "rgba(255, 99, 132, 1)",
+                pointBackgroundColor: "#4E6FCC",
+                pointBorderColor: "#5200CE",
+                pointHoverBackgroundColor: "#4E6FCC",
+                pointHoverBorderColor: "#5200CE",
                 tension: 0.3
             },
             {
@@ -220,10 +220,10 @@ const radarAnytimePrimaryConfig = {
                 fill: true,
                 backgroundColor: "#D014C213",
                 borderColor: "#D06FC2",
-                pointBackgroundColor: "rgba(54, 162, 235, 1)",
-                pointBorderColor: "rgba(255, 255, 255, 1)",
-                pointHoverBackgroundColor: "rgba(255, 255, 255, 1)",
-                pointHoverBorderColor: "rgba(54, 162, 235, 1)",
+                pointBackgroundColor: "#D014C2",
+                pointBorderColor: "#D06FC2",
+                pointHoverBackgroundColor: "#D014C2",
+                pointHoverBorderColor: "#D06FC2",
                 tension: 0.3
             }
         ]
@@ -372,14 +372,14 @@ heatmapChart = new Chart(ctx, {
             backgroundColor(c) {
                 const value = c.dataset.data[c.dataIndex].v - heatmapColorHelper[0] / (heatmapColorHelper[1] - heatmapColorHelper[0]);
                 const alpha = (value * 10) / 60;
-                return Chart.helpers.color('#7E57C2').alpha(alpha).lighten(0.1 / c.dataset.data[c.dataIndex].v).rgbString();
+                return Chart.helpers.color('#791993').alpha(alpha).lighten(0.1 / c.dataset.data[c.dataIndex].v).rgbString();
             }, // #7E57C2
             borderColor(c) {
                 const value = c.dataset.data[c.dataIndex].v - heatmapColorHelper[0] / (heatmapColorHelper[1] - heatmapColorHelper[0]);
                 const alpha = (10 + value * 10) / 60;
-                return Chart.helpers.color('#5D4191').alpha(alpha).darken(0.6).rgbString();
+                return Chart.helpers.color('#4c0e5c').alpha(alpha).darken(0.6).rgbString();
             },
-            borderWidth: 1,
+            borderWidth: 1.1,
             hoverBackgroundColor: 'yellow',
             hoverBorderColor: 'yellowgreen',
             width(c) {

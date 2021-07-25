@@ -72,14 +72,16 @@ if (current_lang === 'en') {
                 amount: 'Amount:'
             },
             line: {
-                month: 'Tickets in the last 30 days',
-                week: 'Tickets in the last 7 days'
+                month: 'Tickets filled',
+                week: 'Tickets filled'
             }
 
         },
 
         lead: {
-            global: {},
+            global: {
+                hover: 'Tickets filled'
+            },
             levels: {
                 one: ['The table is empty right now', 'Submit 35 tickets in the last 7 days to appear here'],
                 two: ['The table is empty right now', 'Submit 70 tickets in the last 7 days to appear here'],
@@ -195,14 +197,16 @@ else if (current_lang === 'ka') {
                         amount: 'რაოდენობა'
                     },
                     line: {
-                        month: 'ბოლო 30 დღის სტატისტიკა',
-                        week: 'ბოლო 7 დღის სტატისტიკა'
+                        month: 'შევსებული ბარათები',
+                        week: 'შევსებული ბარათები'
                     }
 
                 },
 
                 lead: {
-                    global: {},
+                    global: {
+                        hover: 'შევსებული ბარათები'
+                    },
                     levels: {
                         one: ['ცხრილი ამჟამად ცარიელია', 'აქ მოსახვედრად, ბოლო 7 დღეში შევსებული უნდა გქონდეთ 35 ბარათი'],
                         two: ['ცხრილი ამჟამად ცარიელია', 'აქ მოსახვედრად, ბოლო 7 დღეში შევსებული უნდა გქონდეთ 70 ბარათი'],

@@ -312,7 +312,7 @@ async function renderActivityCharts() {
 
 
     buttonWeek.addEventListener("click", function () {
-                updateChartData(monthChart, weekLabels, weekData)
+                updateChartData(monthChart, weekLabels, weekData, txt.dash.act.line.week)
                 console.log(buttonMonth.classList)
                 if (buttonMonth.classList.contains('statistics__active')) {
                     buttonMonth.classList.remove('statistics__active')
@@ -321,7 +321,7 @@ async function renderActivityCharts() {
     })
 
     buttonMonth.addEventListener("click", function () {
-                updateChartData(monthChart, monthLabels, monthData)
+                updateChartData(monthChart, monthLabels, monthData, txt.dash.act.line.month)
                 if (buttonWeek.classList.contains('statistics__active')) {
                     buttonWeek.classList.remove('statistics__active')
                 }
@@ -443,7 +443,7 @@ async function renderLeaderboardChart() {
     let leaderboardData = fetchedData.leaderboard_data
     let userRank = fetchedData.current_user_rank
     let rankUpData = fetchedData.rank_up_data
-    updateChartData(leaderboardChart, leaderboardLabels, leaderboardData)
+    updateChartData(leaderboardChart, leaderboardLabels, leaderboardData, txt.dash.lead.global.hover)
     updateLeaderboardColors(leaderboardChart, userRank)
     updateRankupChart(rankupGoalChart, rankUpData)
 }

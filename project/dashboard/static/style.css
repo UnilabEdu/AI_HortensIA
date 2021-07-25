@@ -148,28 +148,28 @@
 }
 
 .table__green {
-    background: -webkit-linear-gradient(left, rgb(24, 203, 135), rgb(13, 182, 196));
-    background: linear-gradient(to right, rgb(24, 203, 135), rgb(13, 182, 196));
+    background: -webkit-linear-gradient(left, rgba(167, 59, 199, 0.7), rgba(206, 32, 165, 0.7));
+    background: linear-gradient(to right, rgba(167, 59, 199, 0.7), rgba(206, 32, 165, 0.7));
 }
 
 .table__blue {
-    background: -webkit-linear-gradient(left, rgb(19, 103, 168), rgb(111, 95, 161));
-    background: linear-gradient(to right, rgb(19, 103, 168), rgb(111, 95, 161));
+    background: -webkit-linear-gradient(left, rgba(130, 87, 210, 0.7), rgba(32, 74, 199, 0.7));
+    background: linear-gradient(to right, rgba(130, 87, 210, 0.7), rgba(32, 74, 199, 0.7));
 }
 
 .table__red {
-    background: -webkit-linear-gradient(left, rgb(149, 22, 148), rgb(184, 17, 84));
-    background: linear-gradient(to right, rgb(149, 22, 148), rgb(184, 17, 84));
+    background: -webkit-linear-gradient(left, rgba(173, 47, 152, 0.7), rgba(193, 0, 138, 0.7));
+    background: linear-gradient(to right, rgba(173, 47, 152, 0.7), rgba(193, 0, 138, 0.7));
 }
 
 
 .table__green th {
-    background-color: #15bf8f;
+    background-color: rgba(167, 59, 199, 0.9);
 }
 
 
 .table__blue th {
-    background-color: #104278;
+    background-color: rgba(97, 87, 210, 0.9);
 }
 
 
