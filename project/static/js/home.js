@@ -40,6 +40,7 @@ async function displayNextText() {
     currentTextData = await fetchNextText();
     console.log('displayNextText running')
     console.log(currentTextData)
+    // console.log(currentTextData.text)
     if (currentTextData.text) {
         targetCardText.style.opacity = 1
         targetCardText.innerHTML = currentTextData.text
