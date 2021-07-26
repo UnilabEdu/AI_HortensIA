@@ -15,6 +15,7 @@ babel = Babel()
 mail = Mail()
 bcrypt = Bcrypt()
 
+
 def create_app(import_blueprints=True):
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -48,7 +49,8 @@ def create_app(import_blueprints=True):
 
     from project.tickets.views import tickets_blueprint
     app.register_blueprint(tickets_blueprint, url_prefix="/tickets")
-
+    from project.user.Oauth import google_blueprint
+    app.register_blueprint(google_blueprint, url_prefix="/login")
     from project.api import api
     # restful api
     api.init_app(app)

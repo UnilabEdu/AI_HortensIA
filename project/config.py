@@ -9,6 +9,7 @@ class Config(object):
     APP_NAME = "Hortensia"
 
     # Flask settings
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = '1'
     CSRF_ENABLED = True
     PROPAGATE_EXCEPTIONS = True
     SECRET_KEY = "Cannottell"  # TODO: move secret key to environmental variables
@@ -34,6 +35,10 @@ class Config(object):
     USER_AUTO_LOGIN_AT_LOGIN = True
     USER_AUTO_LOGIN_AFTER_CONFIRM = True
 
+    # Flask_dance OAuth configuration
+
+    GOOGLE_OAUTH_CLIENT_ID = '476339205106-ju2726fhl5b2dj1b6pn4bk69pl276tmi.apps.googleusercontent.com'
+    GOOGLE_OAUTH_CLIENT_SECRET = 'XnijaQWBQP3rNiuLxv2KBSMf'
     USER_REGISTER_URL = '/register'
     USER_LOGIN_URL = '/'
 
