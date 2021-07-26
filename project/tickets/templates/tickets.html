@@ -4,23 +4,7 @@
 {% from 'macros/navbar.html' import navbar with context %}
 {% from 'macros/current_lang.html' import current_lang with context %}
 
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="http://fonts.cdnfonts.com/css/segoe-ui-4" rel="stylesheet" />
-    <!-- <link href="https://free.bboxtype.com/embedfonts/?family=FiraGO:300,400,500,700,800" rel="stylesheet"> -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../css/main.min.css" />
-    <title>Document</title>
-  </head>
-  <body class="home__body">
+<body class="home__body">
 
     {{ navbar() }}
 
@@ -1916,17 +1900,12 @@
           <h2 id="title" class="restrict__btn basic__btn center">{{ _('Choose an Emotion') }}</h2>
           <ul>
             <li>
-              <h3>{{ _('Synonym:') }}</h3>
-              <p id="synonym">{{ _('A synonym of the chosen emotion') }}</p>
+              <h3>{{ _('Similar words:') }}</h3>
+              <p id="synonym">{{ _('Similar words or synonyms of the chosen emotion') }}</p>
             </li>
             <li>
-              <h3 id="about-question">{{ _('What does this emotion mean:') }}</h3>
+              <h3 id="about-question">{{ _('What is this emotion telling you?') }}</h3>
               <p id="about">{{ _('The definition of the chosen emotion') }} </p>
-            </li>
-            <li>
-              <h3 id="help-question">{{ _('How does this emotion help you:') }}</h3>
-              <p id="help">{{ _("The description of the emotion's significance") }}
-              </p>
             </li>
           </ul>
           <button id="next-submit-ticket" class="next__btn" disabled>

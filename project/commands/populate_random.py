@@ -5,7 +5,7 @@ from essential_generators import DocumentGenerator
 from random import randrange, choice
 from flask import current_app
 from datetime import datetime, timedelta
-from .populate_initial import populate_emotions, populate_texts
+from .populate_initial import populate_emotions, populate_texts, populate_files
 
 gen = DocumentGenerator()  # used to generate random words and sentences
 
@@ -24,11 +24,12 @@ class PopulateWithRandomCommand(Command):
 
 def populate_with_random():
     populate_users()
-    populate_files()
-    populate_texts()
     populate_emotions()
-    populate_tickets()
+    populate_files()
+    db.session.commit()
 
+    populate_texts()
+    populate_tickets()
     db.session.commit()
 
 
@@ -53,16 +54,13 @@ def populate_users():
                             confirmed_at=confirmed_at))
 
 
-def populate_files():
-    for i in range(5):
-        random_word = gen.word() + gen.word()
-        random_number = str(randrange(1, 2000))
-        db.session.add(Files(title=random_word+' '+random_number,
-                             file_name=random_word+'_'+random_number,
-                             user_id=randrange(1, 301)))
-
-
-
+# def populate_files():
+#     for i in range(5):
+#         random_word = gen.word() + gen.word()
+#         random_number = str(randrange(1, 2000))
+#         db.session.add(Files(title=random_word+' '+random_number,
+#                              file_name=random_word+'_'+random_number,
+#                              user_id=randrange(1, 301)))
 
 
 def populate_tickets():
@@ -73,12 +71,12 @@ def populate_tickets():
 
     # Iterate over 30 User IDs
     for user_id in range(1, 301):
-        text_id_list = list(range(1, 4001))
+        text_id_list = list(range(1, 2736))
 
         # Random numbers used to skip some dates to better showcase Streaks
         skip_these_dates = [date_end - timedelta(days=randrange(1, 90)) for i in range(1, randrange(1, 10))]
 
-        filled_tickets = randrange(2800, 4000)  # amount of tickets for current user
+        filled_tickets = randrange(0, 2736)  # amount of tickets for current user
 
         for i in range(filled_tickets):
             text_id = choice(text_id_list)  # choose a random text to assign to current ticket

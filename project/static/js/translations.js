@@ -72,14 +72,16 @@ if (current_lang === 'en') {
                 amount: 'Amount:'
             },
             line: {
-                month: 'Tickets in the last 30 days',
-                week: 'Tickets in the last 7 days'
+                month: 'Tickets filled',
+                week: 'Tickets filled'
             }
 
         },
 
         lead: {
-            global: {},
+            global: {
+                hover: 'Tickets filled'
+            },
             levels: {
                 one: ['The table is empty right now', 'Submit 35 tickets in the last 7 days to appear here'],
                 two: ['The table is empty right now', 'Submit 70 tickets in the last 7 days to appear here'],
@@ -109,15 +111,12 @@ if (current_lang === 'en') {
 
     ticket: {
         nomore: 'There are no tickets left for you to submit. Please come back later.  ',
-        about: ["What does ", ' mean:'],
-        help: ["How does ", ' help you:'],
+        about: ['What is ', ' telling you:'],
         reset: {
             title: 'Choose an Emotion',
-            synonym: 'A synonym of the chosen emotion',
+            synonym: 'Similar emotions or synonyms of the chosen emotion',
             about: 'The definition of the chosen emotion',
-            help: "The description of the emotion's significance",
-            about_question: 'What does this emotion mean:',
-            help_question: 'How does this emotion help you:'
+            about_question: 'What is this emotion telling you?',
         },
         submit: 'Ticket submitted (Emotion: ',
         error: 'An error occurred'
@@ -198,14 +197,16 @@ else if (current_lang === 'ka') {
                         amount: 'რაოდენობა'
                     },
                     line: {
-                        month: 'ბოლო 30 დღის სტატისტიკა',
-                        week: 'ბოლო 7 დღის სტატისტიკა'
+                        month: 'შევსებული ბარათები',
+                        week: 'შევსებული ბარათები'
                     }
 
                 },
 
                 lead: {
-                    global: {},
+                    global: {
+                        hover: 'შევსებული ბარათები'
+                    },
                     levels: {
                         one: ['ცხრილი ამჟამად ცარიელია', 'აქ მოსახვედრად, ბოლო 7 დღეში შევსებული უნდა გქონდეთ 35 ბარათი'],
                         two: ['ცხრილი ამჟამად ცარიელია', 'აქ მოსახვედრად, ბოლო 7 დღეში შევსებული უნდა გქონდეთ 70 ბარათი'],
@@ -225,7 +226,7 @@ else if (current_lang === 'ka') {
                         emotions: ["რისხვა", "სიფხიზლე", "აღტყინება", "აღტაცება", "თავზარდამცემი შიში", "აღფრთოვანება", "მწუხარება", "სიძულვილი"]
                     },
                     secondary: {
-                        emotions: ['აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'აკრძალვა', 'გაკიცხვა', 'სინანული', 'ზიზღი']
+                        emotions: ['აგრესია', 'ოპტიმიზმი', 'სიყვარული', 'მორჩილება', 'კრძალვა', 'გაკიცხვა', 'სინანული', 'ზიზღი']
                     }
                 }
 
@@ -235,14 +236,11 @@ else if (current_lang === 'ka') {
             ticket: {
                 nomore: 'თქვენ ამოწურეთ მარკირებისთვის განკუთვნილი წინადადებების საცავი. ახალი წინადადებები მოგვიანებით დაემატება. ',
                 about: ["რას გვეუბნება ", ':'],
-                help: ["როგორ დაგეხმარება ", ':'],
                 reset: {
                     title: 'აირჩიეთ ემოცია',
-                    synonym: 'არჩეული ემოციის სინონიმი',
+                    synonym: 'არჩეული ემოციის სინონიმები ან მსგავსი ემოციები',
                     about: 'არჩეული ემოციის განმარტება',
-                    help: 'არჩეული ემოციის მნიშვნელობის განმარტება',
-                    about_question: 'რას გვეუბნება ეს ემოცია:',
-                    help_question: 'როგორ დაგეხმარება ეს ემოცია:'
+                    about_question: 'რას გვეუბნება ეს ემოცია?',
                 },
                 submit: 'მონამეცები მიღებულია (ემოცია: ',
                 error: 'დაფიქსირდა შეცდომა'
