@@ -10,17 +10,6 @@
 
     {{ current_lang() }}
 
-
-{#    <script>#}
-{#        const txt = {{ translations | tojson }}#}
-{#        const current_lang = {{ current_lang | tojson }}#}
-{##}
-{#        if (current_lang === 'en') {#}
-{#            lang_toggler = document.getElementById('lang-checkbox')#}
-{#            lang_toggler.removeAttribute('checked')#}
-{#        }#}
-{#    </script>#}
-
     <div class="home__main__content firago">
       <p id="target-card-text" class="home__title">
       </p>
@@ -1916,7 +1905,9 @@
       </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+    <script src="{{ url_for('tickets.static', filename='tickets.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+
   </body>
 </html>
 

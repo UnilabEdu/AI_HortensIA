@@ -1,24 +1,23 @@
+import os
+from datetime import datetime
+
+from flask import current_app
 from flask_script import Command
+
 from project.models import db, Emotion, Text, Files
 from project.models.user import User, Role
-from flask import current_app
-from datetime import datetime
-from random import randrange
-from essential_generators import DocumentGenerator
-import os
-import re
-
-gen = DocumentGenerator()
 
 
 class PopulateInitial(Command):
-
+    """
+    This command fills the DB with necessary data: an admin user, emotions info, and  unmarked texts
+    """
     def run(self):
         populate_initial()
 
 
 def populate_initial():
-    db.drop_all()
+    db.drop_all()  # warning: both populate_initial and populate_with_random clear the whole DB before running
     db.create_all()
     populate_db()
 
@@ -37,13 +36,17 @@ def populate_db():
 
     populate_emotions()
     populate_files()
-    db.session.commit()
+    db.session.commit()  # commit needed because populate_texts looks for files in DB
 
     populate_texts()
     db.session.commit()
 
 
 def find_or_create_role(name):
+    """
+    if role with name=:name: isn't in db, add :name: role to db
+    else return Role object with name=:name:
+    """
     role = Role.query.filter_by(name=name).first()
 
     if not role:
@@ -55,6 +58,10 @@ def find_or_create_role(name):
 
 
 def find_or_create_user(username, password, email, role=None):
+    """
+    if role with email=:email: isn't in db, add user with the data from parameters to db
+    else return User object with email=:email:
+    """
     user = User.query.filter_by(email=email).first()
 
     if not user:
@@ -73,6 +80,11 @@ def find_or_create_user(username, password, email, role=None):
 
 
 def populate_emotions():
+    """
+    contains data on emotion names, their similar words and definitions on English and Georgian
+    adds rows to 'emotions' table with the data
+    """
+
     emotions_list_en = [  # Primary Emotions
         "Rage", "Anger", "Annoyance",
         "Vigilance", "Anticipation", "Interest",
@@ -86,7 +98,7 @@ def populate_emotions():
         'Aggressiveness', 'Optimism', 'Love', 'Submission', 'Awe', 'Disapproval', 'Remorse', 'Contempt', 'Neutral'
     ]
 
-    emotions_list_ka = [  # ძირითადი ემოციები TODO: improve translations
+    emotions_list_ka = [  # ძირითადი ემოციები
         'რისხვა', 'ბრაზი', 'გაღიზიანება',
         'სიფხიზლე', 'მოლოდინი', 'ინტერესი',
         'აღტყინება', 'სიხარული', 'სიმშვიდე',
@@ -177,6 +189,7 @@ def populate_emotions():
     for emotion_en, similar_en, definition_en, emotion_ka, similar_ka, definition_ka in \
             zip(emotions_list_en, similar_list_en, definition_list_en, emotions_list_ka, similar_list_ka,
                 definition_list_ka):
+
         db.session.add(Emotion(name_en=emotion_en,
                                similar_en=similar_en,
                                definition_en=definition_en,
@@ -186,6 +199,9 @@ def populate_emotions():
 
 
 def populate_files():
+    """
+    finds files with .txt extension in 'project/files' directory and adds File objects to db
+    """
     directory = os.fsencode('project/files/')
 
     for file in os.listdir(directory):
@@ -198,6 +214,10 @@ def populate_files():
 
 
 def populate_texts():
+    """
+    adds Text objects to db from File objects
+    different Files may need different methods of parsing and separating the File into sentences or paragraphs
+    """
     files = Files.query.all()
     filenames = [file.file_name for file in files]
 
@@ -206,11 +226,13 @@ def populate_texts():
     for file in os.listdir(directory):
         file_name = os.fsdecode(file)
 
-        if file_name == filenames[0]:  # add aforizmebi.txt texts to DB
+        # this code block adds each sentence from aforizmebi.txt to DB as a Text object
+        if file_name == filenames[0]:
             f = open(f'project/files/{file_name}', 'br')
-            # for text in f:
-            #     db.session.add(Text(text.decode(), 1))
+            for text in f:
+                db.session.add(Text(text.decode(), 1))
 
+        # this code block adds each sentence from vefxistyaosani.txt to DB as a Text object
         if file_name == filenames[1]:  # add vefxistyaosani.txt texts to DB
             f = open(f'project/files/{file_name}', 'br')
             file_content = f.read().decode()
@@ -218,11 +240,16 @@ def populate_texts():
             texts = []
             current_index = 0
             last_text_index = 0
+
+            # loop through the characters in the file
             for c in file_content:
+                # if the character is an end of the sentence symbol
                 if c == '.' or c == '!' or c == '?':
-                    if current_index < len(file_content)-1 and file_content[current_index+1] == '!':  # this handles '?!'
+                    # if the end of the sentence symbol is '?!'
+                    if current_index < len(file_content)-1 and file_content[current_index+1] == '!':
                         current_index += 1
 
+                    # find and append the sentence including the end of the sentence symbol
                     current_text = file_content[last_text_index:current_index+1]
                     last_text_index = current_index + 1
                     texts.append(current_text)
@@ -232,6 +259,7 @@ def populate_texts():
             alphabet = 'აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ'
             for text in texts:
 
+                # this strips newline characters at the start of the string
                 while len(text) and text[0] not in alphabet:
                     text = text[1:]
 

@@ -1,56 +1,64 @@
-from project.config import Config
 from flask import Flask
-from project.models.user import User
-from flask_mail import Mail, Message
-from flask_user import SQLAlchemyAdapter, UserManager
-from flask_login import LoginManager
-from project.models import db
-from project.user.admin.admin import admin
-from flask_migrate import Migrate
 from flask_babel import Babel
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
+from flask_mail import Mail
+from flask_migrate import Migrate
+from flask_user import SQLAlchemyAdapter, UserManager
+
+from project.admin.admin import admin
+from project.config import Config
+from project.models import db
+from project.models.user import User
+
 
 migrate = Migrate()
 babel = Babel()
 mail = Mail()
 bcrypt = Bcrypt()
+login_manager = LoginManager()
 
-def create_app(import_blueprints=True):
+
+def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-    # database init
+
+    # SQLAlchemy init
     db.init_app(app)
+
+    # Flask-Migrate init
     migrate.init_app(app, db, render_as_batch=True)
-    # flask-user init
-    login_manager = LoginManager()
-    # Added this line fixed the issue.
+
+    # Flask-User init
     login_manager.init_app(app)
 
     db_adapter = SQLAlchemyAdapter(db, User)  # Setup the SQLAlchemy DB Adapter
     UserManager(db_adapter, app)  # Init Flask-User and bind to app
-    # flask-mail init
+
+    # Flask-Mail init
     mail.init_app(app)
-    # flask-babel init
-    babel.init_app(app)
-    # flask-admin init
+
+    # Flask-Admin init
     admin.init_app(app)
 
+    # Flask-Babel init
+    babel.init_app(app)
+
+    # Flask-Bcrypt init
     bcrypt.init_app(app)
 
-    # TODO: remove import_blueprints (it's required for testing data_processing.py functions)
-    if import_blueprints:
-        # Blueprint registrations
-        from project.dashboard.views import dashboard_blueprint
-        app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
+    # Flask-Restful init
+    from project.api import api
+    api.init_app(app)
 
-        from project.front_integration.views import homepage_blueprint
-        app.register_blueprint(homepage_blueprint, url_prefix="/")
+    # Blueprint registrations
+    from project.main.views import homepage_blueprint
+    app.register_blueprint(homepage_blueprint, url_prefix="/")
+
+    from project.dashboard.views import dashboard_blueprint
+    app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
 
     from project.tickets.views import tickets_blueprint
     app.register_blueprint(tickets_blueprint, url_prefix="/tickets")
-
-    from project.api import api
-    # restful api
-    api.init_app(app)
 
     return app

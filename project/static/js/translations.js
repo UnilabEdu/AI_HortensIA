@@ -1,3 +1,8 @@
+// translations.js is used to initialize a dictionary containing
+// every string that would be needed in .js files and can't be imported from Flask-Babel
+// the dictionary changes its language based on current language
+
+
 if (current_lang === 'en') {
 
     lang_toggler = document.getElementById('lang-checkbox')
