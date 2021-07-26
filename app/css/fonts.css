@@ -1,6 +1,7 @@
 @font-face {
   font-family: "BPG Nino Mtavruli";
   src: url(../fonts/ninoMtavruli/bpg-nino-mtavruli-webfont.eot);
+
   src: url(../fonts/ninoMtavruli/bpg-nino-mtavruli-webfont.eot?#iefix) format("embedded-opentype"), url(../fonts/ninoMtavruli/bpg-nino-mtavruli-webfont.woff2) format("woff2"), url(../fonts/ninoMtavruli/bpg-nino-mtavruli-webfont.woff) format("woff"), url(../fonts/ninoMtavruli/bpg-nino-mtavruli-webfont.ttf) format("truetype"), url(../fonts/ninoMtavruli/bpg-nino-mtavruli-webfont.svg#bpg_nino_mtavruliregular) format("svg"); }
 
 @font-face {
@@ -9,5 +10,12 @@
   src: url(../fonts/ninoElit/bpg-nino-elite-caps-webfont.eot?#iefix) format("embedded-opentype"), url(../fonts/ninoElit/bpg-nino-elite-caps-webfont.woff2) format("woff2"), url(../fonts/ninoElit/bpg-nino-elite-caps-webfont.woff) format("woff"), url(../fonts/ninoElit/bpg-nino-elite-caps-webfont.ttf) format("truetype"), url(../fonts/ninoElit/bpg-nino-elite-caps-webfont.svg#bpg_nino_elite_capsregular) format("svg"); }
 
 @font-face {
+  font-family: "BPG Nino Elite Caps";
+  src: url(../fonts/ninoElit/bpg-nino-elite-caps-webfont.eot);
+  src: url(../fonts/ninoElit/bpg-nino-elite-caps-webfont.eot?#iefix) format("embedded-opentype"), url(../fonts/ninoElit/bpg-nino-elite-caps-webfont.woff2) format("woff2"), url(../fonts/ninoElit/bpg-nino-elite-caps-webfont.woff) format("woff"), url(../fonts/ninoElit/bpg-nino-elite-caps-webfont.ttf) format("truetype"), url(../fonts/ninoElit/bpg-nino-elite-caps-webfont.svg#bpg_nino_elite_capsregular) format("svg");
+}
+@font-face {
   font-family: "FiraGo";
-  src: url(../fonts/firago/FiraGO-Book.eot), url(../fonts/firago/FiraGO-Book.woff2) format("woff2"), url(../fonts/firago/FiraGO-Book.woff) format("woff"), url(../fonts/firago/FiraGO-Book.) format("woff"); }
+  src: url(../fonts/firago/FiraGO-Book.eot), url(../fonts/firago/FiraGO-Book.woff2) format("woff2"), url(../fonts/firago/FiraGO-Book.woff) format("woff"), url(../fonts/firago/FiraGO-Book.) format("woff");
+}
+
