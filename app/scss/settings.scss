@@ -13,9 +13,16 @@
 @import "home/mainContent";
 @import "statistics/statistics";
 
-body {
+.home__body {
     height: 100vh !important;
+    background-color: #faf9fb;
+    background-image: url(../assets/Polygon1.svg);
+    background-repeat: no-repeat;
+    background-position-x: 840px;
+    background-position-y: 140px;
+
 }
+
 .s_profile {
 
     width: 600px;
@@ -34,8 +41,12 @@ body {
 
         &_text {
             margin: 35px;
+            h2 {
+                @include font(20px, BPG Nino Mtavruli);
+            }
             a {
                 text-decoration: underline;
+                @include font(14px, FiraGo);
             }
  
         }
@@ -45,13 +56,17 @@ body {
         
         position: relative;
         margin-top: 15px;
+         h2 {
+            @include font(18px, FiraGo);
+         }
 
         .labels {
             display: flex;
             flex-direction: column;
             position: absolute;
-            top: 50px;
+            top: 38px;
             left: 0;
+            
         }
 
 
@@ -59,6 +74,8 @@ body {
             height: 50px;
             margin-top: 10px;
             position: relative;
+            @include font(16px, FiraGo,);
+            font-weight: 700;
            
         }
 
@@ -92,11 +109,17 @@ body {
             background-color: rgba($color: #ffffff, $alpha: 0);
             text-indent: 100px;
             
+            
         }
 
         &_input:focus { 
             outline: none; 
             // background-color: rgba($color: #ffffff, $alpha: 0.1);
+        }
+
+        &_input::placeholder {
+
+          @include font(16px, FiraGo,);
         }
 
 
