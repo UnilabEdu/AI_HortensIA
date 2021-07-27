@@ -91,6 +91,14 @@ const leaderboardChartConfig = {
         }]
     },
     options: {
+        elements:
+        {
+            point:
+                {
+                    radius: 5,
+                    hoverRadius: 20
+                }
+        },
         maintainAspectRatio: false,
         indexAxis: "y",
         scales: {

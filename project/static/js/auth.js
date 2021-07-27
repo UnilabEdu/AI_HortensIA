@@ -47,7 +47,6 @@ const auth_inside_cont = document.querySelector(".auth__left__container");
 const reset_pass_cont = document.querySelector(".reset__pass__left__container")
 const enter_btn = document.querySelector(".enter__btn");
 const inside_reg_btn = document.querySelector(".reg__btn");
-const reset_password = document.querySelector(".reset__password")
 
 enter_btn.addEventListener("click", () => {
   auth_modal.classList.add("d-block");
@@ -61,7 +60,3 @@ inside_reg_btn.addEventListener("click", () => {
   auth_modal.classList.remove("d-block");
   reg_modal.classList.add("d-block");
 });
-reset_password.addEventListener('click', () => {
-    auth_inside_cont.classList.add("d-none");
-    reset_pass_cont.classList.remove("d-none");
-})
