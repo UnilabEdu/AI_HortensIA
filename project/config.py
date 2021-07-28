@@ -9,7 +9,7 @@ class Config(object):
     APP_NAME = "Hortensia"
 
     # Flask settings
-    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = '1'
+
     CSRF_ENABLED = True
     PROPAGATE_EXCEPTIONS = True
     SECRET_KEY = "Cannottell"  # TODO: move secret key to environmental variables
@@ -28,6 +28,14 @@ class Config(object):
     MAIL_USE_SSL = False
     MAIL_DEFAULT_SENDER = 'denissanturyan@gmail.com'
 
+    # Flask_dance OAuth configuration
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = '1'
+    OAUTHLIB_RELAX_TOKEN_SCOPE = 1
+    GITHUB_OAUTH_CLIENT_ID = os.environ.get("GITHUB_OAUTH_CLIENT_ID")
+    GITHUB_OAUTH_CLIENT_SECRET = os.environ.get("GITHUB_OAUTH_CLIENT_SECRET")
+    GOOGLE_OAUTH_CLIENT_ID = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
+    GOOGLE_OAUTH_CLIENT_SECRET = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
+
     # Flask-User settings
     USER_ENABLE_EMAIL = True
     USER_ALLOW_LOGIN_WITHOUT_CONFIRMED_EMAIL = False
@@ -35,10 +43,6 @@ class Config(object):
     USER_AUTO_LOGIN_AT_LOGIN = True
     USER_AUTO_LOGIN_AFTER_CONFIRM = True
 
-    # Flask_dance OAuth configuration
-
-    GOOGLE_OAUTH_CLIENT_ID = '476339205106-ju2726fhl5b2dj1b6pn4bk69pl276tmi.apps.googleusercontent.com'
-    GOOGLE_OAUTH_CLIENT_SECRET = 'XnijaQWBQP3rNiuLxv2KBSMf'
     USER_REGISTER_URL = '/register'
     USER_LOGIN_URL = '/'
 

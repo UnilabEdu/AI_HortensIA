@@ -16,9 +16,9 @@ tickets_blueprint = Blueprint('tickets',
 @tickets_blueprint.route('/', methods=['GET', 'POST'])
 @login_required
 def tickets():
-    text = Text.get_random().text
+    # text = Text.get_random().text
     form = EmotionForm()
-
+    text='text'
     if form.validate_on_submit():
         user = current_user.get_id()
         print(user)

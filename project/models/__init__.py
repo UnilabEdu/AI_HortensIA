@@ -11,6 +11,7 @@ class Profile(db.Model):
     first_name = db.Column(db.String(64), nullable=False)
     last_name = db.Column(db.String(64), nullable=False)
     profile_img_url = db.Column(db.String)
+
     # gender - gasarkvevia
     # date_of_birth - gasarkvevia
 
@@ -81,6 +82,7 @@ class Text(db.Model):  # Sentences
     @classmethod
     def get_random(cls):
         return cls.query.order_by(func.random()).first()
+
 
 # TODO: Change relationship columns to Int
 

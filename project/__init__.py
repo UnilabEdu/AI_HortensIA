@@ -1,6 +1,6 @@
+from project.models.user import User
 from project.config import Config
 from flask import Flask
-from project.models.user import User
 from flask_mail import Mail, Message
 from flask_user import SQLAlchemyAdapter, UserManager
 from flask_login import LoginManager
@@ -14,6 +14,7 @@ migrate = Migrate()
 babel = Babel()
 mail = Mail()
 bcrypt = Bcrypt()
+login_manager = LoginManager()
 
 
 def create_app(import_blueprints=True):
@@ -22,11 +23,9 @@ def create_app(import_blueprints=True):
     # database init
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
-    # flask-user init
-    login_manager = LoginManager()
-    # Added this line fixed the issue.
+    # flask-login init
     login_manager.init_app(app)
-
+    # flask_user init
     db_adapter = SQLAlchemyAdapter(db, User)  # Setup the SQLAlchemy DB Adapter
     UserManager(db_adapter, app)  # Init Flask-User and bind to app
     # flask-mail init
@@ -52,6 +51,7 @@ def create_app(import_blueprints=True):
     from project.user.Oauth import google_blueprint
     app.register_blueprint(google_blueprint, url_prefix="/login")
     from project.api import api
+
     # restful api
     api.init_app(app)
 
