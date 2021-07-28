@@ -8,9 +8,9 @@ class EmotionList(Resource):
         emotions = Emotion.query.all()
         language = get_locale()
         if language == 'en':
-            emotions_list = [{'emotion': emotion.name_en, 'synonym': emotion.synonym_en, 'example': emotion.example_en}
+            emotions_list = [{'emotion': emotion.name_en, 'similar': emotion.similar_en, 'definition': emotion.definition_en}
                              for emotion in emotions]
         elif language == 'ka':
-            emotions_list = [{'emotion': emotion.name_ka, 'synonym': emotion.synonym_ka, 'example': emotion.example_ka}
+            emotions_list = [{'emotion': emotion.name_ka, 'similar': emotion.similar_ka, 'definition': emotion.definition_ka}
                              for emotion in emotions]
         return emotions_list

@@ -25,22 +25,22 @@ class Emotion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name_en = db.Column(db.String(80), nullable=False, unique=True)
     name_ka = db.Column(db.String(80), nullable=False, unique=True)
-    synonym_ka = db.Column(db.String(80))
-    synonym_en = db.Column(db.String(80))
-    example_ka = db.Column(db.Text)
-    example_en = db.Column(db.Text)
+    similar_ka = db.Column(db.String(80))
+    similar_en = db.Column(db.String(80))
+    definition_ka = db.Column(db.Text)
+    definition_en = db.Column(db.Text)
     tickets = db.relationship('Ticket', backref='emotions')
 
-    def __init__(self, name_ka, name_en, synonym_ka, synonym_en, example_ka, example_en):
+    def __init__(self, name_ka, name_en, similar_ka, similar_en, definition_ka, definition_en):
         self.name_ka = name_ka
         self.name_en = name_en
-        self.synonym_ka = synonym_ka
-        self.synonym_en = synonym_en
-        self.example_ka = example_ka
-        self.example_en = example_en
+        self.similar_ka = similar_ka
+        self.similar_en = similar_en
+        self.definition_ka = definition_ka
+        self.definition_en = definition_en
 
     def __repr__(self):
-        return 'Emotion object: self.name_ka, self.name_en'
+        return f'Emotion object: {self.name_ka}, {self.name_en}'
 
     @classmethod
     def get_all(cls):
