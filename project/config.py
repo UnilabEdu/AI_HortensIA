@@ -28,8 +28,6 @@ class Config(object):
     # Flask_dance OAuth configuration
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = '1'
     OAUTHLIB_RELAX_TOKEN_SCOPE = 1
-    GITHUB_OAUTH_CLIENT_ID = os.environ.get("GITHUB_OAUTH_CLIENT_ID")
-    GITHUB_OAUTH_CLIENT_SECRET = os.environ.get("GITHUB_OAUTH_CLIENT_SECRET")
     GOOGLE_OAUTH_CLIENT_ID = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
     GOOGLE_OAUTH_CLIENT_SECRET = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
 
