@@ -10,22 +10,11 @@
 
     {{ current_lang() }}
 
-{#    <script>#}
-{#        const txt = {{ translations | tojson }}#}
-{#        const current_lang = {{ current_lang | tojson }}#}
-{##}
-{#        if (current_lang === 'en') {#}
-{#            lang_toggler = document.getElementById('lang-checkbox')#}
-{#            lang_toggler.removeAttribute('checked')#}
-{#        }#}
-{#    </script>#}
-
 
     <div class="statistics__content">
 
         <div class="statistics__smallContainer">
 
-{# მიმდინარეობს მონაცემების დამუშავება... #}
             <div class="statistics__box">
                 <p id="current-streak-text" class="goal__centered__text"> {{ _('Loading...') }} </p>
                 <p id="rankup-text" class="goal__centered__text"> {{ _('Loading...') }} </p>
@@ -96,8 +85,6 @@
                           <table id="table-leaderboards-weekly" class="table__green mediumbox__content">
                             <thead>
                               <tr>
-{#                                  მომხმარებლის სახელი#}
-{#                                  ბოლო 7 დღეში შევსებული ბარათები#}
                                 <th>{{ _('Username') }}</th>
                                 <th>{{ _('Tickets filled in the last 7 days') }}</th>
                               </tr>
@@ -162,5 +149,6 @@
 
     <script src="{{ url_for('dashboard.static', filename='chart-configs.js') }}"></script>
     <script src="{{ url_for('dashboard.static', filename='chart-scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
 
 {% endblock %}

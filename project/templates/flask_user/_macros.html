@@ -10,7 +10,6 @@
 
 {% macro render_submit_field(field, label=None, tabindex=None, auth_action=None) -%}
     {% if not label %}{% set label=field.label.text %}{% endif %}
-    {#<button type="submit" class="form-control btn btn-default btn-primary">{{label}}</button>#}
     {% if auth_action =='login' %}
     <input type="submit" class="auth__btn basic__btn" value="Sign in"
            {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}

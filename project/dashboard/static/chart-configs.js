@@ -1,10 +1,11 @@
-let ctx;
+// chart-configs.js initializes every chart on the dashboard, applies necessary styles and default values
 
-function clone(obj) {
-    var result = Array.isArray(obj) ? [] : {};
-    for (var key in obj) {
-        var value = obj[key];
-        var type = {}.toString.call(value).slice(8, -1);
+
+function clone(obj) { // Used only to clone chart configs
+    let result = Array.isArray(obj) ? [] : {};
+    for (let key in obj) {
+        let value = obj[key];
+        let type = {}.toString.call(value).slice(8, -1);
         if (type === 'Array' || type === 'Object') {
             result[key] = clone(value);
         } else if (type === 'Date') {
@@ -16,15 +17,14 @@ function clone(obj) {
     return result;
 }
 
-// CONFIGS
-
-// ["User_wor52", "User_form1363", "User_can1525", "User_302000", "User_cludis32", "User_and957", "User_ar891", "User_and1235", "User_navile849", "User_ther,1251", "YOU \u27a4    "]
-// ["rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(127, 92, 194, 1)", "rgba(156, 92, 194, 1)"]
-// [3996, 3988, 3984, 3979, 3973, 3955, 3954, 3949, 3944, 3937, 3233]
+// Global settings for Chart.js
 Chart.defaults.font.family = "'FiraGO', 'BPG Nino Mtavruli', sans-serif"
-
-
 Chart.overrides.doughnut.cutout = '45%'
+
+
+
+
+// Chart config used for every Donut chart
 const doughnutChartConfig = {
     type: "doughnut",
     data: {
@@ -57,26 +57,16 @@ const doughnutChartConfig = {
     }
 }
 
+// Initializing gradients to be used in leaderboard chart and streaks chart
+const bar_ctx = document.getElementById('leaderboardChart').getContext('2d');
 
-var bar_ctx = document.getElementById('leaderboardChart').getContext('2d');
+const leaderboardNormalGradient = bar_ctx.createLinearGradient(0, 0, 400, 0);
+leaderboardNormalGradient.addColorStop(0, 'rgba(159,13,180,0.8)');
+leaderboardNormalGradient.addColorStop(1, 'rgba(243,77,94,0.8)');
 
-const leaderboardNormalGradient = bar_ctx.createLinearGradient(0, 0, 600, 0);
-leaderboardNormalGradient.addColorStop(0, 'purple');
-leaderboardNormalGradient.addColorStop(1, 'rgba(78, 116, 194, 1)');
-
-const leaderboardSpecialGradient = bar_ctx.createLinearGradient(0, 0, 600, 0);
-leaderboardSpecialGradient.addColorStop(0, 'rgba(78, 116, 194, 1)');
-leaderboardSpecialGradient.addColorStop(1, 'purple');
-
-// OLD RED-ORANGE COLORS:
-// const leaderboardNormalGradient = bar_ctx.createLinearGradient(0, 0, 1200, 0);
-//             leaderboardNormalGradient.addColorStop(0, '#F05B6E');
-//             leaderboardNormalGradient.addColorStop(1, '#FCAB5A');
-//
-// const leaderboardSpecialGradient = bar_ctx.createLinearGradient(0, 0, 400, 0);
-//             leaderboardSpecialGradient.addColorStop(0, '#FCAB5A');
-//             leaderboardSpecialGradient.addColorStop(1, '#F05B6E');
-
+const leaderboardSpecialGradient = bar_ctx.createLinearGradient(0, 0, 400, 0);
+leaderboardSpecialGradient.addColorStop(0, 'rgba(243,77,94,0.8)');
+leaderboardSpecialGradient.addColorStop(1, 'rgba(159,13,180,0.8)');
 
 leaderboardColors = []
 for (let count = 0; count < 10; count++) {
@@ -84,14 +74,16 @@ for (let count = 0; count < 10; count++) {
 }
 
 
-// console.log(leaderboardColors)
+
+
+// A bar chart config used for leaderboard chart and streaks chart
 const leaderboardChartConfig = {
     type: "bar",
     data: {
         labels: ['', '', '', '', '', '', '', '', '', '', ''],
         datasets: [{
             label: "Leaderboard",
-            data: [10, 9.5, 9, 8.5, 8, 7.5, 7, 6.5, 6, 5.5, 5],
+            data: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
             backgroundColor: leaderboardColors,
             barThickness: ["flex"],
             barPercentage: [1],
@@ -99,6 +91,14 @@ const leaderboardChartConfig = {
         }]
     },
     options: {
+        elements:
+        {
+            point:
+                {
+                    radius: 5,
+                    hoverRadius: 20
+                }
+        },
         maintainAspectRatio: false,
         indexAxis: "y",
         scales: {
@@ -129,6 +129,8 @@ const leaderboardChartConfig = {
 }
 
 
+
+// Chart config for the last month's activity line chart
 const monthChartConfig = {
     type: "line",
     data:
@@ -139,12 +141,12 @@ const monthChartConfig = {
                 {
                     label: txt.dash.act.line.month,
                     data: [4, 2, 3, 1],
-                    borderColor: 'purple',
+                    borderColor: '#8f1993',
                     borderWidth: 3,
                     backgroundColor: function () {
-                        var gradient = ctx.createLinearGradient(0, 0, 500, 0);
-                        gradient.addColorStop(0, 'purple');
-                        gradient.addColorStop(1, 'rgba(127, 92, 194, 1)');
+                        let gradient = ctx.createLinearGradient(0, 0, 600, 0);
+                        gradient.addColorStop(0, '#791993');
+                        gradient.addColorStop(1, 'rgb(236,93,105)');
                         return gradient
                     },
                     tension: 0.4,
@@ -193,10 +195,9 @@ const monthChartConfig = {
 }
 
 
-const topStreaksChartConfig = clone(leaderboardChartConfig)
-topStreaksChartConfig.data.datasets[0].label = txt.dash.lead.streaks.title
 
 
+// Radar chart config used in the primary and secondary radar charts
 const radarAnytimePrimaryConfig = {
     type: "radar",
     data: {
@@ -208,10 +209,10 @@ const radarAnytimePrimaryConfig = {
                 fill: true,
                 backgroundColor: "#5200CE13",
                 borderColor: "#4E6FCC",
-                pointBackgroundColor: "rgba(255, 99, 132, 1)",
-                pointBorderColor: "rgba(255, 255, 255, 1)",
-                pointHoverBackgroundColor: "rgba(255, 255, 255, 1)",
-                pointHoverBorderColor: "rgba(255, 99, 132, 1)",
+                pointBackgroundColor: "#4E6FCC",
+                pointBorderColor: "#5200CE",
+                pointHoverBackgroundColor: "#4E6FCC",
+                pointHoverBorderColor: "#5200CE",
                 tension: 0.3
             },
             {
@@ -220,10 +221,10 @@ const radarAnytimePrimaryConfig = {
                 fill: true,
                 backgroundColor: "#D014C213",
                 borderColor: "#D06FC2",
-                pointBackgroundColor: "rgba(54, 162, 235, 1)",
-                pointBorderColor: "rgba(255, 255, 255, 1)",
-                pointHoverBackgroundColor: "rgba(255, 255, 255, 1)",
-                pointHoverBorderColor: "rgba(54, 162, 235, 1)",
+                pointBackgroundColor: "#D014C2",
+                pointBorderColor: "#D06FC2",
+                pointHoverBackgroundColor: "#D014C2",
+                pointHoverBorderColor: "#D06FC2",
                 tension: 0.3
             }
         ]
@@ -264,8 +265,9 @@ const radarAnytimePrimaryConfig = {
     }
 }
 
-const radarAnytimeSecondaryConfig = clone(radarAnytimePrimaryConfig)
-radarAnytimeSecondaryConfig.data.labels = txt.dash.radar.secondary.emotions
+// Clone all of the Chart Configs to appropriate constants. Change labels and other text info where necessary
+
+// All Donut charts (Goal charts)
 const streakGoalChartConfig = clone(doughnutChartConfig)
 streakGoalChartConfig.data.labels = txt.dash.goal.streak.tooltips
 const weeklyGoalChartConfig = clone(doughnutChartConfig)
@@ -273,65 +275,53 @@ weeklyGoalChartConfig.data.labels = txt.dash.goal.lvl.tooltips
 const rankupGoalChartConfig = clone(doughnutChartConfig)
 rankupGoalChartConfig.data.labels = txt.dash.goal.rank.tooltips
 
+// Streaks chart is the same as Leaderboard chart
+const topStreaksChartConfig = clone(leaderboardChartConfig)
+topStreaksChartConfig.data.datasets[0].label = txt.dash.lead.streaks.title
 
-// const radarMonthPrimaryConfig = clone(radarAnytimePrimaryConfig)
-// const radarMonthSecondaryConfig = clone(radarAnytimeSecondaryConfig)
-// const radarWeekPrimaryConfig = clone(radarAnytimePrimaryConfig)
-// const radarWeekSecondaryConfig = clone(radarAnytimeSecondaryConfig)
-// const radarDayPrimaryConfig = clone(radarAnytimePrimaryConfig)
-// const radarDaySecondaryConfig = clone(radarAnytimeSecondaryConfig)
+// Secondary Radar chart is the same as Primary Radar
+const radarAnytimeSecondaryConfig = clone(radarAnytimePrimaryConfig)
+radarAnytimeSecondaryConfig.data.labels = txt.dash.radar.secondary.emotions
 
+
+// Create charts based on configs
+
+// Goal charts
 ctx = document.getElementById("streakGoalChart").getContext('2d');
-var streakGoalChart = new Chart(ctx, streakGoalChartConfig);
+const streakGoalChart = new Chart(ctx, streakGoalChartConfig);
 
 ctx = document.getElementById("weeklyGoalChart").getContext('2d');
-var weeklyGoalChart = new Chart(ctx, weeklyGoalChartConfig);
+const weeklyGoalChart = new Chart(ctx, weeklyGoalChartConfig);
 
 ctx = document.getElementById("rankupGoalChart").getContext('2d');
-var rankupGoalChart = new Chart(ctx, rankupGoalChartConfig);
+const rankupGoalChart = new Chart(ctx, rankupGoalChartConfig);
 
-
+// Activity chart
 ctx = document.getElementById("monthChart").getContext('2d');
-var monthChart = new Chart(ctx, monthChartConfig);
+const monthChart = new Chart(ctx, monthChartConfig);
 
-
+// Top-10 charts (leaderboard and streaks)
 ctx = document.getElementById("leaderboardChart").getContext('2d');
-var leaderboardChart = new Chart(ctx, leaderboardChartConfig);
+const leaderboardChart = new Chart(ctx, leaderboardChartConfig);
 
 ctx = document.getElementById("topStreaksChart").getContext('2d');
-var topStreaksChart = new Chart(ctx, topStreaksChartConfig);
+const topStreaksChart = new Chart(ctx, topStreaksChartConfig);
 
+// Radar charts
 ctx = document.getElementById("radarChartAnytimePrimary").getContext('2d');
-var radarChartAnytimePrimary = new Chart(ctx, radarAnytimePrimaryConfig)
+const radarChartAnytimePrimary = new Chart(ctx, radarAnytimePrimaryConfig)
 
 ctx = document.getElementById("radarChartAnytimeSecondary").getContext('2d');
-var radarChartAnytimeSecondary = new Chart(ctx, radarAnytimeSecondaryConfig)
-//
-// ctx = document.getElementById("radarChartMonthPrimary").getContext('2d');
-// var radarChartMonthPrimary = new Chart(ctx, radarMonthPrimaryConfig)
-//
-// ctx = document.getElementById("radarChartMonthSecondary").getContext('2d');
-// var radarChartMonthSecondary = new Chart(ctx, radarMonthSecondaryConfig)
-//
-// ctx = document.getElementById("radarChartWeekPrimary").getContext('2d');
-// var radarChartWeekPrimary = new Chart(ctx, radarWeekPrimaryConfig)
-//
-// ctx = document.getElementById("radarChartWeekSecondary").getContext('2d');
-// var radarChartWeekSecondary = new Chart(ctx, radarWeekSecondaryConfig)
-//
-// ctx = document.getElementById("radarChartDayPrimary").getContext('2d');
-// var radarChartDayPrimary = new Chart(ctx, radarDayPrimaryConfig)
-//
-// ctx = document.getElementById("radarChartDaySecondary").getContext('2d');
-// var radarChartDaySecondary = new Chart(ctx, radarDaySecondaryConfig)
+const radarChartAnytimeSecondary = new Chart(ctx, radarAnytimeSecondaryConfig)
+
+
 
 
 // Generate Empty Heatmap
+
+// Initialize functions needed to generate a heatmap
 function startOfToday() {
     const d = new Date();
-    // TODO: Fix bug and remove console.log
-    console.log('DATEHERE:')
-    console.log(d)
     return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0);
 }
 
@@ -341,7 +331,7 @@ function isoDayOfWeek(dt) {
     return '' + wd; // string so it gets parsed
 }
 
-function generateData() {
+function generateData() { // Generates data for an empty heatmap with 182 days
     const data = [];
     const end = startOfToday();
     let dt = new Date(new Date().setDate(end.getDate() - 182));
@@ -361,6 +351,9 @@ function generateData() {
 
 Chart.defaults.fontSize = 9;
 let heatmapColorHelper = [0, 1]
+
+
+// Create a Heatmap
 ctx = document.getElementById('heatmapChart').getContext('2d');
 heatmapChart = new Chart(ctx, {
     type: 'matrix',
@@ -368,18 +361,17 @@ heatmapChart = new Chart(ctx, {
         datasets: [{
             label: 'Activity Heatmap',
             data: generateData(), // heatmapData
-            // TODO: create a proper formula for choosing colors
             backgroundColor(c) {
                 const value = c.dataset.data[c.dataIndex].v - heatmapColorHelper[0] / (heatmapColorHelper[1] - heatmapColorHelper[0]);
-                const alpha = (value * 10) / 60;
-                return Chart.helpers.color('#7E57C2').alpha(alpha).lighten(0.1 / c.dataset.data[c.dataIndex].v).rgbString();
-            }, // #7E57C2
+                const alpha = (value) / 30;
+                return Chart.helpers.color('#791993').alpha(alpha).lighten(0.1 / c.dataset.data[c.dataIndex].v).rgbString();
+            },
             borderColor(c) {
                 const value = c.dataset.data[c.dataIndex].v - heatmapColorHelper[0] / (heatmapColorHelper[1] - heatmapColorHelper[0]);
                 const alpha = (10 + value * 10) / 60;
-                return Chart.helpers.color('#5D4191').alpha(alpha).darken(0.6).rgbString();
+                return Chart.helpers.color('#4c0e5c').alpha(alpha).darken(0.6).rgbString();
             },
-            borderWidth: 1,
+            borderWidth: 1.1,
             hoverBackgroundColor: 'yellow',
             hoverBorderColor: 'yellowgreen',
             width(c) {
@@ -462,5 +454,3 @@ heatmapChart = new Chart(ctx, {
         }
     }
 });
-
-// End of Generate Empty Heatmap

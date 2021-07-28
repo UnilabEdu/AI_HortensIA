@@ -1,46 +1,34 @@
 from datetime import datetime, date, timedelta
 from project.database import db
+from project.models.user import User
 from sqlalchemy.sql.expression import func
 
 
-class Profile(db.Model):
-    __tablename__ = "profiles"
-
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    first_name = db.Column(db.String(64), nullable=False)
-    last_name = db.Column(db.String(64), nullable=False)
-    profile_img_url = db.Column(db.String)
-
-    # gender - gasarkvevia
-    # date_of_birth - gasarkvevia
-
-    def __init__(self, first_name, last_name, date_of_birth):
-        self.first_name = first_name
-        self.last_name = last_name
-
-
 class Emotion(db.Model):
+    """
+    contains emotion names, definitions, and similar words to the 33 predefined emotions in two languages
+    users choose one of these emotions to mark a text and submit a ticket
+    """
     __tablename__ = "emotions"
     id = db.Column(db.Integer, primary_key=True)
     name_en = db.Column(db.String(80), nullable=False, unique=True)
     name_ka = db.Column(db.String(80), nullable=False, unique=True)
-    synonym_ka = db.Column(db.String(80))
-    synonym_en = db.Column(db.String(80))
-    example_ka = db.Column(db.Text)
-    example_en = db.Column(db.Text)
+    similar_ka = db.Column(db.String(80))
+    similar_en = db.Column(db.String(80))
+    definition_ka = db.Column(db.Text)
+    definition_en = db.Column(db.Text)
     tickets = db.relationship('Ticket', backref='emotions')
 
-    def __init__(self, name_ka, name_en, synonym_ka, synonym_en, example_ka, example_en):
+    def __init__(self, name_ka, name_en, similar_ka, similar_en, definition_ka, definition_en):
         self.name_ka = name_ka
         self.name_en = name_en
-        self.synonym_ka = synonym_ka
-        self.synonym_en = synonym_en
-        self.example_ka = example_ka
-        self.example_en = example_en
+        self.similar_ka = similar_ka
+        self.similar_en = similar_en
+        self.definition_ka = definition_ka
+        self.definition_en = definition_en
 
     def __repr__(self):
-        return 'Emotion object: self.name_ka, self.name_en'
+        return f'Emotion object: {self.name_ka}, {self.name_en}'
 
     @classmethod
     def get_all(cls):
@@ -48,6 +36,9 @@ class Emotion(db.Model):
 
 
 class Files(db.Model):
+    """
+    contains files from which the Text objects are gathered
+    """
     __tablename__ = "files"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -65,8 +56,12 @@ class Files(db.Model):
         return f"File Object: title: {self.title} file_name: {self.file_name}. user: {self.user}"
 
 
-class Text(db.Model):  # Sentences
+class Text(db.Model):
+    """
+    contains texts (sentences or paragraphs) which would be marked by users
+    """
     __tablename__ = "texts"
+
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text)
     file = db.Column(db.Integer, db.ForeignKey('files.id'))
@@ -84,10 +79,12 @@ class Text(db.Model):  # Sentences
         return cls.query.order_by(func.random()).first()
 
 
-# TODO: Change relationship columns to Int
-
 class Ticket(db.Model):
+    """
+    contains submitted tickets with data on the author of the ticket, the marked text, the chosen emotion, and the time
+    """
     __tablename__ = "tickets"
+
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer, db.ForeignKey('users.id'))
     text = db.Column(db.Integer, db.ForeignKey('texts.id'))
@@ -106,11 +103,14 @@ class Ticket(db.Model):
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
-        print('ticket added: ', self)
 
 
 class ActivityStreak(db.Model):
+    """
+    contains each user's activity streaks: how many days in a row has a user submitted at least one ticket per day
+    """
     __tablename__ = 'streaks'
+
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer, db.ForeignKey('users.id'))
     start_date = db.Column(db.Date)
@@ -152,7 +152,11 @@ class ActivityStreak(db.Model):
 
 
 class SubscribedEmails(db.Model):
+    """
+    contains emails which should be added to the mailing list
+    """
     __tablename__ = "subscribed_emails"
+
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String)
     timestamp = db.Column(db.DateTime)

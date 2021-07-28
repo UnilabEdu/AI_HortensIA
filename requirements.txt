@@ -34,7 +34,6 @@ MyApplication==0.1.0
 numpy==1.20.3
 pandas==1.2.4
 passlib==1.7.4
-pyChart.JS==0.3.0
 pycparser==2.20
 pycryptodome==3.10.1
 python-dateutil==2.8.1

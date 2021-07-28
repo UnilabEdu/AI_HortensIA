@@ -1,90 +1,62 @@
-// Automatically open relevant modal (login or register) after an unsuccessful authorization attempt
-
-login_attempt = document.querySelector('#auth-modal .help-block')
-
-register_attempt = document.querySelector('#reg-modal .help-block')
-
-if (login_attempt) {
-    auth_modal.classList.add("d-block");
-} else if (register_attempt) {
-    reg_modal.classList.add("d-block");
-}
+// main.js handles opening and closing authorization modals
 
 
-// Email subscription functionality
+const auth_modal = document.getElementById("auth-modal");
+const reg_modal = document.getElementById("reg-modal");
 
-email_submit_btn = document.getElementById('email-subscription-btn')
+// Get the button that opens the modal
+const auth_btn = document.getElementById("auth-btn");
+const reg_btn = document.getElementById("reg-btn");
 
-email_submit_btn.addEventListener('click', function() {
-    let email = document.getElementById('email-subscription-input').value
-    let help_text = document.getElementById('email-subscription-help-text')
-    if (email.length < 1) {
-        help_text.innerHTML = txt.subscr.zero
-            help_text.style.display = 'block'
-    } else if (email.length > 355 || !email.includes('@') || !email.includes('.')) {
-        help_text.innerHTML = txt.subscr.invalid
-            help_text.style.display = 'block'
-    } else {
-        fetch('/api/subscribe',{
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email: email})
-      }).then(response => response.json())
-        .then(data => {
-          help_text.innerHTML = txt.subscr.success
-          help_text.style.display = 'block'
-        })
-        .catch((error) => {
-          help_text.innerHTML = txt.subscr.error
-          help_text.style.display = 'block'
-          console.log(error)
-        });
-    }
-})
+// Get the <span> element that closes the modal
+const span_close_1 = document.getElementsByClassName("close")[0];
+const span_close_2 = document.getElementsByClassName("close")[1];
 
+// When the user clicks on the button, open the modal
+auth_btn.onclick = function () {
+  auth_modal.classList.add("d-block");
+  if(auth_inside_cont.classList.contains("d-none")){
+    auth_inside_cont.classList.remove("d-none");
+    reset_pass_cont.classList.add("d-none");
+  }
+};
 
-// Translate validator texts
+reg_btn.onclick = function () {
+  reg_modal.classList.add("d-block");
+};
 
-let loginHelpTexts_en = ['Username is required', 'Email is required', 'Invalid Email',
-    'Password is required', 'Username/Email does not exist', 'Incorrect Password',
-    'Email address is required', 'Invalid Email address',
-    'This Email is already in use. Please try another one.', 'This Username is already in use. Please try another one.',
-    "Username may only contain letters, numbers, '-', '.' and '_'",
-    'Username must be at least 3 characters long',
-    'Password must have at least 6 characters with one lowercase letter, one uppercase letter and one number',
-    ]
+// When the user clicks on <span> (x), close the modal
+span_close_1.onclick = function () {
+  auth_modal.classList.remove("d-block");
+};
+span_close_2.onclick = function () {
+  reg_modal.classList.remove("d-block");
+};
 
-let loginHelpTexts_ka = ['შეიყვანეთ მომხმარებლის სახელი', 'შეიყვანეთ ელ-ფოსტა', 'ელ-ფოსტა არასწორადაა შეყვანილი',
-    'შეიყვანეთ პაროლი', 'მონაცემები არასწორადაა შეყვანილი', 'პაროლი არასწორია',
-    'შეიყვანეთ ელ-ფოსტა', 'ელ-ფოსტა არასწორადაა შეყვანილი',
-    'ელ-ფოსტის მისამართი დაკავებულია', 'მომხმარებლის სახელი დაკავებულია',
-    "გამოიყენეთ ასოები, ციფრები ან: -, . , _",
-    'გამოიყენეთ მინიმუმ 3 სიმბოლო',
-    'გამოიყენეთ 6+ სიმბოლო: დიდი/პატარა ასოები, ციფრები',
-    ]
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target === auth_modal) {
+    auth_modal.classList.remove("d-block");
+  } else if (event.target === reg_modal) {
+    reg_modal.classList.remove("d-block");
+  }
+};
 
-let loginHelpTexts_enShort = loginHelpTexts_en.slice()
-loginHelpTexts_enShort[8] = 'This Email is already in use';
-loginHelpTexts_enShort[9] = 'This Username is already in use';
-loginHelpTexts_enShort[10] = 'Use only letters, numbers, -, ., and _'
-loginHelpTexts_enShort[11] = 'Use at least 3 characters'
-loginHelpTexts_enShort[12] = 'Use 6+ characters: uppercase/lowercase letters, numbers'
+// toggle modals
+const auth_inside_cont = document.querySelector(".auth__left__container");
+const reset_pass_cont = document.querySelector(".reset__pass__left__container")
+const enter_btn = document.querySelector(".enter__btn");
+const inside_reg_btn = document.querySelector(".reg__btn");
 
-let helpTexts = document.querySelectorAll('.help-block')
-
-if (helpTexts.length > 0) {
-    for (let i = 0; i < helpTexts.length; i++) {
-        let currentTextIndex = loginHelpTexts_en.indexOf(helpTexts[i].innerHTML)
-        console.log(loginHelpTexts_en)
-        console.log(helpTexts[i].innerHTML)
-        console.log(currentTextIndex)
-        if (current_lang === 'ka') {
-            helpTexts[i].innerHTML = loginHelpTexts_ka[currentTextIndex]
-        } else if (current_lang === 'en') {
-            helpTexts[i].innerHTML = loginHelpTexts_enShort[currentTextIndex]
-        }
-    }
-}
+enter_btn.addEventListener("click", () => {
+  auth_modal.classList.add("d-block");
+  reg_modal.classList.remove("d-block");
+  if(auth_inside_cont.classList.contains("d-none")){
+    auth_inside_cont.classList.remove("d-none");
+    reset_pass_cont.classList.add("d-none");
+  }
+});
+inside_reg_btn.addEventListener("click", () => {
+  auth_modal.classList.remove("d-block");
+  reg_modal.classList.add("d-block");
+});
