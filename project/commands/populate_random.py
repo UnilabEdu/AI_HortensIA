@@ -1,10 +1,12 @@
-from flask_script import Command
-from project.models import db, Ticket, Text, Files
-from project.models.user import User
-from essential_generators import DocumentGenerator
+from datetime import datetime, timedelta, date
 from random import randrange, choice
+
+from essential_generators import DocumentGenerator
 from flask import current_app
-from datetime import datetime, timedelta
+from flask_script import Command
+
+from project.models import db, Ticket, ActivityStreak
+from project.models.user import User
 from .populate_initial import populate_emotions, populate_texts, populate_files
 
 gen = DocumentGenerator()  # used to generate random words and sentences
@@ -13,11 +15,12 @@ gen = DocumentGenerator()  # used to generate random words and sentences
 class PopulateWithRandomCommand(Command):
     """
     Populates DB with Users and Texts with randomized data, Emotions,
-    and Tickets related to those Users, Texts and Emotions
+    and Tickets related to those Users, Texts and Emotions.
+    Also adds Streaks to DB with random values (they aren't based on any actual activity data)
     """
 
     def run(self):
-        db.drop_all()  # uncomment next two lines if db_init wasn't used and DB wasn't populated yet
+        db.drop_all()  # warning: both populate_initial and populate_with_random clear the whole DB before running
         db.create_all()
         populate_with_random()
 
@@ -30,6 +33,7 @@ def populate_with_random():
 
     populate_texts()
     populate_tickets()
+    populate_streaks()
     db.session.commit()
 
 
@@ -54,37 +58,29 @@ def populate_users():
                             confirmed_at=confirmed_at))
 
 
-# def populate_files():
-#     for i in range(5):
-#         random_word = gen.word() + gen.word()
-#         random_number = str(randrange(1, 2000))
-#         db.session.add(Files(title=random_word+' '+random_number,
-#                              file_name=random_word+'_'+random_number,
-#                              user_id=randrange(1, 301)))
-
-
 def populate_tickets():
-    emotion_id_list = range(1, 33)  # IDs of all emotions
+    emotion_id_list = range(1, 34)  # IDs of all emotions
 
     date_end = datetime.now()  # max date
     date_max_difference = 90  # max difference (in days) between today and Ticket submission date
 
-    # Iterate over 30 User IDs
+    # Iterate over 300 User IDs
     for user_id in range(1, 301):
         text_id_list = list(range(1, 2736))
 
         # Random numbers used to skip some dates to better showcase Streaks
         skip_these_dates = [date_end - timedelta(days=randrange(1, 90)) for i in range(1, randrange(1, 10))]
 
-        filled_tickets = randrange(0, 2736)  # amount of tickets for current user
+        filled_tickets = randrange(0, 600)  # amount of tickets for current user
 
         for i in range(filled_tickets):
             text_id = choice(text_id_list)  # choose a random text to assign to current ticket
             text_id_list.remove(text_id)  # remove the used ticket from the next iteration for current user
             emotion_id = choice(emotion_id_list)  # choose a random emotion to assign to current ticket
-            date = date_end - timedelta(days=randrange(0, date_max_difference))
+            date = date_end - timedelta(days=randrange(0, date_max_difference))  # choose a random date for the ticket
 
             if date in skip_these_dates:
+                # some dates are skipped to make the activity data more varying
                 continue
 
             ticket = Ticket(user_id=user_id,
@@ -93,3 +89,21 @@ def populate_tickets():
                             commit_date=date)
 
             db.session.add(ticket)
+
+
+def populate_streaks():
+    for i in range(10000):
+        start_date = date.today() - timedelta(days=randrange(1, 100))
+        total_days = randrange(1, 100)
+        end_date = start_date + timedelta(days=total_days)
+
+        db.session.add(ActivityStreak(
+                            user_id=randrange(1, 301),
+                            start_date=start_date,
+                            end_date=end_date,
+                            total_days=total_days,
+                            status=1
+                            )
+                       )
+
+    db.session.commit()

@@ -1,5 +1,14 @@
+// chart-scripts.js initializes functions used to update charts,
+// fetches data from backend, and renders the data on every dashboard chart and table
+// also adds necessary listeners to buttons which switch displayed charts
+
+
+// Initialize functions needed to update different charts and their buttons
+
 function showChart(chartName, chartGroup, button, additionalDiv = 0) {
-    var i;
+    // shows charts and hides other charts with the same position
+
+    let i;
     let x;
     if (chartGroup === 'activity') {
         x = document.getElementsByClassName("activity-chart-container");
@@ -16,20 +25,14 @@ function showChart(chartName, chartGroup, button, additionalDiv = 0) {
     }
 
     let allButtons;
-    console.log(button.classList)
     if (button.classList.contains('statistics__buttonsActivity')) {
-        console.log('activity')
         allButtons = document.querySelectorAll('.statistics__buttonsActivity')
-        console.log('allButtons')
-        console.log(allButtons)
     } else if (button.classList.contains('statistics__buttonsLeaderboards')) {
-        console.log('leaderboard')
         allButtons = document.querySelectorAll('.statistics__buttonsLeaderboards')
     }
 
     for (let i = 0; i < allButtons.length; i++) {
         if (allButtons[i].classList.contains('statistics__active')) {
-            console.log('contains')
             allButtons[i].classList.remove('statistics__active')
         }
     }
@@ -37,9 +40,9 @@ function showChart(chartName, chartGroup, button, additionalDiv = 0) {
 }
 
 
-
-
 function updateChartData(chart, label, data, infoLabel=null) {
+    // A generic function to update chart labels and values
+
     chart.data.labels = label
     chart.data.datasets.forEach((dataset) => {
         dataset.data = data;
@@ -50,28 +53,9 @@ function updateChartData(chart, label, data, infoLabel=null) {
     chart.update();
 }
 
-// function updateLeaderboard(chart, label, data) {
-//     chart.data.labels = label
-//     chart.data.datasets.forEach((dataset) => {
-//         dataset.data = data;
-//     });
-//     chart.update();
-// }
-
-function activateRadarButtons(btn) {
-    let allRadarButtons = document.querySelectorAll('.statistics__buttonsRadars button')
-    for (let i = 0; i < allRadarButtons.length; i++) {
-        console.log(btn.classList)
-        if (allRadarButtons[i].classList.contains('statistics__active')) {
-            allRadarButtons[i].classList.remove('statistics__active')
-        }
-    }
-    btn.classList.add('statistics__active')
-}
-
 
 function updateRadar(chart, data) {
-    var count = 0
+    let count = 0
     chart.data.datasets.forEach((dataset) => {
         if (count === 0) {
             dataset.data = data[0];
@@ -87,16 +71,6 @@ function updateRadar(chart, data) {
 function updateHeatmap(heatmap, dataNew) {
     heatmap.data.datasets[0].data = dataNew;
     heatmap.update();
-}
-
-
-function updateLeaderboardColors(chart, userRank) {
-    if (userRank > 10) {
-        chart.data.datasets[0].backgroundColor.push(leaderboardSpecialGradient)
-    } else {
-        chart.data.datasets[0].backgroundColor[userRank-1] = leaderboardSpecialGradient
-    }
-    chart.update();
 }
 
 
@@ -122,9 +96,10 @@ function updateRankupChart(chart, data) {
     }
 }
 
+
 function updateStreakGoalChart(chart, streakDays) {
-    var colors = ['#914EB2', '#916DD1', '#4B6DD1', '#0098BD', '#00CEBD', '#F7B967', '#F78C67', '#FF5050', '#F74991', '#00C4E3', '#DE2A7C']
-    var brackets = [7, 14, 21, 30, 60, 90, 120, 150, 180, 365, 99999999]
+    let colors = ['#914EB2', '#916DD1', '#4B6DD1', '#0098BD', '#00CEBD', '#F7B967', '#F78C67', '#FF5050', '#F74991', '#00C4E3', '#DE2A7C']
+    let brackets = [7, 14, 21, 30, 60, 90, 120, 150, 180, 365, 99999999]
     let currentBracket = 7
     let bracketIndex = 0
     let activeStreak = true
@@ -142,8 +117,8 @@ function updateStreakGoalChart(chart, streakDays) {
         }
     })
 
-    var currentStreakText;
-    var targetStreakText;
+    let currentStreakText;
+    let targetStreakText;
     if (activeStreak === true) {
         currentStreakText = txt.dash.goal.streak.calculated.active.curr[0] + streakDays.toString() + txt.dash.goal.streak.calculated.active.curr[1]
 
@@ -255,10 +230,10 @@ function updateWeeklyLevelsTable(tableID, displayLevel, button) {
         let rowsToAppend = []
         for (let i = 0; i < levelData.length; i++) {
             let row = document.createElement('tr')
-            var cellUsername = document.createElement("td");
-            var cellFrequency = document.createElement("td");
-            var cellUsernameText = document.createTextNode(levelData[i][0]);
-            var cellFrequencyText = document.createTextNode(levelData[i][1].toString())
+            let cellUsername = document.createElement("td");
+            let cellFrequency = document.createElement("td");
+            let cellUsernameText = document.createTextNode(levelData[i][0]);
+            let cellFrequencyText = document.createTextNode(levelData[i][1].toString())
             cellUsername.appendChild(cellUsernameText)
             cellFrequency.appendChild(cellFrequencyText)
             row.appendChild(cellUsername)
@@ -281,13 +256,38 @@ function updateWeeklyLevelsTable(tableID, displayLevel, button) {
 }
 
 
+function updateLeaderboardColors(chart, userRank) {
+    // this function lets leaderboard chart use a special gradient to highlight current_user's ranking
+    if (userRank > 10) {
+        chart.data.datasets[0].backgroundColor.push(leaderboardSpecialGradient)
+    } else {
+        chart.data.datasets[0].backgroundColor[userRank-1] = leaderboardSpecialGradient
+    }
+    chart.update();
+}
+
+
+function activateRadarButtons(btn) {
+    // gives active radar buttons an appropriate style while removing that style from other radar timeframe switch buttons
+    let allRadarButtons = document.querySelectorAll('.statistics__buttonsRadars button')
+    for (let i = 0; i < allRadarButtons.length; i++) {
+        if (allRadarButtons[i].classList.contains('statistics__active')) {
+            allRadarButtons[i].classList.remove('statistics__active')
+        }
+    }
+    btn.classList.add('statistics__active')
+}
 
 
 
 
 
-var fetchActivityData = async function () {
-    var response = await fetch('/dashboard/getactivitydata');
+
+// Fetch data from backend from several endpoints
+
+const fetchActivityData = async function () {
+    // fetch heatmap, month activity chart, and streaks goal data
+    let response = await fetch('/dashboard/getactivitydata');
     return await response.json()
 };
 
@@ -306,14 +306,12 @@ async function renderActivityCharts() {
 
     heatmapColorHelper = activityData.min_max
 
-
-    var buttonWeek = document.getElementById('btn-activity-chart-week')
-    var buttonMonth = document.getElementById('btn-activity-chart-month')
+    let buttonWeek = document.getElementById('btn-activity-chart-week')
+    let buttonMonth = document.getElementById('btn-activity-chart-month')
 
 
     buttonWeek.addEventListener("click", function () {
                 updateChartData(monthChart, weekLabels, weekData, txt.dash.act.line.week)
-                console.log(buttonMonth.classList)
                 if (buttonMonth.classList.contains('statistics__active')) {
                     buttonMonth.classList.remove('statistics__active')
                 }
@@ -332,8 +330,11 @@ async function renderActivityCharts() {
 renderActivityCharts()
 
 
-var fetchRadarData = async function () {
-    var response = await fetch('/dashboard/getradarsdata');
+
+
+const fetchRadarData = async function () {
+    // fetch data for the primary and secondary radars
+    let response = await fetch('/dashboard/getradarsdata');
     allRadarData = await response.json();
     return allRadarData
 };
@@ -341,10 +342,10 @@ var fetchRadarData = async function () {
 async function renderRadarCharts() {
     data = await fetchRadarData();
 
-    var buttonAnytime = document.getElementById('btn-radar-anytime')
-    var buttonMonth = document.getElementById('btn-radar-month')
-    var buttonWeek = document.getElementById('btn-radar-week')
-    var buttonDay = document.getElementById('btn-radar-day')
+    let buttonAnytime = document.getElementById('btn-radar-anytime')
+    let buttonMonth = document.getElementById('btn-radar-month')
+    let buttonWeek = document.getElementById('btn-radar-week')
+    let buttonDay = document.getElementById('btn-radar-day')
 
     updateRadar(radarChartAnytimePrimary, [data.user_anytime_primary, data.everyone_anytime_primary])
     updateRadar(radarChartAnytimeSecondary, [data.user_anytime_secondary, data.everyone_anytime_secondary])
@@ -372,68 +373,16 @@ async function renderRadarCharts() {
         updateRadar(radarChartAnytimeSecondary, [data.user_day_secondary, data.everyone_day_secondary])
         activateRadarButtons(buttonDay)
     })
-
-    // var ctx;
-    // console.log(data.user_anytime_primary)
-    // console.log(data.everyone_anytime_primary)
-    // updateRadar(radarChartAnytimePrimary, [data.user_anytime_primary, data.everyone_anytime_primary])
-    // updateRadar(radarChartAnytimeSecondary, [data.user_anytime_secondary, data.everyone_anytime_secondary])
-    // updateRadar(radarChartMonthPrimary, [data.user_month_primary, data.everyone_month_primary])
-    // updateRadar(radarChartMonthSecondary, [data.user_month_secondary, data.everyone_month_secondary])
-    // updateRadar(radarChartWeekPrimary, [data.user_week_primary, data.everyone_week_primary])
-    // updateRadar(radarChartWeekSecondary, [data.user_week_secondary, data.everyone_week_secondary])
-    // updateRadar(radarChartDayPrimary, [data.user_day_primary, data.everyone_day_primary])
-    // updateRadar(radarChartDaySecondary, [data.user_day_secondary, data.everyone_day_secondary])
-
-
-
-
-
-
-
-
-
-
-
-    // ctx = document.getElementById("radarChartAnytimePrimary").getContext('2d');
-    // var radarChartAnytimePrimary = new Chart(ctx, JSON.parse(data.primary_anytime_chart));
-
-
-    // ctx = document.getElementById("radarChartAnytimeSecondary").getContext('2d');
-    // var radarChartAnytimeSecondary = new Chart(ctx, JSON.parse(data.secondary_anytime_chart));
-
-
-    // ctx = document.getElementById("radarChartMonthPrimary").getContext('2d');
-    // var radarChartMonthPrimary = new Chart(ctx, JSON.parse(data.primary_month_chart));
-    //
-    //
-    // ctx = document.getElementById("radarChartMonthSecondary").getContext('2d');
-    // var radarChartMonthSecondary = new Chart(ctx, JSON.parse(data.secondary_month_chart));
-    //
-    //
-    // ctx = document.getElementById("radarChartWeekPrimary").getContext('2d');
-    // var radarChartWeekPrimary = new Chart(ctx, JSON.parse(data.primary_week_chart));
-    //
-    //
-    // ctx = document.getElementById("radarChartWeekSecondary").getContext('2d');
-    // var radarChartWeekSecondary = new Chart(ctx, JSON.parse(data.secondary_week_chart));
-    //
-    //
-    // ctx = document.getElementById("radarChartDayPrimary").getContext('2d');
-    // var radarChartDayPrimary = new Chart(ctx, JSON.parse(data.primary_day_chart));
-    //
-    //
-    // ctx = document.getElementById("radarChartDaySecondary").getContext('2d');
-    // var radarChartDaySecondary = new Chart(ctx, JSON.parse(data.secondary_day_chart));
-
 }
 
 renderRadarCharts()
 
 
 
-var fetchLeaderboardData = async function () {
-    var response = await fetch('/dashboard/getleaderboarddata');
+
+const fetchLeaderboardData = async function () {
+    // fetch data for the leaderboard chart and rankup goal chart
+    let response = await fetch('/dashboard/getleaderboarddata');
     return await response.json();
 };
 
@@ -452,8 +401,10 @@ renderLeaderboardChart()
 
 
 
-var fetchWeeklyLevelsData = async function () {
-    var response = await fetch('/dashboard/getweeklylevelsdata');
+
+const fetchWeeklyLevelsData = async function () {
+    // fetch data for the levels table
+    let response = await fetch('/dashboard/getweeklylevelsdata');
     return await response.json();
 };
 
@@ -467,15 +418,17 @@ renderWeeklyLevelsTable()
 
 
 
-var fetchTopStreaksData = async function () {
-    var response = await fetch('/dashboard/gettopstreaksdata');
+
+const fetchTopStreaksData = async function () {
+    // fetch data for streaks top-10 chart
+    let response = await fetch('/dashboard/gettopstreaksdata');
     return await response.json();
 };
 
 async function renderTopStreaksChart() {
     streaksData = await fetchTopStreaksData();
-    var usernames = streaksData.usernames
-    var scores = streaksData.top_streaks
+    let usernames = streaksData.usernames
+    let scores = streaksData.top_streaks
     updateChartData(topStreaksChart, usernames, scores)
 }
 
