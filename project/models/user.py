@@ -6,7 +6,7 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
-    password = db.Column(db.String(255), nullable=False)
+    password = db.Column(db.String(255), nullable=True)
     email = db.Column(db.String(255), nullable=False, unique=True, server_default='')
     confirmed_at = db.Column(db.DateTime())
     active = db.Column(db.Boolean(), nullable=False, server_default='1')

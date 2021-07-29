@@ -7,6 +7,7 @@ class Config(object):
     APP_NAME = "Hortensia"
 
     # Flask settings
+
     CSRF_ENABLED = True
     PROPAGATE_EXCEPTIONS = True
     SECRET_KEY = "Cannottell"
@@ -23,6 +24,12 @@ class Config(object):
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
     MAIL_DEFAULT_SENDER = 'denissanturyan@gmail.com'
+
+    # Flask_dance OAuth configuration
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = '1'
+    OAUTHLIB_RELAX_TOKEN_SCOPE = 1
+    GOOGLE_OAUTH_CLIENT_ID = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
+    GOOGLE_OAUTH_CLIENT_SECRET = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
 
     # Flask-User settings
     USER_ENABLE_EMAIL = True

@@ -10,7 +10,8 @@ from sqlalchemy.orm import load_only
 from project import create_app
 from project.database import db
 from project.models import Ticket
-from project.models import User, ActivityStreak
+from project.models.user import User
+from project.models import ActivityStreak
 
 
 def data_user_activity():
