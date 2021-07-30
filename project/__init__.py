@@ -61,4 +61,7 @@ def create_app():
     from project.tickets.views import tickets_blueprint
     app.register_blueprint(tickets_blueprint, url_prefix="/tickets")
 
+    from project.Oauth import google_blueprint
+    app.register_blueprint(google_blueprint, url_prefix="/login")
+
     return app
