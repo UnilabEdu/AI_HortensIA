@@ -787,8 +787,13 @@ header {
   color: whitesmoke;
 }
 
-body {
+.home__body {
   height: 100vh !important;
+  background-color: #faf9fb;
+  background-image: url(../assets/Polygon1.svg);
+  background-repeat: no-repeat;
+  background-position-x: 840px;
+  background-position-y: 140px;
 }
 
 .s_profile {
@@ -809,24 +814,41 @@ body {
 .s_profile_basic_text {
   margin: 35px;
 }
+.s_profile_basic_text h2 {
+  font-size: 20px;
+  font-family: BPG Nino Mtavruli;
+  color: black;
+}
 .s_profile_basic_text a {
   text-decoration: underline;
+  font-size: 14px;
+  font-family: FiraGo;
+  color: black;
 }
 .s_profile_form {
   position: relative;
   margin-top: 15px;
 }
+.s_profile_form h2 {
+  font-size: 18px;
+  font-family: FiraGo;
+  color: black;
+}
 .s_profile_form .labels {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 50px;
+  top: 38px;
   left: 0;
 }
 .s_profile_form_label {
   height: 50px;
   margin-top: 10px;
   position: relative;
+  font-size: 16px;
+  font-family: FiraGo;
+  color: black;
+  font-weight: 700;
 }
 .s_profile_form_label::after {
   content: url(../assets/edit.svg);
@@ -854,4 +876,9 @@ body {
 }
 .s_profile_form_input:focus {
   outline: none;
+}
+.s_profile_form_input::placeholder {
+  font-size: 16px;
+  font-family: FiraGo;
+  color: black;
 }
