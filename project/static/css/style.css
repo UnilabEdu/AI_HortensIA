@@ -91,3 +91,7 @@
 #reg-btn:hover {
     cursor: pointer;
 }
+
+.nav {
+    z-index: 1;
+}

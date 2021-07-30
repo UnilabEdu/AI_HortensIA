@@ -25,6 +25,7 @@ class Config(object):
     MAIL_DEFAULT_SENDER = 'denissanturyan@gmail.com'
 
     # Flask-User settings
+    USER_APP_NAME = 'Hortensia'
     USER_ENABLE_EMAIL = True
     USER_ENABLE_CONFIRM_EMAIL = False
     USER_ALLOW_LOGIN_WITHOUT_CONFIRMED_EMAIL = True

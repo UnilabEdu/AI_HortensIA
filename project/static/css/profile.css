@@ -1,0 +1,86 @@
+.s_profile {
+  width: 600px;
+  margin: 20px 0 0 266px;
+}
+.s_profile_basic {
+  display: flex;
+}
+.s_profile_basic_image {
+  width: 138px;
+  height: 138px;
+  background-image: url("{{ url_for('static', filename='assets/reg__background.svg') }}");
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+.s_profile_basic_text {
+  margin: 35px;
+}
+.s_profile_basic_text h2 {
+  font-size: 20px;
+  font-family: 'BPG Nino Mtavruli', sans-serif;
+  color: black;
+}
+.s_profile_basic_text a {
+  text-decoration: underline;
+  font-size: 14px;
+  font-family: 'FiraGo', sans-serif;
+  color: black;
+}
+.s_profile_form {
+  position: relative;
+  margin-top: 15px;
+}
+.s_profile_form h2 {
+  font-size: 18px;
+  font-family: 'FiraGo', sans-serif;
+  color: black;
+}
+.s_profile_form .labels {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 38px;
+  left: 0;
+}
+.s_profile_form_label {
+  height: 50px;
+  margin-top: 10px;
+  position: relative;
+  font-size: 16px;
+  font-family: 'FiraGo', sans-serif;
+  color: black;
+  font-weight: 700;
+}
+.s_profile_form_label::after {
+  content: url(../assets/edit.svg);
+  position: absolute;
+  right: -530px;
+}
+.s_profile_form form {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+}
+.s_profile_form form h2 {
+  margin: 10px 0;
+}
+.s_profile_form_input {
+  margin-top: 10px;
+  width: 100%;
+  height: 50px;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  border-color: #707070;
+  background-color: rgba(255, 255, 255, 0);
+  text-indent: 100px;
+}
+.s_profile_form_input:focus {
+  outline: none;
+}
+.s_profile_form_input::placeholder {
+  font-size: 16px;
+  font-family: 'FiraGo', sans-serif;
+  color: black;
+}

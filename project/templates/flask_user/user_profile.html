@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% from 'macros/navbar.html' import navbar with context %}
+{% from 'macros/current_lang.html' import current_lang with context %}
+
+<body class="home__body">
+
+    {{ navbar() }}
+
+    {{ current_lang() }}
+
+
+<div class="s_profile">
+<div class="s_profile_basic">
+    <div class="s_profile_basic_image">
+        <img src="{{ url_for('static', filename='assets/default_profile_picture.png') }}" alt="profile_picture" style="width: 140px; height: 140px"/>
+    </div>
+    <div class="s_profile_basic_text">
+        <h2>დენისი სანტურიანი</h2>
+    </br>
+        <a href="">+ ფოტოს ატვირთვა</a>
+    </div>
+</div>
+
+<div class="s_profile_form">
+
+    <h2>პარამეტრები</h2>
+    <div class="labels">
+    <label class="s_profile_form_label" for="s_profile_form_email">მეილი</label>
+    <label class="s_profile_form_label" for="s_profile_form_password">პაროლი</label>
+    <label class="s_profile_form_label" for="s_profile_form_text_name">სახელი</label>
+    <label class="s_profile_form_label" for="s_profile_form_text_surname">გვარი</label>
+
+</div>
+    <form action="">
+     <input class="s_profile_form_input" type="email" name="s_profile_form_email" id="s_profile_form_email"  placeholder="denis.santuryan.1@iliauni.edu.ge">
+        <input class="s_profile_form_input" type="password" name="s_profile_form_password" id="s_profile_form_password"  placeholder="********">
+        <input class="s_profile_form_input" type="text" name="s_profile_form_text_name" id="s_profile_form_text_name"  placeholder="დენისი">
+        <input class="s_profile_form_input" type="text" name="s_profile_form_text_surname" id="s_profile_form_text_surname"  placeholder="სანტურიანი">
+    </form>
+</div>
+</div>
+
+<script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+
+{% endblock %}
