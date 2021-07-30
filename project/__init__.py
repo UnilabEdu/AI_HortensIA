@@ -58,10 +58,10 @@ def create_app():
     from project.dashboard.views import dashboard_blueprint
     app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
 
-    from project.Oauth import google_blueprint
-    app.register_blueprint(google_blueprint, url_prefix="/login")
-
     from project.tickets.views import tickets_blueprint
     app.register_blueprint(tickets_blueprint, url_prefix="/tickets")
+
+    from project.Oauth import google_blueprint
+    app.register_blueprint(google_blueprint, url_prefix="/login")
 
     return app

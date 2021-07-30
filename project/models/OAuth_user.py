@@ -12,7 +12,7 @@ class OAuth(OAuthConsumerMixin, db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     user = db.relationship(
         User,
-        # This `backref` thing sets up an `oauth` property on the User model,
+        # The `backref` sets up an `oauth` property on the User model,
         # which is a dictionary of OAuth models associated with that user,
         # where the dictionary key is the OAuth provider name.
         backref=db.backref(

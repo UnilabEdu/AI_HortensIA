@@ -92,7 +92,7 @@ def populate_tickets():
 
 
 def populate_streaks():
-    for i in range(10000):
+    for i in range(100):
         start_date = date.today() - timedelta(days=randrange(1, 100))
         total_days = randrange(1, 100)
         end_date = start_date + timedelta(days=total_days)

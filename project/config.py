@@ -32,6 +32,7 @@ class Config(object):
     GOOGLE_OAUTH_CLIENT_SECRET = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
 
     # Flask-User settings
+    USER_APP_NAME = 'Hortensia'
     USER_ENABLE_EMAIL = True
     USER_ENABLE_CONFIRM_EMAIL = False
     USER_ALLOW_LOGIN_WITHOUT_CONFIRMED_EMAIL = True
