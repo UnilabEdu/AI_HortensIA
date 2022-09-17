@@ -147,6 +147,14 @@ a {
   font-family: "FiraGo";
   src: url(../fonts/firago/FiraGO-Book.eot), url(../fonts/firago/FiraGO-Book.woff2) format("woff2"), url(../fonts/firago/FiraGO-Book.woff) format("woff"), url(../fonts/firago/FiraGO-Book.) format("woff");
 }
+@font-face {
+  font-family: "Segoe UI";
+  src: url("../fonts/segoe-ui/SegoeUI-Bold.eot");
+  src: url("../fonts/segoe-ui/SegoeUI-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/segoe-ui/SegoeUI-Bold.woff2") format("woff2"), url("../fonts/segoe-ui/SegoeUI-Bold.woff") format("woff"), url("../fonts/segoe-ui/SegoeUI-Bold.svg#SegoeUI-Bold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 .switch {
   position: relative;
   display: inline-block;
@@ -226,8 +234,7 @@ input:checked + .slider:before {
       -ms-flex-align: center;
           align-items: center;
 }
-
-.main__content {
+.main__body .main__content {
   width: 80%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -237,69 +244,62 @@ input:checked + .slider:before {
           justify-content: space-between;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  /* The Modal (background) */
+  /* Modal Content */
+  /* The Close Button */
 }
-.main__content .main__title {
-  width: 100%;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-}
-
-.left__section {
-  width: 630px;
-  color: #0b0b0c;
-  text-align: left;
-}
-.left__section .left__text {
-  margin-top: 50px;
-  border-radius: 15px;
-  opacity: 0.8;
-  font-weight: bold;
-  color: #0b0b0c;
-  background-color: white;
-  padding: 50px 30px;
-  font-size: 16px;
-}
-.left__section .left__form {
+.main__body .main__content .main-title-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  z-index: 1000;
+}
+.main__body .main__content .main-title-wrapper .main__title {
+  margin-bottom: 5px;
+  font-size: 45px;
+  margin-right: 375px;
+}
+.main__body .main__content .main-title-wrapper .language {
+  font-size: 20px;
+}
+.main__body .main__content .main-title-wrapper .language span {
+  font-weight: bold;
+}
+.main__body .main__content .main-title-wrapper .language span:after {
+  content: "";
+  float: right;
+  background: #201F20;
+  width: 50%;
+  height: 2px;
+  border-radius: 3px;
+}
+.main__body .main__content .left-right-wrapp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-top: 100px;
 }
-.left__section .left__form__input {
-  -webkit-box-flex: 0.8;
-      -ms-flex-positive: 0.8;
-          flex-grow: 0.8;
-  border-radius: 8px 0 0 8px;
+.main__body .main__content .left-right-wrapp .left__section {
+  width: 636px;
+  height: 325px;
+  color: #0b0b0c;
+  text-align: left;
+  margin-right: 82px;
+  background-color: white;
+  opacity: 0.8;
+  border-radius: 15px;
 }
-.left__section .left__form__btn {
-  height: 55px;
-  border-radius: 0 8px 8px 0;
-  -webkit-box-flex: 0.2;
-      -ms-flex-positive: 0.2;
-          flex-grow: 0.2;
-  font-weight: 300;
+.main__body .main__content .left-right-wrapp .left__section .left__text {
+  width: 488px;
+  font-weight: bold;
+  color: #0b0b0c;
+  padding: 34px 0 0 33px;
+  font-size: 18px;
 }
-.left__section .left__form .left__form__title {
-  width: 100%;
-  margin-bottom: 15px;
-  font-weight: bolder;
-}
-
-.right__section {
+.main__body .main__content .left-right-wrapp .right__section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -316,10 +316,8 @@ input:checked + .slider:before {
   -webkit-box-flex: 0.8;
       -ms-flex: 0.8;
           flex: 0.8;
-  padding-top: 70px;
-  padding-bottom: 50px;
 }
-.right__section .auth__btn {
+.main__body .main__content .left-right-wrapp .right__section .auth__btn {
   width: 350px;
   height: 70px;
   border-radius: 44px;
@@ -328,34 +326,73 @@ input:checked + .slider:before {
   font-weight: bold;
   border: 1px solid #29333a;
   background-color: white;
+  margin-top: 31px;
 }
-.right__section .registration__btn {
+.main__body .main__content .left-right-wrapp .right__section .registration__btn {
   width: 350px;
   height: 70px;
   font-size: 25px;
   font-weight: bold;
   border-radius: 44px;
 }
-.right__section .social {
+.main__body .main__content .left-right-wrapp .right__section .social {
   color: #201f20;
   font-size: 20px;
 }
-.right__section .social i {
-  margin-left: 20px;
-  font-size: 30px;
-}
-.right__section p {
-  font-weight: 700;
-}
-.right__section a {
+.main__body .main__content .left-right-wrapp .right__section .social a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 20px;
 }
-
-/* The Modal (background) */
-.modal {
+.main__body .main__content .left-right-wrapp .right__section .social a i {
+  margin-left: 20px;
+  font-size: 30px;
+}
+.main__body .main__content .left-right-wrapp .right__section .social a p {
+  font-family: "Segoe UI";
+  font-weight: bold;
+}
+.main__body .main__content .left__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-top: 48px;
+  width: 636px;
+}
+.main__body .main__content .left__form .left__form__title {
+  width: 100%;
+  margin-bottom: 15px;
+  font-weight: 900;
+  font-size: 24px;
+}
+.main__body .main__content .left__form__input {
+  -webkit-box-flex: 0.8;
+      -ms-flex-positive: 0.8;
+          flex-grow: 0.8;
+  border-radius: 8px 0 0 8px;
+}
+.main__body .main__content .left__form__btn {
+  height: 55px;
+  border-radius: 0 8px 8px 0;
+  -webkit-box-flex: 0.2;
+      -ms-flex-positive: 0.2;
+          flex-grow: 0.2;
+  font-weight: 300;
+}
+.main__body .main__content .modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -366,9 +403,7 @@ input:checked + .slider:before {
   overflow: auto;
   background-color: rgba(32, 31, 32, 0.51);
 }
-
-/* Modal Content */
-.modal-content {
+.main__body .main__content .modal-content {
   background-repeat: no-repeat;
   background-color: #fff;
   border-radius: 48px;
@@ -378,9 +413,7 @@ input:checked + .slider:before {
   height: 80%;
   overflow: hidden;
 }
-
-/* The Close Button */
-.close {
+.main__body .main__content .close {
   z-index: 11200;
   color: #fff;
   float: right;
@@ -388,22 +421,18 @@ input:checked + .slider:before {
   font-weight: bold;
   margin-left: auto;
 }
-
-.close:hover,
-.close:focus {
+.main__body .main__content .close:hover,
+.main__body .main__content .close:focus {
   text-decoration: none;
   cursor: pointer;
 }
-
-.d-block {
+.main__body .main__content .d-block {
   display: block;
 }
-
-.d-none {
+.main__body .main__content .d-none {
   display: none;
 }
-
-.modal-content {
+.main__body .main__content .modal-content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -541,6 +570,9 @@ input:checked + .slider:before {
   font-size: 18px;
   margin-bottom: 110px;
   text-align: center;
+}
+.right__container .nino__mtavruli {
+  font-size: 30px;
 }
 .right__container .enter__btn {
   display: block;

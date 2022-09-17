@@ -25,3 +25,16 @@
         url(../fonts/firago/FiraGO-Book.woff) format("woff"),
         url(../fonts/firago/FiraGO-Book.) format("woff");
 }
+
+// Segoe UI Bold
+@font-face {
+    font-family: 'Segoe UI';
+    src: url('../fonts/segoe-ui/SegoeUI-Bold.eot');
+    src: url('../fonts/segoe-ui/SegoeUI-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/segoe-ui/SegoeUI-Bold.woff2') format('woff2'),
+        url('../fonts/segoe-ui/SegoeUI-Bold.woff') format('woff'),
+        url('../fonts/segoe-ui/SegoeUI-Bold.svg#SegoeUI-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
