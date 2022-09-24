@@ -12,44 +12,14 @@ from project.models import db
 from project.models.user import User
 
 
-migrate = Migrate()
-babel = Babel()
-mail = Mail()
-bcrypt = Bcrypt()
-login_manager = LoginManager()
+def register_extensions(app):
+    """Register extensions"""
 
+    for extension in extensions_list:
+        extension.init_app(app)
 
-def create_app():
-    app = Flask(__name__)
-    app.config.from_object(Config)
-
-    # SQLAlchemy init
-    db.init_app(app)
-
-    # Flask-Migrate init
-    migrate.init_app(app, db, render_as_batch=True)
-
-    # Flask-User init
-    login_manager.init_app(app)
-
-    db_adapter = SQLAlchemyAdapter(db, User)  # Setup the SQLAlchemy DB Adapter
-    UserManager(db_adapter, app)  # Init Flask-User and bind to app
-
-    # Flask-Mail init
-    mail.init_app(app)
-
-    # Flask-Admin init
-    admin.init_app(app)
-
-    # Flask-Babel init
-    babel.init_app(app)
-
-    # Flask-Bcrypt init
-    bcrypt.init_app(app)
-
-    # Flask-Restful init
-    from project.api import api
-    api.init_app(app)
+    for db_extension in extensions_db_list:
+        db_extension.init_app(app, db)
 
     # Blueprint registrations
     from project.main.views import homepage_blueprint
