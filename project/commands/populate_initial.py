@@ -1,6 +1,5 @@
 import os
 from datetime import datetime
-
 from flask import current_app
 from project.models import db, Emotion, Text, Files
 from project.models.user import User, Role

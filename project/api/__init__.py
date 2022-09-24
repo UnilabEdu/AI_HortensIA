@@ -1,9 +1,7 @@
-from flask_restful import Api
+from project.extensions import api
 from .resources.emotions import EmotionList
 from .resources.tickets import GetTextPostTicket
 from .resources.subscribe import Subscribe
-
-api = Api(prefix='/api/')
 
 
 api.add_resource(EmotionList, '/emotionlist')  # get emotions data (name, similar words, definition) of current language
