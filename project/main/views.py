@@ -1,6 +1,6 @@
 from flask import request, session, redirect, url_for
 
-from project import babel
+from project.extensions import babel
 from . import homepage_blueprint
 
 

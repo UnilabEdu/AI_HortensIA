@@ -11,7 +11,6 @@ from .populate_initial import populate_emotions, populate_texts, populate_files
 gen = DocumentGenerator()  # used to generate random words and sentences
 
 
-
 def populate_with_random():
     populate_users()
     populate_emotions()
