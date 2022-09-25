@@ -1,12 +1,20 @@
-from flask_migrate import MigrateCommand
-from flask_script import Manager
+import click
+from flask.cli import with_appcontext
 
-from project import create_app
-from .populate_initial import PopulateInitial
-from .populate_random import PopulateWithRandomCommand
+from project.commands.populate_initial import populate_initial
+from project.commands.populate_random import populate_with_random
 
-manager = Manager(create_app())
 
-manager.add_command('db', MigrateCommand)  # db commands prefix. available commands: db init, db migrate, db upgrade
-manager.add_command('populate_initial', PopulateInitial)  # populate db with texts from files, emotions, admin user
-manager.add_command('populate_with_random', PopulateWithRandomCommand)  # populate db with randomly filled tickets
+@click.command('populate_initial')
+@with_appcontext
+def populate_initial_command():
+    populate_initial()
+
+
+@click.command('populate_with_random')
+@with_appcontext
+def populate_with_random_command():
+    populate_with_random()
+
+
+command_list = [populate_initial_command, populate_with_random_command]

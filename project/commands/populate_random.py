@@ -3,26 +3,12 @@ from random import randrange, choice
 
 from essential_generators import DocumentGenerator
 from flask import current_app
-from flask_script import Command
 
 from project.models import db, Ticket, ActivityStreak
 from project.models.user import User
 from .populate_initial import populate_emotions, populate_texts, populate_files
 
 gen = DocumentGenerator()  # used to generate random words and sentences
-
-
-class PopulateWithRandomCommand(Command):
-    """
-    Populates DB with Users and Texts with randomized data, Emotions,
-    and Tickets related to those Users, Texts and Emotions.
-    Also adds Streaks to DB with random values (they aren't based on any actual activity data)
-    """
-
-    def run(self):
-        db.drop_all()  # warning: both populate_initial and populate_with_random clear the whole DB before running
-        db.create_all()
-        populate_with_random()
 
 
 def populate_with_random():

@@ -1,19 +1,8 @@
 import os
 from datetime import datetime
-
 from flask import current_app
-from flask_script import Command
-
 from project.models import db, Emotion, Text, Files
 from project.models.user import User, Role
-
-
-class PopulateInitial(Command):
-    """
-    This command fills the DB with necessary data: an admin user, emotions info, and  unmarked texts
-    """
-    def run(self):
-        populate_initial()
 
 
 def populate_initial():
