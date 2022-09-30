@@ -1,4 +1,4 @@
-// main.js handles opening and closing authorization modals
+// tickets.js handles opening and closing authorization modals
 
 
 const auth_modal = document.getElementById("auth-modal");
