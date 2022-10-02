@@ -6,7 +6,7 @@ from flask_user import current_user
 from sqlalchemy.orm import load_only
 from sqlalchemy.sql.expression import func
 
-from project import create_app
+from project.config import Config
 from project.database import db
 from project.models import Text, Ticket, ActivityStreak
 
@@ -34,6 +34,7 @@ class GetTextPostTicket(Resource):
                         help='missing secret'
                         )
 
+    @property
     def get(self):
         """
         returns a dictionary with data which should be used to submit a ticket. the keys are: user, secret, text
@@ -42,10 +43,7 @@ class GetTextPostTicket(Resource):
         :text: a dictionary containing attributes of a Text object as its keys (id (int), text (str), file (int))
         """
 
-        with create_app().app_context():
-            if current_user.__class__.__name__ == 'AnonymousUserMixin':  # when sending requests outside browsers
-                return {'error', 'You are not logged in. Please use the website to log in and submit tickets'}, 403
-
+        if current_user.__class__.__name__ != 'AnonymousUserMixin':  # when sending requests outside browsers
             marked_texts = pd.read_sql(  # get IDs of texts that the used has already marked (submitted a ticket)
                 Ticket.query.filter_by(user=current_user.id).options(
                         load_only('text')
@@ -59,7 +57,7 @@ class GetTextPostTicket(Resource):
             random_text = unmarked_texts.order_by(func.random()).first()  # get a random text out of on unmarked texts
 
             if random_text.text:  # if there is an unmarked text left
-                secret = generate_password_hash(create_app().config['SECRET_KEY'])  # hash the SECRET_KEY
+                secret = generate_password_hash(Config.SECRET_KEY)  # hash the SECRET_KEY
 
                 # create a response dictionary and add text, user and secret keys
                 response = dict(random_text.__dict__)  # convert the randomly selected Text object to type dict
@@ -71,6 +69,9 @@ class GetTextPostTicket(Resource):
             else:  # if there are no unmarked texts, return False so the ticket view notifies the user accordingly
                 return False
 
+        return {'error', 'You are not logged in. Please use the website to log in and submit tickets'}, 403
+
+    @property
     def post(self):
         """
         adds a ticket to db based on current_user ID, received text ID and
@@ -80,7 +81,7 @@ class GetTextPostTicket(Resource):
             return {'error', 'You are not logged in. Please use the website to log in and submit tickets'}, 403
 
         data = GetTextPostTicket.parser.parse_args()
-        if check_password_hash(data['secret'], create_app().config['SECRET_KEY']) and current_user.id == data['user']:
+        if check_password_hash(data['secret'], Config.SECRET_KEY) and current_user.id == data['user']:
             net_ticket = Ticket(current_user.id, data['text'], data['emotion'] + 1)
             net_ticket.save_to_db()
 

@@ -120,7 +120,7 @@ def data_leaderboard():
         usernames = []
         count = 1
         for u in user_ids:
-            usernames.append('   ' + str(count) + '. ' + User.query.get(u).username.capitalize())
+            usernames.append('   ' + str(count) + '. ' + User.query.get.username.capitalize())
             count += 1
 
         # Check if current_user is in Top 10 and whether they have at least one post
@@ -276,9 +276,9 @@ def data_weekly_levels():
             elif count > 35:
                 level_one_users.append([user[0], count])
 
-        level_three_users = [[User.query.get(i[0]).username.capitalize(), i[1]] for i in level_three_users]
-        level_two_users = [[User.query.get(i[0]).username.capitalize(), i[1]] for i in level_two_users]
-        level_one_users = [[User.query.get(i[0]).username.capitalize(), i[1]] for i in level_one_users]
+        level_three_users = [[User.query.get.username.capitalize(), i[1]] for i in level_three_users]
+        level_two_users = [[User.query.get.username.capitalize(), i[1]] for i in level_two_users]
+        level_one_users = [[User.query.get.username.capitalize(), i[1]] for i in level_one_users]
 
         return level_one_users, level_two_users, level_three_users
 
@@ -292,7 +292,7 @@ def data_streaks_leaderboard():
         usernames = []
         count = 1
         for user_id in all_streaks.user.to_list():
-            usernames.append('   ' + str(count) + '. ' + User.query.get(user_id).username.capitalize())
+            usernames.append('   ' + str(count) + '. ' + User.query.get.username.capitalize())
             count += 1
 
         top_streaks = all_streaks.total_days.to_list()
