@@ -26,7 +26,7 @@ def google_logged_in(blueprint, token):
         flash("Failed to log in with Google.", "error")
         return
 
-    resp = blueprint.session.get("/oauth2/v2/userinfo")
+    resp = blueprint.session.get
     if not resp.ok:
         flash("Failed to fetch user info from Google.", "error")
         return
