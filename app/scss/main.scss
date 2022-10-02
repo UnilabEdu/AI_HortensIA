@@ -1,0 +1,16 @@
+@import "config";
+@import "mixins";
+@import "fonts";
+
+@import "components/toggle-switch.scss";
+
+@import "global";
+@import "auth-popup";
+@import "reg-popup";
+@import "reset-pass";
+@import "settings";
+
+
+@import "home/header";
+@import "home/mainContent";
+@import "statistics/statistics";
