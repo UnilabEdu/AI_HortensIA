@@ -1,0 +1,61 @@
+.auth__container {
+    display: flex;
+    height: 80%;
+    align-items: center;
+}
+
+.auth__left__container,
+.reset__pass__left__container {
+
+    .fa-google {
+        display: block;
+        width: 40px;
+        font-size: 30px;
+        font-weight: bold;
+        margin: 30px auto;
+    }
+}
+
+.auth__left__container {
+    
+    .auth__form {
+        position: relative;
+        margin: 0 auto;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+
+        a {
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        input {
+            border-radius: 5px;
+        }
+
+        * {
+            margin-bottom: 20px;
+        }
+
+        .auth__btn {
+            width: 150px;
+            margin: 0 auto;
+            height: 55px;
+            border-radius: 45px;
+        }
+    }
+}
+
+.right__container {
+    .reg__btn {
+        display: block;
+        width: 200px;
+        height: 55px;
+        margin: 0 auto;
+        font-weight: bold;
+        border-radius: 45px;
+        background-color: white;
+        color: #7e57c2;
+    }
+}

@@ -1,0 +1,71 @@
+header {
+  padding: 0 10%;
+  width: 100%;
+  height: 80px;
+  background-color: white;
+  @include flex($justify: space-between);
+}
+
+.header__left__cont {
+  @include flex();
+}
+.lang {
+  margin: 5px;
+  @include font(20px, "FiraGo", #201f20);
+}
+
+.header__right__cont {
+  @include flex();
+
+  .page__name {
+    margin-right: 22px;
+  }
+  .username {
+    margin-right: 15px;
+  }
+  button {
+    @include font(20px, "BPG Nino Mtavruli", #201f20);
+  }
+  .profile {
+    align-items: center;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+
+    .nav {
+      background-color: white;
+      position: absolute;
+      z-index: 1;
+      top: 61px;
+      right: 0;
+
+      button {
+        border: none;
+        background-color: white;
+        @include flex();
+        cursor: pointer;
+        padding: 13px 8.5px;
+
+        img {
+          margin-right: 4.5px;
+        }
+      }
+    }
+  }
+}
+.username,
+.page__name {
+  @include font(20px, "BPG Nino Mtavruli", #201f20);
+}
+
+.avatar__img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
+
+.action,
+.lang__action {
+  color: $dark-background;
+  border-bottom: 1px solid $dark-background;
+}
