@@ -1,7 +1,11 @@
 from flask import request, session, redirect, url_for
-
 from project.extensions import babel
-from . import homepage_blueprint
+from flask import Blueprint
+
+homepage_blueprint = Blueprint('homepage',
+                               __name__,
+                               template_folder='templates'
+                               )
 
 
 # the index page uses Flask-User login_or_register endpoint backend

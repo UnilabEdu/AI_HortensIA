@@ -1,9 +1,16 @@
 from flask import render_template, make_response, jsonify
 from flask_user import login_required
-
-from . import dashboard_blueprint
 from .data_processing import data_user_activity, data_leaderboard, data_radar, data_weekly_levels, \
     data_streaks_leaderboard
+
+from flask import Blueprint
+
+dashboard_blueprint = Blueprint('dashboard',
+                                __name__,
+                                template_folder='templates',
+                                static_folder='static'
+                                )
+
 
 
 @dashboard_blueprint.route('/', methods=['GET'])
@@ -14,7 +21,7 @@ def dashboard():
     charts use data from get_radars_data, get_activity_data, get_leaderboard_data,
     get_weekly_levels_data, and get_top_streaks_data endpoints using JavaScript
     """
-    return render_template('dashboard.html')
+    return render_template('dashboard/dashboard.html')
 
 
 @dashboard_blueprint.route('/getradarsdata')

@@ -18,13 +18,13 @@ def register_extensions(app):
 
 
 def register_blueprints(app):
-    from project.main.views import homepage_blueprint
+    from project.views.main.views import homepage_blueprint
     app.register_blueprint(homepage_blueprint, url_prefix="/")
 
-    from project.dashboard.views import dashboard_blueprint
+    from project.views.dashboard.views import dashboard_blueprint
     app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
 
-    from project.tickets.views import tickets_blueprint
+    from project.views.tickets.views import tickets_blueprint
     app.register_blueprint(tickets_blueprint, url_prefix="/tickets")
 
     from project.Oauth import google_blueprint
