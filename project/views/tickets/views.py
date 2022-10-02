@@ -1,7 +1,13 @@
 from flask import render_template
 from flask_user import login_required
+from flask import Blueprint
 
-from . import tickets_blueprint
+tickets_blueprint = Blueprint('tickets',
+                              __name__,
+                              template_folder='templates',
+                              static_folder='static'
+                              )
+
 
 
 @tickets_blueprint.route('/', methods=['GET', 'POST'])
@@ -12,4 +18,4 @@ def tickets():
     texts and emotions are fetched with JavaScript with the API and submitted in the same way
     """
 
-    return render_template('tickets.html')
+    return render_template('tickets/tickets.html')

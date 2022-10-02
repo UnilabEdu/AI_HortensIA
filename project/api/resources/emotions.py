@@ -1,6 +1,6 @@
 from flask_restful import Resource
 
-from project.main.views import get_locale
+from project.views.main.views import get_locale
 from project.models import Emotion
 
 

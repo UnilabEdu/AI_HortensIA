@@ -4,6 +4,7 @@ from project.models.user import User
 from sqlalchemy.sql.expression import func
 
 
+
 class Emotion(db.Model):
     """
     contains emotion names, definitions, and similar words to the 33 predefined emotions in two languages
