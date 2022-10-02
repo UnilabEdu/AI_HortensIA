@@ -48,7 +48,9 @@ class GetTextPostTicket(Resource):
 
             marked_texts = pd.read_sql(  # get IDs of texts that the used has already marked (submitted a ticket)
                 Ticket.query.filter_by(user=current_user.id).options(
-                    load_only('text')).statement, db.engine)
+                        load_only('text')
+                    ).statement, db.engine
+            )
 
             marked_texts = marked_texts.text.to_list()
 
