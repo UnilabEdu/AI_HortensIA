@@ -16,6 +16,10 @@ def register_extensions(app):
     for db_extension in extensions_db_list:
         db_extension.init_app(app, db)
 
+    # Register api (does not initialize otherwise)
+    from project.api import api
+    api.init_app(app)
+
 
 def register_blueprints(app):
     from project.main.views import homepage_blueprint
