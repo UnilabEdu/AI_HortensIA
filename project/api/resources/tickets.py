@@ -34,7 +34,6 @@ class GetTextPostTicket(Resource):
                         help='missing secret'
                         )
 
-    @property
     def get(self):
         """
         returns a dictionary with data which should be used to submit a ticket. the keys are: user, secret, text
@@ -71,7 +70,6 @@ class GetTextPostTicket(Resource):
 
         return {'error', 'You are not logged in. Please use the website to log in and submit tickets'}, 403
 
-    @property
     def post(self):
         """
         adds a ticket to db based on current_user ID, received text ID and
