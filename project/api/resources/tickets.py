@@ -35,6 +35,7 @@ class GetTextPostTicket(Resource):
                         help='missing secret'
                         )
 
+
     @login_required
     def get(self):
         """
@@ -63,6 +64,7 @@ class GetTextPostTicket(Resource):
 
         else:  # if there are no unmarked texts, return False so the ticket view notifies the user accordingly
             return False
+
 
     @login_required
     def post(self):
