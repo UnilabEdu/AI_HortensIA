@@ -3,6 +3,7 @@ from flask import jsonify
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_restful import Resource, reqparse
 from flask_user import current_user
+from flask_login import login_required
 from sqlalchemy.orm import load_only
 from sqlalchemy.sql.expression import func
 
@@ -34,6 +35,8 @@ class GetTextPostTicket(Resource):
                         help='missing secret'
                         )
 
+
+    @login_required
     def get(self):
         """
         returns a dictionary with data which should be used to submit a ticket. the keys are: user, secret, text
@@ -41,42 +44,33 @@ class GetTextPostTicket(Resource):
         :secret: generates a hash of the app's SECRET_KEY which is required to submit a ticket
         :text: a dictionary containing attributes of a Text object as its keys (id (int), text (str), file (int))
         """
+        user_marked_texts = Ticket.query.filter_by(user=current_user.id)     # marked_texts.text.to_list()
+        user_marked_text_ids_list = [i.text for i in user_marked_texts]
 
-        if current_user.__class__.__name__ != 'AnonymousUserMixin':  # when sending requests outside browsers
-            marked_texts = pd.read_sql(  # get IDs of texts that the used has already marked (submitted a ticket)
-                Ticket.query.filter_by(user=current_user.id).options(
-                        load_only('text')
-                    ).statement, db.engine
-            )
+        # get texts not yet marked by user, based on marked texts
+        user_unmarked_texts = Text.query.filter(Text.id.notin_(user_marked_text_ids_list))
 
-            marked_texts = marked_texts.text.to_list()
+        random_text = user_unmarked_texts.order_by(func.random()).first()  # get a random text out of on unmarked texts
 
-            # get texts not yet marked by user, based on marked texts
-            unmarked_texts = db.session.query(Text).filter(Text.id.notin_(marked_texts))
-            random_text = unmarked_texts.order_by(func.random()).first()  # get a random text out of on unmarked texts
+        if random_text.text:  # if there is an unmarked text left
+            secret = generate_password_hash(Config.SECRET_KEY)  # hash the SECRET_KEY
 
-            if random_text.text:  # if there is an unmarked text left
-                secret = generate_password_hash(Config.SECRET_KEY)  # hash the SECRET_KEY
+            # create a response dictionary and add text, user and secret keys
+            response = dict(random_text.__dict__)  # convert the randomly selected Text object to type dict
+            response.pop('_sa_instance_state')  # remove an unnecessary key from the Text dictionary
+            # add user id to response dictionary and secret key converted to JSON
+            response.update(user=current_user.id, secret=secret.decode('utf8').replace("'", '"'))
+            return jsonify(response)
 
-                # create a response dictionary and add text, user and secret keys
-                response = dict(random_text.__dict__)  # convert the randomly selected Text object to type dict
-                response.pop('_sa_instance_state')  # remove an unnecessary key from the Text dictionary
-                # add user id to response dictionary and secret key converted to JSON
-                response.update(user=current_user.id, secret=secret.decode('utf8').replace("'", '"'))
-                return jsonify(response)
+        else:  # if there are no unmarked texts, return False so the ticket view notifies the user accordingly
+            return False
 
-            else:  # if there are no unmarked texts, return False so the ticket view notifies the user accordingly
-                return False
 
-        return {'error', 'You are not logged in. Please use the website to log in and submit tickets'}, 403
-
+    @login_required
     def post(self):
         """
         adds a ticket to db based on current_user ID, received text ID and
         """
-
-        if current_user.__class__.__name__ == 'AnonymousUserMixin':  # when sending requests outside browsers
-            return {'error', 'You are not logged in. Please use the website to log in and submit tickets'}, 403
 
         data = GetTextPostTicket.parser.parse_args()
         if check_password_hash(data['secret'], Config.SECRET_KEY) and current_user.id == data['user']:
